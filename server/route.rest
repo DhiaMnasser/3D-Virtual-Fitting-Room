@@ -1,0 +1,184 @@
+GET http://localhost:3001/users
+
+###
+GET http://localhost:3001/users/604a251bea9b9b3bbce0e514
+###
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+ "name":"moham",
+ "email":"mohamed@gmail.com",
+ "password":"123",
+ "address":"sfax",
+ "phone":"22337820",
+ "creditCard":"1234",
+ "role":"user"
+}
+###
+POST http://localhost:3001/reviews/test
+###
+POST http://localhost:3001/users/login
+Content-Type: application/json
+
+{
+     "email":"mohamed@gmail.com",
+     "password":"123"
+}
+###
+DELETE  http://localhost:3001/users/604d0b5c48aa545a8c294681
+###
+PATCH   http://localhost:3001/users/604d0b5c48aa545a8c294681
+Content-Type: application/json
+
+{
+     "name":"burrito"
+  
+}
+###
+GET http://localhost:3001/orders
+###
+GET http://localhost:3001/orders/604aedd1eb339207705ffb2a
+###
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+ "clientId":"1",
+ "dateCreated":"1998-04-01",
+ "dateShipped":"1998-04-01",
+ "isValid":"true",
+ "isShipped":"false",
+ "totalPrice":"1234"
+
+}
+###
+DELETE  http://localhost:3001/orders/604aedd1eb339207705ffb2a
+###
+PATCH   http://localhost:3001/orders/604aedd1eb339207705ffb2a
+Content-Type: application/json
+
+{
+ "clientId":"1",
+ "dateCreated":"1998-04-01",
+ "dateShipped":"1998-04-01",
+ "isValid":"true",
+ "isShipped":"false",
+ "totalPrice":"1234"
+  
+}
+###
+GET http://localhost:3001/products
+###
+GET http://localhost:3001/products/604b752c64027e4af0bc00e3
+###
+POST http://localhost:3001/products
+Content-Type: application/json
+
+{
+ "productName":"1",
+ "description":"1998-04-01",
+ "category":"1998-04-01",
+ "price":"123",
+ "size":"false",
+ "stockQuantity":"1234",
+ "image":"1234",
+ "ArModel":"1234"
+
+}
+###
+DELETE  http://localhost:3001/products/604cfb813b46e24b5067d211
+###
+PATCH   http://localhost:3001/products/604cfb813b46e24b5067d211
+Content-Type: application/json
+
+{
+ "productName":"1",
+ "description":"1998-04-01",
+ "category":"1998-04-01",
+ "price":"123",
+ "size":"false",
+ "stockQuantity":"1234",
+ "image":"1234",
+ "ArModel":"1234"
+  
+}
+###
+GET http://localhost:3001/claims
+
+###
+GET http://localhost:3001/claims/604cf7233b46e24b5067d210
+###
+POST http://localhost:3001/claims
+Content-Type: application/json
+
+{
+ "userId":"1",
+ "message":"1998-04-01"
+
+}
+###
+DELETE  http://localhost:3001/claims/604cfbbe3b46e24b5067d212
+###
+PATCH   http://localhost:3001/claims/604cfbbe3b46e24b5067d212
+Content-Type: application/json
+
+{
+  "userId":"1",
+ "message":"1998-04-01"
+  
+}
+###
+GET http://localhost:3001/reviews
+
+###
+GET http://localhost:3001/reviews/604cf7233b46e24b5067d210
+###
+POST http://localhost:3001/reviews
+Content-Type: application/json
+
+{
+ "userId":"1",
+ "message":"1998-04-01",
+ "productId":"2"
+
+}
+###
+DELETE  http://localhost:3001/reviews/604cfbbe3b46e24b5067d212
+###
+PATCH   http://localhost:3001/reviews/604cfbbe3b46e24b5067d212
+Content-Type: application/json
+
+{
+ "userId":"1",
+ "message":"1998-04-01",
+ "productId":"2"
+  
+}
+###
+GET http://localhost:3001/avatars
+
+###
+GET http://localhost:3001/avatars/604cf7233b46e24b5067d210
+###
+POST http://localhost:3001/avatars
+Content-Type: application/json
+
+{
+ "userId":"1",
+ "avatarFile":"1998-04-01"
+ 
+
+}
+###
+DELETE  http://localhost:3001/avatars/604cfca53b46e24b5067d213
+###
+PATCH   http://localhost:3001/avatars/604cfca53b46e24b5067d213
+Content-Type: application/json
+
+{
+ "userId":"1",
+ "avatarFile":"1998-04-01"
+  
+}
+###

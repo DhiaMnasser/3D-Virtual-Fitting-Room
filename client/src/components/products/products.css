@@ -1,0 +1,35 @@
+
+.filter__controls {
+	text-align: right;
+	margin-bottom: 50px;
+}
+
+.filter__controls li {
+	font-size: 14px;
+	list-style: none;
+	display: inline-block;
+	color: #111111;
+	margin-right: 35px;
+	position: relative;
+	cursor: pointer;
+}
+
+.filter__controls li.active:after {
+	opacity: 1;
+}
+
+.filter__controls li:after {
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	height: 2px;
+	width: 100%;
+	background: #ca1515;
+	content: "";
+	opacity: 0;
+}
+
+.filter__controls li:last-child {
+	margin-right: 0;
+}
+
