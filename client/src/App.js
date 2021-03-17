@@ -7,6 +7,9 @@ import Shop from './components/shop/Shop';
 import {useDispatch} from 'react-redux'
 import {fetchProducts} from './redux/slices/productsSlice'
 import { useEffect } from 'react';
+import AddProduct from './components/addProduct/AddProduct';
+import Register from './components/Register/Register';
+import Login from './components/login/Login';
 function App() {
  const dispatch = useDispatch();
   useEffect(() => {
@@ -17,9 +20,9 @@ function App() {
     <div className="App">
  
 <Header></Header>
-<Products></Products>
+<Login></Login>
 <Footer></Footer>
-<Shop></Shop>
+
 
     </div>
   );
