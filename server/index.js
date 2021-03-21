@@ -3,16 +3,25 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import productRoutes from './routes/products.js';
+import categoryRoutes from './routes/categories.js';
+import avatarRoutes from './routes/avatars.js';
+import claimRoutes from './routes/claims.js';
+import orderRoutes from './routes/orders.js';
 
 var app = express();
 
-// routes
-app.use('/products', productRoutes);
 
 // json setup
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
+
+// routes
+app.use('/products', productRoutes);
+app.use('/categories', categoryRoutes);
+app.use('/avatars', avatarRoutes);
+app.use('/claims', claimRoutes);
+app.use('/orders', orderRoutes);
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
@@ -25,3 +34,4 @@ mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: tru
     .catch((error)=>console.log(error.message));
 
 mongoose.set('useFindAndModify', false);
+
