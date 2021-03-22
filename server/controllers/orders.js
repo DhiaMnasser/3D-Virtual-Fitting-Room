@@ -8,7 +8,7 @@ export const getOrders = async(req, res) => {
         console.log('getting orders');
         res.status(200).json(orderModels);
     } catch (error) {
-        res.status(404).json({message: error.message}); 
+        res.status(404).send({message: error.message}); 
     }
 }
 
@@ -20,7 +20,7 @@ export const getOrderById = async (req, res) => {
         
         res.status(200).json(order);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 
@@ -33,7 +33,7 @@ export const createOrder = async(req, res) => {
         await newOrder.save();
         res.status(201).json(newOrder);
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).send({message: error.message});
     }
 }
               
@@ -49,7 +49,7 @@ export const updateOrder = async (req, res) => {
 
     await Order.findByIdAndUpdate(id, updatedOrder, { new: true });
 
-    res.json(updatedOrder);
+    res.status(200).json(updatedOrder);
 }
 
 export const deleteOrder = async (req, res) => {
@@ -59,5 +59,5 @@ export const deleteOrder = async (req, res) => {
 
     await Order.findByIdAndRemove(id);
 
-    res.json({ message: "Order deleted successfully." });
+    res.status(200).json({ message: "Order deleted successfully." });
 }

@@ -7,7 +7,7 @@ export const getClaims = async(req, res) => {
         console.log('getting Claims');
         res.status(200).json(claimModels);
     } catch (error) {
-        res.status(404).json({message: error.message}); 
+        res.status(404).send({message: error.message}); 
     }
 }
 
@@ -19,7 +19,7 @@ export const getClaimById = async (req, res) => {
         
         res.status(200).json(claim);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 
@@ -32,7 +32,7 @@ export const createClaim = async(req, res) => {
         await newClaim.save();
         res.status(201).json(newClaim);
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).send({message: error.message});
     }
 }
               
@@ -48,7 +48,7 @@ export const updateClaim = async (req, res) => {
 
     await Claim.findByIdAndUpdate(id, updatedClaim, { new: true });
 
-    res.json(updatedClaim);
+    res.status(200).json(updatedClaim);
 }
 
 export const deleteClaim = async (req, res) => {
@@ -58,5 +58,5 @@ export const deleteClaim = async (req, res) => {
 
     await Claim.findByIdAndRemove(id);
 
-    res.json({ message: "Claim deleted successfully." });
+    res.status(200).json({ message: "Claim deleted successfully." });
 }

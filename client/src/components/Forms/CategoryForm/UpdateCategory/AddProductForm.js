@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { Validation } from "./Validations/validation";
 import FileBase from "react-file-base64";
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../../../../actions/products'
+import { createProduct } from '../../../../redux/slices/products'
 
 const Form = () => {
 

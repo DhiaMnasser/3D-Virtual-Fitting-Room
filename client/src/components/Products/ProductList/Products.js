@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Products = () => {
-  const products = useSelector(state => state.products);
+  const products = useSelector(state => state.products.products);
 
   // console.log(products);
 
@@ -33,7 +33,7 @@ const Products = () => {
         
                   <tr>
                     <td class="cart__product__item">
-                      <img src="img/shop-cart/cp-1.jpg" alt="" />
+                      <img src={product.image} alt="" />
                       <div class="cart__product__item__title">
                         <h6>{product.productName}</h6>
                         <div class="rating">

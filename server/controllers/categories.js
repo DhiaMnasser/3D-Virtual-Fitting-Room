@@ -8,7 +8,7 @@ export const getCategories = async(req, res) => {
         console.log('getting Categories');
         res.status(200).json(categoryModels);
     } catch (error) {
-        res.status(404).json({message: error.message}); 
+        res.status(404).send({message: error.message}); 
     }
 }
 
@@ -20,7 +20,7 @@ export const getCategoryById = async (req, res) => {
         
         res.status(200).json(category);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 
@@ -33,7 +33,7 @@ export const createCategory = async(req, res) => {
         await newCategory.save();
         res.status(201).json(newCategory);
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).send({message: error.message});
     }
 }
               
@@ -49,7 +49,7 @@ export const updateCategory = async (req, res) => {
 
     await Category.findByIdAndUpdate(id, updatedCategory, { new: true });
 
-    res.json(updatedCategory);
+    res.status(200).json(updatedCategory);
 }
 
 export const deleteCategory = async (req, res) => {
@@ -59,5 +59,5 @@ export const deleteCategory = async (req, res) => {
 
     await Category.findByIdAndRemove(id);
 
-    res.json({ message: "Category deleted successfully." });
+    res.status(200).json({ message: "Category deleted successfully." });
 }

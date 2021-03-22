@@ -5,7 +5,9 @@ var Schema = mongoose.Schema;
 var Category = new Schema({
   categoryName: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
+    dropDups: true
   }
 
 });

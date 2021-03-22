@@ -33,15 +33,15 @@ var Product = new Schema({
   },
   image: {
     type: String,
-    required: true
+    // required: true
   },
-  // threeDmodel: {
-  //   type: String
+  arModel: {
+    type: String
+  },
+  threeDmodel: {
+    type: String
+  }
 
-  // },
-  // ArModel: {
-  //   type: String
-  // }
 });
 
 export default mongoose.model("Product", Product);

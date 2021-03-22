@@ -5,7 +5,7 @@ import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Categories = () => {
 
-  const categories = useSelector(state => state.categories);
+  const categories = useSelector(state => state.categories.categories);
 
   console.log(categories);
 

@@ -6,8 +6,8 @@ import LayoutFront from "./components/FrontOffice/Layout";
 // import Login from "./Login";
 import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getProducts } from "./actions/products";
-import { getCategories } from "./actions/categories";
+import { getProducts } from "./redux/slices/products";
+import { getCategories } from "./redux/slices/categories";
 
 function App() {
 

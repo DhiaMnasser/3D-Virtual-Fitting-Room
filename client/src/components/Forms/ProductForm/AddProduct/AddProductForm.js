@@ -1,14 +1,13 @@
 import React from "react";
 // import { textField, Button, Typoghraphy, Paper } from '@material-ui/core';
-import { useFormik } from "formik";
+import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
 import FileBase from "react-file-base64";
-import { useDispatch } from 'react-redux';
-import { createProduct } from '../../../../actions/products'
+import { useDispatch } from "react-redux";
+import { createProduct } from "../../../../redux/slices/products";
+import styled from "styled-components";
 
 const Form = () => {
-
-
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -19,13 +18,14 @@ const Form = () => {
       size: "M",
       stockQuantity: "0",
       image: "",
-      ArModel: ""
+      arModel: "",
+      theeDModel: ""
     },
     validationSchema: Validation,
-    onSubmit: async (values) => {
+    onSubmit: async values => {
       // e.preventDefault();
-      dispatch(createProduct(values))
-      console.dir("vals"+ JSON.stringify(values, null, 4));
+      dispatch(createProduct(values));
+      console.log("vals" + JSON.stringify(values, null, 4));
     }
   });
 
@@ -47,6 +47,9 @@ const Form = () => {
                   value={formik.values.productName}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.productName && formik.touched.productName && (
+                  <FormError>{formik.errors.productName}</FormError>
+                )}
               </div>
               <div>
                 <input
@@ -57,6 +60,9 @@ const Form = () => {
                   value={formik.values.description}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.description && formik.touched.description && (
+                  <FormError>{formik.errors.description}</FormError>
+                )}
               </div>
               <div>
                 <input
@@ -67,6 +73,9 @@ const Form = () => {
                   value={formik.values.categoryId}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.categoryId && formik.touched.categoryId && (
+                  <FormError>{formik.errors.categoryId}</FormError>
+                )}
               </div>
               <div>
                 <input
@@ -77,6 +86,9 @@ const Form = () => {
                   value={formik.values.price}
                   onChange={formik.handleChange}
                 />
+                                {formik.errors.price && formik.touched.price && (
+                  <FormError>{formik.errors.price}</FormError>
+                )}
               </div>
               <div>
                 <input
@@ -87,6 +99,9 @@ const Form = () => {
                   value={formik.values.size}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.size && formik.touched.size && (
+                  <FormError>{formik.errors.size}</FormError>
+                )}
               </div>
               <div>
                 <input
@@ -97,48 +112,80 @@ const Form = () => {
                   value={formik.values.stockQuantity}
                   onChange={formik.handleChange}
                 />
+                {formik.errors.stockQuantity && formik.touched.stockQuantity && (
+                  <FormError>{formik.errors.stockQuantity}</FormError>
+                )}
               </div>
               <div>
-              <span class="text">Image: </span>
+                <span class="text">Image: </span>
 
-                <input
+                <FileBase
+                  type="file"
+                  id="image"
                   name="image"
-                  type="file"
-                  placeholder="image"
-                  onChange={event => {
-                    formik.setFieldValue("image", event.currentTarget.files[0]);
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("image", base64);
                   }}
                 />
+                {formik.errors.image && formik.touched.image && (
+                  <FormError>{formik.errors.image}</FormError>
+                )}
               </div>
               <div>
-                <span class="text">ArModel: </span>
-
-                <input
-                  // type="file"
-                  // multiple={false}
-                  // onDone={({base64}) => setPro}
-                  name="ArModel"
+                <span class="text">arModel: </span>
+                <FileBase
                   type="file"
-                  placeholder="ArModel"
-                  onChange={event => {
-                    formik.setFieldValue("file", event.currentTarget.files[1]);
+                  id="arModel"
+                  name="arModel"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("image", base64);
                   }}
                 />
+                {formik.errors.arModel && formik.touched.arModel && (
+                  <FormError>{formik.errors.arModel}</FormError>
+                )}
+              </div>
+              <div>
+                <span class="text">theeDModel: </span>
+
+                <FileBase
+                  type="file"
+                  id="theeDModel"
+                  name="theeDModel"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("image", base64);
+                  }}
+                />
+                {formik.errors.theeDModel && formik.touched.theeDModel && (
+                  <FormError>{formik.errors.theeDModel}</FormError>
+                )}
               </div>
               <div class="mb-4"></div>
 
-              <button class="btn btn-primary btn-icon-split btn-sm" type="submit" >
+              <button
+                class="btn btn-primary btn-icon-split btn-sm"
+                type="submit"
+              >
                 <span class="icon text-white-50">
                   <i class="fas fa-check"></i>
                 </span>
                 Submit
-                </button>
+              </button>
             </form>
-           </div>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
+const FormError = styled.p`
+  color: #f74b1b;
+`;
+
 export default Form;
+
+

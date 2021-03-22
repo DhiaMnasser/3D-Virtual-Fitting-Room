@@ -12,8 +12,8 @@ var app = express();
 
 
 // json setup
-app.use(bodyParser.json({limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
+app.use(bodyParser.json({limit: "60mb", extended: true}));
+app.use(bodyParser.urlencoded({limit: "60mb", extended: true}));
 app.use(cors());
 
 // routes

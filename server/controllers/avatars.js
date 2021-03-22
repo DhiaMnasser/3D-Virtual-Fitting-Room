@@ -7,7 +7,7 @@ export const getAvatars = async(req, res) => {
         console.log('getting Avatars');
         res.status(200).json(avatarModels);
     } catch (error) {
-        res.status(404).json({message: error.message}); 
+        res.status(404).send({message: error.message}); 
     }
 }
 
@@ -19,7 +19,7 @@ export const getAvatarById = async (req, res) => {
         
         res.status(200).json(Avatar);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 
@@ -32,7 +32,7 @@ export const createAvatar = async(req, res) => {
         await newAvatar.save();
         res.status(201).json(newAvatar);
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).send({message: error.message});
     }
 }
               
@@ -48,7 +48,7 @@ export const updateAvatar = async (req, res) => {
 
     await Avatar.findByIdAndUpdate(id, updatedAvatar, { new: true });
 
-    res.json(updatedAvatar);
+    res.status(200).json(updatedAvatar);
 }
 
 export const deleteAvatar = async (req, res) => {
@@ -58,5 +58,5 @@ export const deleteAvatar = async (req, res) => {
 
     await Avatar.findByIdAndRemove(id);
 
-    res.json({ message: "Avatar deleted successfully." });
+    res.status(200).json({ message: "Avatar deleted successfully." });
 }

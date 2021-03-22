@@ -7,7 +7,7 @@ export const getReviews = async(req, res) => {
         console.log('getting Reviews');
         res.status(200).json(reviewModels);
     } catch (error) {
-        res.status(404).json({message: error.message}); 
+        res.status(404).send({message: error.message}); 
     }
 }
 
@@ -19,7 +19,7 @@ export const getReviewById = async (req, res) => {
         
         res.status(200).json(review);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 
@@ -32,7 +32,7 @@ export const createReview = async(req, res) => {
         await newReview.save();
         res.status(201).json(newReview);
     } catch (error) {
-        res.status(409).json({message: error.message});
+        res.status(409).send({message: error.message});
     }
 }
               
@@ -48,7 +48,7 @@ export const updateReview = async (req, res) => {
 
     await Review.findByIdAndUpdate(id, updatedReview, { new: true });
 
-    res.json(updatedReview);
+    res.status(200).json(updatedReview);
 }
 
 export const deleteReview = async (req, res) => {
@@ -58,5 +58,5 @@ export const deleteReview = async (req, res) => {
 
     await Review.findByIdAndRemove(id);
 
-    res.json({ message: "Review deleted successfully." });
+    res.status(200).json({ message: "Review deleted successfully." });
 }
