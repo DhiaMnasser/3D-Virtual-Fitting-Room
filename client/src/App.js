@@ -4,6 +4,8 @@ import "./App.css";
 import LayoutBack from "./components/BackOffice/Layout";
 import LayoutFront from "./components/FrontOffice/Layout";
 // import Login from "./Login";
+import Auth from './components/Auth/Auth';
+
 import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProducts } from "./redux/slices/products";
@@ -26,6 +28,7 @@ function App() {
       <Route path="/admin">
         <LayoutBack />
       </Route>
+      <Route path="/auth" exact component={Auth} />
       <Route path="/">
         <LayoutFront />
       </Route>

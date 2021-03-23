@@ -7,6 +7,7 @@ import categoryRoutes from './routes/categories.js';
 import avatarRoutes from './routes/avatars.js';
 import claimRoutes from './routes/claims.js';
 import orderRoutes from './routes/orders.js';
+import userRouter from "./routes/user.js";
 
 var app = express();
 
@@ -22,6 +23,8 @@ app.use('/categories', categoryRoutes);
 app.use('/avatars', avatarRoutes);
 app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
+app.use("/user", userRouter);
+
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
