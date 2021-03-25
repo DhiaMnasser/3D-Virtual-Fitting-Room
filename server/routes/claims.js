@@ -1,5 +1,5 @@
-import express from 'express'
-import { getClaims, getClaimById, createClaim, updateClaim, deleteClaim } from '../controllers/claims.js';
+const express =require( 'express')
+const { getClaims, getClaimById, createClaim, updateClaim, deleteClaim } =require('../controllers/claims.js');
 
 var router = express.Router();
 
@@ -12,4 +12,4 @@ router.delete("/:id", deleteClaim);
 
 
 
-export default router;
+module.exports= router ;

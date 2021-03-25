@@ -17,7 +17,7 @@ export const createProduct = product => async dispatch => {
   try {
     const data = await api.createProduct(product);
     
-    dispatch({ type: "CREATE", payload: data });
+    dispatch(addProduct(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -27,7 +27,7 @@ export const updateProduct = (id, product) => async dispatch => {
   try {
     const { data } = await api.updateProduct(id, product);
 
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch(editProduct(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -35,13 +35,14 @@ export const updateProduct = (id, product) => async dispatch => {
 
 
 export const deleteProduct = (id) => async (dispatch) => {
-  try {
+ try{
     await api.deleteProduct(id);
 
-    dispatch({ type: 'DELETE', payload: id });
-  } catch (error) {
-    console.log(error.response);
-  }
+    dispatch(removeProduct(id));
+ }catch (error) {
+  console.log(error.response);
+}
+ 
 };
 
 export const productsSlice = createSlice({
@@ -54,11 +55,26 @@ export const productsSlice = createSlice({
       getAllProducts(state,action){
           state.products=action.payload;
           // console.log("in slice"+ JSON.stringify(state.products, null, 4));   
-      }
+      },
+        addProduct(state,action){
+        state.products.push(action.payload)
+    },
+    removeProduct(state,action){
+        const index = state.products.findIndex((prod)=> prod._id === action.payload);
+        if(index!==-1){
+            state.products.splice(index,1)
+        }
+    },
+    editProduct(state,action){
+         const index = state.products.findIndex((prod)=> prod._id === action.payload._id);
+        if(index!==-1){   
+            state.products[index]=action.payload;
+        }
+    },
   }
   });
 
-  export const {getAllProducts} =productsSlice.actions
+  export const {getAllProducts, editProduct,removeProduct,addProduct} =productsSlice.actions
   export default productsSlice.reducer;
 
 

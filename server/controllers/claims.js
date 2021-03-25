@@ -1,7 +1,7 @@
-import Claim from '../models/Claim.js';
-import mongoose from 'mongoose';
+const Claim =require( '../models/Claim.js');
+const mongoose =require('mongoose');
 
-export const getClaims = async(req, res) => {
+ const getClaims = async(req, res) => {
     try {
         const claimModels = await Claim.find();
         console.log('getting Claims');
@@ -11,7 +11,7 @@ export const getClaims = async(req, res) => {
     }
 }
 
-export const getClaimById = async (req, res) => { 
+ const getClaimById = async (req, res) => { 
     const { id } = req.params;
 
     try {
@@ -23,7 +23,7 @@ export const getClaimById = async (req, res) => {
     }
 }
 
-export const createClaim = async(req, res) => {
+ const createClaim = async(req, res) => {
     console.log(`create claim in server ${req}`);
     
     const { userId, message} = req.body;
@@ -37,7 +37,7 @@ export const createClaim = async(req, res) => {
 }
               
 
-export const updateClaim = async (req, res) => {
+ const updateClaim = async (req, res) => {
     const { id } = req.params;
     const { userId, message} = req.body;
 
@@ -51,7 +51,7 @@ export const updateClaim = async (req, res) => {
     res.status(200).json(updatedClaim);
 }
 
-export const deleteClaim = async (req, res) => {
+ const deleteClaim = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Claim with id: ${id}`);
@@ -60,3 +60,4 @@ export const deleteClaim = async (req, res) => {
 
     res.status(200).json({ message: "Claim deleted successfully." });
 }
+module.exports= {deleteClaim,updateClaim,createClaim,getClaimById,getClaims }

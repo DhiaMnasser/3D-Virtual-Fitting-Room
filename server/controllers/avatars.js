@@ -1,7 +1,7 @@
-import Avatar from '../models/Avatar.js';
-import mongoose from 'mongoose';
+const Avatar =require('../models/Avatar.js');
+const mongoose =require('mongoose');
 
-export const getAvatars = async(req, res) => {
+ const getAvatars = async(req, res) => {
     try {
         const avatarModels = await Avatar.find();
         console.log('getting Avatars');
@@ -11,7 +11,7 @@ export const getAvatars = async(req, res) => {
     }
 }
 
-export const getAvatarById = async (req, res) => { 
+ const getAvatarById = async (req, res) => { 
     const { id } = req.params;
 
     try {
@@ -23,7 +23,7 @@ export const getAvatarById = async (req, res) => {
     }
 }
 
-export const createAvatar = async(req, res) => {
+ const createAvatar = async(req, res) => {
     console.log(`create avatar in server ${req}`);
     
     const { userId, avatarFile} = req.body;
@@ -37,7 +37,7 @@ export const createAvatar = async(req, res) => {
 }
               
 
-export const updateAvatar = async (req, res) => {
+ const updateAvatar = async (req, res) => {
     const { id } = req.params;
     const { userId, avatarFile} = req.body;
 
@@ -51,7 +51,7 @@ export const updateAvatar = async (req, res) => {
     res.status(200).json(updatedAvatar);
 }
 
-export const deleteAvatar = async (req, res) => {
+ const deleteAvatar = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No avatar with id: ${id}`);
@@ -60,3 +60,4 @@ export const deleteAvatar = async (req, res) => {
 
     res.status(200).json({ message: "Avatar deleted successfully." });
 }
+module.exports= {deleteAvatar,updateAvatar,createAvatar,getAvatarById,getAvatars}

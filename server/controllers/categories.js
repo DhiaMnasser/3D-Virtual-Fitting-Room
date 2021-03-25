@@ -1,8 +1,8 @@
 
-import Category from '../models/Category.js';
-import mongoose from 'mongoose';
+const Category =require('../models/Category.js');
+const mongoose =require('mongoose');
 
-export const getCategories = async(req, res) => {
+ const getCategories = async(req, res) => {
     try {
         const categoryModels = await Category.find();
         console.log('getting Categories');
@@ -12,7 +12,7 @@ export const getCategories = async(req, res) => {
     }
 }
 
-export const getCategoryById = async (req, res) => { 
+ const getCategoryById = async (req, res) => { 
     const { id } = req.params;
 
     try {
@@ -24,7 +24,7 @@ export const getCategoryById = async (req, res) => {
     }
 }
 
-export const createCategory = async(req, res) => {
+ const createCategory = async(req, res) => {
     console.log(`create category in server ${req}`);
     
     const { categoryName} = req.body;
@@ -38,7 +38,7 @@ export const createCategory = async(req, res) => {
 }
               
 
-export const updateCategory = async (req, res) => {
+ const updateCategory = async (req, res) => {
     const { id } = req.params;
     const { categoryName } = req.body;
     
@@ -52,7 +52,7 @@ export const updateCategory = async (req, res) => {
     res.status(200).json(updatedCategory);
 }
 
-export const deleteCategory = async (req, res) => {
+ const deleteCategory = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No category with id: ${id}`);
@@ -61,3 +61,4 @@ export const deleteCategory = async (req, res) => {
 
     res.status(200).json({ message: "Category deleted successfully." });
 }
+module.exports= {deleteCategory,updateCategory,createCategory,getCategoryById,getCategories }

@@ -1,5 +1,5 @@
-import express from 'express'
-import { getAvatars, getAvatarById, createAvatar, updateAvatar, deleteAvatar } from '../controllers/avatars.js';
+const express =require('express')
+const { getAvatars, getAvatarById, createAvatar, updateAvatar, deleteAvatar } =require( '../controllers/avatars.js');
 
 var router = express.Router();
 
@@ -12,4 +12,4 @@ router.delete("/:id", deleteAvatar);
 
 
 
-export default router;
+module.exports= router

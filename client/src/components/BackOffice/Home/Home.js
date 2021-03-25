@@ -17,12 +17,12 @@ export class Home extends Component {
             <>
             <h2>this is home</h2>
             <ProductGrid/>
-            <div class="row justify-content-md-center">
+            <div className="row justify-content-md-center">
             <AddProductForm/>
             </div>
             <ProductList/>
             <CategoryList/>
-            <div class="row justify-content-md-center">
+            <div className="row justify-content-md-center">
             <AddCategoryForm/>
             </div>
 

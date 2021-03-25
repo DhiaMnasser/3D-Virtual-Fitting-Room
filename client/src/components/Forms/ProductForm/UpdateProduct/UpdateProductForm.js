@@ -4,10 +4,14 @@ import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../../../../redux/slices/products";
+import { updateProduct  } from "../../../../redux/slices/products";
 import styled from "styled-components";
 
 const Form = ({product}) => {
+
+  // const { id } = useParams();
+  // const history = useHistory();
+
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {

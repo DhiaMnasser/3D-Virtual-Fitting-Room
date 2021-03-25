@@ -8,8 +8,28 @@ export const fetchProducts = ()=> axios.get(`${url}/products`);
 export const createProduct = (newProduct)=> axios.post(`${url}/products`, newProduct);
 export const updateProduct = (id, updatedProduct) => axios.patch(`${url}/products/${id}`, updatedProduct);
 export const deleteProduct = (id) => axios.delete(`${url}/products/${id}`);
-
+//avatars
+export const fetchAvatars = ()=> axios.get(`${url}/avatars`);
+export const createAvatar = (newAvatar)=> axios.post(`${url}/avatars`, newAvatar);
+export const updateAvatar = (id, updatedAvatar) => axios.patch(`${url}/avatars/${id}`, updatedAvatar);
+export const deleteAvatar = (id) => axios.delete(`${url}/avatars/${id}`);
+//claims
+export const fetchClaims = ()=> axios.get(`${url}/claims`);
+export const createClaim = (newClaim)=> axios.post(`${url}/claims`, newClaim);
+export const updateClaim = (id, updatedClaim) => axios.patch(`${url}/claims/${id}`, updatedClaim);
+export const deleteClaim = (id) => axios.delete(`${url}/claims/${id}`);
+//orders
+export const fetchOrders = ()=> axios.get(`${url}/orders`);
+export const createOrder = (newOrder)=> axios.post(`${url}/orders`, newOrder);
+export const updateOrder = (id, updatedOrder) => axios.patch(`${url}/orders/${id}`, updatedOrder);
+export const deleteOrder = (id) => axios.delete(`${url}/orders/${id}`);
+//reviews
+export const fetchReviews = ()=> axios.get(`${url}/reviews`);
+export const createReview = (newReview)=> axios.post(`${url}/reviews`, newReview);
+export const updateReview = (id, updatedReview) => axios.patch(`${url}/reviews/${id}`, updatedReview);
+export const deleteReview = (id) => axios.delete(`${url}/reviews/${id}`);
 // Categories
+
 export const fetchCategories = ()=> axios.get(`${url}/categories`);
 export const createCategory = (newCategory)=> axios.post(`${url}/categories`, newCategory);
 export const updateCategory = (id, updatedCategory) => axios.patch(`${url}/categories/${id}`, updatedCategory);
@@ -26,3 +46,17 @@ API.interceptors.request.use((req) => {
   
     return req;
   });
+export const fetchUsers = ()=> axios.get(`${url}/users`);
+export const createUser = (newUser)=> axios.post(`${url}/users`, newUser);
+export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`, updatedUser);
+export const deleteUser = (id) => axios.delete(`${url}/users/${id}`);
+
+// files
+
+export const fetchFiles = ()=> axios.get(`${url}/files/files`);
+export const fetchFileByName = (fileName)=> axios.get(`${url}/files/file/${fileName}`);
+export const uploadFile = (file)=> axios.post(`${url}/files`, file);
+export const deleteFileById = (id) => axios.post(`${url}/files/file/del/${id}`);
+
+export const fetchImageByName = (fileName)=> axios.get(`${url}/files/image/${fileName}`);
+export const deleteImageById = (id) => axios.get(`${url}/files/delete/${id}`);

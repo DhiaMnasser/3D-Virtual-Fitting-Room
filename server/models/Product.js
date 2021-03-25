@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require( "mongoose");
 
 var Schema = mongoose.Schema;
 
@@ -38,10 +38,10 @@ var Product = new Schema({
   arModel: {
     type: String
   },
-  threeDmodel: {
+  threeDModel: {
     type: String
   }
 
 });
 
-export default mongoose.model("Product", Product);
+module.exports=  mongoose.model("Product", Product);

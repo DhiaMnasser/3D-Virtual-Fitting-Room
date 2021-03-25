@@ -1,36 +1,20 @@
-import { combineReducers } from "redux";
 import {configureStore} from '@reduxjs/toolkit';
-
-import products from "./reducers/products";
-import categories from "./reducers/categories";
-import productsReducer from "../redux/slices/products";
-import categoriesReducer from "../redux/slices/categories";
-import rootReducers from "./reducers";
-
-
-// export const ()=>console.log('configureStore'+JSON.stringify(productsReducer, null, 4));
+import productsReducer from "./slices/products";
+import avatarsReducer from "./slices/avatars";
+import categoriesReducer from "./slices/categories";
+import claimsReducer from "./slices/claims";
+import ordersReducer from "./slices/orders";
+import reviewsReducer from "./slices/reviews";
 
 export default configureStore({
-  reducer: rootReducers,
+reducer:{
+    products: productsReducer,
+    avatars: avatarsReducer,
+    categories: categoriesReducer,
+    claims: claimsReducer,
+    orders: ordersReducer,
+    reviews: reviewsReducer,
 
-},
+}
 
-()=>console.log("combineReducers"+JSON.stringify(rootReducers, null, 4)));
-
-
-// import { combineReducers } from "redux";
-// import {configureStore} from '@reduxjs/toolkit';
-
-// import products from "./reducers/products";
-// import categories from "./reducers/categories";
-// import productsReducer from "../redux/slices/products";
-// import categoriesReducer from "../redux/slices/categories";
-
-// // export const ()=>console.log('configureStore'+JSON.stringify(productsReducer, null, 4));
-
-// export default configureStore({
-//   reducer:{
-//   products: productsReducer,
-//   categories: categoriesReducer
-//   }
-// });
+})

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require( "mongoose");
 
 var Schema = mongoose.Schema;
 
@@ -11,5 +11,4 @@ var Category = new Schema({
   }
 
 });
-
-export default mongoose.model("Category", Category);
+module.exports=  mongoose.model("Category", Category);

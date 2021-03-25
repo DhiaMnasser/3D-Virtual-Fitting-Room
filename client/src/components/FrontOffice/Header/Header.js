@@ -1,65 +1,109 @@
-import React from 'react'
-import './header.css';
-import {Container} from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars } from '@fortawesome/free-solid-svg-icons'
+import React from "react";
+import "./header.css";
+import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-import logo from './logo.png'
+import logo from "./logo.png";
 function Header() {
-    return (<>
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src={logo} alt=""/></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
+  return (
+    <>
+      <header className="header">
+        <Container fluid={true}>
+          <div className="row">
+            <div className="col-xl-3 col-lg-2">
+              <div className="header__logo">
+                <a href="./index.html">
+                  <img src={logo} alt="" />
+                </a>
+              </div>
             </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
+            <div className="col-xl-6 col-lg-7">
+              <nav className="header__menu">
+                <ul>
+                  <li className="active">
+                    <a href="./index.html">Home</a>
+                  </li>
+                  <li>
+                    <a href="#">Women’s</a>
+                  </li>
+                  <li>
+                    <a href="#">Men’s</a>
+                  </li>
+                  <li>
+                    <a href="./shop.html">Shop</a>
+                  </li>
+                  <li>
+                    <a href="#">Pages</a>
+                    <ul className="dropdown">
+                      <li>
+                        <a href="./product-details.html">Product Details</a>
+                      </li>
+                      <li>
+                        <a href="./shop-cart.html">Shop Cart</a>
+                      </li>
+                      <li>
+                        <a href="./checkout.html">Checkout</a>
+                      </li>
+                      <li>
+                        <a href="./blog-details.html">Blog Details</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="./blog.html">Blog</a>
+                  </li>
+                  <li>
+                    <a href="./contact.html">Contact</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
+            <div className="col-lg-3">
+              <div className="header__right">
+                <div className="header__right__auth">
+                  <a href="#">Login</a>
+                  <a href="#">Register</a>
+                </div>
+                <ul className="header__right__widget">
+                  <li>
+                    <span className="ei ei-icon_search search-switch"></span>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span className="ei ei-icon_heart_alt"></span>
+                      <div className="tip">2</div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span className="ei ei-icon_bag_alt"></span>
+                      <div className="tip">2</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="canvas__open">
+            <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+          </div>
+        </Container>
+      </header>
+      <div className="search-model">
+        <div className="h-100 d-flex align-items-center justify-content-center">
+          <div className="search-close-switch">+</div>
+          <form className="search-model-form">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search here....."
+            />
+          </form>
         </div>
-    </header>
+      </div>
     </>
-    )
+  );
 }
 
-export default Header
+export default Header;

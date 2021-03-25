@@ -6,7 +6,7 @@ export const getClaims = () => async dispatch => {
     let { data } = await api.fetchClaims();
    
 
-    dispatch(getAllClaims(data)});
+    dispatch(getAllClaims(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -16,7 +16,7 @@ export const createClaim = claim => async dispatch => {
   try {
     const data = api.createClaim(claim);
    
-    dispatch({ type: "CREATE", payload: data });
+    dispatch(addClaim(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -26,7 +26,7 @@ export const updateClaim = (id, claim) => async dispatch => {
   try {
     const { data } = await api.updateClaim(id, claim);
 
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch(editClaim(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -37,7 +37,7 @@ export const deleteClaim = (id) => async (dispatch) => {
   try {
     await api.deleteClaim(id);
 
-    dispatch({ type: 'DELETE', payload: id });
+    dispatch(deleteClaim(id));
   } catch (error) {
     console.log(error.response);
   }
@@ -53,11 +53,27 @@ export const claimsSlice = createSlice({
   reducers:{
       getAllClaims(state,action){
           state.claims=action.payload;
-      }
+      },
+      
+      addClaim(state,action){
+        state.claims.push(action.payload)
+    },
+    removeClaim(state,action){
+        const index = state.claims.findIndex((prod)=> prod._id === action.payload);
+        if(index!==-1){
+            state.claims.splice(index,1)
+        }
+    },
+    editClaim(state,action){
+         const index = state.claims.findIndex((prod)=> prod._id === action.payload._id);
+        if(index!==-1){   
+            state.claims[index]=action.payload;
+        }
+    },
   }
   
   });
 
-  export const {getAllClaims} =claimsSlice.actions
+  export const {getAllClaims,editClaim,removeClaim,addClaim} =claimsSlice.actions
   export default claimsSlice.reducer;
 

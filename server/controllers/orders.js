@@ -1,8 +1,8 @@
 
-import Order from '../models/Order.js';
-import mongoose from 'mongoose';
+const Order =require( '../models/Order.js');
+const mongoose =require( 'mongoose');
 
-export const getOrders = async(req, res) => {
+ const getOrders = async(req, res) => {
     try {
         const orderModels = await Order.find();
         console.log('getting orders');
@@ -12,7 +12,7 @@ export const getOrders = async(req, res) => {
     }
 }
 
-export const getOrderById = async (req, res) => { 
+ const getOrderById = async (req, res) => { 
     const { id } = req.params;
 
     try {
@@ -24,7 +24,7 @@ export const getOrderById = async (req, res) => {
     }
 }
 
-export const createOrder = async(req, res) => {
+ const createOrder = async(req, res) => {
     console.log(`create prod in server ${req}`);
     
     const { orderName, description, price, size, stockQuantity,  categoryId} = req.body;
@@ -38,7 +38,7 @@ export const createOrder = async(req, res) => {
 }
               
 
-export const updateOrder = async (req, res) => {
+ const updateOrder = async (req, res) => {
     const { id } = req.params;
     const { orderName, description, price, size, stockQuantity,  categoryId} = req.body;
     
@@ -52,7 +52,7 @@ export const updateOrder = async (req, res) => {
     res.status(200).json(updatedOrder);
 }
 
-export const deleteOrder = async (req, res) => {
+ const deleteOrder = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No order with id: ${id}`);
@@ -61,3 +61,4 @@ export const deleteOrder = async (req, res) => {
 
     res.status(200).json({ message: "Order deleted successfully." });
 }
+module.exports={ deleteOrder,updateOrder,createOrder,getOrderById,getOrders }

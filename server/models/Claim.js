@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require( "mongoose");
 
 const claimSchema =new  mongoose.Schema({
 userId:{
@@ -11,4 +11,4 @@ message:{
 }
 })
 
-export default mongoose.model("Claim", claimSchema);
+module.exports= mongoose.model("Claim", claimSchema);

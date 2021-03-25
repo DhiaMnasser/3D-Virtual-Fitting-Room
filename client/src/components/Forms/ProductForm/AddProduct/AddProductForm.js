@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import { textField, Button, Typoghraphy, Paper } from '@material-ui/core';
 import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
@@ -6,8 +6,15 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { createProduct } from "../../../../redux/slices/products";
 import styled from "styled-components";
+import axios from "axios";
+import {uploadFile} from "../../../../api/index";
 
 const Form = () => {
+  const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
+  const [uploadedArModel, setUploadedArModel] = useState({});
+  const [uploadedThreeDModelUrl, setUploadedThreeDModelUrl] = useState("");
+  const [uploadedThreeDModel, setUploadedThreeDModel] = useState({});
+
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -16,18 +23,59 @@ const Form = () => {
       categoryId: "",
       price: "0",
       size: "M",
-      stockQuantity: "0",
+      stockQuantity: "1",
       image: "",
       arModel: "",
-      theeDModel: ""
+      threeDModel: ""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+      console.log("vals:" + JSON.stringify(values, null, 4));
       dispatch(createProduct(values));
-      console.log("vals" + JSON.stringify(values, null, 4));
     }
   });
+
+  useEffect(() => {
+    // console.log("uploadedArModel" + JSON.stringify(uploadedArModel, null, 4));
+    if (!uploadedArModel.name) {
+      return alert("AR file is missing");
+    }
+
+    addFileToBd(uploadedArModel, "arModel");
+
+
+  }, [uploadedArModel]);
+
+  useEffect(() => {
+    // console.log("uploadedThreeDModel" + JSON.stringify(uploadedThreeDModel, null, 4));
+    if (!uploadedThreeDModel.name) {
+      return alert("3D file is missing");
+    }
+    addFileToBd(uploadedThreeDModel, "threeDModel");
+  }, [uploadedThreeDModel]);
+
+  const addFileToBd = (selectedFile, selectedField) => {
+    let formData = new FormData();
+    // formData.append("caption", this.state.caption);
+    formData.append("file", selectedFile);
+
+    uploadFile(formData)
+      .then(response => {
+        response.data.success
+          ? alert(
+              "File successfully uploaded" +
+                JSON.stringify(response.data.message, null, 4)
+            )
+          : alert("File already exists");
+          formik.setFieldValue(
+            selectedField,
+            response.data.message.filename
+          );
+        // this.fetchRecent();
+      })
+      .catch(err => alert("Error useEffect: " + err));
+  };
 
   return (
     <>
@@ -86,7 +134,7 @@ const Form = () => {
                   value={formik.values.price}
                   onChange={formik.handleChange}
                 />
-                                {formik.errors.price && formik.touched.price && (
+                {formik.errors.price && formik.touched.price && (
                   <FormError>{formik.errors.price}</FormError>
                 )}
               </div>
@@ -112,9 +160,10 @@ const Form = () => {
                   value={formik.values.stockQuantity}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.stockQuantity && formik.touched.stockQuantity && (
-                  <FormError>{formik.errors.stockQuantity}</FormError>
-                )}
+                {formik.errors.stockQuantity &&
+                  formik.touched.stockQuantity && (
+                    <FormError>{formik.errors.stockQuantity}</FormError>
+                  )}
               </div>
               <div>
                 <span class="text">Image: </span>
@@ -134,29 +183,44 @@ const Form = () => {
               </div>
               <div>
                 <span class="text">arModel: </span>
-                <FileBase
+               
+
+                <input
                   type="file"
                   id="arModel"
                   name="arModel"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("image", base64);
+                  className="Upload__Input"
+                  onChange={(event: any) => {
+                    alert("File is uploading please wait");
+                    setUploadedArModel(event.target.files[0]);
+                    // setUploadedArModel({added: 'yes'});
+
+                    setUploadedArModelUrl(
+                      URL.createObjectURL(event.target.files[0])
+                    );
+
+                    // uploadArModel();
                   }}
                 />
-                {formik.errors.arModel && formik.touched.arModel && (
-                  <FormError>{formik.errors.arModel}</FormError>
-                )}
               </div>
               <div>
                 <span class="text">theeDModel: </span>
 
-                <FileBase
+                <input
                   type="file"
                   id="theeDModel"
                   name="theeDModel"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("image", base64);
+                  className="Upload__Input"
+                  onChange={(event: any) => {
+                    alert("File is uploading please wait");
+                    setUploadedThreeDModel(event.target.files[0]);
+                    // setUploadedThreeDModel({added: 'yes'});
+
+                    setUploadedThreeDModelUrl(
+                      URL.createObjectURL(event.target.files[0])
+                    );
+
+                    // uploadArModel();
                   }}
                 />
                 {formik.errors.theeDModel && formik.touched.theeDModel && (
@@ -187,5 +251,3 @@ const FormError = styled.p`
 `;
 
 export default Form;
-
-

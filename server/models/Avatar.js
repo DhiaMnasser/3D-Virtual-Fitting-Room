@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose =require( "mongoose");
 
 const avatarSchema =new  mongoose.Schema({
 userId:{
@@ -10,4 +10,4 @@ avatarFile:{
     required:true
 }
 })
-export default mongoose.model("Avatar", avatarSchema);
+module.exports= mongoose.model("Avatar", avatarSchema);

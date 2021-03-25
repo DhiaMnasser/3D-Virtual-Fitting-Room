@@ -15,9 +15,9 @@ export const getAvatars = () => async dispatch => {
 export const createAvatar = avatar => async dispatch => {
   try {
     const data = api.createAvatar(avatar);
-    console.log(`data createAvatar /actions ${data}`);
+   
 
-    dispatch({ type: "CREATE", payload: data });
+    dispatch(addAvatar(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -28,7 +28,7 @@ export const updateAvatar = (id, avatar) => async dispatch => {
     const { data } = await api.updateAvatar(id, avatar);
     console.log(`data updateAvatar /actions ${data}`);
 
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch(editAvatar(data));
   } catch (error) {
     console.log(error.response);
   }
@@ -38,9 +38,9 @@ export const updateAvatar = (id, avatar) => async dispatch => {
 export const deleteAvatar = (id) => async (dispatch) => {
   try {
     await api.deleteAvatar(id);
-    console.log(`data deleteAvatar /actions ${data}`);
+    
 
-    dispatch({ type: 'DELETE', payload: id });
+    dispatch(removeAvatar(id));
   } catch (error) {
     console.log(error.response);
   }
@@ -54,10 +54,26 @@ export const avatarsSlice = createSlice({
   reducers:{
       getAllAvatars(state,action){
           state.avatars=action.payload;
-      }
+      },
+        addAvatar(state,action){
+        state.avatars.push(action.payload)
+    },
+    removeAvatar(state,action){
+        const index = state.avatars.findIndex((prod)=> prod._id === action.payload);
+        if(index!==-1){
+            state.avatars.splice(index,1)
+        }
+    },
+    editAvatar(state,action){
+         const index = state.avatars.findIndex((prod)=> prod._id === action.payload._id);
+        if(index!==-1){   
+            state.avatars[index]=action.payload;
+        }
+    },
+      
   }
   
   });
 
-  export const {getAllAvatars} =avatarsSlice.actions
+  export const {getAllAvatars,editAvatar ,removeAvatar ,addAvatar } =avatarsSlice.actions
   export default avatarsSlice.reducer;

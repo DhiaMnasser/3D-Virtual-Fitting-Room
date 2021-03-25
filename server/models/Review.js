@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose =require( "mongoose");
 const reviewSchema =new  mongoose.Schema({
 userId:{
     type:String,
@@ -18,4 +18,4 @@ reviewDate:{
     default:Date.now
 }
 })
-export default mongoose.model("Review", reviewSchema);
+module.exports=  mongoose.model("Review", reviewSchema);

@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import Product from "./Product.js";
+const mongoose =require( "mongoose");
+const Product =require( "./Product.js");
 
 const orderSchema = new mongoose.Schema({
   clientId: {
@@ -32,4 +32,4 @@ const orderSchema = new mongoose.Schema({
   },
   products: [Product.schema]
 });
-export default mongoose.model("Order", orderSchema);
+module.exports=  mongoose.model("Order", orderSchema);

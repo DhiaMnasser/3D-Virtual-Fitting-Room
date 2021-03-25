@@ -13,10 +13,10 @@ const Categories = () => {
     <>
       <h1>Categories list</h1>
 
-      <div class="container justify-content-md-center">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="shop__cart__table">
+      <div className="container justify-content-md-center">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="shop__cart__table">
               <table>
                 <thead>
                   <tr>
@@ -33,16 +33,16 @@ const Categories = () => {
 
         
                   <tr>
-                    <td class="cart__product__item">
+                    <td className="cart__product__item">
                       
-                      <div class="cart__product__item__title">
+                      <div className="cart__product__item__title">
                         <h6>{categories.categoryName}</h6>
-                        <div class="rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
+                        <div className="rating">
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
                         </div>
                       </div>
                     </td>

@@ -1,5 +1,5 @@
-import express from 'express'
-import { getCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from '../controllers/categories.js';
+const express =require('express')
+const { getCategories, getCategoryById, createCategory, updateCategory, deleteCategory } =require( '../controllers/categories.js');
 
 var router = express.Router();
 
@@ -12,4 +12,4 @@ router.delete("/:id", deleteCategory);
 
 
 
-export default router;
+module.exports= router

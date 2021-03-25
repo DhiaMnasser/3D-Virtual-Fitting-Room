@@ -12,10 +12,10 @@ export class Layout extends Component {
   );
   render() {
     return (
-      <div class="App">
+      <div className="App">
         <div id="wrapper">
           <Leftside></Leftside>
-          <div id="content-wrapper" class="d-flex flex-column">
+          <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <Header />
               <Home />
