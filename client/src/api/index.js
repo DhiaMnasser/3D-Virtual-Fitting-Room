@@ -37,8 +37,8 @@ export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
 
 // users
 
-export const signIn = (formData) => API.post('/user/signin', formData);
-export const signUp = (formData) => API.post('/user/signup', formData);
+export const signIn = (formData) => API.post('/users/signin', formData);
+export const signUp = (formData) => API.post('/users/signup', formData);
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
       req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
@@ -52,7 +52,6 @@ export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`,
 export const deleteUser = (id) => axios.delete(`${url}/users/${id}`);
 
 // files
-
 export const fetchFiles = ()=> axios.get(`${url}/files/files`);
 export const fetchFileByName = (fileName)=> axios.get(`${url}/files/file/${fileName}`);
 export const uploadFile = (file)=> axios.post(`${url}/files`, file);

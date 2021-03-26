@@ -35,13 +35,10 @@ export const updateProduct = (id, product) => async dispatch => {
 
 
 export const deleteProduct = (id) => async (dispatch) => {
- try{
+ 
     await api.deleteProduct(id);
 
     dispatch(removeProduct(id));
- }catch (error) {
-  console.log(error.response);
-}
  
 };
 

@@ -5,8 +5,7 @@ import Footer from './Footer/Footer';
 // import Home from './Home/Home';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import products, { addProduct } from '../../redux/slices/products';
-import ProductGrid from '../Products/ProductGrid/Products';
-import ProductList from '../Products/ProductList/Products';
+import Products from '../Products/ProductGrid/Products';
 import Form from '../Forms/ProductForm/AddProduct/AddProductForm';
 
 
@@ -25,7 +24,7 @@ export class Layout extends Component {
               <Header />
               {/* <Home /> */}
               <Form></Form>
-<ProductGrid></ProductGrid>
+<Products></Products>
             </div>
             <Footer />
           </div>

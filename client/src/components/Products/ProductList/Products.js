@@ -12,10 +12,10 @@ const Products = () => {
     <>
       <h1>Product list</h1>
 
-      <div class="container justify-content-md-center">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="shop__cart__table">
+      <div className="container justify-content-md-center">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="shop__cart__table">
               <table>
                 <thead>
                   <tr>
@@ -32,30 +32,30 @@ const Products = () => {
 
         
                   <tr>
-                    <td class="cart__product__item">
+                    <td className="cart__product__item">
                       <img src={product.image} alt="" />
-                      <div class="cart__product__item__title">
+                      <div className="cart__product__item__title">
                         <h6>{product.productName}</h6>
-                        <div class="rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
+                        <div className="rating">
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
+                          <i className="fa fa-star"></i>
                         </div>
                       </div>
                     </td>
-                    <td class="cart__price">{product.price} DT</td>
-                    <td class="cart__quantity">
-                      <div class="pro-qty">
-                        <span class="dec qtybtn">-</span>
+                    <td className="cart__price">{product.price} DT</td>
+                    <td className="cart__quantity">
+                      <div className="pro-qty">
+                        <span className="dec qtybtn">-</span>
                         <input type="text" value={product.Quantity}/>
-                        <span class="inc qtybtn">+</span>
+                        <span className="inc qtybtn">+</span>
                       </div>
                     </td>
                     
-                    <td class="cart__close">
-                      <span class="icon_close"></span>
+                    <td className="cart__close">
+                      <span className="icon_close"></span>
                     </td>
 
                   </tr>

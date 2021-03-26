@@ -24,16 +24,16 @@ const Form = () => {
 
   return (
     <>
-      <div class="col-lg-6">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Add Category</h6>
+      <div className="col-lg-6">
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">Add Category</h6>
           </div>
-          <div class="card-body ">
+          <div className="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="categoryName"
                   type="text"
                   placeholder="category Name"
@@ -41,11 +41,11 @@ const Form = () => {
                   onChange={formik.handleChange}
                 />
               
-              <div class="mb-4"></div>
+              <div className="mb-4"></div>
 
-              <button class="btn btn-primary btn-icon-split btn-sm" type="submit" >
-                <span class="icon text-white-50">
-                  <i class="fas fa-check"></i>
+              <button className="btn btn-primary btn-icon-split btn-sm" type="submit" >
+                <span className="icon text-white-50">
+                  <i className="fas fa-check"></i>
                 </span>
                 Submit
                 </button>

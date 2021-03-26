@@ -4,14 +4,10 @@ import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { updateProduct  } from "../../../../redux/slices/products";
+import { updateProduct } from "../../../../redux/slices/products";
 import styled from "styled-components";
 
 const Form = ({product}) => {
-
-  // const { id } = useParams();
-  // const history = useHistory();
-
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -35,16 +31,16 @@ const Form = ({product}) => {
 
   return (
     <>
-      <div class="col-lg-6">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Add Product</h6>
+      <div className="col-lg-6">
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">Add Product</h6>
           </div>
-          <div class="card-body ">
+          <div className="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="productName"
                   type="text"
                   placeholder={product.productName}
@@ -57,7 +53,7 @@ const Form = ({product}) => {
               </div>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="description"
                   type="text"
                   placeholder={product.description}
@@ -70,7 +66,7 @@ const Form = ({product}) => {
               </div>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="categoryId"
                   type="text"
                   placeholder={product.categoryId}
@@ -83,7 +79,7 @@ const Form = ({product}) => {
               </div>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="price"
                   type="number"
                   placeholder={product.price}
@@ -96,7 +92,7 @@ const Form = ({product}) => {
               </div>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="size"
                   type="text"
                   placeholder={product.size}
@@ -109,7 +105,7 @@ const Form = ({product}) => {
               </div>
               <div>
                 <input
-                  class="my-2"
+                  className="my-2"
                   name="stockQuantity"
                   type="number"
                   placeholder={product.stockQuantity}
@@ -122,7 +118,7 @@ const Form = ({product}) => {
                   )}
               </div>
               <div>
-                <span class="text">Image: </span>
+                <span className="text">Image: </span>
 
                 <FileBase
                   type="file"
@@ -138,7 +134,7 @@ const Form = ({product}) => {
                 )}
               </div>
               <div>
-                <span class="text">arModel: </span>
+                <span className="text">arModel: </span>
                 <FileBase
                   type="file"
                   id="arModel"
@@ -153,7 +149,7 @@ const Form = ({product}) => {
                 )}
               </div>
               <div>
-                <span class="text">theeDModel: </span>
+                <span className="text">theeDModel: </span>
 
                 <FileBase
                   type="file"
@@ -168,14 +164,14 @@ const Form = ({product}) => {
                   <FormError>{formik.errors.theeDModel}</FormError>
                 )}
               </div>
-              <div class="mb-4"></div>
+              <div className="mb-4"></div>
 
               <button
-                class="btn btn-primary btn-icon-split btn-sm"
+                className="btn btn-primary btn-icon-split btn-sm"
                 type="submit"
               >
-                <span class="icon text-white-50">
-                  <i class="fas fa-check"></i>
+                <span className="icon text-white-50">
+                  <i className="fas fa-check"></i>
                 </span>
                 Submit
               </button>
