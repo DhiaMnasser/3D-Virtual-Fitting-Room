@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { AUTH } from '../../constants/actionTypes';
 import { useHistory } from 'react-router-dom';
 import Icon from './icon';
-import { signin, signup } from '../../actions/auth';
+import { signin, signup } from '../../redux/slices/auth';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 const Auth = () => {

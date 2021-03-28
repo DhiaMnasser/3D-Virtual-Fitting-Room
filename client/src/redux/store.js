@@ -1,0 +1,20 @@
+import {configureStore} from '@reduxjs/toolkit';
+import productsReducer from "./slices/products";
+import avatarsReducer from "./slices/avatars";
+import categoriesReducer from "./slices/categories";
+import claimsReducer from "./slices/claims";
+import ordersReducer from "./slices/orders";
+import reviewsReducer from "./slices/reviews";
+
+export default configureStore({
+reducer:{
+    products: productsReducer,
+    avatars: avatarsReducer,
+    categories: categoriesReducer,
+    claims: claimsReducer,
+    orders: ordersReducer,
+    reviews: reviewsReducer,
+
+}
+
+})
