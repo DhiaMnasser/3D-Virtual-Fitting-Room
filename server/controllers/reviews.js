@@ -27,7 +27,7 @@ const mongoose =require('mongoose');
     console.log(`create review in server ${req}`);
     
     const { userId, message} = req.body;
-    const newreview = await new Review({userId, message });
+    const newReview = await new Review({userId, message });
     try {
         await newReview.save();
         res.status(201).json(newReview);

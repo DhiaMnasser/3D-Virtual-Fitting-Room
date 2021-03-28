@@ -16,7 +16,7 @@ export const createClaim = claim => async dispatch => {
   try {
     const data = api.createClaim(claim);
    
-    dispatch(addClaim(data));
+    dispatch(addClaim(data.data));
   } catch (error) {
     console.log(error.response);
   }

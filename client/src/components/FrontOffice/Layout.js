@@ -6,7 +6,9 @@ import Footer from './Footer/Footer';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import products, { addProduct } from '../../redux/slices/products';
 import Products from '../Products/ProductGrid/Products';
-import Form from '../Forms/ProductForm/AddProduct/AddProductForm';
+//import Form from '../Forms/ProductForm/AddProduct/AddProductForm';
+import Form from '../Forms/ClaimForm/AddClaim/AddClaimForm';
+//import Form from '../Forms/CategoryForm/AddCategory/AddCategoryForm';
 
 
 export class Layout extends Component {
@@ -23,7 +25,7 @@ export class Layout extends Component {
             <div id="content">
               <Header />
               {/* <Home /> */}
-              <Form></Form>
+              
 <Products></Products>
             </div>
             <Footer />

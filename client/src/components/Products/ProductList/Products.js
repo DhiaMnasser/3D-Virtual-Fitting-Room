@@ -1,7 +1,6 @@
 import React from "react";
 import Product from "../Product/Product";
 import { useSelector } from "react-redux";
-import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Products = () => {
   const products = useSelector(state => state.products.products);

@@ -5,6 +5,7 @@ import LayoutBack from "./components/BackOffice/Layout";
 import LayoutFront from "./components/FrontOffice/Layout";
 // import Login from "./Login";
 import Auth from './components/Auth/Auth';
+import Form from './components/Forms/ClaimForm/AddClaim/AddClaimForm';
 
 import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -40,6 +41,7 @@ dispatch(getUsers());
       </Route>
       <Route path="/auth" exact component={Auth} />
       <Route path="/">
+      <Route path="/addclaim" exact component={Form} />
         <LayoutFront />
       </Route>
       <Route

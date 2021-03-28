@@ -3,9 +3,12 @@ import './header.css';
 import {Container} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars } from '@fortawesome/free-solid-svg-icons'
+import {Link} from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 import logo from './logo.png'
 function Header() {
+    let url ="/addclaim";
     return (<>
     <header className="header">
         <Container fluid={true}>
@@ -30,7 +33,7 @@ function Header() {
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href={url} >Claim</a> </li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
