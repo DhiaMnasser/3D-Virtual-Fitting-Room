@@ -3,6 +3,9 @@ import './header.css';
 import {Container} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars } from '@fortawesome/free-solid-svg-icons'
+import Basket from '../Basket/Basket'
+import { Link, useHistory, useLocation } from 'react-router-dom';
+
 
 import logo from './logo.png'
 function Header() {
@@ -46,8 +49,8 @@ function Header() {
                             <li><a href="#"><span className="ei ei-icon_heart_alt"></span>
                                 <div className="tip">2</div>
                             </a></li>
-                            <li><a href="#"><span className="ei ei-icon_bag_alt"></span>
-                                <div className="tip">2</div>
+                            <li><a ><span className="ei ei-icon_bag_alt"></span>
+                                <div component={Link} to="/basket" className="tip">2</div>
                             </a></li>
                         </ul>
                     </div>

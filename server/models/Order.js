@@ -8,26 +8,21 @@ const orderSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: Date,
-    required: true,
     default: Date.now
   },
   dateShipped: {
     type: Date,
-    required: false
   },
   isValid: {
     type: Boolean,
-    required: true,
     default: false
   },
   isShipped: {
     type: Boolean,
-    required: true,
     default: false
   },
   totalPrice: {
     type: Number,
-    required: true,
     default: 0
   },
   products: [Product.schema]

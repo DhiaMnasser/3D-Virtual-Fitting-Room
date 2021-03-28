@@ -1,11 +1,19 @@
 import { combineReducers } from "redux";
 
-import categoriesReducer from "./slices/categories";
 import productsReducer from "./slices/products";
+import avatarsReducer from "./slices/avatars";
+import categoriesReducer from "./slices/categories";
+import claimsReducer from "./slices/claims";
+import ordersReducer from "./slices/orders";
+import reviewsReducer from "./slices/reviews";
 
 const reducers = combineReducers({
   products: productsReducer,
-  categories: categoriesReducer
+  avatars: avatarsReducer,
+  categories: categoriesReducer,
+  claims: claimsReducer,
+  orders: ordersReducer,
+  reviews: reviewsReducer,
 });
 
 

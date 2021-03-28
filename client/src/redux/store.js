@@ -5,6 +5,8 @@ import categoriesReducer from "./slices/categories";
 import claimsReducer from "./slices/claims";
 import ordersReducer from "./slices/orders";
 import reviewsReducer from "./slices/reviews";
+// import authReducer from "./reducers/auth/";
+import rootReducers from "./reducers";
 
 export default configureStore({
 reducer:{
@@ -14,6 +16,7 @@ reducer:{
     claims: claimsReducer,
     orders: ordersReducer,
     reviews: reviewsReducer,
+    // auth: authReducer
 
 }
 

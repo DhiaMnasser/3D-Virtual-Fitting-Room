@@ -15,6 +15,7 @@ import { getAvatars } from "./redux/slices/avatars";
 import { getOrders } from "./redux/slices/orders";
 import { getReviews } from "./redux/slices/reviews";
 import { getAllUsers, getUsers } from "./redux/slices/auth";
+import Basket from "./components/FrontOffice/Basket/Basket";
 
 function App() {
 
@@ -39,6 +40,7 @@ dispatch(getUsers());
         <LayoutBack />
       </Route>
       <Route path="/auth" exact component={Auth} />
+      <Route path="/basket" exact component={Basket} />
       <Route path="/">
         <LayoutFront />
       </Route>
