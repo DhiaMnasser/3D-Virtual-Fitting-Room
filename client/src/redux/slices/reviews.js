@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const getReviews = () => async dispatch => {
   try {
-    const  data  = await api.fetchReviews();
+    const {data}  = await api.fetchReviews();
 
     // dispatch({ type: "FETCH_ALL", payload: data });
     dispatch(getAllReviews(data));

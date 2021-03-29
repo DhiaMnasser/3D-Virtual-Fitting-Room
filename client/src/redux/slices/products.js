@@ -13,6 +13,7 @@ export const getProducts = () => async dispatch => {
   }
 };
 
+
 export const createProduct = product => async dispatch => {
   try {
     const data = await api.createProduct(product);

@@ -10,7 +10,7 @@ import CategoryList from '../../Categories/CategoryList/Categories';
 import AddProductForm from '../../Forms/ProductForm/AddProduct/AddProductForm';
 import AddCategoryForm from '../../Forms/CategoryForm/AddCategory/AddCategoryForm';
 import AddClaimForm from '../../Forms/ClaimForm/AddClaim/AddClaimForm';
-import Claimlist from '../../Claims/Claimlist/Claims';
+
 
 export class Home extends Component {  
  
@@ -25,7 +25,6 @@ export class Home extends Component {
             <div className="row justify-content-md-center">
             <AddClaimForm/>
             </div>
-            
             <ProductList/>
             <CategoryList/>
             <div className="row justify-content-md-center">

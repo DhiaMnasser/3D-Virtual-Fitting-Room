@@ -9,6 +9,8 @@ import { Button } from '@material-ui/core';
 import logo from './logo.png'
 function Header() {
     let url ="/addclaim";
+    let url1 ="/addreview"
+    let url2 ="/listreview"
     return (<>
     <header className="header">
         <Container fluid={true}>
@@ -34,6 +36,8 @@ function Header() {
                                 </ul>
                             </li>
                             <li><a href={url} >Claim</a> </li>
+                            <li><a href={url1} >Review</a> </li>
+                            <li><a href={url2} >list</a> </li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>

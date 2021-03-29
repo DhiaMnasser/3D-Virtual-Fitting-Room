@@ -2,9 +2,18 @@ import axios from 'axios'
 
 const url = 'http://localhost:5000';
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+  }
 
+  return req;
+});
 // products
-export const fetchProducts = ()=> axios.get(`${url}/products`);
+//export const fetchProducts = ()=> axios.get(`${url}/products`);
+
+export const fetchProducts = ()=>  API.get('/products' );
+
 export const createProduct = (newProduct)=> axios.post(`${url}/products`, newProduct);
 export const updateProduct = (id, updatedProduct) => axios.patch(`${url}/products/${id}`, updatedProduct);
 export const deleteProduct = (id) => axios.delete(`${url}/products/${id}`);
@@ -15,7 +24,9 @@ export const updateAvatar = (id, updatedAvatar) => axios.patch(`${url}/avatars/$
 export const deleteAvatar = (id) => axios.delete(`${url}/avatars/${id}`);
 //claims
 export const fetchClaims = ()=> axios.get(`${url}/claims`);
-export const createClaim = (newClaim)=> axios.post(`${url}/claims`, newClaim);
+
+//export const createClaim = (newClaim)=> axios.post(`${url}/claims`, newClaim);
+export const createClaim = (newClaim) => API.post('/claims', newClaim);
 export const updateClaim = (id, updatedClaim) => axios.patch(`${url}/claims/${id}`, updatedClaim);
 export const deleteClaim = (id) => axios.delete(`${url}/claims/${id}`);
 //orders
@@ -39,13 +50,7 @@ export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
-API.interceptors.request.use((req) => {
-    if (localStorage.getItem('profile')) {
-      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-    }
-  
-    return req;
-  });
+
 export const fetchUsers = ()=> axios.get(`${url}/users`);
 export const createUser = (newUser)=> axios.post(`${url}/users`, newUser);
 export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`, updatedUser);

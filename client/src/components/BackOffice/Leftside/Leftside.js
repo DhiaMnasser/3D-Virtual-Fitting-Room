@@ -1,7 +1,10 @@
 import React, { Component } from 'react'  
 import { Link } from 'react-router-dom';
 export class Leftside extends Component {  
+    
     render() {  
+        let url ="/listclaim";
+        let url1="/listreview"
         return (  
             
             <div>  
@@ -17,6 +20,16 @@ export class Leftside extends Component {
                             <i className="fas fa-fw fa-tachometer-alt"></i>  
                             <span>Dashboard</span></a>  
                     </li>  
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href={url}>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Claims</span></a>  
+                    </li>  
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href={url1}>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Reviews</span></a>  
+                    </li> 
                     <hr className="sidebar-divider" />  
                     <div className="sidebar-heading">  
                         Interface  
