@@ -3,6 +3,7 @@ import Leftside from './Leftside/Leftside';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Home from './Home/Home';
+import './Layout.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 export default ({children}) => {

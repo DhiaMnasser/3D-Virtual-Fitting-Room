@@ -58,21 +58,29 @@ export const deleteOrder = (id) => async (dispatch) => {
 //   }
 // };
 
-export const addItemToCart = (product) => async dispatch => {
-  const indexOrder = useSelector((state) => state.orders.findIndex((order)=> order.clientId === "605e25bdd6c4bd30e8ceebcc"));
-
+export const addItemToCart = ({ product: product, state }) => async dispatch => {
+  try{
+  // const indexOrder = useSelector((state) => state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id ));
+  
+  const indexOrder = state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id );
   // const indexOrder = state.orders.findIndex((order)=> order.clientId === "605e25bdd6c4bd30e8ceebcc");
+  console.log("indexOrder"+indexOrder);
+  
   const indexProduct = useSelector((state) => state.orders[indexOrder].products.findIndex((prod)=> prod._id === product._id));
    
   // const indexProduct = state.orders[indexOrder].products.findIndex((prod)=> prod._id === action.payload._id);
     if(indexProduct!==-1){   
     useSelector((state) =>  state.orders[indexOrder].products[indexProduct].stockQuantity++);
+       console.log("indexProduct"+indexProduct);
        
      
    }else{
     useSelector((state) => state.orders[indexOrder].products.push(product));
      
    }
+  } catch(error){
+    console.log(error.message);
+  }
   //  dispatch(editOrder(state.orders[indexOrder]));
    
 };

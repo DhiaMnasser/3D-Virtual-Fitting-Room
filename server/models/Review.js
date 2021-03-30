@@ -1,6 +1,10 @@
 const mongoose =require( "mongoose");
 const reviewSchema =new  mongoose.Schema({
-userId:{
+creator_id:{
+    type:String,
+    required:true
+},
+creator:{
     type:String,
     required:true
 },
@@ -9,7 +13,7 @@ message:{
     required:true
 },
 productId:{
-    type:Number,
+    type:String,
     required:true
 },
 reviewDate:{

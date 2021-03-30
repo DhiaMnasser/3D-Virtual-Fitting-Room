@@ -1,11 +1,12 @@
 import React, { Component, Suspense } from "react";
 // import Leftside from './Leftside/Leftside';
 import { Route, Switch, Redirect } from "react-router-dom";
-import {faHome } from '@fortawesome/free-solid-svg-icons'
+import {faHome } from '@fortawesome/free-solid-svg-icons';
+import './Layout.css'
+
 
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-// import Home from './Home/Home';
 import Products from "../Products/ProductGrid/Products";
 import Form from "../Forms/ProductForm/AddProduct/AddProductForm";
 import products, { addProduct } from "../../redux/slices/products";

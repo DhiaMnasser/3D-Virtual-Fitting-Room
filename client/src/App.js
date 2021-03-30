@@ -12,8 +12,15 @@ import HomeBack from "./components/BackOffice/Home/Home";
 import Shop from "./components/FrontOffice/Shop/Shop";
 import Checkout from "./components/FrontOffice/Checkout/Checkout";
 import AddProduct from "./components/Forms/ProductForm/AddProduct/AddProductForm";
+import Claims from "./components/Claims/Claimlist/Claims";
+import Reviews from "./components/Reviews/Reviewlist/Reviews";
+import AddReviewForm from "./components/Forms/ReviewForm/AddReview/AddReviewForm";
+import AddClaimForm from "./components/Forms/ClaimForm/AddClaim/AddClaimForm";
+import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateReviewForm";
+
 import AdminRoute from "./Routes/AdminRoute";
 import ClientRoute from "./Routes/ClientRoute";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 import { getProducts } from "./redux/slices/products";
 import { getCategories } from "./redux/slices/categories";
@@ -38,59 +45,31 @@ function App() {
   const [connectedUser, setConnectedUser] = useState(null);
 
   return (
-    // <BrowserRouter basename="/">
-    // <Switch>
-    //   <Route path="/admin">
-    //     <LayoutBack />
-    //   </Route>
-    //   <Route path="/auth" exact component={Auth} />
-    //   <Route path="/basket" exact component={Basket} />
-    //   <Route path="/">
-    //     <LayoutFront />
-    //   </Route>
-    //   <Route
-
-    //     render={() => (
-    //       <p>Default rendered page! Welcome {connectedUser.name}</p>
-    //     )}
-    //   ></Route>
-    // </Switch>
-    // </BrowserRouter>
-
-    <Router >
+    <Router>
       <Switch>
-        <Route path="/auth" component={Auth} />
+        <Route path="/auth" exact component={Auth} />
 
-        {/* <Route path="/admin/:path?" exact>
-          <LayoutBack>
-            <Switch>
-              <Route path="/admin" exact component={HomeBack} />
-              <Route path="/admin/addProduct" component={AddProduct} />
-              <Route path="/admin/hello" component={Hello} />
-            </Switch>
-          </LayoutBack>
-        </Route>
+        <ClientRoute path="/" exact component={HomeFront} />
+        <ClientRoute path="/Home" component={HomeFront} />
+        <ClientRoute path="/Shop" component={Shop} />
+        <ClientRoute path="/Basket/" component={Basket} />
+        <ClientRoute path="/Checkout/" component={Checkout} />
 
-        <Route  >
-          <LayoutFront>
-            <Switch>
-              <Route path='/' exact component={HomeFront} />
-              <Route path='/Home/' exact component={HomeFront} />
-              <Route path='/Shop/' exact component={Shop} />
-              <Route path='/Basket/' component={Basket} />
-            </Switch>
-          </LayoutFront>
-        </Route> */}
+        <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
+        <PrivateRoute path="/addreview" exact component={AddReviewForm} />
+        <PrivateRoute
+          path="/updatereview/:value"
+          exact
+          component={UpdateReviewForm}
+        />
 
-        <ClientRoute exact path="/"  component={HomeFront} />
-        <ClientRoute  path="/home/"  component={HomeFront} />
-        <ClientRoute  path="/shop/"  component={Shop} />
-        <ClientRoute  path="/basket/"  component={Basket} />
-        <ClientRoute  path="/checkout/"  component={Checkout} />
-        {/* <Route path='/admin/' exact>
-          <AdminRoute exact path="/addProduct"  component={AddProduct} />
-          <AdminRoute exact path="" component={HomeBack} />
-        </Route> */}
+        <AdminRoute exact path="/admin/" component={HomeBack} />
+        <AdminRoute path="/admin/products" component={Checkout} />
+        <AdminRoute path="/admin/addProduct" component={AddProduct} />
+        <AdminRoute path="/admin/listclaim" exact component={Claims} />
+        <AdminRoute path="/admin/listreview" exact component={Reviews} />
+
+        <ClientRoute path="*" component={HomeFront} />
       </Switch>
     </Router>
   );

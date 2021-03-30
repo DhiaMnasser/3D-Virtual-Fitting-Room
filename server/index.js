@@ -36,7 +36,7 @@ app.use('/categories', categoryRoutes);
 app.use('/avatars', avatarRoutes);
 app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
 
 
 // mongoDB setup

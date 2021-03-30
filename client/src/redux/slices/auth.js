@@ -34,6 +34,16 @@ export const getUsers = () => async dispatch => {
     console.log(error.response);
   }
 };
+
+export const isAuthenticated = () => {
+  if (typeof window == 'undefined') return false;
+  if (localStorage.getItem('profile')) {
+    return JSON.parse(localStorage.getItem('profile'));
+  } else {
+    return false;
+  }
+};
+
 export const usersSlice = createSlice({
   name:"users",
   initialState:{

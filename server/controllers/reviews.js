@@ -26,8 +26,8 @@ const mongoose =require('mongoose');
  const createReview = async(req, res) => {
     console.log(`create review in server ${req}`);
     
-    const { userId, message} = req.body;
-    const newreview = await new Review({userId, message });
+    const {creator_id, creator, message,productId,reviewDate} = req.body;
+    const newReview = await new Review({creator_id,creator, message,productId,reviewDate: new Date().toISOString()});
     try {
         await newReview.save();
         res.status(201).json(newReview);
@@ -39,12 +39,12 @@ const mongoose =require('mongoose');
 
  const updateReview = async (req, res) => {
     const { id } = req.params;
-    const { userId, message} = req.body;
+    const { userId, message ,productId} = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Review with id: ${id}`);
 
 
-    const updatedReview ={ userId, message};
+    const updatedReview ={ userId, message,productId};
 
     await Review.findByIdAndUpdate(id, updatedReview, { new: true });
 

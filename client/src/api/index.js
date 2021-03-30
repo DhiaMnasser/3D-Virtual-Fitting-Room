@@ -2,7 +2,13 @@ import axios from 'axios'
 
 const url = 'http://localhost:5000';
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+  }
 
+  return req;
+});
 // products
 export const fetchProducts = ()=> axios.get(`${url}/products`);
 export const createProduct = (newProduct)=> axios.post(`${url}/products`, newProduct);
@@ -37,19 +43,14 @@ export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
 
 // users
 
+
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
-API.interceptors.request.use((req) => {
-    if (localStorage.getItem('profile')) {
-      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-    }
-  
-    return req;
-  });
-export const fetchUsers = ()=> axios.get(`${url}/users`);
-export const createUser = (newUser)=> axios.post(`${url}/users`, newUser);
-export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`, updatedUser);
-export const deleteUser = (id) => axios.delete(`${url}/users/${id}`);
+
+export const fetchUsers = ()=> axios.get(`${url}/user`);
+export const createUser = (newUser)=> axios.post(`${url}/user`, newUser);
+export const updateUser = (id, updatedUser) => axios.patch(`${url}/user/${id}`, updatedUser);
+export const deleteUser = (id) => axios.delete(`${url}/user/${id}`);
 
 // files
 export const fetchFiles = ()=> axios.get(`${url}/files/files`);

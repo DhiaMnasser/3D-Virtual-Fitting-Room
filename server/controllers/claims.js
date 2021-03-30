@@ -25,9 +25,9 @@ const mongoose =require('mongoose');
 
  const createClaim = async(req, res) => {
     console.log(`create claim in server ${req}`);
-    
-    const { userId, message} = req.body;
-    const newclaim = await new Claim({userId, message });
+    console.log(req.userId);
+    const {message,creator ,creator_id} = req.body;
+    const newClaim = await new Claim({ message , creator, creator_id });
     try {
         await newClaim.save();
         res.status(201).json(newClaim);

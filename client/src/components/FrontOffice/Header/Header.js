@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./header.css";
 import { Container } from "react-bootstrap";
+import {  Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import * as actionType from '../../../constants/actionTypes';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import decode from 'jwt-decode';
 
 import logo from "./logo.png";
 function Header() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  }, [location]); 
+  const logout = () => {
+    dispatch({ type: actionType.LOGOUT });
+
+    history.push('/');
+
+    setUser(null);
+  };
+
   return (
     <>
       <header className="header">
@@ -65,8 +97,22 @@ function Header() {
             <div className="col-lg-3">
               <div className="header__right">
                 <div className="header__right__auth">
-                <Link to='/auth'>Login</Link>
-                <Link to='/auth'>Register</Link>
+                { user?  (
+                  <div >
+                  <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
+                  <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
+
+                  </div>
+                 ):(
+                   <span>
+
+                  <Link to='/auth'>Login</Link>
+                  <Link to='/auth'>Register</Link>
+                   </span>
+                    
+                  )}
+                  
+
                   
                 </div>
                 <ul className="header__right__widget">

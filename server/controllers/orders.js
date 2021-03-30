@@ -27,8 +27,8 @@ const mongoose =require( 'mongoose');
  const createOrder = async(req, res) => {
     console.log(`create prod in server ${req}`);
     
-    const { orderName, description, price, size, stockQuantity,  categoryId} = req.body;
-    const newOrder = await new Order({orderName, description, categoryId, price, size, stockQuantity });
+    const { clientId } = req.body;
+    const newOrder = await new Order({ clientId });
     try {
         await newOrder.save();
         res.status(201).json(newOrder);
