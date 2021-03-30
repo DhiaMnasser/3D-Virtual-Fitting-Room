@@ -204,7 +204,7 @@ const Form = () => {
                 />
               </div>
               <div>
-                <span class="text">theeDModel: </span>
+                <span class="text">threeDModel: </span>
 
                 <input
                   type="file"

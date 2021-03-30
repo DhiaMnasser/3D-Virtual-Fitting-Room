@@ -4,12 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const signin = (formData, router) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
-    console.log(`signin slice ${JSON.stringify(data, null, 4)}`);
-    
 
     dispatch({ type: AUTH, data });
 
-    // router.push('/');
+    router.push('/');
   } catch (error) {
     console.log(error);
   }
@@ -29,7 +27,7 @@ export const signup = (formData, router) => async (dispatch) => {
 export const getUsers = () => async dispatch => {
   try {
     let { data } = await api.fetchUsers();
-    console.log('data getUsers /actions ${data}');
+    console.log(`data getUsers /actions ${data}`);
 
     dispatch(getAllUsers(data));
   } catch (error) {

@@ -12,7 +12,6 @@ const Categories = () => {
   return (
     <>
       <h1>Categories list</h1>
-
       <div className="container justify-content-md-center">
         <div className="row">
           <div className="col-lg-12">

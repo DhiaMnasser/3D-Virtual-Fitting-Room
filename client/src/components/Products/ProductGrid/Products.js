@@ -11,7 +11,7 @@ console.log(JSON.stringify(useSelector((state) => state), null, 4));
 
   return (
     <>
-      <h1>Product grid</h1>
+      
       <div class="col-lg-9 col-md-9">
         <div class="row">
         {products.map((product)=>{ 

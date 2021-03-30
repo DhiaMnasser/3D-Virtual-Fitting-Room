@@ -15,13 +15,13 @@ export class Home extends Component {
     render() {  
         return (  
             <>
-            <h2>this is home</h2>
-            <ProductGrid/>
+            <h2>this is Admin Dashboard</h2>
+            {/* <ProductGrid/> */}
             <div className="row justify-content-md-center">
             <AddProductForm/>
             </div>
-            <ProductList/>
-            <CategoryList/>
+            {/* <ProductList/> */}
+            {/* <CategoryList/> */}
             <div className="row justify-content-md-center">
             <AddCategoryForm/>
             </div>

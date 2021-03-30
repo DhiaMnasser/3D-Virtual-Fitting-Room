@@ -4,7 +4,7 @@ export class Leftside extends Component {
     render() {  
         return (  
             
-            <div>  
+            <>  
                 <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">  
                     <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">  
                         <div className="sidebar-brand-text mx-3">React Routing </div>  
@@ -90,7 +90,7 @@ export class Leftside extends Component {
                     </div>  
   
                 </ul>  
-            </div>  
+            </>  
         )  
     }  
 }  

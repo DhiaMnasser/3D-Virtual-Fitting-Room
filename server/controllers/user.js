@@ -2,7 +2,6 @@ const bcrypt =require("bcryptjs");
 const jwt =require("jsonwebtoken");
 
 const UserModal =require("../models/user.js");
-const OrderModel =require("../models/Order.js");
 
 const secret = 'test';
 
@@ -37,8 +36,6 @@ const signin = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
-    
-    const newOrder = await OrderModel.create({clientId: result._id});
 
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
 

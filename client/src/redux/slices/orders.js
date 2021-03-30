@@ -125,4 +125,3 @@ export const ordersSlice = createSlice({
 
   export const {getAllOrders,addOrder,removeOrder,editOrder} =ordersSlice.actions
   export default ordersSlice.reducer;
-
