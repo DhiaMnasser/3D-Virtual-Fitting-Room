@@ -39,12 +39,12 @@ const mongoose =require('mongoose');
 
  const updateReview = async (req, res) => {
     const { id } = req.params;
-    const { userId, message} = req.body;
+    const { userId, message ,productId} = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Review with id: ${id}`);
 
 
-    const updatedReview ={ userId, message};
+    const updatedReview ={ userId, message,productId};
 
     await Review.findByIdAndUpdate(id, updatedReview, { new: true });
 

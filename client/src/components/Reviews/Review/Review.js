@@ -5,7 +5,7 @@ import './product.css'
 import { deleteReview} from '../../../redux/slices/reviews'
 import { useDispatch } from 'react-redux'
 import {   Button } from '@material-ui/core';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function Review(props) {
   const dispatch = useDispatch()
   
@@ -23,9 +23,12 @@ function Review(props) {
                        {/*  <div className="product__price">$ 49.0 <span>$ 59.0</span></div> */}
                     </div>
                 </div>
-                <button onClick={()=>{dispatch(deleteReview(props.review._id))}}>delete</button>
-                <Button component={Link} to={"/updatereview/"+props.review._id} variant="contained" color="primary">Sign In</Button>
-                <button onClick={()=>{}}>update</button>
+                <Button color="primary"  fullWidth variant="contained"  onClick={()=>{dispatch(deleteReview(props.review._id))}}>delete</Button>
+                <br/>
+                <Link to={{pathname: "/updatereview/"+props.review._id, review: props.review}}> <Button type="button" color="danger" fullWidth variant="contained"  > update </Button></Link>
+                
+                {/* <Button component={Link} to={"/updatereview/"+props.review._id} variant="contained" color="primary"> Updatee</Button> */}
+                
                 <script> 
 
                 </script>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { textField, Button, Typoghraphy, Paper } from '@material-ui/core';
 import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
@@ -7,7 +7,9 @@ import { useDispatch } from "react-redux";
 import { updateReview } from "../../../../redux/slices/reviews";
 import styled from "styled-components";
 
-const Formup = ({review}) => {
+const Formup = (props) => {
+  // alert('review'+JSON.stringify(props.location.review))
+  const [review, setReview] = useState(props.location.review);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {

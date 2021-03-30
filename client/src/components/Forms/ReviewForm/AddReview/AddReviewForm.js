@@ -14,7 +14,7 @@ const Formrev = () => {
   
   const user = JSON.parse(localStorage.getItem('profile'));
   const products = useSelector(state => state.products.products)
-const options=products.map((x)=>x={value:x._id, label :x.productName})
+const options=products.map((x)=>x={value:x.productName, label :x.productName})
 const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
