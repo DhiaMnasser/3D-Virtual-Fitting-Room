@@ -13,11 +13,50 @@ export const getProducts = () => async dispatch => {
   }
 };
 
+export const filterProducts = (cat) => async dispatch => {
+  try {
+    const { data } = await api.fetchProducts();
+const datas = data.filter((prod)=> prod.categoryId ===cat)
+    // dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch(getAllProducts(datas));
+
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+export const searchProducts = (search) => async dispatch => {
+  try {
+    const { data } = await api.fetchProducts();
+const datas = data.filter((prod)=> prod.productName.includes(search)||prod.description.includes(search)||prod.categoryId.includes(search))
+    // dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch(getAllProducts(datas));
+
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+export const filterProductsBySize = (tailles) => async dispatch => {
+  try {
+    let datas=[]
+    const { data } = await api.fetchProducts();
+    tailles.forEach((taille)=>{
+ datas=[...datas,...data.filter((prod)=>prod.size===taille)]
+
+})
+
+    // dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch(getAllProducts(datas));
+
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
 export const createProduct = product => async dispatch => {
   try {
     const data = await api.createProduct(product);
     
-    dispatch(addProduct(data));
+    dispatch(addProduct(data.data));
   } catch (error) {
     console.log(error.response);
   }
@@ -27,7 +66,7 @@ export const updateProduct = (id, product) => async dispatch => {
   try {
     const { data } = await api.updateProduct(id, product);
 
-    dispatch(editProduct(data));
+    dispatch(editProduct(data.data));
   } catch (error) {
     console.log(error.response);
   }
@@ -67,11 +106,9 @@ export const productsSlice = createSlice({
         if(index!==-1){   
             state.products[index]=action.payload;
         }
-    },
+    }
   }
   });
 
-  export const {getAllProducts, editProduct,removeProduct,addProduct} =productsSlice.actions
+  export const {getAllProducts, editProduct,removeProduct,addProduct,filterProductByCategory} =productsSlice.actions
   export default productsSlice.reducer;
-
-

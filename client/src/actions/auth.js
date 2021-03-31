@@ -7,8 +7,8 @@ export const signin = (formData, router) => async (dispatch) => {
     const { data } = await api.signIn(formData);
 
     dispatch({ type: AUTH, data });
-
-    router.push('/');
+    data.result.role === 1 ? router.push('/admin') : router.push('/') ;
+    
   } catch (error) {
     console.log(error);
   }
@@ -23,8 +23,8 @@ export const signup = (formData, router) => async (dispatch) => {
     dispatch({ type: AUTH, data });
     // dispatch(addOrder({clientId: data.result._id}));
     // dispatch(addOrder(order));
-    
-    router.push('/');
+    // data.result.role === 1 ? router.push('/') : router.push('/admin') ;
+    router.push('/')
   } catch (error) {
     console.log(error);
   }

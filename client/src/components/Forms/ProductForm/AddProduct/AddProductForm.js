@@ -3,18 +3,28 @@ import React, { useState, useEffect } from "react";
 import { useFormik, Formik } from "formik";
 import { Validation } from "./Validations/validation";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../../redux/slices/products";
 import styled from "styled-components";
 import axios from "axios";
 import {uploadFile} from "../../../../api/index";
-
+import CustomSelect from "./CustomSelect";
 const Form = () => {
   const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
   const [uploadedArModel, setUploadedArModel] = useState({});
   const [uploadedThreeDModelUrl, setUploadedThreeDModelUrl] = useState("");
   const [uploadedThreeDModel, setUploadedThreeDModel] = useState({});
-
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+let sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
+sizes=sizes.map((x)=>x={value:x, label :x})
+  const categories = useSelector(state => state.categories.categories)
+const options=categories.map((x)=>x={value:x.categoryName, label :x.categoryName})
+ 
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -31,9 +41,16 @@ const Form = () => {
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+      const img=await toBase64(values.image).catch(e => Error(e));
+        if(img instanceof Error) {
+      console.log('Error: ', img.message);
+      return;
+   }else{
+     values.image=img
       console.log("vals:" + JSON.stringify(values, null, 4));
       dispatch(createProduct(values));
-    }
+
+    }}
   });
 
   useEffect(() => {
@@ -113,13 +130,11 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <input
-                  class="my-2"
-                  name="categoryId"
-                  type="text"
-                  placeholder="categoryId"
-                  value={formik.values.categoryId}
-                  onChange={formik.handleChange}
+                 <label>category</label>
+                <CustomSelect
+                value={formik.values.categoryId}
+                onChange={value=>formik.setFieldValue('categoryId',value.value)}
+                options={options}
                 />
                 {formik.errors.categoryId && formik.touched.categoryId && (
                   <FormError>{formik.errors.categoryId}</FormError>
@@ -138,14 +153,12 @@ const Form = () => {
                   <FormError>{formik.errors.price}</FormError>
                 )}
               </div>
-              <div>
-                <input
-                  class="my-2"
-                  name="size"
-                  type="text"
-                  placeholder="size"
-                  value={formik.values.size}
-                  onChange={formik.handleChange}
+                 <div>
+                <label>size</label>
+                <CustomSelect
+                value={formik.values.size}
+                onChange={value=>formik.setFieldValue('size',value.value)}
+                options={sizes}
                 />
                 {formik.errors.size && formik.touched.size && (
                   <FormError>{formik.errors.size}</FormError>
@@ -166,17 +179,11 @@ const Form = () => {
                   )}
               </div>
               <div>
-                <span class="text">Image: </span>
+                  <span className="text">Image: </span>
 
-                <FileBase
-                  type="file"
-                  id="image"
-                  name="image"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("image", base64);
-                  }}
-                />
+           <input name="image" type="file" placeholder="image"  onChange={(event) => {
+                 formik.setFieldValue("image", event.target.files[0]);
+                  }}  />
                 {formik.errors.image && formik.touched.image && (
                   <FormError>{formik.errors.image}</FormError>
                 )}
@@ -190,7 +197,7 @@ const Form = () => {
                   id="arModel"
                   name="arModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedArModel(event.target.files[0]);
                     // setUploadedArModel({added: 'yes'});
@@ -204,14 +211,14 @@ const Form = () => {
                 />
               </div>
               <div>
-                <span class="text">threeDModel: </span>
+                <span class="text">theeDModel: </span>
 
                 <input
                   type="file"
                   id="theeDModel"
                   name="theeDModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});

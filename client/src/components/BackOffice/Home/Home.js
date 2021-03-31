@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';  
 import ProductGrid from '../../Products/ProductGrid/Products';
 import ProductList from '../../Products/ProductList/Products';
-import CategoryList from '../../Categories/CategoryList/Categories';
+// import CategoryList from '../../Categories/CategoryList/Categories';
 import AddProductForm from '../../Forms/ProductForm/AddProduct/AddProductForm';
 import AddCategoryForm from '../../Forms/CategoryForm/AddCategory/AddCategoryForm';
 

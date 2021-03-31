@@ -10,11 +10,11 @@ export const getCategories = () => async dispatch => {
   }
 };
 
-export const createCategory = category => async dispatch => {
+export const createCategory = (category) => async dispatch => {
   try {
-    const data = api.createCategory(category);
+    const data = await api.createCategory(category);
 
-    dispatch(addCategory(data));
+    dispatch(addCategory(data.data));
   } catch (error) {
     console.log(error.response);
   }
@@ -22,9 +22,11 @@ export const createCategory = category => async dispatch => {
 
 export const updateCategory = (id, category) => async dispatch => {
   try {
-    const { data } = await api.updateCategory(id, category);
+    const  data = await api.updateCategory(id, category);
 
-    dispatch(editCategory(data));
+const datas = {"_id": id, ...data.data}
+console.log(datas)
+    dispatch(editCategory(datas));
   } catch (error) {
     console.log(error.response);
   }
@@ -45,8 +47,8 @@ export const deleteCategory = (id) => async (dispatch) => {
 export const categoriesSlice = createSlice({
   name:"categories",
   initialState:{
-    categories:[]
-  
+    categories:[],
+    
   },
   reducers:{
       getAllCategories(state,action){
@@ -66,11 +68,11 @@ export const categoriesSlice = createSlice({
         if(index!==-1){   
             state.categories[index]=action.payload;
         }
-    },
+    }
   }
   
   });
 
-  export const {getAllCategories,addCategory,removeCategory,editCategory} =categoriesSlice.actions
+  export const {getAllCategories,addCategory,removeCategory,editCategory,deselectCategory,selectCategory} =categoriesSlice.actions
   export default categoriesSlice.reducer;
 

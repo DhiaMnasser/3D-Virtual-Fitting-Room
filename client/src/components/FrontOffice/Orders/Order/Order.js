@@ -1,16 +1,23 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faStar } from '@fortawesome/free-solid-svg-icons';
-import { getCurrentBasket } from '../../../redux/slices/orders';
+import React, { useState, useEffect } from 'react'
+import {faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from "react-redux";
+import './Order.css'
+import { deleteProduct } from '../../../../redux/slices/products'
+import { useDispatch } from 'react-redux';
+import { addItemToCart, getCurrentBasket, updateOrder } from '../../../../redux/slices/orders';
 
-function Order() {
-    const currentOrder = getCurrentBasket();
-    const products = useSelector(state => state.products.products);
-    const basket = useSelector(state => state.basket.basket);
-    this.state = {value: ''};
+function Order(props) {
+  const dispatch = useDispatch()
+  const [order, setOrder] = useState(props.order) ;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const orders = useSelector((state) => state.orders.orders);
+
+  useEffect(() => {
+    console.log(`order : ${order}`);
+          
+  }, [order]);
     
-    // console.log(products);
   
     return ( 
         <>
@@ -21,18 +28,28 @@ function Order() {
                     <div class="shop__cart__table">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
+                            <tr>
+                             <th>clientId</th>
+                             <th>dateCreated</th>
+                             <th>dateShipped</th>
+                             <th>isValid</th>
+                             <th>isShipped</th>
+                             <th>totalPrice</th>
+                             <th></th>
+                            </tr>
                             </thead>
                             <tbody>
-                            {basket.map(product =>(
+                            
                                 <tr>
-                                    <td class="cart__product__item">
+                                    <td className="cart__price">{order.clientId}</td>
+                                    <td className="cart__price">{order.dateCreated}</td>
+                                    <td className="cart__price">{order.dateShipped}</td>
+                                    <td className="cart__price">{order.isValid}</td>
+                                    <td className="cart__price">{order.isShipped}</td>
+                                    <td className="cart__price">{order.totalPrice}</td>
+                                    {order.map(product =>(
+                                    <div>
+                                    <td class="cart__product__item" >
                                         <img src={product.image} alt=""/>
                                         <div class="cart__product__item__title">
                                             <h6>{product.productName}</h6>
@@ -53,8 +70,9 @@ function Order() {
                                     </td>
                                     <td class="cart__total">{product.price * product.stockQuantity}</td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
+                                    </div>
+                                    ))}
                                 </tr>
-                             ))}
                            </tbody>
                         </table>
                     </div>

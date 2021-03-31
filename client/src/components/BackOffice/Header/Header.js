@@ -1,7 +1,28 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import {Button,   Avatar } from '@material-ui/core';
+import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import * as actionType from '../../../constants/actionTypes';
+import { Link, useHistory, useLocation } from "react-router-dom";
 
-export class Header extends Component {
-  render() {
+
+ export default function Header()  {
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+
+  const logout = () => {
+    dispatch({ type: actionType.LOGOUT });
+
+    history.push('/');
+
+    setUser(null);
+  };
+
+    
     return (
       <div>
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -246,13 +267,17 @@ export class Header extends Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
+
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                  Valerie Luna
+                {user.result.name}
                 </span>
-                <img
+                {/* <img
                   className="img-profile rounded-circle"
-                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
-                />
+                  src={user.result.imageUrl}
+                /> */}
+                  <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                  <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
+
               </a>
 
               <div
@@ -287,7 +312,6 @@ export class Header extends Component {
         </nav>
       </div>
     );
-  }
+  
 }
 
-export default Header;

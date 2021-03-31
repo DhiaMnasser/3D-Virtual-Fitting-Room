@@ -9,11 +9,14 @@ import Basket from "./components/FrontOffice/Basket/Basket";
 import Auth from "./components/Auth/Auth";
 import HomeFront from "./components/FrontOffice/Home/Home";
 import HomeBack from "./components/BackOffice/Home/Home";
-import Shop from "./components/FrontOffice/Shop/Shop";
+import Shop from "./components/Products/ProductGrid/Shop";
 import Checkout from "./components/FrontOffice/Checkout/Checkout";
 import AddProduct from "./components/Forms/ProductForm/AddProduct/AddProductForm";
 import Claims from "./components/Claims/Claimlist/Claims";
+import ProductList from "./components/Products/ProductList/Products";
+
 import Reviews from "./components/Reviews/Reviewlist/Reviews";
+import OrderListAdmin from "./components/FrontOffice/Orders/Order/Order";
 import AddReviewForm from "./components/Forms/ReviewForm/AddReview/AddReviewForm";
 import AddClaimForm from "./components/Forms/ClaimForm/AddClaim/AddClaimForm";
 import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateReviewForm";
@@ -29,6 +32,8 @@ import { getAvatars } from "./redux/slices/avatars";
 import { getOrders } from "./redux/slices/orders";
 import { getReviews } from "./redux/slices/reviews";
 import { getAllUsers, getUsers } from "./redux/slices/auth";
+import Categories from "./components/Categories/Categories";
+import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,9 +67,16 @@ function App() {
           exact
           component={UpdateReviewForm}
         />
+        <ClientRoute
+          path="/productDetails/:value"
+          exact
+          component={ProductDetails}
+        />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />
-        <AdminRoute path="/admin/products" component={Checkout} />
+        <AdminRoute path="/admin/products" component={ProductList} />
+        <AdminRoute path="/admin/categories" component={Categories} />
+        <AdminRoute path="/admin/orders" component={OrderListAdmin} />
         <AdminRoute path="/admin/addProduct" component={AddProduct} />
         <AdminRoute path="/admin/listclaim" exact component={Claims} />
         <AdminRoute path="/admin/listreview" exact component={Reviews} />

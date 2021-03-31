@@ -17,8 +17,10 @@ const Form = () => {
     validationSchema: Validation,
     onSubmit: async (values) => {
       // e.preventDefault();
+    
+    
       dispatch(createCategory(values))
-      console.dir("vals"+ JSON.stringify(values, null, 4));
+  
     }
   });
 

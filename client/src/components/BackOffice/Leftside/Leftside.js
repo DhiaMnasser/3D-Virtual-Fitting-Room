@@ -1,13 +1,16 @@
 import React, { Component } from 'react'  
 import { Link } from 'react-router-dom';
 export class Leftside extends Component {  
+    
     render() {  
+        let url ="/listclaim";
+        let url1="/listreview"
         return (  
             
-            <>  
+            <div>  
                 <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">  
                     <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">  
-                        <div className="sidebar-brand-text mx-3">React Routing </div>  
+                        <div className="sidebar-brand-text mx-3">Admin</div>  
                     </a>  
   
                     <hr className="sidebar-divider my-0" />  
@@ -17,6 +20,31 @@ export class Leftside extends Component {
                             <i className="fas fa-fw fa-tachometer-alt"></i>  
                             <span>Dashboard</span></a>  
                     </li>  
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/listclaim'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Claims</span></a>  
+                    </li>  
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/listreview'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Reviews</span></a>  
+                    </li> 
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/products'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Products</span></a>  
+                    </li> 
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/categories'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Categories</span></a>  
+                    </li> 
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/orders'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Orders</span></a>  
+                    </li> 
                     <hr className="sidebar-divider" />  
                     <div className="sidebar-heading">  
                         Interface  
@@ -90,7 +118,7 @@ export class Leftside extends Component {
                     </div>  
   
                 </ul>  
-            </>  
+            </div>  
         )  
     }  
 }  
