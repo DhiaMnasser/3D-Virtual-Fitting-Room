@@ -3,6 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import { Button } from "@material-ui/core";
 
 import "./ProductDetails.css";
 import { deleteProduct } from "../../../redux/slices/products";
@@ -12,12 +13,20 @@ import {
   getCurrentBasket,
   updateOrder
 } from "../../../redux/slices/orders";
+import AddReviewForm from "../../Forms/ReviewForm/AddReview/AddReviewForm";
+import { deleteReview } from "../../../redux/slices/reviews";
+
+
 
 function ProductDetails(props) {
   const dispatch = useDispatch();
-  const [product, setProduct] = useState(props.location.product);
+  const prod = useSelector(state => state.products.products.find(prod => prod._id === props.location.product._id));
+
+  const [product, setProduct] = useState(prod);
+  console.log('product'+JSON.stringify(product));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const orders = useSelector(state => state.orders.orders);
+  const reviews = useSelector(state=>state.reviews.reviews)
   const addToBasket = () => {
     try {
       const indexOrder = orders.findIndex(
@@ -198,6 +207,17 @@ function ProductDetails(props) {
                             </li>
                         </ul>
                         <div class="tab-content">
+                        <AddReviewForm product={product} />
+                        <div className="card-body">
+                        {reviews.filter(review=> review.productId === (product._id)).map(filteredName => (  
+                        <li>{filteredName.message}  <br/>
+                        <Button hidden={user?.result?.name !== filteredName.creator} color="primary"  variant="contained"  onClick={()=>{dispatch(deleteReview(filteredName._id))}}>delete</Button>
+                <Link to={{pathname: "/updatereview/"+filteredName._id, review: filteredName}}> <Button type="button" color="danger"  variant="contained" hidden={user?.result?.name !== filteredName.creator} > update </Button></Link>
+                        
+                        </li>
+                     
+                        
+  ))}</div>
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <h6>Description</h6>
                                 <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed

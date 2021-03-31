@@ -13,11 +13,13 @@ import {
   updateOrder
 } from "../../../redux/slices/orders";
 
+
 function Product(props) {
   const dispatch = useDispatch();
   const [product, setProduct] = useState(props.product);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const orders = useSelector(state => state.orders.orders);
+
   useEffect(() => {
     // console.log(`props ${props.product}`);
     // console.log(`product ${product.stockQuantity}`);
@@ -133,8 +135,10 @@ function Product(props) {
             )}
           </div>
           <div className="product__price">${props.product.price}</div>
+
           {/* <div className="product__price">$ 49.0 <span>$ 59.0</span></div> */}
         </div>
+        
       </div>
       <button
         onClick={() => {

@@ -10,18 +10,18 @@ import products from "../../../../redux/slices/products";
 import CustomSelect from "./CustomSelect";
 import {  createReview } from "../../../../redux/slices/reviews";
 
-const Formrev = () => {
+const Formrev = (props) => {
   
   const user = JSON.parse(localStorage.getItem('profile'));
   const products = useSelector(state => state.products.products)
-const options=products.map((x)=>x={value:x.productName, label :x.productName})
+const options=products.map((x)=>x={value:x._id, label :x.productName})
 const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
      message: "",
      creator_id :user?.result?._id,
      creator :user?.result?.name,
-     productId:"",
+     productId: props.product._id,
    
 
 
@@ -62,7 +62,7 @@ const dispatch = useDispatch();
                 )}
               </div>
            
-              <div>
+              {/* <div>
               <label>Product</label>
                 <CustomSelect
                 value={formik.values.productId}
@@ -72,7 +72,7 @@ const dispatch = useDispatch();
                 {formik.errors.productId && formik.touched.productId && (
                   <FormError>{formik.errors.productId}</FormError>
                 )}
-              </div>
+              </div> */}
               
               
               <div className="mb-4"></div>

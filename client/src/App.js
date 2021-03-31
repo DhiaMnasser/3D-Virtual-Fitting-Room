@@ -34,6 +34,7 @@ import { getReviews } from "./redux/slices/reviews";
 import { getAllUsers, getUsers } from "./redux/slices/auth";
 import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
+import Contact from "./components/FrontOffice/Contact/Contact";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,11 @@ function App() {
           path="/productDetails/:value"
           exact
           component={ProductDetails}
+        />
+        <ClientRoute
+          path="/Contact/"
+          exact
+          component={Contact}
         />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />

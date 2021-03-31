@@ -11,7 +11,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from 'jwt-decode';
 
-import logo from "./logo.png";
+// import logo from "./logo.png";
 function Header() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const classes = useStyles();
@@ -47,7 +47,7 @@ function Header() {
             <div className="col-xl-3 col-lg-2">
               <div className="header__logo">
                 <a href="./index.html">
-                  <img src={logo} alt="" />
+                  {/* <img src={logo} alt="" /> */}
                 </a>
               </div>
             </div>
@@ -66,6 +66,10 @@ function Header() {
                   </li>
                   <li>
                 <Link to='/Shop'>Shop</Link>
+
+                  </li>
+                  <li>
+                <Link to='/addclaim'>Claims</Link>
 
                   </li>
                   <li>
@@ -89,7 +93,8 @@ function Header() {
                     <a href="./blog.html">Blog</a>
                   </li>
                   <li>
-                    <a href="./contact.html">Contact</a>
+                <Link to='/contact'>Contact</Link>
+                  
                   </li>
                 </ul>
               </nav>
@@ -98,11 +103,27 @@ function Header() {
               <div className="header__right">
                 <div className="header__right__auth">
                 { user?  (
-                  <div >
-                  <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
-                  <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
+              <a
+              className="nav-link dropdown-toggle inline"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
 
-                  </div>
+              <span className="mr-2 d-none d-lg-inline text-gray-600 small">
+              
+              </span>
+              {/* <img
+                className="img-profile rounded-circle"
+                src={user.result.imageUrl}
+              /> */}
+                <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
+
+            </a>
                  ):(
                    <span>
 

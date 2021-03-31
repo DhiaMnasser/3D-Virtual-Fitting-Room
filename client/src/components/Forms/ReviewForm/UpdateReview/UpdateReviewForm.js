@@ -48,20 +48,7 @@ const Formup = (props) => {
                   <FormError>{formik.errors.message}</FormError>
                 )}
               </div>
-              <div>
-                <input
-                  className="my-2"
-                  name="productId"
-                  type="text"
-                  placeholder={review.productId}
-                  value={formik.values.ProductId}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.productId && formik.touched.productId && (
-                  <FormError>{formik.errors.productId}</FormError>
-                )}
-              </div>
-              
+             
               <div className="mb-4"></div>
 
               <button
