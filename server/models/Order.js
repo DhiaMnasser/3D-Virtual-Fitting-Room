@@ -6,12 +6,24 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  ref: {
+    type: Date,
+    default: Date.now()
+  },
   dateCreated: {
     type: Date,
     default: Date.now
   },
   dateShipped: {
     type: Date,
+  },
+  clientName: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
   },
   isValid: {
     type: Boolean,

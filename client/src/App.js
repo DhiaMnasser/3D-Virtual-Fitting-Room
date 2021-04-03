@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
 import LayoutBack from "./components/BackOffice/Layout";
@@ -16,7 +16,7 @@ import Claims from "./components/Claims/Claimlist/Claims";
 import ProductList from "./components/Products/ProductList/Products";
 
 import Reviews from "./components/Reviews/Reviewlist/Reviews";
-import OrderListAdmin from "./components/FrontOffice/Orders/Order/Order";
+import OrderListAdmin from "./components/FrontOffice/Orders/OrderList/Orders";
 import AddReviewForm from "./components/Forms/ReviewForm/AddReview/AddReviewForm";
 import AddClaimForm from "./components/Forms/ClaimForm/AddClaim/AddClaimForm";
 import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateReviewForm";
@@ -29,26 +29,41 @@ import { getProducts } from "./redux/slices/products";
 import { getCategories } from "./redux/slices/categories";
 import { getClaims } from "./redux/slices/claims";
 import { getAvatars } from "./redux/slices/avatars";
-import { getOrders } from "./redux/slices/orders";
+import { getOrdersByUser, getOrders } from "./redux/slices/orders";
 import { getReviews } from "./redux/slices/reviews";
-import { getAllUsers, getUsers } from "./redux/slices/auth";
+import { getAllUsers, getUsers, isAuthenticated } from "./redux/slices/auth";
 import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 import Contact from "./components/FrontOffice/Contact/Contact";
 
 function App() {
+  const login = useSelector(state => state.login);
+  const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategories());
     dispatch(getClaims());
     dispatch(getAvatars());
-    dispatch(getOrders());
     dispatch(getReviews());
     dispatch(getUsers());
   }, [dispatch]);
 
-  const [connectedUser, setConnectedUser] = useState(null);
+  useEffect(() => {
+    
+    if (connectedUser) { 
+      connectedUser.role === 0 ?
+    dispatch(getOrdersByUser())
+    :
+    dispatch(getOrders())
+    }
+    
+  },[connectedUser]);
+
+  useEffect(()=>{
+    setConnectedUser(isAuthenticated()?.result)
+
+  }, [login])
 
   return (
     <Router>

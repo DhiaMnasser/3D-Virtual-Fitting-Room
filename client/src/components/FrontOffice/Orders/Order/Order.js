@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import './Order.css'
 import { deleteProduct } from '../../../../redux/slices/products'
 import { useDispatch } from 'react-redux';
-import { addItemToCart, getCurrentBasket, updateOrder } from '../../../../redux/slices/orders';
+import { addItemToCart, getCurrentBasket, updateOrder, getOrders } from '../../../../redux/slices/orders';
 
 function Order(props) {
   const dispatch = useDispatch()
@@ -14,9 +14,9 @@ function Order(props) {
   const orders = useSelector((state) => state.orders.orders);
 
   useEffect(() => {
-    console.log(`order : ${order}`);
+    dispatch(getOrders());
           
-  }, [order]);
+  }, [dispatch]);
     
   
     return ( 
@@ -32,7 +32,7 @@ function Order(props) {
                              <th>clientId</th>
                              <th>dateCreated</th>
                              <th>dateShipped</th>
-                             <th>isValid</th>
+                             
                              <th>isShipped</th>
                              <th>totalPrice</th>
                              <th></th>
@@ -41,13 +41,13 @@ function Order(props) {
                             <tbody>
                             
                                 <tr>
-                                    <td className="cart__price">{order.clientId}</td>
-                                    <td className="cart__price">{order.dateCreated}</td>
-                                    <td className="cart__price">{order.dateShipped}</td>
-                                    <td className="cart__price">{order.isValid}</td>
-                                    <td className="cart__price">{order.isShipped}</td>
-                                    <td className="cart__price">{order.totalPrice}</td>
-                                    {order.map(product =>(
+                                    <td className="cart__price">{order?.clientId}</td>
+                                    <td className="cart__price">{order?.dateCreated}</td>
+                                    <td className="cart__price">{order?.dateShipped}</td>
+
+                                    <td className="cart__price">{order?.isShipped}</td>
+                                    <td className="cart__price">{order?.totalPrice}</td>
+                                    {order?.map(product =>(
                                     <div>
                                     <td class="cart__product__item" >
                                         <img src={product.image} alt=""/>

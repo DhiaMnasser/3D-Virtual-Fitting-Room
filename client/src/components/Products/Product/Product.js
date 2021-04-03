@@ -8,54 +8,35 @@ import "./product.css";
 import { deleteProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 import {
-  addItemToCart,
+  addItemToBasket,
   getCurrentBasket,
   updateOrder
 } from "../../../redux/slices/orders";
+import { isAuthenticated } from "../../../redux/slices/auth";
 
 
 function Product(props) {
   const dispatch = useDispatch();
-  const [product, setProduct] = useState(props.product);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [product, setProduct] = useState(JSON.parse(JSON.stringify(props.product)));
+  const [user, setUser] = useState(isAuthenticated().result);
   const orders = useSelector(state => state.orders.orders);
+  const [currentOrder, setCurrentOrder] = useState();
 
   useEffect(() => {
-    // console.log(`props ${props.product}`);
-    // console.log(`product ${product.stockQuantity}`);
-    // console.log(`product after ${product.stockQuantity}`);
-    // dispatch(addItemToCart(product));
-    console.log(`product : ${product}`);
+    if(currentOrder){
+    console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
+    dispatch(updateOrder(currentOrder._id, currentOrder ));
+  }
 
-    // getCurrentBasket();
-  }, [product]);
+  }, [currentOrder]);
+
 
   const addToBasket = () => {
-    try {
-      const indexOrder = orders.findIndex(
-        order => !order.isValid && order.clientId === user.result._id
-      );
-      let newOrder = orders[indexOrder];
-      // const indexOrder = state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id );
-      // const indexOrder = state.orders.findIndex((order)=> order.clientId === "605e25bdd6c4bd30e8ceebcc");
-      console.log("Order" + JSON.stringify(orders));
-      console.log("user" + JSON.stringify(user));
-      console.log("indexOrder" + indexOrder);
+   try{
+      setCurrentOrder(addItemToBasket(orders, product));
+      // console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
 
-      const indexProduct = newOrder.products.findIndex(
-        prod => prod._id === product._id
-      );
-      console.log("indexProduct" + indexProduct);
-
-      // const indexProduct = state.orders[indexOrder].products.findIndex((prod)=> prod._id === action.payload._id);
-      if (indexProduct !== -1) {
-        newOrder.products[indexProduct].stockQuantity++;
-        console.log("indexProduct" + indexProduct);
-      } else {
-        newOrder.products = [...newOrder.products, product];
-        console.log("Order" + JSON.stringify(newOrder));
-      }
-      //  updateOrder(orders[indexOrder]._id, orders[indexOrder] );
+      //  dispatch(updateOrder(currentOrder._id, currentOrder ));
     } catch (error) {
       console.log(error.message);
     }

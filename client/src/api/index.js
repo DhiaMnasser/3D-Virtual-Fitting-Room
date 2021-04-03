@@ -26,6 +26,7 @@ export const updateClaim = (id, updatedClaim) => axios.patch(`${url}/claims/${id
 export const deleteClaim = (id) => axios.delete(`${url}/claims/${id}`);
 //orders
 export const fetchOrders = ()=> axios.get(`${url}/orders`);
+export const fetchOrderByUser = (userId)=> axios.get(`${url}/orders/user/${userId}`);
 export const createOrder = (newOrder)=> axios.post(`${url}/orders`, newOrder);
 export const updateOrder = (id, updatedOrder) => axios.patch(`${url}/orders/${id}`, updatedOrder);
 export const deleteOrder = (id) => axios.delete(`${url}/orders/${id}`);

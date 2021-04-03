@@ -1,11 +1,25 @@
+
 import * as api from "../../api/index";
 import { createSlice } from '@reduxjs/toolkit';
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { isAuthenticated } from "./auth";
+
 
 export const getOrders = () => async dispatch => {
   try {
     let { data } = await api.fetchOrders();
+    console.log(`data getOrders /actions ${data}`);
+
+    dispatch(getAllOrders(data));
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const getOrdersByUser = () => async dispatch => {
+  try {
+    let { data } = await api.fetchOrderByUser(isAuthenticated().result._id);
     console.log(`data getOrders /actions ${data}`);
 
     dispatch(getAllOrders(data));
@@ -58,44 +72,67 @@ export const deleteOrder = (id) => async (dispatch) => {
 //   }
 // };
 
-export const addItemToCart = ({ product: product, state }) => async dispatch => {
-  try{
-  // const indexOrder = useSelector((state) => state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id ));
+export const removeItemFromBasket = (currentOrder, product) => {
+  try {
+    const indexProduct = currentOrder.products.findIndex(
+      prod => prod._id === product._id
+    );
+    currentOrder.totalPrice -= currentOrder.products[indexProduct].price * currentOrder.products[indexProduct].stockQuantity;
+    currentOrder.products.splice(indexProduct,1)
+      return currentOrder;
+    }catch(error){
+console.log(error);
+
+    }
+}
+
+export const addItemToBasket = (orders, product) => {
+
+  // console.log("addItemToBasket called");
   
-  const indexOrder = state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id );
-  // const indexOrder = state.orders.findIndex((order)=> order.clientId === "605e25bdd6c4bd30e8ceebcc");
-  console.log("indexOrder"+indexOrder);
+  const currentOrder = JSON.parse(JSON.stringify(getCurrentBasket(orders)));
+  // console.log(`currentOrder in slices: ${JSON.stringify(currentOrder)}`);
   
-  const indexProduct = useSelector((state) => state.orders[indexOrder].products.findIndex((prod)=> prod._id === product._id));
-   
-  // const indexProduct = state.orders[indexOrder].products.findIndex((prod)=> prod._id === action.payload._id);
-    if(indexProduct!==-1){   
-    useSelector((state) =>  state.orders[indexOrder].products[indexProduct].stockQuantity++);
-       console.log("indexProduct"+indexProduct);
-       
-     
-   }else{
-    useSelector((state) => state.orders[indexOrder].products.push(product));
-     
-   }
-  } catch(error){
+  try {
+
+
+    const indexProduct = currentOrder.products.findIndex(
+      prod => prod._id === product._id
+    );
+    // console.log("indexProduct" + indexProduct);
+
+    // const indexProduct = state.orders[indexOrder].products.findIndex((prod)=> prod._id === action.payload._id);
+    if (indexProduct !== -1) {
+      currentOrder.products[indexProduct].stockQuantity++;
+      // console.log("indexProduct" + currentOrder.products[indexProduct].stockQuantity);
+    } else {
+      product.stockQuantity=1;
+      
+      currentOrder.products.push(product) ;
+    }
+    // console.log("Product Order pushed" + JSON.stringify(currentOrder));
+    currentOrder.totalPrice = currentOrder.totalPrice + product.price;
+    
+    return (currentOrder);
+    //  dispatch(updateOrder(currentOrder._id, currentOrder ));
+  } catch (error) {
     console.log(error.message);
   }
   //  dispatch(editOrder(state.orders[indexOrder]));
-   
 };
 
-export const getCurrentBasket = () => async dispatch => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-  const indexOrder = useSelector((state) => state.orders.findIndex((order)=> order.clientId === user.result._id));
-  console.log("getting basket");
+export const getCurrentBasket = (orders) => {
+  
+  const connectedUser = isAuthenticated().result;
+  // console.log("getCurrentBasket Orders" + JSON.stringify(orders));
 
-    if(indexOrder!==-1){   
-      console.log("get basket"+useSelector((state) =>state.orders[indexOrder]));
-    }
-  console.log("fail");
-  //  null;
-   
+  const indexOrder = orders?.findIndex((order)=> !order.isValid && order.clientId === connectedUser._id);
+  
+  if(indexOrder!==-1){ 
+    return orders[indexOrder] ;
+  }
+  return  null;
+  
 };
 
 
@@ -123,13 +160,18 @@ export const ordersSlice = createSlice({
     },
     editOrder(state,action){
          const index = state.orders.findIndex((order)=> order._id === action.payload._id);
+        //  console.log(`editOrder in slices : ${state.orders}`);
+         
         if(index!==-1){   
+            // let orders = JSON.parse(JSON.stringify(state.orders))
             state.orders[index]=action.payload;
+            // alert("Product Added To Basket");
+            // state.orders = orders;
         }
     },
 
   }
   });
 
-  export const {getAllOrders,addOrder,removeOrder,editOrder} =ordersSlice.actions
+  export const {getAllOrders,addOrder,removeOrder,editOrder} = ordersSlice.actions
   export default ordersSlice.reducer;
