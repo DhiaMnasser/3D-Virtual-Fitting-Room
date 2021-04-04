@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button } from "@material-ui/core";
 
 import "./ProductDetails.css";
@@ -11,53 +11,57 @@ import { useDispatch } from "react-redux";
 import {
   addItemToCart,
   getCurrentBasket,
-  updateOrder
+  updateOrder,
+  addItemToBasket
 } from "../../../redux/slices/orders";
 import AddReviewForm from "../../Forms/ReviewForm/AddReview/AddReviewForm";
 import { deleteReview } from "../../../redux/slices/reviews";
+import axios from "axios";
 
 
 
 function ProductDetails(props) {
+
+
+    const productId = window.location.pathname.split("productDetails")[1];
+    // console.log('window.location.pathname id' + window.location.pathname.split("productDetails")[1]);
+    
   const dispatch = useDispatch();
-  const prod = useSelector(state => state.products.products.find(prod => prod._id === props.location.product._id));
+//   const prod = useSelector(state => state.products.products.find(prod => prod._id === props.location.product._id));
 
-  const [product, setProduct] = useState(prod);
-  console.log('product'+JSON.stringify(product));
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const orders = useSelector(state => state.orders.orders);
+// console.log('product'+JSON.stringify(product));
+const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+const orders = useSelector(state => state.orders.orders);
+const products = useSelector(state => state.products.products);
+let [product, setProduct] = useState(JSON.parse(JSON.stringify(props.location.product)));
   const reviews = useSelector(state=>state.reviews.reviews)
+  const [currentOrder, setCurrentOrder] = useState();
+
+ 
+useEffect(() => {
+    // setProduct(axios.get(`http://localhost:5000/products/${productId}`).result)
+console.log('product'+JSON.stringify( axios.get(`http://localhost:5000/products/${productId}`)));
+
+}, [])  
+  useEffect(() => {
+    if( user && currentOrder ){
+    console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
+    dispatch(updateOrder(currentOrder._id, currentOrder ));
+  }
+
+  }, [currentOrder]);
+
   const addToBasket = () => {
-    try {
-      const indexOrder = orders.findIndex(
-        order => !order.isValid && order.clientId === user.result._id
-      );
-      let newOrder = orders[indexOrder];
-      // const indexOrder = state.orders.findIndex((order)=> !order.isValid && order.clientId === JSON.parse(localStorage.getItem('profile')).result._id );
-      // const indexOrder = state.orders.findIndex((order)=> order.clientId === "605e25bdd6c4bd30e8ceebcc");
-      console.log("Order" + JSON.stringify(orders));
-      console.log("user" + JSON.stringify(user));
-      console.log("indexOrder" + indexOrder);
-
-      const indexProduct = newOrder.products.findIndex(
-        prod => prod._id === product._id
-      );
-      console.log("indexProduct" + indexProduct);
-
-      // const indexProduct = state.orders[indexOrder].products.findIndex((prod)=> prod._id === action.payload._id);
-      if (indexProduct !== -1) {
-        newOrder.products[indexProduct].stockQuantity++;
-        console.log("indexProduct" + indexProduct);
-      } else {
-        newOrder.products = [...newOrder.products, product];
-        console.log("Order" + JSON.stringify(newOrder));
-      }
-      //  updateOrder(orders[indexOrder]._id, orders[indexOrder] );
-    } catch (error) {
-      console.log(error.message);
-    }
-    //  dispatch(editOrder(state.orders[indexOrder]));
-  };
+    try{
+       setCurrentOrder(addItemToBasket(orders, product));
+       // console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
+ 
+       //  dispatch(updateOrder(currentOrder._id, currentOrder ));
+     } catch (error) {
+       console.log(error.message);
+     }
+     //  dispatch(editOrder(state.orders[indexOrder]));
+   };
 
   return (
     <section class="product-details spad">
@@ -129,7 +133,7 @@ function ProductDetails(props) {
                                     <input type="text" value="1" />
                                 </div>
                             </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <a onClick={() => {if(user)addToBasket()}} class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
