@@ -11,9 +11,12 @@ API.interceptors.request.use((req) => {
 });
 // products
 export const fetchProducts = ()=> axios.get(`${url}/products`);
+export const fetchProductById = (id)=> axios.get(`${url}/products/${id}`);
 export const createProduct = (newProduct)=> axios.post(`${url}/products`, newProduct);
 export const updateProduct = (id, updatedProduct) => axios.patch(`${url}/products/${id}`, updatedProduct);
 export const deleteProduct = (id) => axios.delete(`${url}/products/${id}`);
+export const smartFetchProduct = (pagination)=> axios.post(`${url}/products/page`, pagination);
+export const getNbPages=()=> axios.get(`${url}/products/page/1`);
 //avatars
 export const fetchAvatars = ()=> axios.get(`${url}/avatars`);
 export const createAvatar = (newAvatar)=> axios.post(`${url}/avatars`, newAvatar);

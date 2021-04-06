@@ -1,26 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import Product from "../Product/Product";
 import './shop.css'
-import {filterProducts,searchProducts,filterProductsBySize} from "../../../redux/slices/products"
+import {filterProducts,searchProducts,filterProductsBySize, addProduct,get9Products} from "../../../redux/slices/products"
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik';
+import { Checkbox } from '@material-ui/core';
+
+
+
+
+
+
 function Shop(props) {
+  
     const sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
       const products = useSelector((state) => state.products.products)
+      const pages = useSelector((state)=>state.products.nbpg)
       const categories = useSelector((state) => state.categories.categories)
      const dispatch = useDispatch()
+     if (localStorage.getItem('page')===null) {
+        localStorage.setItem('page',1)
+     }
+     if (localStorage.getItem('filter')===null) {
+        localStorage.setItem('filter',sizes)
+     }
+        var page = {page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}
+
+      useEffect(() => {
+       
+    dispatch(get9Products(page));
+  
+  }, [dispatch]);
+
        const formik = useFormik({
     initialValues: {
       search: "",
     },
     onSubmit: async (values) => {
         console.log(values)
- dispatch(searchProducts(values.search))
+ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),recherche:values.search}))
     }
   });
   const stormik = useFormik({
        initialValues: {
-      tailles: [] ,
+      tailles: ["XXS","XS","XS-S","S","M","M-L","L","XL"] ,
     },
     onSubmit: async (values) => {
        dispatch(filterProductsBySize(values))
@@ -36,7 +59,9 @@ let table=[]
  console.log(event.target.value)
  if(table.indexOf(event.target.value)===-1){
  table.push(event.target.value)
- dispatch(filterProductsBySize(table))
+localStorage.setItem('filter',table)
+ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))
+console.log({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')})
  console.log(stormik.values.tailles)}}
       else{
             var array = [...stormik.values.tailles]; // make a separate copy of the array
@@ -46,14 +71,17 @@ let table=[]
 stormik.setFieldValue('tailles',array)
   
  console.log(array)
-    dispatch(filterProductsBySize(array))
+    localStorage.setItem('filter',array)
+    console.log({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')})
+ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))
       }
      
   }}
+
     return (
         
         <div>
-    
+
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -120,10 +148,10 @@ stormik.setFieldValue('tailles',array)
                                         <div className="card-heading">
                                             <a data-toggle="collapse" data-target="#collapseFour">Accessories</a>
                                         </div>
-                                        <div id="collapseFour" className="collapse" data-parent="#accordionExample">
+                                        <div on id="collapseFour" className="collapse show" data-parent="#accordionExample">
                                             <div className="card-body">
                                                 <ul>
-                                                    {categories.map((cat)=>{return <li key={cat._id}><button key={cat._id}onClick={()=>{dispatch(filterProducts(cat.categoryName))}}>{cat.categoryName}</button></li>})}
+                                                    {categories.map((cat)=>{return <li key={cat._id}><button key={cat._id}onClick={()=>{ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),category:cat.categoryName}))}}>{cat.categoryName}</button></li>})}
                                    
                                                 </ul>
                                             </div>
@@ -173,12 +201,11 @@ stormik.setFieldValue('tailles',array)
 
                             <div className="size__list">
                                 
-                                {sizes.map((size,index)=>{return<label key={index} htmlFor={size}>
-                                    {size}
-                                    <input key={size} onChange={(event)=>handleChange(event)} value={size}   type="checkbox" id={size} />
-                                    <span className="checkmark"></span>
-                                </label>})}
-                            
+                             
+                             {sizes.map((size,index)=>{return<> 
+                             <Checkbox key={index}
+                              onChange={(event)=>handleChange(event)} 
+                              checked={stormik.values.tailles.includes(size)} value={size} on="true"></Checkbox>{size}</>})}
                             </div>
                         </div>
                         <div className="sidebar__color">
@@ -258,10 +285,9 @@ stormik.setFieldValue('tailles',array)
         })}
                         <div className="col-lg-12 text-center">
                             <div className="pagination__option">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i className="fa fa-angle-right"></i></a>
+                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<button  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
+                               key={page}>{page}</button>})}
+                             current page: {localStorage.getItem('page')}
                             </div>
                         </div>
                     </div>

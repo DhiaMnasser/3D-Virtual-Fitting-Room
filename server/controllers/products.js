@@ -27,8 +27,8 @@ const mongoose =require('mongoose');
 const createProduct = async(req, res) => {
     console.log(`create prod in server ${req}`);
     
-    const { productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel } = req.body;
-    const newProduct = await new Product({productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel});
+    const { productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color } = req.body;
+    const newProduct = await new Product({productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color});
     try {
         await newProduct.save();
         res.status(201).json(newProduct);
@@ -41,12 +41,12 @@ const createProduct = async(req, res) => {
 
  const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel} = req.body;
+    const { productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color} = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No product with id: ${id}`);
 
 
-    const updatedProduct ={ productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel };
+    const updatedProduct ={ productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color };
 
     await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
 

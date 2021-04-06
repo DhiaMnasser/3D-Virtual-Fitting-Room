@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
 import "./product.css";
-import { deleteProduct } from "../../../redux/slices/products";
+import { deleteProduct, getProductById } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 import {
   addItemToBasket,
@@ -72,12 +72,17 @@ function Product(props) {
           </ul>
         </div>
         <div className="product__item__text">
-          <h6>
+          <h6 onClick={()=>{
+            localStorage.removeItem("selectedProduct");
+            localStorage.setItem("selectedProduct",JSON.stringify(props.product));
+          }}
+        >
             <Link
               to={{
                 pathname: "/productDetails/" + props.product._id,
                 product: props.product
               }}
+
             >
             {props.product.productName}
 
@@ -115,9 +120,11 @@ function Product(props) {
               />
             )}
           </div>
-          <div className="product__price">${props.product.price}</div>
+          {props.product.promo===0 && <div className="product__price">${props.product.price}</div>}
 
-          {/* <div className="product__price">$ 49.0 <span>$ 59.0</span></div> */}
+{props.product.promo===0 || <div className="product__price">{props.product.price-(props.product.price*props.product.promo)/100}<span>{props.product.price}</span></div>}
+ <div className="product__price">{props.product.color} </div>
+<div className="product__price"> {props.product.size}</div>
         </div>
         
       </div>

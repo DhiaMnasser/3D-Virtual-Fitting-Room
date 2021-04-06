@@ -9,7 +9,7 @@ const claimRoutes =require('./routes/claims.js');
 const orderRoutes =require('./routes/orders.js');
 const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
-
+const mailRoutes =require('./routes/mails.js');
 const fileRoutes = require("./routes/files.js");
 const GridFsStorage = require('multer-gridfs-storage');
 const multer = require('multer');
@@ -37,7 +37,7 @@ app.use('/avatars', avatarRoutes);
 app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
-
+app.use('/mails',mailRoutes)
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
@@ -80,3 +80,12 @@ app.use('/files', fileRoutes(upload));
 
 // catch 404 and forward to error handler
 
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });

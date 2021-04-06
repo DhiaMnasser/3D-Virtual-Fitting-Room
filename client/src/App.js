@@ -24,7 +24,7 @@ import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateR
 import AdminRoute from "./Routes/AdminRoute";
 import ClientRoute from "./Routes/ClientRoute";
 import PrivateRoute from "./Routes/PrivateRoute";
-
+import { getNbPage, get9Products } from "./redux/slices/products";
 import { getProducts } from "./redux/slices/products";
 import { getCategories } from "./redux/slices/categories";
 import { getClaims } from "./redux/slices/claims";
@@ -41,12 +41,13 @@ function App() {
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProducts());
+
     dispatch(getCategories());
     dispatch(getClaims());
     dispatch(getAvatars());
     dispatch(getReviews());
     dispatch(getUsers());
+    dispatch(getNbPage());
   }, [dispatch]);
 
   useEffect(() => {

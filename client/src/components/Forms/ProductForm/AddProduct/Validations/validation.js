@@ -19,4 +19,8 @@ export const Validation = yup.object().shape({
     ,
   arModel: yup.string(),
   threeDModel: yup.string(),
+  rating:yup.number(),
+  promo:yup.number(),
+  color:yup.string()
+
 });

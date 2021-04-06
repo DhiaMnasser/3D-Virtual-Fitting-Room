@@ -23,6 +23,7 @@
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
+    "react-colorful": "^5.1.1",
     "react-dom": "^17.0.1",
     "react-file-base64": "^1.0.3",
     "react-google-login": "^5.2.2",
@@ -35,7 +36,10 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "react-three-fiber": "^5.3.22",
+    "three": "^0.127.0",
+    "three-gltf-loader": "^1.111.0"
   },
   "scripts": {
     "start": "react-scripts start",

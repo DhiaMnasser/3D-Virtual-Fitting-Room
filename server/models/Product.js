@@ -40,7 +40,17 @@ var Product = new Schema({
   },
   threeDmodel: {
     type: String
+  },
+  rating:{
+    type:Number
+  },
+  color:{
+    type:String
+  },
+  promo:{
+    type:Number
   }
+
 
 });
 
