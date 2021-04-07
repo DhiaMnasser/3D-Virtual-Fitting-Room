@@ -31,14 +31,11 @@ var Product = new Schema({
     required: true,
     min: 1
   },
-  image: {
-    type: String,
-    // required: true
-  },
+  image: [String],
   arModel: {
     type: String
   },
-  threeDmodel: {
+  threeDModel: {
     type: String
   },
   rating:{

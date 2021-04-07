@@ -35,6 +35,8 @@ import { getAllUsers, getUsers, isAuthenticated } from "./redux/slices/auth";
 import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 import Contact from "./components/FrontOffice/Contact/Contact";
+import AR from "./components/FrontOffice/AR/AR";
+// import Chat from "./components/FrontOffice/Chatbot/Chat";
 
 function App() {
   const login = useSelector(state => state.login);
@@ -76,6 +78,7 @@ function App() {
         <ClientRoute path="/Shop" component={Shop} />
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
+        <ClientRoute path="/AR/" component={AR} />
 
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />

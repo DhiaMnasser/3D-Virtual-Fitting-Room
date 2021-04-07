@@ -11,6 +11,7 @@ const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
 const mailRoutes =require('./routes/mails.js');
 const fileRoutes = require("./routes/files.js");
+const chatbotRoutes = require("./routes/chatbot/chatbot.js");
 const GridFsStorage = require('multer-gridfs-storage');
 const multer = require('multer');
 const crypto = require('crypto');
@@ -38,6 +39,7 @@ app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/mails',mailRoutes)
+app.use('/chatbot',chatbotRoutes);
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
