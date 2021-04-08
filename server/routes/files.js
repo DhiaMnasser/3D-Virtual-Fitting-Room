@@ -163,12 +163,36 @@ module.exports = (upload) => {
                 });
             });
         });
+    /*
+        GET: Fetches a particular file' data by filename
+    */
+    fileRouter.route('/fileData/:filename')
+    .get((req, res, next) => {
+        gfs.find({ filename: req.params.filename }).toArray((err, files) => {
+            if (!files[0] || files.length === 0) {
+                return res.status(200).json({
+                    success: false,
+                    message: 'No files available',
+                });
+            }
+            // fs = gridfs.GridFS(connect.db);
+            gridout = gfs.get_last_version(req.params.filename)
+            
+            return res.status(200).json({
+                success: true,
+                message: JSON.stringify(gridout),
+            });
+        });
+    });
+       
 
     /* 
         GET: Fetches a particular image and render on browser
     */
     fileRouter.route('/image/:filename')
         .get((req, res, next) => {
+            console.log("Fetches a particular image");
+
             gfs.find({ filename: req.params.filename }).toArray((err, files) => {
                 if (!files[0] || files.length === 0) {
                     return res.status(200).json({
@@ -177,7 +201,7 @@ module.exports = (upload) => {
                     });
                 }
 
-                if (files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml') {
+                if (files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml' || files[0].contentType === 'application/octet-stream') {
                     // render image to browser
                     gfs.openDownloadStreamByName(req.params.filename).pipe(res);
                 } else {
@@ -205,6 +229,9 @@ module.exports = (upload) => {
                 });
             });
         });
+
+
+
 
     return fileRouter;
 };

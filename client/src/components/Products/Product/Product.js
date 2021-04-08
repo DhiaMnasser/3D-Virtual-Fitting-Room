@@ -48,8 +48,8 @@ function Product(props) {
       <div className="product__item">
         <div
           className="product__item__pic set-bg"
-          style={{ backgroundImage: `url(${props.product.image})` }}
-          data-setbg={props.product.image}
+          style={{ backgroundImage: `url(${props.product.image[0]})` }}
+          data-setbg={props.product.image[0]}
         >
           <div className="label new">New</div>
           <div className="label stockout">out of stock</div>

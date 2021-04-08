@@ -59,6 +59,7 @@ export const deleteUser = (id) => axios.delete(`${url}/user/${id}`);
 // files
 export const fetchFiles = ()=> axios.get(`${url}/files/files`);
 export const fetchFileByName = (fileName)=> axios.get(`${url}/files/file/${fileName}`);
+export const fetchFileDataByName = (fileName)=> axios.get(`${url}/files/fileData/${fileName}`);
 export const uploadFile = (file)=> axios.post(`${url}/files`, file);
 export const deleteFileById = (id) => axios.post(`${url}/files/file/del/${id}`);
 
