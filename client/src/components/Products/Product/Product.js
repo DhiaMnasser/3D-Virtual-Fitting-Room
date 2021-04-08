@@ -128,14 +128,7 @@ function Product(props) {
         </div>
         
       </div>
-      <button
-        onClick={() => {
-          dispatch(deleteProduct(props.product._id));
-        }}
-      >
-        delete
-      </button>
-      <button onClick={() => {}}>update</button>
+      
       <script></script>
     </div>
   );
