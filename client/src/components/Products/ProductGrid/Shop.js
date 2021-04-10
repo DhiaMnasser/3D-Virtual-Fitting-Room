@@ -86,7 +86,7 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-
+<Stripe name="yoyo" price={10}></Stripe>
     <section className="shop spad">
         <div className="container">
             <div className="row">
