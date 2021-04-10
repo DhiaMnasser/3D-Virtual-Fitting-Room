@@ -5,6 +5,8 @@ import {filterProducts,searchProducts,filterProductsBySize, addProduct,get9Produ
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik';
 import { Checkbox } from '@material-ui/core';
+import Comparateur from '../../Comparateur/Comparateur';
+import Stripe from '../../Stripe/Stripe';
 
 
 
