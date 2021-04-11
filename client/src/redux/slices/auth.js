@@ -35,6 +35,8 @@ export const getUsers = () => async dispatch => {
   }
 };
 
+
+
 export const isAuthenticated = () => {
   if (typeof window == 'undefined') return false;
   if (localStorage.getItem('profile')) {
@@ -43,7 +45,15 @@ export const isAuthenticated = () => {
     return false;
   }
 };
+export const updateUser = (id, user) => async dispatch => {
+  try {
+    const { data } = await api.updateUser(id, user);
 
+    dispatch(editUser(data));
+  } catch (error) {
+    console.log(error.response);
+  }
+};
 export const usersSlice = createSlice({
   name:"users",
   initialState:{
@@ -53,7 +63,7 @@ export const usersSlice = createSlice({
   reducers:{
       getAllUsers(state,action){
           state.users=action.payload;
-          // console.log("in slice"+ JSON.stringify(state.users, null, 4));   
+           console.log("in slice"+ JSON.stringify(state.users, null, 4));   
       },
         addUser(state,action){
         state.users.push(action.payload)

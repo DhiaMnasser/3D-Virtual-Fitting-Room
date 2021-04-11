@@ -5,6 +5,7 @@ export class Leftside extends Component {
     render() {  
         let url ="/listclaim";
         let url1="/listreview"
+        let url2="/listreview"
         return (  
             
             <div>  
@@ -30,6 +31,11 @@ export class Leftside extends Component {
                             <i className="fas fa-fw fa-tachometer-alt"></i>  
                             <span>Reviews</span></a>  
                     </li> 
+                    <li className="nav-item active">  
+                        <a className="nav-link"  href='/admin/listuser'>  
+                            <i className="fas fa-fw fa-tachometer-alt"></i>  
+                            <span>Users</span></a>  
+                    </li>
                     <li className="nav-item active">  
                         <a className="nav-link"  href='/admin/products'>  
                             <i className="fas fa-fw fa-tachometer-alt"></i>  

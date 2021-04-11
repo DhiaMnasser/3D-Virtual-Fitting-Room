@@ -31,7 +31,15 @@ export const updateClaim = (id, claim) => async dispatch => {
     console.log(error.response);
   }
 };
+export const traiterClaim = (id) => async dispatch => {
+  try {
+    const { data } = await api.traiterClaim(id);
 
+    dispatch(editClaim(data));
+  } catch (error) {
+    console.log(error.response);
+  }
+};
 
 export const deleteClaim = (id) => async (dispatch) => {
   try {
@@ -76,4 +84,3 @@ export const claimsSlice = createSlice({
 
   export const {getAllClaims,editClaim,removeClaim,addClaim} =claimsSlice.actions
   export default claimsSlice.reducer;
-

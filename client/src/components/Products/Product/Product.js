@@ -48,8 +48,8 @@ function Product(props) {
       <div className="product__item">
         <div
           className="product__item__pic set-bg"
-          style={{ backgroundImage: `url(${props.product.image[0]})` }}
-          data-setbg={props.product.image[0]}
+          style={{ backgroundImage: `url(${props.product.image})` }}
+          data-setbg={props.product.image}
         >
           <div className="label new">New</div>
           <div className="label stockout">out of stock</div>
@@ -128,14 +128,7 @@ function Product(props) {
         </div>
         
       </div>
-      <button
-        onClick={() => {
-          dispatch(deleteProduct(props.product._id));
-        }}
-      >
-        delete
-      </button>
-      <button onClick={() => {}}>update</button>
+      
       <script></script>
     </div>
   );

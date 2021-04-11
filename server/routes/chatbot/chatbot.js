@@ -10,7 +10,7 @@ var router = express.Router();
 var jsonParser = bodyParser.json();
 var urlEncoded = bodyParser.urlencoded({ extended: true });
 
-router.post("/chatbot", jsonParser, urlEncoded,function (req, res, next) {
+router.post("/", jsonParser, urlEncoded,function (req, res, next) {
   const message = req.body.message;
   console.log("message" + message);
 

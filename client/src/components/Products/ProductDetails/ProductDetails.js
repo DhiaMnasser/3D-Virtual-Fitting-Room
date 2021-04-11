@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import * as api from "../../../api/index";
+
 import "./ProductDetails.css";
 import { deleteProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
@@ -44,27 +44,15 @@ function ProductDetails(props) {
   const [product, setProduct] = useState(JSON.parse(localStorage.getItem("selectedProduct")));
   const reviews = useSelector(state => state.reviews.reviews);
   const [currentOrder, setCurrentOrder] = useState();
-  const [threeDModel, setThreeDModel] = useState();
 
   useEffect(() => {
-    console.log("useEffect called setThreeDModel");
-    // const threeDModel =  api.fetchFileDataByName(product.threeDModel)
-    // const threeDModel =  api.fetchFileByName(product.threeDModel)
-    // api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(response.data)});
-    api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(JSON.stringify(response.data))});
-    // setThreeDModel(data);
-    // console.log(data);
-    console.log(threeDModel);
-    // localStorage.setItem("threeDModel", threeDModel);
-    
+    console.log("useEffect called setProduct");
 
     // setProduct(prod);
     // setProduct(axios.get(`http://localhost:5000/products/${productId}`).result)
     // console.log('product'+JSON.stringify( axios.get(`http://localhost:5000/products/${productId}`)));
   }, [prod]);
 
-
-  
   useEffect(() => {
     if (user && currentOrder) {
       console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
@@ -91,15 +79,15 @@ function ProductDetails(props) {
           <div class="col-lg-6">
             <div class="product__details__pic">
               <div class="product__details__pic__left product__thumb nice-scroll">
-              {product.image.map(image => {
-
-                return <a class=" product__details__pic__slider owl-carouse pt active" href="#product-1">
-                  <img src={image} alt={product?.description} />
+                <a class="pt active" href="#product-1">
+                  <img src={product?.image} alt={product?.description} />
                 </a>
-
-              })}
-                
-               
+                <a class="pt" href="#product-2">
+                  <img src={product?.image} alt={product?.description} />
+                </a>
+                <a class="pt" href="#product-3">
+                  <img src={product?.image} alt={product?.description} />
+                </a>
               </div>
               <div class="product__details__slider__content">
                 <div class="product__details__pic__slider owl-carousel">
@@ -108,7 +96,7 @@ function ProductDetails(props) {
                     src={product?.image}
                     alt="Waa"
                   /> */}
-    <Avatar man={threeDModel}/>
+    <Avatar/>
                 </div>
 
 
@@ -152,18 +140,9 @@ function ProductDetails(props) {
                   />
                 }
               </div>
-              {/* <div class="product__details__price"> */}
-              {product?.promo !==0 ? (
-                <div class="product__details__price">
-                $ {product?.price * product?.promo} <span>$ {product?.price}- {product?.price * product?.promo} </span>
-                </div>
-
-              ):(
-                <div class="product__details__price">
-                $ {product?.price } 
-                </div>
-
-              )}
+              <div class="product__details__price">
+                $ {product?.price} <span>$ {product?.price}-10 </span>
+              </div>
               <p>
                 Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret
                 fugit, sed quia consequuntur magni lores eos qui ratione
@@ -331,6 +310,7 @@ function ProductDetails(props) {
                         </Link>
                       </li>
                     ))}
+                    
                 </div>
                 </span>):
             (

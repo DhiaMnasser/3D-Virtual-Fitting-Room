@@ -14,7 +14,6 @@ const mongoose =require('mongoose');
 
  const getProductById = async (req, res) => { 
     const { id } = req.params;
-    console.log(' getProductById');
 
     try {
         const product = await Product.findById(id);

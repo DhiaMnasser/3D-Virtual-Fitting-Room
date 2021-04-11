@@ -5,6 +5,8 @@ import {filterProducts,searchProducts,filterProductsBySize, addProduct,get9Produ
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik';
 import { Checkbox } from '@material-ui/core';
+import Comparateur from '../../Comparateur/Comparateur';
+import Stripe from '../../Stripe/Stripe';
 
 
 
@@ -41,14 +43,17 @@ function Shop(props) {
  dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),recherche:values.search}))
     }
   });
-  const stormik = useFormik({
+   const [taille, setTaille] = useState(["XXS","XS","XS-S","S","M","M-L","L","XL"])
+
+   const stormik = useFormik({
        initialValues: {
-      tailles: ["XXS","XS","XS-S","S","M","M-L","L","XL"] ,
+      tailles: localStorage.getItem('filter').split(",") ,
     },
     onSubmit: async (values) => {
        dispatch(filterProductsBySize(values))
     }
   })
+  
 let table=[]
   const handleChange=(event)=>{
       console.log(event.target.checked)
@@ -81,7 +86,7 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-
+<Stripe name="yoyo" price={10}></Stripe>
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -94,86 +99,17 @@ stormik.setFieldValue('tailles',array)
                             <div className="categories__accordion">
                                 <div className="accordion" id="accordionExample">
                                     <div className="card">
-                                        <div className="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">Women</a>
-                                        </div>
-                                        <div id="collapseOne" className="collapse show" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
-                                        </div>
-                                        <div id="collapseTwo" className="collapse" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseThree">Kids</a>
-                                        </div>
-                                        <div id="collapseThree" className="collapse" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card">
-                                        <div className="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFour">Accessories</a>
-                                        </div>
+                                        
                                         <div on id="collapseFour" className="collapse show" data-parent="#accordionExample">
                                             <div className="card-body">
                                                 <ul>
-                                                    {categories.map((cat)=>{return <li key={cat._id}><button key={cat._id}onClick={()=>{ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),category:cat.categoryName}))}}>{cat.categoryName}</button></li>})}
+                                                    {categories.map((cat)=>{return <li key={cat._id}><a key={cat._id}onClick={()=>{ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),category:cat.categoryName}))}}>{cat.categoryName}</a></li>})}
                                    
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="card">
-                                        <div className="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFive">Cosmetic</a>
-                                        </div>
-                                        <div id="collapseFive" className="collapse" data-parent="#accordionExample">
-                                            <div className="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -208,53 +144,7 @@ stormik.setFieldValue('tailles',array)
                               checked={stormik.values.tailles.includes(size)} value={size} on="true"></Checkbox>{size}</>})}
                             </div>
                         </div>
-                        <div className="sidebar__color">
-                            <div className="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div className="size__list color__list">
-                                <label htmlFor="black">
-                                    Blacks
-                                    <input type="checkbox" id="black"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="whites">
-                                    Whites
-                                    <input type="checkbox" id="whites"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="reds">
-                                    Reds
-                                    <input type="checkbox" id="reds"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="greys">
-                                    Greys
-                                    <input type="checkbox" id="greys"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="blues">
-                                    Blues
-                                    <input type="checkbox" id="blues"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="beige">
-                                    Beige Tones
-                                    <input type="checkbox" id="beige"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="greens">
-                                    Greens
-                                    <input type="checkbox" id="greens"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                                <label htmlFor="yellows">
-                                    Yellows
-                                    <input type="checkbox" id="yellows"/>
-                                    <span className="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -285,8 +175,8 @@ stormik.setFieldValue('tailles',array)
         })}
                         <div className="col-lg-12 text-center">
                             <div className="pagination__option">
-                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<button  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
-                               key={page}>{page}</button>})}
+                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<a className={page===localStorage.getItem('page')?'selected':'pagination__option'}  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
+                               key={page}>{page}</a>})}
                              current page: {localStorage.getItem('page')}
                             </div>
                         </div>

@@ -11,7 +11,6 @@ import Products from "../Products/ProductGrid/Products";
 import Form from "../Forms/ProductForm/AddProduct/AddProductForm";
 import products, { addProduct } from "../../redux/slices/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Chat from "./Chatbot/Chat";
 
 export default ({ children }) => {
   console.log("render Main Client");
@@ -75,7 +74,6 @@ export default ({ children }) => {
         </div>
     </div>
       {children}
-      <Chat/>
       <Footer />
     </>
   );
