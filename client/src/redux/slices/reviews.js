@@ -32,7 +32,21 @@ export const updateReview = (id, review) => async dispatch => {
     console.log(error.response);
   }
 };
+<<<<<<< HEAD
 
+=======
+export const likeReview = (id) => async (dispatch) => {
+  const user = JSON.parse(localStorage.getItem('profile'));
+
+  try {
+    const { data } = await api.likeReview(id, user?.token);
+
+    dispatch( like(data) );
+  } catch (error) {
+    console.log(error);
+  }
+};
+>>>>>>> hajer3
 
 export const deleteReview = (id) => async (dispatch) => {
   try {
@@ -70,6 +84,7 @@ export const reviewsSlice = createSlice({
             state.reviews[index]=action.payload;
         }
     },
+<<<<<<< HEAD
   }
   });
 
@@ -77,3 +92,22 @@ export const reviewsSlice = createSlice({
   export default reviewsSlice.reducer;
 
 
+=======
+    like(state,action){
+      const index = state.reviews.findIndex((prod)=> prod._id === action.payload._id);
+        if(index!==-1){   
+            state.reviews[index]=action.payload;
+        } 
+    }
+
+    
+  }
+  });
+
+  export const {getAllReviews,addReview,editReview,removeReview,like} =reviewsSlice.actions
+  export default reviewsSlice.reducer;
+
+
+
+
+>>>>>>> hajer3

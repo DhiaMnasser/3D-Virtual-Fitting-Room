@@ -128,7 +128,18 @@ function Product(props) {
         </div>
         
       </div>
+<<<<<<< HEAD
       
+=======
+      <button
+        onClick={() => {
+          dispatch(deleteProduct(props.product._id));
+        }}
+      >
+        delete
+      </button>
+      <button onClick={() => {}}>update</button>
+>>>>>>> hajer3
       <script></script>
     </div>
   );

@@ -28,7 +28,11 @@ const Formup = (props) => {
 
   return (
     <>
+<<<<<<< HEAD
       <div className="col-lg-6">
+=======
+      <div className="col-lg-3">
+>>>>>>> hajer3
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">Update Review</h6>

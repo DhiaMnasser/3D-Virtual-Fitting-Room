@@ -11,7 +11,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+<<<<<<< HEAD
 const Claims = () => {
+=======
+import { traiterClaim} from '../../../redux/slices/claims'
+import { useDispatch } from 'react-redux'
+import {   Button } from '@material-ui/core';
+const Claims = () => {
+  const dispatch = useDispatch()
+>>>>>>> hajer3
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -31,8 +39,16 @@ const Claims = () => {
         <TableHead>
         <TableRow>
         <TableCell align="left">Creator</TableCell>
+<<<<<<< HEAD
             <TableCell align="left">Message</TableCell>
                    
+=======
+        <TableCell align="left">Type</TableCell> 
+            <TableCell align="left">Message</TableCell>
+             
+            <TableCell align="left">Status</TableCell>    
+            <TableCell align="left">Actions</TableCell>    
+>>>>>>> hajer3
             </TableRow>
         </TableHead>
         <TableBody>
@@ -50,8 +66,17 @@ const Claims = () => {
                       
                       
                       </TableCell>
+<<<<<<< HEAD
                       <TableCell align="left"> <h6>{claims.message}</h6> </TableCell>
 
+=======
+                      <TableCell align="left"> <h6>{claims.type}</h6> </TableCell>
+                      <TableCell align="left"> <h6>{claims.message}</h6> </TableCell>
+                      <TableCell align="left"> <h6>{claims.status}</h6> </TableCell>
+                      <TableCell><Button color="primary"  fullWidth variant="contained"  onClick={()=>{dispatch(traiterClaim(claims._id))}}>update status</Button> </TableCell>
+                <br/>
+                    
+>>>>>>> hajer3
                </TableRow>
                   ))}
 
@@ -65,3 +90,7 @@ const Claims = () => {
 };
 
 export default Claims;
+<<<<<<< HEAD
+=======
+
+>>>>>>> hajer3

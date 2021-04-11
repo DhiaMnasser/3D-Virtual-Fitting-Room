@@ -20,6 +20,16 @@ reviewDate:{
     type:Date,
     required:true,
     default:Date.now
+<<<<<<< HEAD
 }
+=======
+},
+likeCount: {
+    type: Number,
+    default: 0,
+},
+likes: { type: [String], default: [] },
+
+>>>>>>> hajer3
 })
 module.exports=  mongoose.model("Review", reviewSchema);

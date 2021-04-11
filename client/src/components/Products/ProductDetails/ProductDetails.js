@@ -310,6 +310,10 @@ function ProductDetails(props) {
                         </Link>
                       </li>
                     ))}
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> hajer3
                 </div>
                 </span>):
             (

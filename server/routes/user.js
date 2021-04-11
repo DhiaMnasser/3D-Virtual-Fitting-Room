@@ -1,4 +1,5 @@
 const express= require("express");
+<<<<<<< HEAD
 const router = express.Router();
 const User = require('../models/user')
 
@@ -7,6 +8,19 @@ const { signin, signup }= require("../controllers/user.js");
 router.post("/signin", signin);
 router.post("/signup", signup);
 router.get('/', async(req,res)=>{
+=======
+
+const User = require('../models/user')
+
+const { signin, signup, refresh,getusers ,updateUser }= require("../controllers/users.js");
+var router = express.Router();
+router.post("/signin", signin);
+router.post("/signup", signup);
+router.post("/token",refresh)
+router.get("/", getusers);
+router.patch("/:id", updateUser);
+/*router.get('/', async(req,res)=>{
+>>>>>>> hajer3
 try{
 const users = await User.find()
 res.json(users)
@@ -14,7 +28,11 @@ res.json(users)
 res.status(500).json({message:err.message})
 
 }
+<<<<<<< HEAD
 })
+=======
+})*/
+>>>>>>> hajer3
 //getting one
 router.get('/:id',getUser, (req,res)=>{
   res.send(res.user)  

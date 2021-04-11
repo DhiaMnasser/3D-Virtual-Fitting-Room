@@ -9,6 +9,11 @@ const mongoose =require('mongoose');
     } catch (error) {
         res.status(404).send({message: error.message}); 
     }
+<<<<<<< HEAD
+=======
+    console.log(req.userId);
+
+>>>>>>> hajer3
 }
 
  const getReviewById = async (req, res) => { 
@@ -58,5 +63,30 @@ const mongoose =require('mongoose');
     await Review.findByIdAndRemove(id);
 
     res.status(200).json({ message: "Review deleted successfully." });
+<<<<<<< HEAD
 }
 module.exports= {deleteReview,updateReview,createReview,getReviewById,getReviews }
+=======
+};
+ const likeReview = async (req, res) => {
+    const { id } = req.params;
+    
+
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No review with id: ${id}`);
+    
+    const review = await Review.findById(id);
+
+    /*const index = review.likes.findIndex((id) => id ===String(req.userId));
+    
+    if (index === -1) {
+      review.likes.push(req.userId);
+    } else {
+      review.likes = review.likes.filter((id) => id !== String(req.userId));
+    }
+    const updatedReview = await Review.findByIdAndUpdate(id, review, { new: true });*/
+    const updatedReview = await Review.findByIdAndUpdate(id, { likeCount: review.likeCount + 1 }, { new: true });
+    res.status(200).json(updatedReview);
+}
+module.exports= {deleteReview,updateReview,createReview,getReviewById,getReviews,likeReview }
+>>>>>>> hajer3
