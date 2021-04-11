@@ -1,11 +1,8 @@
 import axios from 'axios'
 
 const url = 'http://localhost:5000';
-<<<<<<< HEAD
-=======
 
 const urll = 'http://localhost:5008';
->>>>>>> hajer3
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
@@ -32,10 +29,7 @@ export const fetchClaims = ()=> axios.get(`${url}/claims`);
 export const createClaim = (newClaim)=> axios.post(`${url}/claims`, newClaim);
 export const updateClaim = (id, updatedClaim) => axios.patch(`${url}/claims/${id}`, updatedClaim);
 export const deleteClaim = (id) => axios.delete(`${url}/claims/${id}`);
-<<<<<<< HEAD
-=======
 export const traiterClaim = (id) => axios.patch(`${url}/claims/${id}/traiterClaim`);
->>>>>>> hajer3
 //orders
 export const fetchOrders = ()=> axios.get(`${url}/orders`);
 export const fetchOrderByUser = (userId)=> axios.get(`${url}/orders/user/${userId}`);
@@ -47,10 +41,7 @@ export const fetchReviews = ()=> axios.get(`${url}/reviews`);
 export const createReview = (newReview)=> axios.post(`${url}/reviews`, newReview);
 export const updateReview = (id, updatedReview) => axios.patch(`${url}/reviews/${id}`, updatedReview);
 export const deleteReview = (id) => axios.delete(`${url}/reviews/${id}`);
-<<<<<<< HEAD
-=======
 export const likeReview = (id) => API.patch(`/reviews/${id}/likeReview`);
->>>>>>> hajer3
 // Categories
 
 export const fetchCategories = ()=> axios.get(`${url}/categories`);
@@ -60,22 +51,12 @@ export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
 
 // users
 
-<<<<<<< HEAD
-
-export const signIn = (formData) => API.post('/user/signin', formData);
-export const signUp = (formData) => API.post('/user/signup', formData);
-
-export const fetchUsers = ()=> axios.get(`${url}/user`);
-export const createUser = (newUser)=> axios.post(`${url}/user`, newUser);
-export const updateUser = (id, updatedUser) => axios.patch(`${url}/user/${id}`, updatedUser);
-=======
 export const signIn = (formData) => API.post('/users/signin', formData);
 export const signUp = (formData) => API.post('/users/signup', formData);
 
 export const fetchUsers = ()=> axios.get(`${url}/users`);
 export const createUser = (newUser)=> axios.post(`${url}/user`, newUser);
 export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`, updatedUser);
->>>>>>> hajer3
 export const deleteUser = (id) => axios.delete(`${url}/user/${id}`);
 
 // files
@@ -86,8 +67,6 @@ export const deleteFileById = (id) => axios.post(`${url}/files/file/del/${id}`);
 
 export const fetchImageByName = (fileName)=> axios.get(`${url}/files/image/${fileName}`);
 export const deleteImageById = (id) => axios.get(`${url}/files/delete/${id}`);
-<<<<<<< HEAD
-=======
 export const uploadFileavatar=(event)=>{
   const data = new FormData() ;
   data.append('file', event.target.files[0]);
@@ -97,4 +76,3 @@ export const uploadFileavatar=(event)=>{
       })
 }
 export const customavatr= ()=> axios.get(`${urll}/createavatar`);
->>>>>>> hajer3

@@ -12,20 +12,13 @@ import CustomSelect from "./CustomSelect";
 import { HexColorPicker } from "react-colorful";
 
 const Form = () => {
-<<<<<<< HEAD
-
-=======
->>>>>>> hajer3
   const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
   const [uploadedArModel, setUploadedArModel] = useState({});
   const [uploadedThreeDModelUrl, setUploadedThreeDModelUrl] = useState("");
   const [uploadedThreeDModel, setUploadedThreeDModel] = useState({});
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> hajer3
   const Chan = event => {
     formik.setFieldValue("color", color);
     console.log(formik.values.color);
@@ -105,10 +98,7 @@ const Form = () => {
       })
       .catch(err => alert("Error useEffect: " + err));
   };
-<<<<<<< HEAD
 
-=======
->>>>>>> hajer3
   return (
     <>
       <div class="col-lg-6">
@@ -232,11 +222,7 @@ const Form = () => {
                   id="arModel"
                   name="arModel"
                   className="Upload__Input"
-<<<<<<< HEAD
-                  onChange={(event) => {
-=======
                   onChange={(event: any) => {
->>>>>>> hajer3
                     alert("File is uploading please wait");
                     setUploadedArModel(event.target.files[0]);
                     // setUploadedArModel({added: 'yes'});
@@ -257,11 +243,7 @@ const Form = () => {
                   id="threeDModel"
                   name="threeDModel"
                   className="Upload__Input"
-<<<<<<< HEAD
-                  onChange={(event) => {
-=======
                   onChange={(event: any) => {
->>>>>>> hajer3
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});

@@ -26,13 +26,9 @@ const mongoose =require('mongoose');
  const createClaim = async(req, res) => {
     console.log(`create claim in server ${req}`);
     console.log(req.userId);
-<<<<<<< HEAD
-    const {message,creator ,creator_id} = req.body;
-    const newClaim = await new Claim({ message , creator, creator_id });
-=======
+
     const {message,creator ,creator_id,status ,type,Réf} = req.body;
     const newClaim = await new Claim({ message , creator, creator_id ,status,type,Réf});
->>>>>>> hajer3
     try {
         await newClaim.save();
         res.status(201).json(newClaim);
@@ -65,9 +61,6 @@ const mongoose =require('mongoose');
 
     res.status(200).json({ message: "Claim deleted successfully." });
 }
-<<<<<<< HEAD
-module.exports= {deleteClaim,updateClaim,createClaim,getClaimById,getClaims }
-=======
 
 const traiterClaim = async (req, res) => {
     const { id } = req.params;
@@ -82,4 +75,3 @@ claim.status="processed";
 }
 
 module.exports= {deleteClaim,updateClaim,createClaim,getClaimById,getClaims,traiterClaim }
->>>>>>> hajer3

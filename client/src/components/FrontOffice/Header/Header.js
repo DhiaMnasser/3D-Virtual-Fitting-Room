@@ -38,12 +38,8 @@ function Header() {
 
     setUser(null);
   };
-<<<<<<< HEAD
-
-=======
   const profile =()=>
   { history.push('/profile');};
->>>>>>> hajer3
   return (
     <>
       <header className="header">
@@ -78,13 +74,10 @@ function Header() {
 
                   </li>
                   <li>
-<<<<<<< HEAD
-=======
                 <Link to='/Myclaims'> My Claims</Link>
 
                   </li>
                   <li>
->>>>>>> hajer3
                     <a href="#">Pages</a>
                     <ul className="dropdown">
                       <li>
@@ -107,14 +100,11 @@ function Header() {
                   <li>
                 <Link to='/contact'>Contact</Link>
                   
-<<<<<<< HEAD
-=======
                 
                   </li>
                   <li>
                 <Link to='/avatar'>Your Avatar</Link>
                   
->>>>>>> hajer3
                   </li>
                 </ul>
               </nav>
@@ -140,11 +130,7 @@ function Header() {
                 className="img-profile rounded-circle"
                 src={user.result.imageUrl}
               /> */}
-<<<<<<< HEAD
-                <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
-=======
                 <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl} onClick={profile} >{user.result.name.charAt(0)}</Avatar>
->>>>>>> hajer3
                 <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
 
             </a>

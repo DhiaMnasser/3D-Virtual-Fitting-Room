@@ -9,11 +9,8 @@ const mongoose =require('mongoose');
     } catch (error) {
         res.status(404).send({message: error.message}); 
     }
-<<<<<<< HEAD
-=======
     console.log(req.userId);
 
->>>>>>> hajer3
 }
 
  const getReviewById = async (req, res) => { 
@@ -63,10 +60,6 @@ const mongoose =require('mongoose');
     await Review.findByIdAndRemove(id);
 
     res.status(200).json({ message: "Review deleted successfully." });
-<<<<<<< HEAD
-}
-module.exports= {deleteReview,updateReview,createReview,getReviewById,getReviews }
-=======
 };
  const likeReview = async (req, res) => {
     const { id } = req.params;
@@ -89,4 +82,3 @@ module.exports= {deleteReview,updateReview,createReview,getReviewById,getReviews
     res.status(200).json(updatedReview);
 }
 module.exports= {deleteReview,updateReview,createReview,getReviewById,getReviews,likeReview }
->>>>>>> hajer3

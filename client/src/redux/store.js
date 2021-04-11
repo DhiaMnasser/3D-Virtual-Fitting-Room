@@ -20,10 +20,7 @@ import claimsReducer from "./slices/claims";
 import ordersReducer from "./slices/orders";
 import reviewsReducer from "./slices/reviews";
 import  { reducers }  from './reducers';
-<<<<<<< HEAD
-=======
 import usersReducer from "./slices/auth";
->>>>>>> hajer3
 
 export default configureStore({
     
@@ -35,10 +32,7 @@ reducer:{
     orders: ordersReducer,
     reviews: reviewsReducer,
     login : reducers ,
-<<<<<<< HEAD
-=======
     users:usersReducer,
->>>>>>> hajer3
 
 }
 

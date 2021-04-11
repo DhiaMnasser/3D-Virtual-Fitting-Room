@@ -7,11 +7,6 @@ import styled from "styled-components";
 import axios from 'axios';
 import {  Typography, Paper } from '@material-ui/core';
 import useStyles from '../styles';
-<<<<<<< HEAD
-
-import { createClaim } from "../../../../redux/slices/claims";
-
-=======
 import CustomSelect from "./CustomSelect";
 import { createClaim } from "../../../../redux/slices/claims";
 let types = ["Size","Color","Fabric","Other"];
@@ -20,30 +15,22 @@ let types2 = ["Delay","Missing item ","Other"];
 types2= types2.map((x)=>x={value:x, label :x})
 let selecteds = ["product","Order"];
 selecteds= selecteds.map((x)=>x={value:x, label :x})
->>>>>>> hajer3
 const Form = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
-<<<<<<< HEAD
-=======
 
  
->>>>>>> hajer3
   const formik = useFormik({
     initialValues: {
      message: "",
      creator_id :user?.result?._id,
-<<<<<<< HEAD
-     creator :user?.result?.name
-=======
      creator :user?.result?.name,
      status :"In Progress",
      type :"",
      selectValue :"",
      product :"Order",
      Réf :""
->>>>>>> hajer3
 
 
     },
@@ -74,30 +61,20 @@ const Form = () => {
           <div className="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
-<<<<<<< HEAD
-=======
               <label> Message
                 
                 <br/>
->>>>>>> hajer3
                 <input
                   className="my-2"
                   name="message"
                   type="text"
-<<<<<<< HEAD
-                  placeholder="message"
-=======
                   placeholder="type your message"
->>>>>>> hajer3
                   value={formik.values.message}
                   onChange={formik.handleChange}
                 />
                 {formik.errors.message && formik.touched.message && (
                   <FormError>{formik.errors.message}</FormError>
                 )}
-<<<<<<< HEAD
-              </div>
-=======
                 </label>
               </div>
               
@@ -154,7 +131,6 @@ const Form = () => {
 
           
           
->>>>>>> hajer3
               <div className="mb-4"></div>
 
               <button

@@ -11,7 +11,7 @@ const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
 const mailRoutes =require('./routes/mails.js');
 const fileRoutes = require("./routes/files.js");
-<<<<<<< HEAD
+// const chatbotRoutes = require("./routes/chatbot/chatbot.js");
 const scrapingRoutes = require("./routes/scraping.js");
 const GridFsStorage = require('multer-gridfs-storage');
 const multer = require('multer');
@@ -19,14 +19,8 @@ const crypto = require('crypto');
 const path = require('path');
 const stripe = require("stripe")("sk_test_51IcLvHCPAWlRLabTKXrUtBtjKUfrCpayBeReUcudDNg23OMhZhMQg70MqbXOvATDviRQPpo7HKhigVqSNqk45BNM00WrYq0y9m")
 const {v4:uuid} = require("uuid");
-=======
-const GridFsStorage = require('multer-gridfs-storage');
 
-const multer = require('multer');
-const crypto = require('crypto');
-const path = require('path');
 
->>>>>>> hajer3
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -47,9 +41,10 @@ app.use('/categories', categoryRoutes);
 app.use('/avatars', avatarRoutes);
 app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
-<<<<<<< HEAD
 app.use('/user', userRoutes);
 app.use('/mails',mailRoutes)
+// app.use('/chatbot',chatbotRoutes);
+// app.use('/messages',messagesRoutes);
 app.use('/scraping',scrapingRoutes)
 app.post("/checkout",async(req,res)=>{
     let error;
@@ -76,11 +71,9 @@ app.post("/checkout",async(req,res)=>{
         
     
 })
-=======
 app.use('/users', userRoutes);
 app.use('/mails',mailRoutes)
 
->>>>>>> hajer3
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
 const CONNECTION_URL = 'mongodb+srv://admin:admin123@cluster0.pdxx0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';

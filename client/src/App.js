@@ -14,10 +14,7 @@ import Checkout from "./components/FrontOffice/Checkout/Checkout";
 import AddProduct from "./components/Forms/ProductForm/AddProduct/AddProductForm";
 import Claims from "./components/Claims/Claimlist/Claims";
 import ProductList from "./components/Products/ProductList/Products";
-<<<<<<< HEAD
-=======
 import MyClaims from "./components/Claims/Claimlist/Myclaims";
->>>>>>> hajer3
 
 import Reviews from "./components/Reviews/Reviewlist/Reviews";
 import OrderListAdmin from "./components/FrontOffice/Orders/OrderList/Orders";
@@ -35,13 +32,6 @@ import { getClaims } from "./redux/slices/claims";
 import { getAvatars } from "./redux/slices/avatars";
 import { getOrdersByUser, getOrders } from "./redux/slices/orders";
 import { getReviews } from "./redux/slices/reviews";
-<<<<<<< HEAD
-import { getAllUsers, getUsers, isAuthenticated } from "./redux/slices/auth";
-import Categories from "./components/Categories/Categories";
-import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
-import Contact from "./components/FrontOffice/Contact/Contact";
-
-=======
 import {  getUsers, isAuthenticated } from "./redux/slices/auth";
 import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
@@ -50,7 +40,6 @@ import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
->>>>>>> hajer3
 function App() {
   const login = useSelector(state => state.login);
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
@@ -91,30 +80,21 @@ function App() {
         <ClientRoute path="/Shop" component={Shop} />
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
-<<<<<<< HEAD
-
-        <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
-        <PrivateRoute path="/addreview" exact component={AddReviewForm} />
-=======
         <ClientRoute path="/avatar/" component={customizedAvatar} />
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
         <PrivateRoute path="/profile" exact component={Profile} />
->>>>>>> hajer3
         <PrivateRoute
           path="/updatereview/:value"
           exact
           component={UpdateReviewForm}
         />
-<<<<<<< HEAD
-=======
         <PrivateRoute
           path="/updateuser/:value"
           exact
           component={Formuser}
         />
->>>>>>> hajer3
         <ClientRoute
           path="/productDetails/:value"
           exact
@@ -133,10 +113,7 @@ function App() {
         <AdminRoute path="/admin/addProduct" component={AddProduct} />
         <AdminRoute path="/admin/listclaim" exact component={Claims} />
         <AdminRoute path="/admin/listreview" exact component={Reviews} />
-<<<<<<< HEAD
-=======
         <AdminRoute path="/admin/listuser" exact component={Users} />
->>>>>>> hajer3
 
         <ClientRoute path="*" component={HomeFront} />
       </Switch>
