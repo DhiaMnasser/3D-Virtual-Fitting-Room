@@ -11,7 +11,8 @@ const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
 const mailRoutes =require('./routes/mails.js');
 const fileRoutes = require("./routes/files.js");
-// const chatbotRoutes = require("./routes/chatbot/chatbot.js");
+const chatbotRoutes = require("./routes/chatbot/chatbot.js");
+const messagesRoutes =require('./routes/message.js');
 const scrapingRoutes = require("./routes/scraping.js");
 const GridFsStorage = require('multer-gridfs-storage');
 const multer = require('multer');
@@ -43,8 +44,8 @@ app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/mails',mailRoutes)
-// app.use('/chatbot',chatbotRoutes);
-// app.use('/messages',messagesRoutes);
+app.use('/chatbot',chatbotRoutes);
+app.use('/messages',messagesRoutes);
 app.use('/scraping',scrapingRoutes)
 app.post("/checkout",async(req,res)=>{
     let error;

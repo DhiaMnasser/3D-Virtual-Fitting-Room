@@ -14,10 +14,13 @@ const Chat = props => {
     };
 
     axios
-      .post("http://localhost:5008/chatbot", data)
+      .post("http://localhost:5000/chatbot", data)
       .then(response => {
         const responseData = {
-          text: response.data["message"]["fulfillmentText"] != "" ? response.data["message"]["fulfillmentText"] : "Sorry, I can't get it. Can you please repeat once?",
+          text:
+            response.data["message"]["fulfillmentText"] != ""
+              ? response.data["message"]["fulfillmentText"]
+              : "Sorry, I can't get it. Can you please repeat once?",
           isBot: true
         };
 
@@ -42,7 +45,6 @@ const Chat = props => {
       handleMessageSubmit(message.text);
       setCurrentMessage("");
     }
-    
   };
 
   return (

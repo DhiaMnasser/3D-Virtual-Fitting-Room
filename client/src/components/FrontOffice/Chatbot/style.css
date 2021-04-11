@@ -3,6 +3,10 @@ h1, p {
   }
   
   .chatSection {
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
+    background: rgb(61, 172, 166);
     margin: auto;
     width: 20%;
     height: 80vh;
@@ -34,6 +38,7 @@ h1, p {
   }
   
   .messageInputField {
+    background : inherit;
     margin-left: 10px;
     font-size: 18px;
     outline:none;
@@ -64,9 +69,9 @@ h1, p {
     border-bottom-right-radius: 30px 30px;
     border-top-right-radius: 30px 30px;
     border-bottom-left-radius: 30px 30px;
-    background-color: grey;
+    background-color: rgb(116, 116, 116);
     margin-left: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
     margin-bottom: 10px;
   }
   

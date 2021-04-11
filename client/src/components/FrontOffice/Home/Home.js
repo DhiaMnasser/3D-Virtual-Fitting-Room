@@ -7,6 +7,7 @@ import { deleteProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 import { addItemToCart, getCurrentBasket } from "../../../redux/slices/orders";
 import Avatar from "../Avatar/Avatar";
+import Chatbot from "../Chatbot/Chat";
 function Home(props) {
   return (
     <>
@@ -80,6 +81,7 @@ function Home(props) {
         </div>
         <a href="#">Shop now</a>
       </div>
+      <Chatbot/>
     </>
   );
 }
