@@ -85,12 +85,12 @@ function Header() {
                         <a href="./checkout.html">Checkout</a>
                       </li>
                       <li>
-                        <a href="./blog-details.html">Blog Details</a>
+                        <a href="./blog-details.html">BLOG</a>
                       </li>
                     </ul>
                   </li>
                   <li onClick={()=>{setBar([false,false,false,false,false,true,false,false])}} className={bar[5]?'active':''}>
-                    <a href="./blog.html">Blog</a>
+                    <a href="/AR">AR</a>
                   </li>
                   <li onClick={()=>{setBar([false,false,false,false,false,false,true,false])}} className={bar[6]?'active':''}>
                 <Link to='/contact'>Contact</Link>
