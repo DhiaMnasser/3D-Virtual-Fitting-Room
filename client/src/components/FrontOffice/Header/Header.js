@@ -18,7 +18,7 @@ function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
-  
+  const [bar, setBar] = useState([false,false,false,false,false,false,false,false])
   useEffect(() => {
     const token = user?.token;
 
@@ -55,25 +55,25 @@ function Header() {
             <div className="col-xl-6 col-lg-7">
               <nav className="header__menu">
                 <ul>
-                  <li className="active">
+                  <li onClick={()=>{setBar([true,false,false,false,false,false,false,false])}} className={bar[0]?'active':''}>
                 <Link to='/Home'>Home</Link>
 
                   </li>
                 
-                  <li>
+                  <li onClick={()=>{setBar([false,true,false,false,false,false,false,false])}} className={bar[1]?'active':''}>
                 <Link to='/Shop'>Shop</Link>
 
                   </li>
-                  <li>
+                  <li onClick={()=>{setBar([false,false,true,false,false,false,false,false])}} className={bar[2]?'active':''}>
                 <Link to='/addclaim'>Claims</Link>
 
                   </li>
-                  <li>
+                  <li onClick={()=>{setBar([false,false,false,true,false,false,false,false])}} className={bar[3]?'active':''}>
                 <Link to='/Myclaims'> My Claims</Link>
 
                   </li>
-                  <li>
-                    <a href="#">Pages</a>
+                  <li onClick={()=>{setBar([false,false,false,false,true,false,false,false])}} className={bar[4]?'active':''} >
+                    <a href="#" >Pages</a>
                     <ul className="dropdown">
                       <li>
                         <a href="./product-details.html">Product Details</a>
@@ -89,15 +89,15 @@ function Header() {
                       </li>
                     </ul>
                   </li>
-                  <li>
+                  <li onClick={()=>{setBar([false,false,false,false,false,true,false,false])}} className={bar[5]?'active':''}>
                     <a href="./blog.html">Blog</a>
                   </li>
-                  <li>
+                  <li onClick={()=>{setBar([false,false,false,false,false,false,true,false])}} className={bar[6]?'active':''}>
                 <Link to='/contact'>Contact</Link>
                   
                 
                   </li>
-                  <li>
+                  <li onClick={()=>{setBar([false,false,false,false,false,false,false,true])}} className={bar[7]?'active':''}>
                 <Link to='/avatar'>Your Avatar</Link>
                   
                   </li>
