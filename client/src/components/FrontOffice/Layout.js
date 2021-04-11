@@ -75,7 +75,7 @@ export default ({ children }) => {
         </div>
     </div>
       {children}
-      <Chat/>
+      {/* <Chat/> */}
       <Footer />
     </>
   );

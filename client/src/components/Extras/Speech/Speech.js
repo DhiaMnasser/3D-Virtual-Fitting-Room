@@ -84,6 +84,7 @@ function Speech() {
     setIsListening(true);
     microphoneRef.current.classList.add("listening");
     SpeechRecognition.startListening({
+      language:'en-US',
       continuous: true,
     });
   };

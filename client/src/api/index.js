@@ -44,6 +44,11 @@ export const fetchCategories = ()=> axios.get(`${url}/categories`);
 export const createCategory = (newCategory)=> axios.post(`${url}/categories`, newCategory);
 export const updateCategory = (id, updatedCategory) => axios.patch(`${url}/categories/${id}`, updatedCategory);
 export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
+// Messages
+export const fetchMessages = ()=> axios.get(`${url}/messages`);
+export const createMessage = (newMessage)=> axios.post(`${url}/messages`, newMessage);
+export const updateMessage = (id, updatedMessage) => axios.patch(`${url}/messages/${id}`, updatedMessage);
+export const deleteMessage = (id) => axios.delete(`${url}/messages/${id}`);
 
 // users
 

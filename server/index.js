@@ -10,6 +10,7 @@ const orderRoutes =require('./routes/orders.js');
 const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
 const mailRoutes =require('./routes/mails.js');
+const messagesRoutes =require('./routes/message.js');
 const fileRoutes = require("./routes/files.js");
 const chatbotRoutes = require("./routes/chatbot/chatbot.js");
 const GridFsStorage = require('multer-gridfs-storage');
@@ -40,6 +41,7 @@ app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/mails',mailRoutes)
 app.use('/chatbot',chatbotRoutes);
+app.use('/messages',messagesRoutes);
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas

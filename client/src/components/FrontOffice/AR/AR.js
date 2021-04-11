@@ -116,7 +116,11 @@ class AR extends React.Component {
 
         //yed
         // left slv
-
+        let width=p.dist(pose.rightHip.x - 1.25 * d, pose.rightHip.y - 1.25 * d,pose.leftHip.x + 1.25 * d, pose.leftHip.y - 1.25 * d)/d *6
+      let height=((p.dist(pose.rightShoulder.y - 1.25 * d, pose.rightShoulder.y - 1.25 * d,pose.rightHip.x - d, pose.rightHip.y) )+
+      (p.dist(pose.rightHip.x,pose.rightHip.y,pose.rightAnkle.x,pose.rightAnkle.y))+p.dist(pose.rightShoulder.x,pose.rightShoulder.y,pose.rightEye.x,pose.rightEye.y))/d*6.5
+      console.log(height)
+      console.log(width)
         p.texture(slv);
         p.textureMode(p.NORMAL);
         p.beginShape();
@@ -191,12 +195,7 @@ class AR extends React.Component {
           0,
           0
         );
-        p.vertex(
-          pose.leftShoulder.x + 1.25 * d/1.5,
-          pose.leftShoulder.y - 1.25 * d,
-          1,
-          0
-        );
+        p.vertex(pose.leftShoulder.x + 1.25 * d/1.5,pose.leftShoulder.y - 1.25 * d, 1,0);
         p.vertex(pose.leftHip.x + d, pose.leftHip.y + d /1.25, 1, 1);
         p.vertex(pose.rightHip.x - d, pose.rightHip.y + d/1.25, 0, 1);
         p.endShape();
@@ -225,6 +224,7 @@ class AR extends React.Component {
 
   render() {
     return <div class="vid"><div ref={this.myRef}></div></div>;
+    
   }
 }
 export default AR;

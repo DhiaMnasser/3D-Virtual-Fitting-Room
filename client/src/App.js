@@ -36,6 +36,7 @@ import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 import Contact from "./components/FrontOffice/Contact/Contact";
 import AR from "./components/FrontOffice/AR/AR";
+import Chat from "./components/FrontOffice/Chatbot/Chat";
 // import Chat from "./components/FrontOffice/Chatbot/Chat";
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/AR/" component={AR} />
+        <ClientRoute path="/chatbot/" component={Chat} />
 
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
