@@ -6,140 +6,140 @@ function Comparateur() {
     const [pull, setPull] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/pull')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/pull')
         .then(response => setPull(response.data));
    console.log(pull)
     }, [])
       const [pulls, setPulls] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/pulls')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/pulls')
         .then(response => setPulls(response.data));
    console.log(pulls)
     }, [])
      const [pantalon, setPantalon] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/pantalon')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/pantalon')
         .then(response => setPantalon(response.data));
    console.log(pantalon)
     }, [])
       const [pantalons, setPantalons] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/pantalons')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/pantalons')
         .then(response => setPantalons(response.data));
    console.log(pantalons)
     }, [])
       const [gilet, setGilet] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/gilet')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/gilet')
         .then(response => setGilet(response.data));
    console.log(gilet)
     }, [])
        const [gilets, setGilets] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/gilets')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/gilets')
         .then(response => setGilets(response.data));
    console.log(gilets)
     }, [])
      const [blouson, setBlouson] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/blouson')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/blouson')
         .then(response => setBlouson(response.data));
    console.log(blouson)
     }, [])
      const [blousons, setBlousons] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/blousons')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/blousons')
         .then(response => setBlousons(response.data));
    console.log(blousons)
     }, [])
       const [manteau, setManteau] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/manteau')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/manteau')
         .then(response => setManteau(response.data));
    console.log(manteau)
     }, [])
       const [manteaus, setManteaus] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/manteaus')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/manteaus')
         .then(response => setManteaus(response.data));
    console.log(manteaus)
     }, [])
         const [chemise, setChemise] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/chemise')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/chemise')
         .then(response => setChemise(response.data));
    console.log(chemise)
     }, [])
           const [chemises, setChemises] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/chemises')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/chemises')
         .then(response => setChemises(response.data));
    console.log(chemises)
     }, [])
         const [short, setShort] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/short')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/short')
         .then(response => setShort(response.data));
    console.log(short)
     }, [])
       const [shorts, setShorts] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/shorts')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/shorts')
         .then(response => setShorts(response.data));
    console.log(shorts)
     }, [])
       const [costume, setCostume] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/costume')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/costume')
         .then(response => setCostume(response.data));
    console.log(costume)
     }, [])
       const [costumes, setCostumes] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/costumes')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/costumes')
         .then(response => setCostumes(response.data));
    console.log(costumes)
     }, [])
       const [chaussure, setChaussure] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/chaussure')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/chaussure')
         .then(response => setChaussure(response.data));
    console.log(chaussure)
     }, [])
         const [chaussures, setChaussures] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/chaussures')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/chaussures')
         .then(response => setChaussures(response.data));
    console.log(chaussures)
     }, [])
       const [accessoire, setAccessoire] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/accessoire')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/accessoire')
         .then(response => setAccessoire(response.data));
    console.log(accessoire)
     }, [])
        const [accessoires, setAccessoires] = useState([])
     useEffect(() => {
       
-    axios.get('http://localhost:5000/scraping/accessoires')
+    axios.get('http://threedvfr-back.herokuapp.com/scraping/accessoires')
         .then(response => setAccessoires(response.data));
    console.log(accessoires)
     }, [])
