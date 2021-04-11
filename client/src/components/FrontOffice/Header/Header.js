@@ -59,12 +59,7 @@ function Header() {
                 <Link to='/Home'>Home</Link>
 
                   </li>
-                  <li>
-                    <a href="#">Women’s</a>
-                  </li>
-                  <li>
-                    <a href="#">Men’s</a>
-                  </li>
+                
                   <li>
                 <Link to='/Shop'>Shop</Link>
 

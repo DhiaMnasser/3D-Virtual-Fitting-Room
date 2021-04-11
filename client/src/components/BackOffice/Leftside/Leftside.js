@@ -17,7 +17,7 @@ export class Leftside extends Component {
                     <hr className="sidebar-divider my-0" />  
   
                     <li className="nav-item active">  
-                        <a className="nav-link" href="index.html">  
+                        <a className="nav-link" href="/admin/Comparateur">  
                             <i className="fas fa-fw fa-tachometer-alt"></i>  
                             <span>Dashboard</span></a>  
                     </li>  

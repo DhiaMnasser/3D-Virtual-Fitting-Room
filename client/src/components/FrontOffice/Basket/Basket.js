@@ -8,12 +8,14 @@ import {
   getOrdersByUser,
   addItemToBasket,
   removeItemFromBasket,
-  updateOrder
+  updateOrder,
+  getAllOrders
 } from "../../../redux/slices/orders";
 import { useSelector, useDispatch } from "react-redux";
 import Product from "../../Products/Product/Product";
 import { isAuthenticated } from "../../../redux/slices/auth";
 import { Link } from 'react-router-dom';
+import Stripe from "../../Stripe/Stripe";
 
 
 // import logo from './logo.png'
@@ -243,6 +245,7 @@ function Basket() {
                     Total <span>{currentOrder?.totalPrice } DT</span>
                   </li>
                 </ul>
+                <Stripe name={currentOrder?._id} price={currentOrder?.totalPrice}></Stripe>
                 <Link to="/checkout" class="primary-btn">
                   Proceed to checkout
                 </Link>

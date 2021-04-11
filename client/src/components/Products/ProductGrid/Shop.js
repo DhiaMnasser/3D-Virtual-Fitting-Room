@@ -43,7 +43,7 @@ function Shop(props) {
  dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),recherche:values.search}))
     }
   });
-   const [taille, setTaille] = useState(["XXS","XS","XS-S","S","M","M-L","L","XL"])
+  
 
    const stormik = useFormik({
        initialValues: {
@@ -86,7 +86,7 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-<Stripe name="yoyo" price={10}></Stripe>
+
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -113,23 +113,7 @@ stormik.setFieldValue('tailles',array)
                                 </div>
                             </div>
                         </div>
-                        <div className="sidebar__filter">
-                            <div className="section-title">
-                                <h4>Shop by price</h4>
-                            </div>
-                            <div className="filter-range-wrap">
-                                <div className="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
-                                <div className="range-slider">
-                                    <div className="price-input">
-                                        <p>Price:</p>
-                                        <input type="text" id="minamount"/>
-                                        <input type="text" id="maxamount"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">Filter</a>
-                        </div>
+                        
                         <div className="sidebar__sizes">
                             <div className="section-title">
                                 <h4>Shop by size</h4>

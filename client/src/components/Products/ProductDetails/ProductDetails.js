@@ -140,13 +140,21 @@ function ProductDetails(props) {
                   />
                 }
               </div>
-              <div class="product__details__price">
-                $ {product?.price} <span>$ {product?.price}-10 </span>
-              </div>
+           {/* <div className="product__details__price"> */}
+              {product?.promo !==0 ? (
+                <div className="product__details__price">
+                $ {product?.price* (100-product?.promo)/100} <span>$ {product?.price} </span>
+                </div>
+
+              ):(
+                <div className="product__details__price">
+                $ {product?.price } 
+                </div>
+
+              )}
               <p>
-                Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret
-                fugit, sed quia consequuntur magni lores eos qui ratione
-                voluptatem sequi nesciunt.
+               clique on the 3d model and move your mouse so you can see the detais of the product 
+               you can also use the mouse wheel to zoom in and zoom out.
               </p>
               <div class="product__details__button">
                 <div class="quantity">
@@ -215,17 +223,9 @@ function ProductDetails(props) {
                     <div class="size__btn">
                       <label for="xs-btn" class="active">
                         <input type="radio" id="xs-btn" />
-                        xs
+                       {product?.size}
                       </label>
-                      <label for="s-btn">
-                        <input type="radio" id="s-btn" />s
-                      </label>
-                      <label for="m-btn">
-                        <input type="radio" id="m-btn" />m
-                      </label>
-                      <label for="l-btn">
-                        <input type="radio" id="l-btn" />l
-                      </label>
+                      
                     </div>
                   </li>
                   <li>

@@ -40,6 +40,7 @@ import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
+import Comparateur from "./components/Comparateur/Comparateur";
 function App() {
   const login = useSelector(state => state.login);
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
@@ -114,7 +115,7 @@ function App() {
         <AdminRoute path="/admin/listclaim" exact component={Claims} />
         <AdminRoute path="/admin/listreview" exact component={Reviews} />
         <AdminRoute path="/admin/listuser" exact component={Users} />
-
+        <AdminRoute path="/admin/Comparateur" exact component={Comparateur} />
         <ClientRoute path="*" component={HomeFront} />
       </Switch>
     </Router>
