@@ -3,13 +3,14 @@ h1, p {
   }
   
   .chatSection {
+    z-index: 99;
     position: fixed;
     right: 2%;
     bottom: 2%;
     background: rgb(61, 172, 166);
     margin: auto;
     width: 20%;
-    height: 80vh;
+    height: 70vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 20px;
@@ -34,7 +35,7 @@ h1, p {
   }
   
   .messagesSection {
-    height: 90%;
+    height: 80%;
   }
   
   .messageInputField {
@@ -47,6 +48,7 @@ h1, p {
     border-left-style: hidden;
     border-bottom-style: hidden;
     width: 90%;
+    color: white;
   }
   
   .inputSection {
@@ -54,11 +56,15 @@ h1, p {
     flex-direction: row;
     justify-content: space-between;
     margin-top: 7px;
+    background: rgb(59, 160, 155);
+    border-radius:5px;
+    padding: 0 20px;  
+    color: whitesmoke;
   }
   
   .messagesSection {
-    min-height: 70vh;
-    max-height: 70vh;
+    min-height: 60vh;
+    max-height: 60vh;
     margin-top: 20px;
     overflow-y: auto;
   }
@@ -69,9 +75,9 @@ h1, p {
     border-bottom-right-radius: 30px 30px;
     border-top-right-radius: 30px 30px;
     border-bottom-left-radius: 30px 30px;
-    background-color: rgb(116, 116, 116);
+    background-color: rgb(212, 212, 212);
     margin-left: 5px;
-    color: rgb(255, 255, 255);
+    /* color: white; */
     margin-bottom: 10px;
   }
   
@@ -81,9 +87,9 @@ h1, p {
     border-top-left-radius: 30px 30px;
     border-bottom-left-radius: 30px 30px;
     float: right;
-    background-color: rgba(48, 38, 245, 0.582);
+    background-color: coral;
     margin-right: 5px;
-    color: white;
+    /* color: white; */
   }
   
   .messagesSection::-webkit-scrollbar {
