@@ -40,6 +40,10 @@ import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
+import AR from "./components/FrontOffice/AR/AR";
+import Chat from "./components/FrontOffice/Chatbot/Chat";
+// import Chat from "./components/FrontOffice/Chatbot/Chat";
+
 function App() {
   const login = useSelector(state => state.login);
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
@@ -81,6 +85,9 @@ function App() {
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
+        <ClientRoute path="/AR/" component={AR} />
+        <ClientRoute path="/chatbot/" component={Chat} />
+
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />

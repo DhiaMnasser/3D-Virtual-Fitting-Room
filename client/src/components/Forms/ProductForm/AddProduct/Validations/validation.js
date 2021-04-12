@@ -15,8 +15,7 @@ export const Validation = yup.object().shape({
   stockQuantity: yup.number()
     .required("required")
     .min(1, "Minimum qte is 1"),
-  image: yup.string()
-    ,
+  image: yup.array().of(yup.string()),
   arModel: yup.string(),
   threeDModel: yup.string(),
   rating:yup.number(),

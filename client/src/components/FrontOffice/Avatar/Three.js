@@ -90,12 +90,14 @@ export class Three extends Component {
       });
     }
     if (this.props.pants !== undefined) {
-      gltfLoader.load(this.props.pants, gltf => {
+      gltfLoader.parse(this.props.pants,'', gltf => {
         gltf.scene.position.y = -10;
 
-        console.log(gltf);
+        // console.log("pants in three.js");
+        // console.log(gltf);
         scene.add(gltf.scene);
       });
+      // scene.add(this.props.pants);
     }
     /**
      * Floor

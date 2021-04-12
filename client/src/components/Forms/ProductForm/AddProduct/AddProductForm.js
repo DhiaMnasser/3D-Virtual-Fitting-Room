@@ -10,6 +10,7 @@ import axios from "axios";
 import { uploadFile } from "../../../../api/index";
 import CustomSelect from "./CustomSelect";
 import { HexColorPicker } from "react-colorful";
+import { array } from "yup";
 
 const Form = () => {
   const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
@@ -39,7 +40,7 @@ const Form = () => {
       price: "1",
       size: "M",
       stockQuantity: "1",
-      image: "",
+      image: [],
       arModel: "",
       threeDModel: "",
       rating: "5",
@@ -109,6 +110,8 @@ const Form = () => {
           <div class="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
+              <span className="text">Name: </span>
+
                 <input
                   class="my-2"
                   name="productName"
@@ -122,6 +125,8 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">ref: </span>
+
                 <input
                   class="my-2"
                   name="ref"
@@ -135,6 +140,8 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">description: </span>
+
                 <input
                   class="my-2"
                   name="description"
@@ -161,6 +168,8 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">price: </span>
+
                 <input
                   class="my-2"
                   name="price"
@@ -185,6 +194,8 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">quantity: </span>
+
                 <input
                   class="my-2"
                   name="stockQuantity"
@@ -206,7 +217,10 @@ const Form = () => {
                   name="image"
                   multiple={false}
                   onDone={({ base64 }) => {
-                    formik.setFieldValue("image", base64);
+                    formik.values.image.push(base64);
+                    formik.setFieldValue("image",formik.values.image);
+                    console.log(formik.values.image);
+                    
                   }}
                 />
 
@@ -214,6 +228,7 @@ const Form = () => {
                   <FormError>{formik.errors.image}</FormError>
                 )}
               </div>
+              
               <div>
                 <span class="text">AR Model: </span>
 
@@ -260,6 +275,8 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">rating: </span>
+
                 <input
                   class="my-2"
                   name="rating"
@@ -273,12 +290,14 @@ const Form = () => {
                 )}
               </div>
               <div>
+              <span className="text">promo in %: </span>
+
                 <input
                   class="my-2"
                   name="promo"
                   type="number"
                   placeholder="promo"
-                  value={formik.values.promo}
+                  value={formik.values.promo/100}
                   onChange={formik.handleChange}
                 />
                 {formik.errors.promo && formik.touched.promo && (
