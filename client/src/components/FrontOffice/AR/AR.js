@@ -66,7 +66,7 @@ class AR extends React.Component {
   
    canvas.style('position', 'absolute');
    canvas.style('margin-top', '150px');
-   canvas.style('margin-buttom', '250px');
+   
    canvas.style('z-index', '-1');
 canvas.style('width', '2980px');
 canvas.style('height', '1504px');
