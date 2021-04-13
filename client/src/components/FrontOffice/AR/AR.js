@@ -9,7 +9,7 @@ import upperR from "./models/upperRightLeg.png";
 import lowerR from "./models/lowerRightLeg.png";
 import upperL from "./models/upperLeftLeg.png";
 import lowerL from "./models/lowerLeftLeg.png";
-
+import './AR.css'
 
 
 class AR extends React.Component {
@@ -19,16 +19,13 @@ class AR extends React.Component {
   }
 
   Sketch = p => {
-    let a = 0;
-    let b = 0;
-    let speed = 3;
+  
     let video;
     let poseNet;
     let pose;
     let skeleton;
     let img;
     let slv;
-    let snap;
     let slv2;
     let hzem;
     let ul;
@@ -63,7 +60,16 @@ class AR extends React.Component {
     };
     //###########################SETUP##########################\\
     p.setup = () => {
-      p.createCanvas(1200, 800, p.WEBGL).position(-100, -100);
+      p.pixelDensity(1)
+     let canvas = p.createCanvas(1200,800, p.WEBGL).position(-1490, -752);
+  canvas.style('display', 'block');
+  
+   canvas.style('position', 'absolute');
+   canvas.style('margin-top', '150px');
+   canvas.style('margin-buttom', '250px');
+   canvas.style('z-index', '-1');
+canvas.style('width', '2980px');
+canvas.style('height', '1504px');
       console.log(p.VIDEO);
       video = p.createCapture(p.VIDEO);
 
@@ -73,7 +79,7 @@ class AR extends React.Component {
     };
     //###########################DRAW##########################\\
     p.draw = () => {
-      p.image(video, 0, 0);
+      p.image(video, 0,0);
 
       if (pose) {
         let eyeR = pose.rightEye;
@@ -222,7 +228,7 @@ class AR extends React.Component {
   }
 
   render() {
-    return <div class="vid"><div ref={this.myRef}></div></div>;
+    return <div class="vid" ><div ref={this.myRef}></div></div>;
     
   }
 }

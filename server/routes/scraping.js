@@ -27,7 +27,6 @@ pantalons=[
 gilets=['https://www.ha.com.tn/femme/gilet/gilet-court.html',
 'https://www.ha.com.tn/femme/gilet/gilet-long.html',
 'https://www.ha.com.tn/femme/gilet/bolero.html',
-'https://www.ha.com.tn/femme/gilet/twin-set.html',
 'https://www.ha.com.tn/homme/gilet.html']
 blousons=['https://www.ha.com.tn/homme/outwear/veste.html',
 'https://www.ha.com.tn/homme/outwear/manteau.html',
@@ -438,6 +437,61 @@ var { data } = await axios.post(
       res.status(500).json({message:err.message})
   }
     })
+ router.get('/ha', async(req,res)=>{
+    try{
+var { data } = await axios.post(
+			'https://three-vfr-p.herokuapp.com/ha',
+           {link:[...pulls,
+            ...pantalons,
+            ...gilets,
+            ...blousons,
+            ...manteaus,
+            ...chemises,
+            ...shorts,
+            ...costumes,
+            ...chaussures,
+            ...accessoires
+        
+        
+        ]}
+		);
+
+     res.status(201).json(data)
+  }catch (err){
+      res.status(500).json({message:err.message})
+  }
+    })   
+    router.get('/exist', async(req,res)=>{
+    try{
+var { data } = await axios.post(
+			'https://three-vfr-p.herokuapp.com/ha',
+           {link:[pull[0].link,
+            pantalon[0].link,
+            gilet[0].link,
+            blouson[0].link,
+            manteau[0].link,
+            chemise[0].link,
+            short[0].link,
+            costume[0].link,
+            chaussure[0].link,
+            accessoire[0].link
+         ],page:[pull[0].page,
+            pantalon[0].page,
+            gilet[0].page,
+            blouson[0].page,
+            manteau[0].page,
+            chemise[0].page,
+            short[0].page,
+            costume[0].page,
+            chaussure[0].page,
+            accessoire[0].page]}
+		);
+
+     res.status(201).json(data)
+  }catch (err){
+      res.status(500).json({message:err.message})
+  }
+    })   
 //exist 
 //http://localhost:5000/scraping/pull
 //http://localhost:5000/scraping/pantalon

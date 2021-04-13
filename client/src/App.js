@@ -42,6 +42,7 @@ import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
 import Comparateur from "./components/Comparateur/Comparateur";
 import AR from "./components/FrontOffice/AR/AR";
+import ARHolder from "./components/FrontOffice/AR/ARHolder";
 function App() {
   const login = useSelector(state => state.login);
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
@@ -87,7 +88,7 @@ function App() {
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
         <PrivateRoute path="/profile" exact component={Profile} />
-        <PrivateRoute path="/AR" exact component={AR} />
+        <PrivateRoute path="/AR" exact component={ARHolder} />
         <PrivateRoute
           path="/updatereview/:value"
           exact

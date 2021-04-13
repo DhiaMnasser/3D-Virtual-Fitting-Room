@@ -66,8 +66,7 @@ export default ({ children }) => {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><FontAwesomeIcon icon={faHome}/> Home</a>
-                        <span>Shopping cart</span>
+                       
                     </div>
                 </div>
             </div>

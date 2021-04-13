@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const url = 'http://threedvfr-back.herokuapp.com';
+const url = 'http://localhost:5000';
 
-const urll = 'http://threedvfr-back.herokuapp.com';
-const API = axios.create({ baseURL: 'http://threedvfr-back.herokuapp.com' });
+const urll = 'http://localhost:5000';
+const API = axios.create({ baseURL: 'http://localhost:5000' });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
@@ -36,6 +36,7 @@ export const fetchOrderByUser = (userId)=> axios.get(`${url}/orders/user/${userI
 export const createOrder = (newOrder)=> axios.post(`${url}/orders`, newOrder);
 export const updateOrder = (id, updatedOrder) => axios.patch(`${url}/orders/${id}`, updatedOrder);
 export const deleteOrder = (id) => axios.delete(`${url}/orders/${id}`);
+export const fetchOrderById = (id)=> axios.get(`${url}/orders/${id}`);
 //reviews
 export const fetchReviews = ()=> axios.get(`${url}/reviews`);
 export const createReview = (newReview)=> axios.post(`${url}/reviews`, newReview);

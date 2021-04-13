@@ -136,11 +136,32 @@ export const getCurrentBasket = (orders) => {
 };
 
 
+export const getBasket =  (orders) => async (dispatch) => {
+  
+  const connectedUser = isAuthenticated().result;
+  // console.log("getCurrentBasket Orders" + JSON.stringify(orders));
+    const indexOrder = orders?.findIndex((order)=> !order.isValid && order.clientId === connectedUser._id);
+  
+  if(indexOrder!==-1){ 
+   
+  
+    try { 
+ const {data} =await api.fetchOrderById(orders[indexOrder]._id)
+ dispatch(getOrder())
+  } catch (error) {
+    console.log(error.response);
+  }
+  }
+  
+};
+
+
 
 export const ordersSlice = createSlice({
   name:"orders",
   initialState:{
-      orders:[]
+      orders:[],
+      order:{}
   
   },
   reducers:{
@@ -169,9 +190,13 @@ export const ordersSlice = createSlice({
             // state.orders = orders;
         }
     },
+       getOrder(state,action){
+          state.order=action.payload;
+          // console.log("in slice"+ JSON.stringify(state.orders, null, 4));   
+      }
 
   }
   });
 
-  export const {getAllOrders,addOrder,removeOrder,editOrder} = ordersSlice.actions
+  export const {getAllOrders,addOrder,removeOrder,editOrder,getOrder} = ordersSlice.actions
   export default ordersSlice.reducer;

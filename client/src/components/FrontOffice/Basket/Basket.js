@@ -25,6 +25,7 @@ function Basket() {
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
 
   let orders = useSelector(state => state.orders.orders);
+
   let [currentOrder, setCurrentOrder] = useState(getCurrentBasket(orders));
   let products = currentOrder?.products;
 
@@ -53,6 +54,7 @@ function Basket() {
     console.log('useEffect called');
     console.log(`currentOrder in useEffect ${JSON.stringify(currentOrder)}`);
     dispatch(updateOrder(currentOrder?._id, currentOrder));
+
 
     }
 
