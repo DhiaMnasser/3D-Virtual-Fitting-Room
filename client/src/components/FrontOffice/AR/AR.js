@@ -49,14 +49,14 @@ class AR extends React.Component {
     }
     //###########################PRELOAD##########################\\
     p.preload = () => {
-      img = p.loadImage(shirt);
-      slv = p.loadImage(sleeve);
-      slv2 = p.loadImage(sleeve2);
-      hzem = p.loadImage(jean);
-      ul = p.loadImage(upperL);
-      ur = p.loadImage(upperR);
-      ll = p.loadImage(lowerL);
-      lr = p.loadImage(lowerR);
+      img = p.loadImage(this.props.body);
+      slv = p.loadImage(this.props.lh);
+      slv2 = p.loadImage(this.props.rh);
+      hzem = p.loadImage(this.props.hip);
+      ul = p.loadImage(this.props.ull);
+      ur = p.loadImage(this.props.url);
+      ll = p.loadImage(this.props.lll);
+      lr = p.loadImage(this.props.lrl);
     };
     //###########################SETUP##########################\\
     p.setup = () => {
