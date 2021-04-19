@@ -2,3 +2,10 @@
     padding-bottom:250px;
     margin-top: 500px;
 }
+.control-panel{
+    background-color: blue;
+    height:738px;
+    width: 200px;
+    position: absolute;
+    top: 166px;
+}

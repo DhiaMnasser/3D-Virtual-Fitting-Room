@@ -32,6 +32,7 @@ class AR extends React.Component {
     let ur;
     let ll;
     let lr;
+    let sizes
     function modelLoaded() {
       console.log("poseNet ready");
     }
@@ -60,16 +61,17 @@ class AR extends React.Component {
     };
     //###########################SETUP##########################\\
     p.setup = () => {
+        sizes={height:2980,width:1504}
       p.pixelDensity(1)
-     let canvas = p.createCanvas(1200,800, p.WEBGL).position(-1490, -752);
+     let canvas = p.createCanvas(1200,800, p.WEBGL).position(-sizes.height/2, -sizes.width/2);
   canvas.style('display', 'block');
   
    canvas.style('position', 'absolute');
    canvas.style('margin-top', '150px');
    
    canvas.style('z-index', '-1');
-canvas.style('width', '2980px');
-canvas.style('height', '1504px');
+canvas.style('width', sizes.height+'px');
+canvas.style('height', sizes.width+'px');
       console.log(p.VIDEO);
       video = p.createCapture(p.VIDEO);
 
@@ -124,8 +126,8 @@ canvas.style('height', '1504px');
         let width=p.dist(pose.rightHip.x - 1.25 * d, pose.rightHip.y - 1.25 * d,pose.leftHip.x + 1.25 * d, pose.leftHip.y - 1.25 * d)/d *6
       let height=((p.dist(pose.rightShoulder.y - 1.25 * d, pose.rightShoulder.y - 1.25 * d,pose.rightHip.x - d, pose.rightHip.y) )+
       (p.dist(pose.rightHip.x,pose.rightHip.y,pose.rightAnkle.x,pose.rightAnkle.y))+p.dist(pose.rightShoulder.x,pose.rightShoulder.y,pose.rightEye.x,pose.rightEye.y))/d*6.5
-      console.log(height)
-      console.log(width)
+ console.log(width)
+ console.log(height)
         p.texture(slv);
         p.textureMode(p.NORMAL);
         p.beginShape();

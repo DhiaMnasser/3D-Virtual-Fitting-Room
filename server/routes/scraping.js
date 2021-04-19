@@ -464,7 +464,7 @@ var { data } = await axios.post(
     router.get('/exist', async(req,res)=>{
     try{
 var { data } = await axios.post(
-			'https://three-vfr-p.herokuapp.com/ha',
+			'https://three-vfr-p.herokuapp.com/exist',
            {link:[pull[0].link,
             pantalon[0].link,
             gilet[0].link,
