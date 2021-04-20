@@ -36,7 +36,7 @@ var Product = new Schema({
     // required: true
   },
   arModel: {
-    type: String
+    type: [String]
   },
   threeDmodel: {
     type: String

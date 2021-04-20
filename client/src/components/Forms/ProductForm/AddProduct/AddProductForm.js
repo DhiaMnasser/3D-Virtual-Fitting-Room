@@ -45,11 +45,31 @@ const Form = () => {
       rating: "5",
       promo: "0",
       color: "#aabbcc",
-      ref:""
+      ref:"",
+      body:"",
+      lh:"",
+      rh:""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+      var armodel=[values.body,values.lh,values.rh]
+      values.arModel=armodel
+      values={
+        productName:values.productName,
+        description:values.description ,
+        categoryId:values.categoryId ,
+      price: values.price,
+      size: values.size,
+      stockQuantity: values.stockQuantity,
+      image:values.image,
+      arModel:values.arModel,
+      threeDModel:values.threeDModel,
+      rating: values.rating,
+      promo: values.promo,
+      color: values.color,
+      ref:values.ref
+      }
       console.log("vals:" + JSON.stringify(values, null, 4));
       dispatch(createProduct(values));
     }
@@ -215,23 +235,41 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <span class="text">AR Model: </span>
+                <span class="text">body: </span>
 
-                <input
+                    <FileBase
                   type="file"
-                  id="arModel"
-                  name="arModel"
-                  className="Upload__Input"
-                  onChange={(event: any) => {
-                    alert("File is uploading please wait");
-                    setUploadedArModel(event.target.files[0]);
-                    // setUploadedArModel({added: 'yes'});
+                  id="body"
+                  name="body"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("body", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">right hand: </span>
 
-                    setUploadedArModelUrl(
-                      URL.createObjectURL(event.target.files[0])
-                    );
+                    <FileBase
+                  type="file"
+                  id="rh"
+                  name="rh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("rh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left hand: </span>
 
-                    // uploadArModel();
+                    <FileBase
+                  type="file"
+                  id="lh"
+                  name="lh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lh", base64);
                   }}
                 />
               </div>
@@ -243,7 +281,7 @@ const Form = () => {
                   id="threeDModel"
                   name="threeDModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});

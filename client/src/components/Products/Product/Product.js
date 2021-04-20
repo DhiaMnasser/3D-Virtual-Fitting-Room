@@ -120,6 +120,7 @@ function Product(props) {
               />
             )}
           </div>
+          <button onClick={()=>{dispatch(deleteProduct(props.product._id))}}>delete</button>
           {props.product.promo===0 && <div className="product__price">${props.product.price}</div>}
 
 {props.product.promo===0 || <div className="product__price">{props.product.price-(props.product.price*props.product.promo)/100}<span>{props.product.price}</span></div>}
