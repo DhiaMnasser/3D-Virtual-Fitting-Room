@@ -27,6 +27,9 @@ const [pants, setPants] = useState({hip:empty,ull:empty,lll:empty,url:empty,lrl:
       slidesToScroll: 3
     };
 const products = useSelector((state) => state.products.products)
+var shirt=products.filter(prod=>prod.categoryId==="T-shirts")
+var jean=products.filter(prod=>prod.categoryId==="Jeans")
+console.log(jean)
 const dispatch = useDispatch()
 
       useEffect(() => {
@@ -46,13 +49,20 @@ console.log(products)
        </div>
         <div>
             <Slider {...settings}>
-                  {products.map((prod)=>{return<>      
+                  {shirt.map((prod)=>{return<>      
           
-        <img className="image" src={prod.image } alt={prod.productName} onClick={()=>{setPull({rh:prod.arModel[2],lh:prod.arModel[1],body:prod.arModel[0]});setUpdate(!update)}}></img>
+        <img key={prod._id} className="image" src={prod.image } alt={prod.productName} onClick={()=>{setPull({rh:prod.arModel[2],lh:prod.arModel[1],body:prod.arModel[0]});setUpdate(!update)}}></img>
           
          </>})}
         </Slider>
-     
+        <div className="yo"></div>
+          <Slider {...settings}>
+                  {jean.map((prod)=>{return<>      
+          
+        <img key={prod._id} className="image" src={prod.image } alt={prod.productName} onClick={()=>{setPants({hip:prod.arModel[0],ull:prod.arModel[1],lll:prod.arModel[3],url:prod.arModel[2],lrl:prod.arModel[4]});setUpdate(!update)}}></img>
+          <div>{prod.name}</div>
+         </>})}
+        </Slider>
            
             
        </div>

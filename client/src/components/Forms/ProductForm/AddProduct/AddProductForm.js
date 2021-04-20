@@ -48,12 +48,19 @@ const Form = () => {
       ref:"",
       body:"",
       lh:"",
-      rh:""
+      rh:"",
+      lll:"",
+      lrl:""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+       if(values.categoryId==="T-shirts"){
       var armodel=[values.body,values.lh,values.rh]
+       }
+ if(values.categoryId==="Jeans"){
+      var armodel=[values.body,values.lh,values.rh,values.lll,values.lrl]
+       }
       values.arModel=armodel
       values={
         productName:values.productName,
@@ -77,7 +84,17 @@ const Form = () => {
   useEffect(() => {
     formik.setFieldValue("color", color);
   }, [color]);
+const [model, setModel] = useState("")
+useEffect(() => {
+  if(formik.values.categoryId==="T-shirts"){
+  setModel("shirt")
+  }
+  if(formik.values.categoryId==="Jeans"){
+setModel("jean")
+  }
 
+  }
+  , [formik.values.categoryId]);
   useEffect(() => {
     // console.log("uploadedArModel" + JSON.stringify(uploadedArModel, null, 4));
     if (!uploadedArModel.name) {
@@ -94,6 +111,7 @@ const Form = () => {
     if (!uploadedThreeDModel.name) {
       return alert("3D file is missing");
     }
+
     addFileToBd(uploadedThreeDModel, "threeDModel");
   }, [uploadedThreeDModel]);
 
@@ -234,6 +252,7 @@ const Form = () => {
                   <FormError>{formik.errors.image}</FormError>
                 )}
               </div>
+              { model === "shirt" &&<div>
               <div>
                 <span class="text">body: </span>
 
@@ -273,6 +292,74 @@ const Form = () => {
                   }}
                 />
               </div>
+              </div>}
+              { model === "jean" &&<div>
+              <div>
+                <span class="text">hips: </span>
+
+                    <FileBase
+                  type="file"
+                  id="body"
+                  name="body"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("body", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">right upper leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="rh"
+                  name="rh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("rh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left upper leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lh"
+                  name="lh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left lower leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lll"
+                  name="lll"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lll", base64);
+                  }}
+                />
+              </div>
+                   <div>
+                <span class="text">right lower leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lrl"
+                  name="lrl"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lrl", base64);
+                  }}
+                />
+              </div>
+              </div>}
               <div>
                 <span class="text">3D Model: </span>
 
