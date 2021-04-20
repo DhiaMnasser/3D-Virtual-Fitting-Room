@@ -12,11 +12,20 @@ import lowerL from "./models/lowerLeftLeg.png";
 import empty from "./models/Empty.png"
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../redux/slices/products';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function ARHolder() {
 const [update, setUpdate] = useState(false)
 const [pull, setPull] = useState({rh:empty,lh:empty,body:empty})
 const [pants, setPants] = useState({hip:empty,ull:empty,lll:empty,url:empty,lrl:empty})
-
+  const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 3
+    };
 const products = useSelector((state) => state.products.products)
 const dispatch = useDispatch()
 
@@ -36,10 +45,16 @@ console.log(products)
        
        </div>
         <div>
+            <Slider {...settings}>
+                  {products.map((prod)=>{return<>      
+          
+        <img className="image" src={prod.image } alt={prod.productName} onClick={()=>{setPull({rh:prod.arModel[2],lh:prod.arModel[1],body:prod.arModel[0]});setUpdate(!update)}}></img>
+          
+         </>})}
+        </Slider>
+     
            
-           {products.map((prod)=>{return<>  
-           <img className="image" src={prod.image } alt={prod.productName} onClick={()=>{setPull({rh:prod.arModel[2],lh:prod.arModel[1],body:prod.arModel[0]});setUpdate(!update)}}></img>
-            </>})}
+            
        </div>
       </> 
     )
