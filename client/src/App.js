@@ -37,11 +37,13 @@ import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 import Contact from "./components/FrontOffice/Contact/Contact";
 import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
+import TakePicture from "./components/FrontOffice/Avatar/TakePicture";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
 import AR from "./components/FrontOffice/AR/AR";
 import Chat from "./components/FrontOffice/Chatbot/Chat";
+import Comparateur from "./components/Comparateur/Comparateur";
 // import Chat from "./components/FrontOffice/Chatbot/Chat";
 
 function App() {
@@ -86,6 +88,7 @@ function App() {
         <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
         <ClientRoute path="/AR/" component={AR} />
+        <ClientRoute path="/TakePicture/" component={TakePicture} />
         <ClientRoute path="/chatbot/" component={Chat} />
 
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
@@ -121,6 +124,7 @@ function App() {
         <AdminRoute path="/admin/listclaim" exact component={Claims} />
         <AdminRoute path="/admin/listreview" exact component={Reviews} />
         <AdminRoute path="/admin/listuser" exact component={Users} />
+        <AdminRoute path="/admin/comparateur" exact component={Comparateur} />
 
         <ClientRoute path="*" component={HomeFront} />
       </Switch>

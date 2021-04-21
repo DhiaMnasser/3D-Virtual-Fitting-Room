@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 
 import "./style.css";
 import Messages from "./Messages";
+import {  Avatar, Icon } from '@material-ui/core';
+
 
 const Chat = props => {
   const [responses, setResponses] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    handleEventQuery("welcomeTo3DVFR");
+  }, [])
 
   const handleMessageSubmit = message => {
     const data = {
@@ -16,7 +23,9 @@ const Chat = props => {
     axios
       .post("http://localhost:5000/chatbot", data)
       .then(response => {
-        const responseData = {
+        // for (let content of response.data["message"]["fulfillmentMessages"]) {
+
+        let responseData = {
           text:
             response.data["message"]["fulfillmentText"] != ""
               ? response.data["message"]["fulfillmentText"]
@@ -25,11 +34,38 @@ const Chat = props => {
         };
 
         setResponses(responses => [...responses, responseData]);
+      // };
       })
       .catch(error => {
         console.log("Error: ", error);
       });
   };
+
+const handleEventQuery = event => {
+  const data = {
+    "event" :event
+    };
+
+  axios
+  .post("http://localhost:5000/chatbot/eventQuery", data)
+  .then(response => {
+    for (let content of response.data["message"]["fulfillmentMessages"]) {
+
+      let responseData = {
+        text:
+          response.data["message"]["fulfillmentText"] != ""
+            ? content.text.text
+            : "Sorry, I can't get it. Can you please repeat once?",
+        isBot: true
+      };
+
+      setResponses(responses => [...responses, responseData]);
+    };
+    })
+  .catch(error => {
+    console.log("Error: ", error);
+  });
+}
 
   const handleMessageChange = event => {
     setCurrentMessage(event.target.value);
@@ -48,6 +84,8 @@ const Chat = props => {
   };
 
   return (
+    <>
+    { !isHidden? (
     <div className="chatSection">
       <div className="botContainer">
         <div className="messagesContainer">
@@ -97,6 +135,13 @@ const Chat = props => {
         </div>
       </div>
     </div>
+    ):(
+      <div className="chat-head" >
+      
+      </div>
+    )}
+    </>
+    
   );
 };
 

@@ -53,7 +53,8 @@ function ProductDetails(props) {
     // api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(response.data)});
     api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(JSON.stringify(response.data))});
     // setThreeDModel(data);
-    // console.log(data);
+    console.log('product');
+    console.log(product);
     console.log(threeDModel);
     // localStorage.setItem("threeDModel", threeDModel);
     
