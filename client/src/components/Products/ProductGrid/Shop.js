@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { Checkbox } from '@material-ui/core';
 import Comparateur from '../../Comparateur/Comparateur';
 import Stripe from '../../Stripe/Stripe';
+import Weather from '../../Extras/Geo/Weather';
 
 
 
@@ -144,7 +145,7 @@ stormik.setFieldValue('tailles',array)
                               checked={stormik.values.tailles.includes(size)} value={size} on="true"></Checkbox>{size}</>})}
                             </div>
                         </div>
-                       
+                        <button class="btn" onClick={Weather}>Weather</button>
                     </div>
                 </div>
 

@@ -8,12 +8,14 @@ import { useDispatch } from "react-redux";
 import { addItemToCart, getCurrentBasket } from "../../../redux/slices/orders";
 import ShopSideBar from "./ShopSideBar/ShopSideBar";
 import ProductGrid from "../../Products/ProductGrid/Products";
+import Weather from "../../Extras/Geo/Weather";
 
 function Shop(props) {
   return (
     <section class="shop spad">
       <div class="container">
         <div class="row">
+          <button class="btn" onClick={Weather}>Weather</button>
           <ShopSideBar />
           <ProductGrid />
         </div>

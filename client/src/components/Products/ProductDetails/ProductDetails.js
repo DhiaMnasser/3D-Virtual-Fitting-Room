@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import * as api from "../../../api/index";
+import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import { deleteProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
@@ -84,76 +85,45 @@ function ProductDetails(props) {
     }
     //  dispatch(editOrder(state.orders[indexOrder]));
   };
-
+    const ratingChanged = (newRating) => {
+      console.log(newRating);
+    };
   return (
-    <section class="product-details spad">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="product__details__pic">
-              <div class="product__details__pic__left product__thumb nice-scroll">
-              {product.image.map(image => {
-
-                return <a class=" product__details__pic__slider owl-carouse pt active" href="#product-1">
-                  <img src={image} alt={product?.description} />
-                </a>
-
-              })}
-                
-               
-              </div>
-              <div class="product__details__slider__content">
-                <div class="product__details__pic__slider owl-carousel">
-                  {/* <img
-                    class="product__big__img"
-                    src={product?.image}
-                    alt="Waa"
-                  /> */}
-    <Avatar man={threeDModel}/>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="product__details__text">
-              <h3>
-                {product?.productName} <span>Brand: ITPaladins</span>
-              </h3>
-              <div className="rating">
-                {
-                  <FontAwesomeIcon
-                    style={{ color: `#e3c01c`, fontSize: `10px` }}
-                    icon={faStar}
-                  />
-                }
-                {
-                  <FontAwesomeIcon
-                    style={{ color: `#e3c01c`, fontSize: `10px` }}
-                    icon={faStar}
-                  />
-                }
-                {
-                  <FontAwesomeIcon
-                    style={{ color: `#e3c01c`, fontSize: `10px` }}
-                    icon={faStar}
-                  />
-                }
-                {
-                  <FontAwesomeIcon
-                    style={{ color: `#e3c01c`, fontSize: `10px` }}
-                    icon={faStar}
-                  />
-                }
-                {
-                  <FontAwesomeIcon
-                    style={{ color: `#e3c01c`, fontSize: `10px` }}
-                    icon={faStar}
-                  />
-                }
-              </div>
-              {/* <div class="product__details__price"> */}
+        <>
+      <section class="product-details spad">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <div class="product__details__pic">
+                          <div class="product__details__pic__left product__thumb nice-scroll">
+                              <a class="pt active" href="#product-1">
+                                  <img src={product.image} alt="" />
+                              </a>
+                              <a class="pt" href="#product-2">
+                                  <img src={product.image} alt="" />
+                              </a>
+                              <a class="pt" href="#product-3">
+                                  <img src={product.image} alt="" />
+                              </a>
+                          </div>
+                          <Avatar man={threeDModel}/>
+                          <div class="product__details__slider__content">
+                              <div class="product__details__pic__slider owl-carousel">
+                                  <img  class="product__big__img" src={product.image} alt="Waa"/>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="product__details__text">
+                          <h3>{product.productName} <span>Brand: ITPaladins</span></h3>
+                          <div className="rating">
+                          <ReactStars
+                           count={5}
+                           onChange={ratingChanged}
+                           size={24}
+                           activeColor="#ffd700"
+                           />,
               {product?.promo !==0 ? (
                 <div class="product__details__price">
                 $ {product?.price * product?.promo} <span>$ {product?.price}- {product?.price * product?.promo} </span>
@@ -258,318 +228,46 @@ function ProductDetails(props) {
               </div>
             </div>
           </div>
+          </div>
           <div class="col-lg-12">
-            <div class="product__details__tab">
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                  <a
-                    class="nav-link active"
-                    data-toggle="tab"
-                    href="#tabs-1"
-                    role="tab"
-                  >
-                    Description
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    data-toggle="tab"
-                    href="#tabs-2"
-                    role="tab"
-                  >
-                    Specification
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    data-toggle="tab"
-                    href="#tabs-3"
-                    role="tab"
-                  >
-                    Reviews ( 2 )
-                  </a>
-                </li>
-              </ul>
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Review</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <br></br>
+                        <AddReviewForm product={product} />
+                        <div className="card-body">
+                        {reviews.filter(review=> review.productId === (product._id)).map(filteredName => (  
+                        <li>{filteredName.message}  <br/>
+                        <Button hidden={user?.result?.name !== filteredName.creator} color="primary"  variant="contained"  onClick={()=>{dispatch(deleteReview(filteredName._id))}}>delete</Button>
+                        <Link to={{pathname: "/updatereview/"+filteredName._id, review: filteredName}}> <Button type="button" color="danger"  variant="contained" hidden={user?.result?.name !== filteredName.creator} > update </Button></Link>
+                        
+                        </li>               
+  ))}</div>
 
-              <div class="tab-content">
-              { product? (
-                  <span>
-                <AddReviewForm product={product} />
-                <div className="card-body">
-                  {reviews
-                    .filter(review => review.productId === product._id)
-                    .map(filteredName => (
-                      <li>
-                        {filteredName.message} <br />
-                        <Button
-                          hidden={user?.result?.name !== filteredName.creator}
-                          color="primary"
-                          variant="contained"
-                          onClick={() => {
-                            dispatch(deleteReview(filteredName._id));
-                          }}
-                        >
-                          delete
-                        </Button>
-                        <Link
-                          to={{
-                            pathname: "/updatereview/" + filteredName._id,
-                            review: filteredName
-                          }}
-                        >
-                          {" "}
-                          <Button
-                            type="button"
-                            color="danger"
-                            variant="contained"
-                            hidden={user?.result?.name !== filteredName.creator}
-                          >
-                            {" "}
-                            update{" "}
-                          </Button>
-                        </Link>
-                      </li>
-                    ))}
-                    
+                <div class="tab-pane" id="tabs-1" role="tabpanel">
+                                <h6>Review</h6>
+                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                consequat massa quis enim.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                quis, sem.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </span>):
-            (
-                <span></span>
-            )
-            }
-                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                  <h6>Description</h6>
-                  <p>
-                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                    odit aut loret fugit, sed quia consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt loret. Neque porro
-                    lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo
-                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                    aut loret fugit, sed quia ipsu consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt. Nulla consequat
-                    massa quis enim.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem.
-                  </p>
-                </div>
-                <div class="tab-pane" id="tabs-2" role="tabpanel">
-                  <h6>Specification</h6>
-                  <p>
-                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                    odit aut loret fugit, sed quia consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt loret. Neque porro
-                    lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo
-                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                    aut loret fugit, sed quia ipsu consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt. Nulla consequat
-                    massa quis enim.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem.
-                  </p>
-                </div>
-                <div class="tab-pane" id="tabs-3" role="tabpanel">
-                  <h6>Reviews ( 2 )</h6>
-                  <p>
-                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                    odit aut loret fugit, sed quia consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt loret. Neque porro
-                    lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo
-                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                    aut loret fugit, sed quia ipsu consequuntur magni dolores
-                    eos qui ratione voluptatem sequi nesciunt. Nulla consequat
-                    massa quis enim.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem.
-                  </p>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <div class="related__title">
-              <h5>RELATED PRODUCTS</h5>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/related/rp-1.jpg"
-              >
-                <div class="label new">New</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/related/rp-1.jpg" class="image-popup">
-                      <span class="arrow_expand"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_heart_alt"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_bag_alt"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6>
-                  <a href="#">Buttons tweed blazer</a>
-                </h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/related/rp-2.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/related/rp-2.jpg" class="image-popup">
-                      <span class="arrow_expand"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_heart_alt"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_bag_alt"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6>
-                  <a href="#">Flowy striped skirt</a>
-                </h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 49.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/related/rp-3.jpg"
-              >
-                <div class="label stockout">out of stock</div>
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/related/rp-3.jpg" class="image-popup">
-                      <span class="arrow_expand"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_heart_alt"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_bag_alt"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6>
-                  <a href="#">Cotton T-Shirt</a>
-                </h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="img/product/related/rp-4.jpg"
-              >
-                <ul class="product__hover">
-                  <li>
-                    <a href="img/product/related/rp-4.jpg" class="image-popup">
-                      <span class="arrow_expand"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_heart_alt"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_bag_alt"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6>
-                  <a href="#">Slim striped pocket shirt</a>
-                </h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">$ 59.0</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
+    </>
   );
 }
 
