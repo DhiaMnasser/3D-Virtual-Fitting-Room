@@ -1,5 +1,5 @@
 const express =require( 'express')
-const { getClaims, getClaimById, createClaim, updateClaim, deleteClaim, traiterClaim } =require('../controllers/claims.js');
+const { getClaims, getClaimById, createClaim, updateClaim, deleteClaim } =require('../controllers/claims.js');
 
 var router = express.Router();
 
@@ -9,7 +9,7 @@ router.get("/:id", getClaimById);
 router.post("/", createClaim);
 router.patch("/:id", updateClaim);
 router.delete("/:id", deleteClaim);
-router.patch("/:id/traiterClaim", traiterClaim);
+
 
 
 module.exports= router ;

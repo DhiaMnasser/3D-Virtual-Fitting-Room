@@ -7,57 +7,51 @@ import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../../../redux/slices/products";
 import styled from "styled-components";
 import axios from "axios";
-import { uploadFile } from "../../../../api/index";
+import {uploadFile} from "../../../../api/index";
 import CustomSelect from "./CustomSelect";
-import { HexColorPicker } from "react-colorful";
-import { array } from "yup";
-
 const Form = () => {
   const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
   const [uploadedArModel, setUploadedArModel] = useState({});
   const [uploadedThreeDModelUrl, setUploadedThreeDModelUrl] = useState("");
   const [uploadedThreeDModel, setUploadedThreeDModel] = useState({});
-
-
-
-  const Chan = event => {
-    formik.setFieldValue("color", color);
-    console.log(formik.values.color);
-  };
-  let sizes = ["XXS", "XS", "XS-S", "S", "M", "M-L", "L", "XL"];
-  sizes = sizes.map(x => (x = { value: x, label: x }));
-  const categories = useSelector(state => state.categories.categories);
-  const options = categories.map(
-    x => (x = { value: x.categoryName, label: x.categoryName })
-  );
-  const [color, setColor] = useState("#aabbcc");
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+let sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
+sizes=sizes.map((x)=>x={value:x, label :x})
+  const categories = useSelector(state => state.categories.categories)
+const options=categories.map((x)=>x={value:x.categoryName, label :x.categoryName})
+ 
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       productName: "",
       description: "",
       categoryId: "",
-      price: "1",
+      price: "0",
       size: "M",
       stockQuantity: "1",
-      image: [],
+      image: "",
       arModel: "",
-      threeDModel: "",
-      rating: "5",
-      promo: "0",
-      color: "#aabbcc",
-      ref:""
+      threeDModel: ""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+      const img=await toBase64(values.image).catch(e => Error(e));
+        if(img instanceof Error) {
+      console.log('Error: ', img.message);
+      return;
+   }else{
+     values.image=img
       console.log("vals:" + JSON.stringify(values, null, 4));
       dispatch(createProduct(values));
-    }
+
+    }}
   });
-  useEffect(() => {
-    formik.setFieldValue("color", color);
-  }, [color]);
 
   useEffect(() => {
     // console.log("uploadedArModel" + JSON.stringify(uploadedArModel, null, 4));
@@ -110,8 +104,6 @@ const Form = () => {
           <div class="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
-              <span className="text">Name: </span>
-
                 <input
                   class="my-2"
                   name="productName"
@@ -125,23 +117,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">ref: </span>
-
-                <input
-                  class="my-2"
-                  name="ref"
-                  type="text"
-                  placeholder="ref"
-                  value={formik.values.ref}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.ref && formik.touched.ref && (
-                  <FormError>{formik.errors.ref}</FormError>
-                )}
-              </div>
-              <div>
-              <span className="text">description: </span>
-
                 <input
                   class="my-2"
                   name="description"
@@ -155,21 +130,17 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <label>category</label>
+                 <label>category</label>
                 <CustomSelect
-                  value={formik.values.categoryId}
-                  onChange={value =>
-                    formik.setFieldValue("categoryId", value.value)
-                  }
-                  options={options}
+                value={formik.values.categoryId}
+                onChange={value=>formik.setFieldValue('categoryId',value.value)}
+                options={options}
                 />
                 {formik.errors.categoryId && formik.touched.categoryId && (
                   <FormError>{formik.errors.categoryId}</FormError>
                 )}
               </div>
               <div>
-              <span className="text">price: </span>
-
                 <input
                   class="my-2"
                   name="price"
@@ -182,20 +153,18 @@ const Form = () => {
                   <FormError>{formik.errors.price}</FormError>
                 )}
               </div>
-              <div>
+                 <div>
                 <label>size</label>
                 <CustomSelect
-                  value={formik.values.size}
-                  onChange={value => formik.setFieldValue("size", value.value)}
-                  options={sizes}
+                value={formik.values.size}
+                onChange={value=>formik.setFieldValue('size',value.value)}
+                options={sizes}
                 />
                 {formik.errors.size && formik.touched.size && (
                   <FormError>{formik.errors.size}</FormError>
                 )}
               </div>
               <div>
-              <span className="text">quantity: </span>
-
                 <input
                   class="my-2"
                   name="stockQuantity"
@@ -210,34 +179,25 @@ const Form = () => {
                   )}
               </div>
               <div>
-                <span className="text">Image: </span>
-                <FileBase
-                  type="file"
-                  id="image"
-                  name="image"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.values.image.push(base64);
-                    formik.setFieldValue("image",formik.values.image);
-                    console.log(formik.values.image);
-                    
-                  }}
-                />
+                  <span className="text">Image: </span>
 
+           <input name="image" type="file" placeholder="image"  onChange={(event) => {
+                 formik.setFieldValue("image", event.target.files[0]);
+                  }}  />
                 {formik.errors.image && formik.touched.image && (
                   <FormError>{formik.errors.image}</FormError>
                 )}
               </div>
-              
               <div>
-                <span class="text">AR Model: </span>
+                <span class="text">arModel: </span>
+               
 
                 <input
                   type="file"
                   id="arModel"
                   name="arModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedArModel(event.target.files[0]);
                     // setUploadedArModel({added: 'yes'});
@@ -251,14 +211,14 @@ const Form = () => {
                 />
               </div>
               <div>
-                <span class="text">3D Model: </span>
+                <span class="text">theeDModel: </span>
 
                 <input
                   type="file"
-                  id="threeDModel"
-                  name="threeDModel"
+                  id="theeDModel"
+                  name="theeDModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});
@@ -274,52 +234,6 @@ const Form = () => {
                   <FormError>{formik.errors.theeDModel}</FormError>
                 )}
               </div>
-              <div>
-              <span className="text">rating: </span>
-
-                <input
-                  class="my-2"
-                  name="rating"
-                  type="number"
-                  placeholder="rating"
-                  value={formik.values.rating}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.rating && formik.touched.rating && (
-                  <FormError>{formik.errors.rating}</FormError>
-                )}
-              </div>
-              <div>
-              <span className="text">promo in %: </span>
-
-                <input
-                  class="my-2"
-                  name="promo"
-                  type="number"
-                  placeholder="promo"
-                  value={formik.values.promo/100}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.promo && formik.touched.promo && (
-                  <FormError>{formik.errors.promo}</FormError>
-                )}
-              </div>
-              <div>
-                <input
-                  readOnly="true"
-                  class="my-2"
-                  name="color"
-                  type="text"
-                  placeholder="color"
-                  value={color}
-                  onChange={event => Chan(event)}
-                />
-                {formik.errors.color && formik.touched.color && (
-                  <FormError>{formik.errors.color}</FormError>
-                )}
-              </div>
-              <HexColorPicker color={color} onChange={setColor} />
-
               <div class="mb-4"></div>
 
               <button

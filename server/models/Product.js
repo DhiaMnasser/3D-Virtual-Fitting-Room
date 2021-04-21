@@ -31,23 +31,16 @@ var Product = new Schema({
     required: true,
     min: 1
   },
-  image: [String],
+  image: {
+    type: String,
+    // required: true
+  },
   arModel: {
     type: String
   },
-  threeDModel: {
+  threeDmodel: {
     type: String
-  },
-  rating:{
-    type:Number
-  },
-  color:{
-    type:String
-  },
-  promo:{
-    type:Number
   }
-
 
 });
 

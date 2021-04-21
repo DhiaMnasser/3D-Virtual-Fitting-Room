@@ -19,8 +19,7 @@ import categoriesReducer from "./slices/categories";
 import claimsReducer from "./slices/claims";
 import ordersReducer from "./slices/orders";
 import reviewsReducer from "./slices/reviews";
-import  { reducers }  from './reducers';
-import usersReducer from "./slices/auth";
+import reducers  from './reducers';
 
 export default configureStore({
     
@@ -32,7 +31,6 @@ reducer:{
     orders: ordersReducer,
     reviews: reviewsReducer,
     login : reducers ,
-    users:usersReducer,
 
 }
 

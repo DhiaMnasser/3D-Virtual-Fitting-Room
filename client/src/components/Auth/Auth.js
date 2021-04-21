@@ -11,6 +11,7 @@ import Icon from './icon';
 import { signin, signup } from '../../actions/auth';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const crypto = require('crypto');
 const Auth = () => {
   const history = useHistory();
   const [form, setForm] = useState(initialState);
@@ -81,6 +82,7 @@ const Auth = () => {
             onFailure={googleError}
             cookiePolicy="single_host_origin"
           />
+
             <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>

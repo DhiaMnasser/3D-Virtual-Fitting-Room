@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
 import "./product.css";
-import { deleteProduct, getProductById } from "../../../redux/slices/products";
+import { deleteProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 import {
   addItemToBasket,
@@ -48,8 +48,8 @@ function Product(props) {
       <div className="product__item">
         <div
           className="product__item__pic set-bg"
-          style={{ backgroundImage: `url(${props.product.image[0]})` }}
-          data-setbg={props.product.image[0]}
+          style={{ backgroundImage: `url(${props.product.image})` }}
+          data-setbg={props.product.image}
         >
           <div className="label new">New</div>
           <div className="label stockout">out of stock</div>
@@ -72,17 +72,12 @@ function Product(props) {
           </ul>
         </div>
         <div className="product__item__text">
-          <h6 onClick={()=>{
-            localStorage.removeItem("selectedProduct");
-            localStorage.setItem("selectedProduct",JSON.stringify(props.product));
-          }}
-        >
+          <h6>
             <Link
               to={{
                 pathname: "/productDetails/" + props.product._id,
                 product: props.product
               }}
-
             >
             {props.product.productName}
 
@@ -120,15 +115,20 @@ function Product(props) {
               />
             )}
           </div>
-          {props.product.promo===0 && <div className="product__price">${props.product.price}</div>}
+          <div className="product__price">${props.product.price}</div>
 
-{props.product.promo===0 || <div className="product__price">{props.product.price-(props.product.price*props.product.promo)/100}<span>{props.product.price}</span></div>}
- <div className="product__price">{props.product.color} </div>
-<div className="product__price"> {props.product.size}</div>
+          {/* <div className="product__price">$ 49.0 <span>$ 59.0</span></div> */}
         </div>
         
       </div>
-      
+      <button
+        onClick={() => {
+          dispatch(deleteProduct(props.product._id));
+        }}
+      >
+        delete
+      </button>
+      <button onClick={() => {}}>update</button>
       <script></script>
     </div>
   );

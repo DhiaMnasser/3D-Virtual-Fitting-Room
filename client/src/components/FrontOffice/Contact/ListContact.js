@@ -4,6 +4,7 @@ import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCategory } from "../../../redux/slices/contacts";
+import { deleteMessage } from "../../../redux/slices/messages";
 const Contacts = () => {
   const dispatch= useDispatch()
   const [update, setUpdate] = useState(false)
@@ -36,7 +37,7 @@ const Contacts = () => {
       <td>contacts.email</td>
       <td>contacts.message</td>
       <td>
-        <button type="button" class="btn btn-danger btn-sm px-3" onClick={()=>{  dispatch(deleteCategory(contacts.id))}}>
+        <button type="button" class="btn btn-danger btn-sm px-3" onClick={()=>{  dispatch(deleteMessage(contacts.id))}}>
           <i class="fas fa-times"></i>
         </button>
       </td>

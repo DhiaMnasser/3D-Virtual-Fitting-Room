@@ -6,10 +6,6 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  clientName: {
-    type: String,
-    required: true
-  },
   ref: {
     type: Date,
     default: Date.now()
@@ -20,6 +16,10 @@ const orderSchema = new mongoose.Schema({
   },
   dateShipped: {
     type: Date,
+  },
+  clientName: {
+    type: String,
+    required: true
   },
   address: {
     type: String,

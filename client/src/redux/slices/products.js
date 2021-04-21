@@ -12,28 +12,7 @@ export const getProducts = () => async dispatch => {
     console.log(error.response);
   }
 };
-//page={ "page": 1,"pagination":1,filter,"recherche"=string}
-export const get9Products = (page) => async dispatch => {
-  try {
-    const { data } = await api.smartFetchProduct(page);
 
-    // dispatch({ type: "FETCH_ALL", payload: data });
-    dispatch(getAllProducts(data.products));
-  } catch (error) {
-    console.log(error.response);
-  }
-};
-
-export const getNbPage = () => async dispatch => {
-  try {
-    const { data } = await api.getNbPages();
-
-    // dispatch({ type: "FETCH_ALL", payload: data });
-    dispatch(getNb(data.cnt));
-  } catch (error) {
-    console.log(error.response);
-  }
-};
 export const filterProducts = (cat) => async dispatch => {
   try {
     const { data } = await api.fetchProducts();
@@ -105,8 +84,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const productsSlice = createSlice({
   name:"products",
   initialState:{
-      products:[],
-      nbpg:0
+      products:[]
   
   },
   reducers:{
@@ -128,13 +106,9 @@ export const productsSlice = createSlice({
         if(index!==-1){   
             state.products[index]=action.payload;
         }
-    },
-   getNb(state,action){
-          state.nbpg=action.payload;
-          // console.log("in slice"+ JSON.stringify(state.products, null, 4));   
-      }
+    }
   }
   });
 
-  export const {getAllProducts, editProduct,removeProduct,addProduct,filterProductByCategory,getNb} =productsSlice.actions
+  export const {getAllProducts, editProduct,removeProduct,addProduct,filterProductByCategory} =productsSlice.actions
   export default productsSlice.reducer;

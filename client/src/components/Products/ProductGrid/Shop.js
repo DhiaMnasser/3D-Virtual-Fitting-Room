@@ -1,59 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import Product from "../Product/Product";
 import './shop.css'
-import {filterProducts,searchProducts,filterProductsBySize, addProduct,get9Products} from "../../../redux/slices/products"
+import {filterProducts,searchProducts,filterProductsBySize} from "../../../redux/slices/products"
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik';
-import { Checkbox } from '@material-ui/core';
-import Comparateur from '../../Comparateur/Comparateur';
-import Stripe from '../../Stripe/Stripe';
-
-
-
-
-
-
 function Shop(props) {
-  
     const sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
       const products = useSelector((state) => state.products.products)
-      const pages = useSelector((state)=>state.products.nbpg)
       const categories = useSelector((state) => state.categories.categories)
      const dispatch = useDispatch()
-     if (localStorage.getItem('page')===null) {
-        localStorage.setItem('page',1)
-     }
-     if (localStorage.getItem('filter')===null) {
-        localStorage.setItem('filter',sizes)
-     }
-        var page = {page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}
-
-      useEffect(() => {
-       
-    dispatch(get9Products(page));
-  
-  }, [dispatch]);
-
        const formik = useFormik({
     initialValues: {
       search: "",
     },
     onSubmit: async (values) => {
         console.log(values)
- dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),recherche:values.search}))
+ dispatch(searchProducts(values.search))
     }
   });
-   const [taille, setTaille] = useState(["XXS","XS","XS-S","S","M","M-L","L","XL"])
-
-   const stormik = useFormik({
+  const stormik = useFormik({
        initialValues: {
-      tailles: localStorage.getItem('filter').split(",") ,
+      tailles: [] ,
     },
     onSubmit: async (values) => {
        dispatch(filterProductsBySize(values))
     }
   })
-  
 let table=[]
   const handleChange=(event)=>{
       console.log(event.target.checked)
@@ -64,9 +36,7 @@ let table=[]
  console.log(event.target.value)
  if(table.indexOf(event.target.value)===-1){
  table.push(event.target.value)
-localStorage.setItem('filter',table)
- dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))
-console.log({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')})
+ dispatch(filterProductsBySize(table))
  console.log(stormik.values.tailles)}}
       else{
             var array = [...stormik.values.tailles]; // make a separate copy of the array
@@ -76,17 +46,14 @@ console.log({page: localStorage.getItem('page'),filter:localStorage.getItem('fil
 stormik.setFieldValue('tailles',array)
   
  console.log(array)
-    localStorage.setItem('filter',array)
-    console.log({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')})
- dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))
+    dispatch(filterProductsBySize(array))
       }
      
   }}
-
     return (
         
         <div>
-<Stripe name="yoyo" price={10}></Stripe>
+    
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -99,17 +66,86 @@ stormik.setFieldValue('tailles',array)
                             <div className="categories__accordion">
                                 <div className="accordion" id="accordionExample">
                                     <div className="card">
-                                        
-                                        <div on id="collapseFour" className="collapse show" data-parent="#accordionExample">
+                                        <div className="card-heading active">
+                                            <a data-toggle="collapse" data-target="#collapseOne">Women</a>
+                                        </div>
+                                        <div id="collapseOne" className="collapse show" data-parent="#accordionExample">
                                             <div className="card-body">
                                                 <ul>
-                                                    {categories.map((cat)=>{return <li key={cat._id}><a key={cat._id}onClick={()=>{ dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter'),category:cat.categoryName}))}}>{cat.categoryName}</a></li>})}
+                                                    <li><a href="#">Coats</a></li>
+                                                    <li><a href="#">Jackets</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">T-shirts</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <div className="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
+                                        </div>
+                                        <div id="collapseTwo" className="collapse" data-parent="#accordionExample">
+                                            <div className="card-body">
+                                                <ul>
+                                                    <li><a href="#">Coats</a></li>
+                                                    <li><a href="#">Jackets</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">T-shirts</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <div className="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseThree">Kids</a>
+                                        </div>
+                                        <div id="collapseThree" className="collapse" data-parent="#accordionExample">
+                                            <div className="card-body">
+                                                <ul>
+                                                    <li><a href="#">Coats</a></li>
+                                                    <li><a href="#">Jackets</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">T-shirts</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <div className="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFour">Accessories</a>
+                                        </div>
+                                        <div id="collapseFour" className="collapse" data-parent="#accordionExample">
+                                            <div className="card-body">
+                                                <ul>
+                                                    {categories.map((cat)=>{return <li key={cat._id}><button key={cat._id}onClick={()=>{dispatch(filterProducts(cat.categoryName))}}>{cat.categoryName}</button></li>})}
                                    
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div className="card">
+                                        <div className="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseFive">Cosmetic</a>
+                                        </div>
+                                        <div id="collapseFive" className="collapse" data-parent="#accordionExample">
+                                            <div className="card-body">
+                                                <ul>
+                                                    <li><a href="#">Coats</a></li>
+                                                    <li><a href="#">Jackets</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">T-shirts</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,14 +173,61 @@ stormik.setFieldValue('tailles',array)
 
                             <div className="size__list">
                                 
-                             
-                             {sizes.map((size,index)=>{return<> 
-                             <Checkbox key={index}
-                              onChange={(event)=>handleChange(event)} 
-                              checked={stormik.values.tailles.includes(size)} value={size} on="true"></Checkbox>{size}</>})}
+                                {sizes.map((size,index)=>{return<label key={index} htmlFor={size}>
+                                    {size}
+                                    <input key={size} onChange={(event)=>handleChange(event)} value={size}   type="checkbox" id={size} />
+                                    <span className="checkmark"></span>
+                                </label>})}
+                            
                             </div>
                         </div>
-                       
+                        <div className="sidebar__color">
+                            <div className="section-title">
+                                <h4>Shop by size</h4>
+                            </div>
+                            <div className="size__list color__list">
+                                <label htmlFor="black">
+                                    Blacks
+                                    <input type="checkbox" id="black"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="whites">
+                                    Whites
+                                    <input type="checkbox" id="whites"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="reds">
+                                    Reds
+                                    <input type="checkbox" id="reds"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="greys">
+                                    Greys
+                                    <input type="checkbox" id="greys"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="blues">
+                                    Blues
+                                    <input type="checkbox" id="blues"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="beige">
+                                    Beige Tones
+                                    <input type="checkbox" id="beige"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="greens">
+                                    Greens
+                                    <input type="checkbox" id="greens"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label htmlFor="yellows">
+                                    Yellows
+                                    <input type="checkbox" id="yellows"/>
+                                    <span className="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -175,9 +258,10 @@ stormik.setFieldValue('tailles',array)
         })}
                         <div className="col-lg-12 text-center">
                             <div className="pagination__option">
-                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<a className={page===localStorage.getItem('page')?'selected':'pagination__option'}  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
-                               key={page}>{page}</a>})}
-                             current page: {localStorage.getItem('page')}
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i className="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>

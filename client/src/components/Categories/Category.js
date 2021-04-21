@@ -5,11 +5,12 @@ import { Validation } from '../Forms/CategoryForm/AddCategory/Validations/valida
 import {updateCategory,editCategory} from '../../redux/slices/categories'
 import {deleteCategory,selectCategory,deselectCategory} from '../../redux/slices/categories'
 import { useFormik } from 'formik'
-import './style.css';
+import Categories from "./CategoryList/Categories";
 function Category(props) {
-    const dispatch= useDispatch()
+const dispatch= useDispatch()
 const [update, setUpdate] = useState(false)
-const [categName, setCategName] = useState(props.category.categoryName);
+const [categName, setCategName] = useState(props.category.categoryName)
+
 
   const formik = useFormik({
     initialValues: {
@@ -34,15 +35,16 @@ setCategName(datas.categoryName)
  
 const handle=()=>{
 setUpdate(!update)
-}
-    return (<>
+};
+const style = {
+  
+};
 
-        {update===true || <div><div className="kl" >
-            <div onClick={()=>{  handle()}}>{categName}</div>
-                <button className="btn btn-danger" onClick={()=>{  dispatch(deleteCategory(props.category._id))}}>delete</button>
-                </div>
-        </div>}
-          {update===false || <div>
+    return (
+    <>
+        <Categories></Categories>
+
+    {update===false || <div>
                <form onSubmit={formik.handleSubmit }>
               
                 <input
@@ -59,6 +61,13 @@ setUpdate(!update)
 
             </form>
         </div>}
+    
+         {/* {update===true || <div><div>
+            <div onClick={()=>{  handle()}}>{categName}</div>
+                <button className="btn btn-danger" onClick={()=>{  dispatch(deleteCategory(props.category._id))}}>delete</button>
+                </div>
+        </div>}  */}
+          
 
         </>
     )

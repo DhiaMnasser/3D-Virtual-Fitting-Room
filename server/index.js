@@ -9,18 +9,12 @@ const claimRoutes =require('./routes/claims.js');
 const orderRoutes =require('./routes/orders.js');
 const reviewRoutes =require('./routes/reviews.js');
 const userRoutes =require("./routes/user.js");
-const mailRoutes =require('./routes/mails.js');
+const messagesRoutes =require("./routes/message.js")
 const fileRoutes = require("./routes/files.js");
-const chatbotRoutes = require("./routes/chatbot/chatbot.js");
-const messagesRoutes =require('./routes/message.js');
-const scrapingRoutes = require("./routes/scraping.js");
 const GridFsStorage = require('multer-gridfs-storage');
 const multer = require('multer');
 const crypto = require('crypto');
 const path = require('path');
-const stripe = require("stripe")("sk_test_51IcLvHCPAWlRLabTKXrUtBtjKUfrCpayBeReUcudDNg23OMhZhMQg70MqbXOvATDviRQPpo7HKhigVqSNqk45BNM00WrYq0y9m")
-const {v4:uuid} = require("uuid");
-
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -43,37 +37,8 @@ app.use('/avatars', avatarRoutes);
 app.use('/claims', claimRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
-app.use('/mails',mailRoutes)
-app.use('/chatbot',chatbotRoutes);
-app.use('/messages',messagesRoutes);
-app.use('/scraping',scrapingRoutes)
-app.post("/checkout",async(req,res)=>{
-    let error;
-    let status;
-    try{
-        const{product,token}=req.body;
-    
-        const idempotencey_key = uuid()
-        
-        const charge =await stripe.charges.create({
-            amount:product.price*100,
-            currency:"usd",
-            source: token.id,
-            receipt_email:token.email,
-            description:`purchased the  ${product.name}`}
-        ).catch((err)=>{console.log(err)});
-        console.log("charge:",{charge});
-        status="success";
-        }catch(error){
-           console.log("error:",error); 
-           status="failure" ;
-        }
-        res.json({error,status})
-        
-    
-})
-app.use('/users', userRoutes);
-app.use('/mails',mailRoutes)
+app.use('/messages', messagesRoutes);
+
 
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
@@ -116,12 +81,3 @@ app.use('/files', fileRoutes(upload));
 
 // catch 404 and forward to error handler
 
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
