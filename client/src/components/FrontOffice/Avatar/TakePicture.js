@@ -24,6 +24,8 @@ class TakePicture extends React.Component {
     let b = 0;
     let speed = 3;
     let video;
+    let button;
+    let snapShot;
     let poseNet;
     let pose;
     let skeleton;
@@ -76,15 +78,22 @@ class TakePicture extends React.Component {
       canvas.style("position", "relative");
       canvas.style("margin", "0 auto");
 
-      console.log(p.VIDEO);
+      console.log(canvas);
       video = p.createCapture(p.VIDEO);
-      video.hide();
-      poseNet = ml5.poseNet(video, modelLoaded);
-      poseNet.on("pose", gotPoses);
+      button = p.createButton('snap');
+      button.mousePressed(takeSnap);
+      // video.hide();
+      // poseNet = ml5.poseNet(video, modelLoaded);
+      // poseNet.on("pose", gotPoses);
     };
 
     // ################################################
+const takeSnap = () =>{
+  snapShot = video.get();
+  p.image(snapShot, 0, 0);
+  // video.delete();
 
+}
     //###########################DRAW##########################\\
     p.draw = () => {
       // p.translate(video.width,0);
@@ -92,11 +101,20 @@ class TakePicture extends React.Component {
       p.image(video, 0, 0);
       // p.image(shirt,0,0);
 
+      p.texture(img);
+      p.textureMode(p.NORMAL);
+      p.beginShape();
+      p.vertex(0, 0, 0, 0);
+      p.vertex(600, 0, 1, 0);
+      p.vertex(600, 400, 1, 1);
+      p.vertex(0, 400, 0, 1);
+      p.endShape();
+
       if (pose) {
         let footR = pose.rightAnkle;
         let eyeL = pose.leftEye;
         let d = p.dist(footR.x, footR.y, eyeL.x, eyeL.y);
-        console.log("distsnce d : " + d);
+        // console.log("distsnce d : " + d);
 
         //man overlay img
         p.texture(img);
@@ -123,6 +141,7 @@ class TakePicture extends React.Component {
           p.line(a.position.x, a.position.y, b.position.x, b.position.y);
         }
       }
+      p.Loop();
     };
   };
 
