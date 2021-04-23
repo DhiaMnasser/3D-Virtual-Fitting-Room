@@ -1,0 +1,18 @@
+.image{
+    height: 200px;
+    width: 200px;
+}
+.price{
+
+}
+.espace{
+    padding: 10px;
+}
+.container{
+
+}
+.yep{
+    display: left;
+    flex-grow: 1;
+    justify-content: space-around;
+}

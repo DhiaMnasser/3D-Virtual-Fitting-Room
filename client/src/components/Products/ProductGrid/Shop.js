@@ -7,6 +7,8 @@ import { useFormik } from 'formik';
 import { Checkbox } from '@material-ui/core';
 import Comparateur from '../../Comparateur/Comparateur';
 import Stripe from '../../Stripe/Stripe';
+import ImgComp from '../../Comparateur/ImgComp';
+import Comp from '../../Comparateur/Comp';
 
 
 
@@ -86,7 +88,7 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-
+<ImgComp></ImgComp>
     <section className="shop spad">
         <div className="container">
             <div className="row">

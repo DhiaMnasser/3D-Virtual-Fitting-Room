@@ -157,10 +157,11 @@ var timer = setInterval( function(){
        i++
     
  axios.all([
-   axios.post('https://three-vfr-p.herokuapp.com/exist', {link:["https://www.exist.com.tn/215-pulls-polos?page="],page:11}),
+   axios.post('https://three-vfr-p.herokuapp.com/exist', {link:["https://www.exist.com.tn/215-pulls-polos?page="],page:10}),
    axios.post('https://three-vfr-p.herokuapp.com/ha',{link:[...pulls,...pantalons,...chemises]}),
    axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/208-pantalons?page='],page:4}),
-   axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/206-chemises?page='],page:4})
+   axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/206-chemises?page='],page:4}),
+    axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/219-gilets?page='],page:3}),
 ]).then(res => {
   //this will be executed only when all requests are complete
   
@@ -168,6 +169,7 @@ var timer = setInterval( function(){
   var data2=res[1]
   var data3=res[2]
   var data4=res[3]
+  var data5=res[4]
   console.log(data1)
   console.log(data2)
   var exist= [...data1.data,...data3.data,...data4.data]
