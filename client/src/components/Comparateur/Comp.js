@@ -4,11 +4,20 @@ import tiger from "./shirt2.png";
 import * as ml5 from "ml5";
 import axios from "axios"
 import './Comp.css'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function Comp (props) {
     
 const [predictions, setPredictions] = useState([]) 
 
-
+const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4
+    };
 
 
   const classifyImg = () => {
@@ -64,30 +73,45 @@ fetchHa()
     }, [])
     console.log(ha)
     return (
-      <div className="App">
-        <h1>Image classification with ML5.js</h1>
+    <div>
+        <h1>upload the image of the item you want to compare</h1>
         <img src={ props.img } id="image" width="400" alt="" />
  {predictions}
  <div className="espace"></div>
- <div className="yep">{predictions.includes("T-shirt") && exist.filter(ex=>ex.category==="PULLS & POLOS").map((ex)=>{
-     return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
+   <Slider {...settings}>
+{predictions.includes("T-shirt") && exist.filter(ex=>ex.category==="PULLS & POLOS").map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
      })}
+     
+     <div className="espace"></div>
+   
 {predictions.includes("T-shirt") && ha.filter(h=>h.category.includes("Sweat","pull")).map((ex)=>{
-    return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
-    })}</div>
- <div className="yep">{predictions.includes("jean") && exist.filter(ex=>ex.title.includes("JEAN","PANTALON")).map((ex)=>{
-     return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
-     })}</div>
-{predictions.includes("jean") && ha.filter(h=>h.category.includes("Jeans","Pantalon")).map((ex)=>{
-    return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
     })}
-<div className="yep">{predictions.includes("sweatshirt") && exist.filter(ex=>ex.title.includes("CHEMISE")).map((ex)=>{
-     return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
+    </Slider>
+    <div className="espace"></div>
+    <Slider {...settings}>
+ {predictions.includes("jean") && exist.filter(ex=>ex.title.includes("JEAN","PANTALON")).map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
      })}
-     {predictions.includes("sweatshirt") && ha.filter(h=>h.category.includes("Chemise")).map((ex)=>{
-    return <><div className="container"><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></div></>
-    })}</div>
-      </div>
+ 
+     <div className="espace"></div>
+     
+{predictions.includes("jean") && ha.filter(h=>h.category.includes("Jeans","Pantalon")).map((ex)=>{
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+    })}
+    </Slider>
+    <div className="espace"></div>
+    <Slider {...settings}>
+{predictions.includes("sweatshirt") && exist.filter(ex=>ex.title.includes("CHEMISE")).map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+     })}
+    
+{predictions.includes("sweatshirt") && ha.filter(h=>h.category.includes("Chemise")).map((ex)=>{
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+    })}
+    </Slider>
+     </div>
     );
  
 }
