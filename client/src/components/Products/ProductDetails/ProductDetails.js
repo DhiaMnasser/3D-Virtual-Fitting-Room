@@ -20,6 +20,25 @@ import { deleteReview } from "../../../redux/slices/reviews";
 import axios from "axios";
 import Avatar from "../../FrontOffice/Avatar/Avatar";
 
+async function addToCart(id, quantity) {
+  try {
+    const response = await fetch("http://localhost:4000/cart", {
+      method: "POST",
+      body: JSON.stringify({
+        productId: id,
+        quantity: quantity,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+    let data = await response.json()
+    console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 function ProductDetails(props) {
   const productId = window.location.pathname.split("/productDetails/")[1];
   console.log(
@@ -58,8 +77,6 @@ function ProductDetails(props) {
     console.log(product);
     console.log(threeDModel);
     // localStorage.setItem("threeDModel", threeDModel);
-    
-
     // setProduct(prod);
     // setProduct(axios.get(`http://localhost:5000/products/${productId}`).result)
     // console.log('product'+JSON.stringify( axios.get(`http://localhost:5000/products/${productId}`)));
@@ -153,7 +170,7 @@ function ProductDetails(props) {
                   }}
                   class="cart-btn"
                 >
-                  <span class="icon_bag_alt"></span> Add to cart
+                  <button class="icon_bag_alt"></button> Add to cart
                 </a>
                 <ul>
                   <li>

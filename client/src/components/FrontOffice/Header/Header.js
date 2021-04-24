@@ -60,12 +60,6 @@ function Header() {
 
                   </li>
                   <li>
-                    <a href="#">Women’s</a>
-                  </li>
-                  <li>
-                    <a href="#">Men’s</a>
-                  </li>
-                  <li>
                 <Link to='/Shop'>Shop</Link>
 
                   </li>
@@ -75,7 +69,6 @@ function Header() {
                   </li>
                   <li>
                 <Link to='/Myclaims'> My Claims</Link>
-
                   </li>
                   <li>
                     <a href="#">Pages</a>

@@ -9,11 +9,6 @@ import Comparateur from '../../Comparateur/Comparateur';
 import Stripe from '../../Stripe/Stripe';
 import Weather from '../../Extras/Geo/Weather';
 
-
-
-
-
-
 function Shop(props) {
   
     const sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
@@ -87,7 +82,6 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-<Stripe name="yoyo" price={10}></Stripe>
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -162,7 +156,7 @@ stormik.setFieldValue('tailles',array)
                 onChange={formik.handleChange}
               />
 
-            <button  type="submit" >
+            <button  class="btn" type="submit"  >
               search
               </button>
 

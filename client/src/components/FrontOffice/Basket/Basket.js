@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Product from "../../Products/Product/Product";
 import { isAuthenticated } from "../../../redux/slices/auth";
 import { Link } from 'react-router-dom';
+import Stripe from "../../Stripe/Stripe";
 
 
 // import logo from './logo.png'
@@ -240,12 +241,13 @@ function Basket() {
                 <h6>Basket total</h6>
                 <ul>
                   <li>
-                    Total <span>{currentOrder?.totalPrice } DT</span>
+                    Total <span>{currentOrder?.totalPrice} DT</span>
                   </li>
                 </ul>
                 <Link to="/checkout" class="primary-btn">
                   Proceed to checkout
                 </Link>
+                <Stripe name="yoyo" price={currentOrder?.totalPrice}></Stripe>
               </div>
             </div>
           </div>

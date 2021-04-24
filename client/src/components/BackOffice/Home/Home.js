@@ -9,13 +9,14 @@ import ProductList from '../../Products/ProductList/Products';
 // import CategoryList from '../../Categories/CategoryList/Categories';
 import AddProductForm from '../../Forms/ProductForm/AddProduct/AddProductForm';
 import AddCategoryForm from '../../Forms/CategoryForm/AddCategory/AddCategoryForm';
-
+import Analytics from '../../Extras/Analytics/Analytics';
 export class Home extends Component {  
  
     render() {  
         return (  
             <>
             <h2>this is Admin Dashboard</h2>
+            <Analytics></Analytics>
             {/* <ProductGrid/> */}
             <div className="row justify-content-md-center">
             <AddProductForm/>

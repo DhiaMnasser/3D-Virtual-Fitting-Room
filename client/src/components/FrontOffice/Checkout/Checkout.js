@@ -1,20 +1,118 @@
 import React, { useState, useEffect } from 'react'
 import {faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// import './product.css'
 import { deleteProduct } from '../../../redux/slices/products'
-import { useDispatch } from 'react-redux';
-import { addItemToCart, getCurrentBasket } from '../../../redux/slices/orders';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAuthenticated } from '../../../redux/slices/auth';
+import Product from "../../Products/Product/Product";
+import Stripe from "../../Stripe/Stripe";
+import {
+    getCurrentBasket,
+    getOrdersByUser,
+    addItemToBasket,
+    removeItemFromBasket,
+    updateOrder
+  } from "../../../redux/slices/orders";
+import { Link } from 'react-router-dom';
+import Help from './Help';
 
 function Home(props) {
-
+    const dispatch = useDispatch();
+    const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
+    let orders = useSelector(state => state.orders.orders);
+    let [currentOrder, setCurrentOrder] = useState(getCurrentBasket(orders));
+    let products = currentOrder?.products;
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      
+      function success(pos) {
+        var crd = pos.coords;
+        console.log('Votre position actuelle est :');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude : ${crd.longitude}`);
+        console.log(`La précision est de ${crd.accuracy} mètres.`);
+        return (crd);
+      }
+      
+      function error(err) {
+        console.warn(`ERREUR (${err.code}): ${err.message}`);
+      }
+      
+      navigator.geolocation.getCurrentPosition(success, error, options);
+      useEffect(() => {
+      setCurrentOrder(getCurrentBasket(orders));
+      return ()=>{
+      console.log('useEffect called');
+      console.log(`currentOrder in useEffect ${JSON.stringify(currentOrder)}`);
+      dispatch(updateOrder(currentOrder?._id, currentOrder));
+      }
+    },[currentOrder] );
+  
+  
+  
+    const incQuantity = (prod) => {
+      console.log('incQuantity called');
+      const product = JSON.parse(JSON.stringify(prod));
+      const currOrder = JSON.parse(JSON.stringify(currentOrder));
+      try {
+        console.log(product.stockQuantity);
+        const indexProduct = currOrder.products.findIndex(
+          p => p._id === product._id
+        );
+        currOrder.products[indexProduct].stockQuantity++;
+        currOrder.totalPrice = currOrder.totalPrice + product.price;
+        setCurrentOrder(currOrder);
+      console.log(`currentOrder in incQuantity ${JSON.stringify(currentOrder)}`);  
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    const decQuantity = (prod) => {
+      const product = JSON.parse(JSON.stringify(prod));
+      const currOrder = JSON.parse(JSON.stringify(currentOrder));
+      console.log('decQuantity called');
+      try {
+        const indexProduct = currOrder.products.findIndex(
+          p => p._id === product._id
+        );
+        if (product > 1) {
+          currOrder.products[indexProduct].stockQuantity--;
+          currOrder.totalPrice = currOrder.totalPrice - product.price;
+          setCurrentOrder(currOrder);
+          console.log(product.stockQuantity);
+        } else {
+          alert("quantity cant go below 1");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    const removeItem = (prod) => {
+      const product = JSON.parse(JSON.stringify(prod));
+      const currOrder = JSON.parse(JSON.stringify(currentOrder));
+      console.log('removeItem called');
+      try {
+          const indexProduct = currOrder.products.findIndex(
+              prod => prod._id === product._id
+            );
+            currOrder.totalPrice -= currOrder.products[indexProduct].price * currOrder.products[indexProduct].stockQuantity;
+            currOrder.products.splice(indexProduct,1)
+          setCurrentOrder(currOrder);  
+      } catch (error) {
+        console.log(error);
+      }
+    };
     return (
         <section class="checkout spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
+                    <h6 class="coupon__link"><a href="#">Have a coupon?</a> Click
                     here to enter your code.</h6>
                 </div>
             </div>
@@ -70,33 +168,18 @@ function Home(props) {
                                     <input type="text"/>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__checkbox">
-                                    <label for="acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="acc"/>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br></br>top of the page</p>
-                                   
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Account Password <span>*</span></p>
-                                        <input type="text"/>
-                                    </div>
-                                    <div class="checkout__form__checkbox">
-                                        <label for="note">
-                                            Note about your order, e.g, special noe for delivery
-                                            <input type="checkbox" id="note"/>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Oder notes <span>*</span></p>
-                                        <input type="text" placeholder="Note about your order, e.g, special noe for delivery"/>
-                                    </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                    <p>Your Latitude <span> *</span></p>
+                                    <input type="text"/>
                                 </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="checkout__form__input">
+                                    <p>Your Longitude <span> *</span></p>
+                                    <input type="text"/>
+                                </div>
+                            </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -108,35 +191,33 @@ function Home(props) {
                                             <span class="top__text">Product</span>
                                             <span class="top__text__right">Total</span>
                                         </li>
-                                        <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                        <li>02. Zip-pockets pebbled<br></br> tote briefcase <span>$ 170.0</span></li>
-                                        <li>03. Black jean <span>$ 170.0</span></li>
-                                        <li>04. Cotton shirt <span>$ 110.0</span></li>
+                                        {products?.map(product => (
+                                        <li>
+                                            {product.productName} <span>{product.price}</span>
+                                        </li>
+                                                                                    ))}
                                     </ul>
                                 </div>
                                 <div class="checkout__order__total">
                                     <ul>
-                                        <li>Subtotal <span>$ 750.0</span></li>
-                                        <li>Total <span>$ 750.0</span></li>
+                                        <li>Subtotal <span>{currentOrder?.totalPrice} DT</span></li>
+                                        <li>Total <span>{currentOrder?.totalPrice} DT</span></li>
                                     </ul>
                                 </div>
                                 <div class="checkout__order__widget">
                                     <label for="o-acc">
                                         Create an acount?
                                         <input type="checkbox" id="o-acc"/>
-                                        <span class="checkmark"></span>
                                     </label>
                                     <p>Create am acount by entering the information below. If you are a returing customer
                                     login at the top of the page.</p>
                                     <label for="check-payment">
                                         Cheque payment
                                         <input type="checkbox" id="check-payment"/>
-                                        <span class="checkmark"></span>
                                     </label>
                                     <label for="paypal">
                                         PayPal
                                         <input type="checkbox" id="paypal"/>
-                                        <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <button type="submit" class="site-btn">Place oder</button>
