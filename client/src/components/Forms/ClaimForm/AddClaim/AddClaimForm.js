@@ -53,40 +53,114 @@ const Form = () => {
   }
 
   return (
-      <div className="col-lg-6">
-        <div className="card shadow mb-4">
-          <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Add Claim</h6>
-          </div>
-          <div className="card-body ">
-            <form onSubmit={formik.handleSubmit}>
-              <div>
-              <label> Message
+    <div class="contact__form">
+                        <h2>SEND CLAIM</h2>
+                        <div>
+                        <form onSubmit={formik.handleSubmit}>
+                            <div>
+                            <input type="text" 
+                            name="Message"
+                            placeholder="Name" 
+                            value={formik.values.name}
+                            onChange={formik.handleChange} />
+                            {formik.errors.name && formik.touched.name && (
+                            <FormError>{formik.errors.name}</FormError>
+                             )}
+                             </div>
+                             <div>
+                             <label> <h4>Choose your object</h4> </label>
+                             <CustomSelect
+                             value={formik.values.selectValue}
+                             onChange={value=>formik.setFieldValue('selectValue',value.value)}
+                             options={selecteds}
+                             />
+                             </div>
+                             <div>
+                      
+                          {formik.values.selectValue === formik.values.product ? (  <div>
+                          <label> <h4>Choose your type of claim:</h4></label>
+                           <CustomSelect
+                          value={formik.values.type}
+                          onChange={value=>formik.setFieldValue('type',value.value)}
+                          options={types2}
+                          />
+                         {formik.errors.type && formik.touched.type && (
+                         <FormError>{formik.errors.type}</FormError>
+                          )}
+                          </div> ):(<div> <label><h4> Choose your type of claim: </h4></label>
+                          <CustomSelect
+                          value={formik.values.type}
+                          onChange={value=>formik.setFieldValue('type',value.value)}
+                          options={types}
+                          />
+                          {formik.errors.type && formik.touched.type && (
+                          <FormError>{formik.errors.type}</FormError>
+                          )}
+                          </div>  ) }
+                             </div>
+                             <div>
+                            <textarea 
+                            name="message"
+                            placeholder="Message" 
+                            value={formik.values.message} 
+                            onChange={formik.handleChange} />
+                            {formik.errors.message && formik.touched.messsage && (
+                            <FormError>{formik.errors.message}</FormError>
+                             )}
+                             </div>
+                             <div>
+                             <input
+                             className="my-2"
+                             name="Réf"
+                             type="text"
+                             placeholder="AEJXZ.."
+                             value={formik.values.Réf}
+                             onChange={formik.handleChange}
+                             />
+                            {formik.errors.Réf && formik.touched.Réf && (
+                            <FormError>{formik.errors.Réf}</FormError>
+                            )}
+                             </div>
+                            <button type="submit" class="site-btn" >Send Message</button>
+                        </form>
+                        </div>
+                    </div>
                 
-                <br/>
-                <input
-                  className="my-2"
-                  name="message"
-                  type="text"
-                  placeholder="type your message"
-                  value={formik.values.message}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.message && formik.touched.message && (
-                  <FormError>{formik.errors.message}</FormError>
-                )}
-                </label>
-              </div>
+  );
+};    
+       // <div className="col-lg-6">
+      //   <div className="card shadow mb-4">
+      //     <div className="card-header py-3">
+      //       <h6 className="m-0 font-weight-bold text-primary">Add Claim</h6>
+      //     </div>
+      //     <div className="card-body ">
+      //       <form onSubmit={formik.handleSubmit}>
+      //         <div>
+      //         <label> Message           
+      //           <br/>
+      //           <input */}
+      {/* //             className="my-2"
+      //             name="message"
+      //             type="text"
+      //             placeholder="type your message"
+      //             value={formik.values.message}
+      //             onChange={formik.handleChange}
+      //           />
+      //           {formik.errors.message && formik.touched.message && ( */}
+      {/* //             <FormError>{formik.errors.message}</FormError>
+      //           )}
+      //           </label>
+      //         </div> */}
               
-              <div>
-                 <label> Choose your object </label>
-                <CustomSelect
-                value={formik.values.selectValue}
-                onChange={value=>formik.setFieldValue('selectValue',value.value)}
-                options={selecteds}
-                />
+      {/* //         <div>
+      //            <label> Choose your object </label>
+      //           <CustomSelect */}
+      {/* //           value={formik.values.selectValue}
+      //           onChange={value=>formik.setFieldValue('selectValue',value.value)}
+      //           options={selecteds}
+      //           />
                 
-              </div>
+      //         </div>
               <div>
                {formik.values.selectValue === formik.values.product ? (  <div>
                  <label> Choose your type of claim:</label>
@@ -145,10 +219,8 @@ const Form = () => {
             </form>
           </div>
         </div>
-      </div>
-    
-  );
-};
+      </div> */}
+
 
 const FormError = styled.p`
   color: #f74b1b;

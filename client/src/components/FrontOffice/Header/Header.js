@@ -146,13 +146,13 @@ function Header() {
                   <li>
                     <a href="#">
                       <span className="ei ei-icon_heart_alt"></span>
-                      <div className="tip">2</div>
+                      {/* <div className="tip"></div> */}
                     </a>
                   </li>
                   <li>
                   <Link to='/Basket'>
                     <span className="ei ei-icon_bag_alt"></span>
-                    <div className="tip">2</div>
+                    {/* <div className="tip"></div> */}
                     </Link>
                   </li>
                 </ul>
