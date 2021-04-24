@@ -56,7 +56,7 @@ function App() {
     dispatch(getClaims());
     dispatch(getAvatars());
     dispatch(getReviews());
-    dispatch(getUsers());
+    // dispatch(getUsers());
     dispatch(getNbPage());
   }, [dispatch]);
 
@@ -84,37 +84,21 @@ function App() {
         <ClientRoute path="/" exact component={HomeFront} />
         <ClientRoute path="/Home" component={HomeFront} />
         <ClientRoute path="/Shop" component={Shop} />
-        <ClientRoute path="/Basket/" component={Basket} />
-        <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
         <ClientRoute path="/AR/" component={AR} />
         <ClientRoute path="/TakePicture/" component={TakePicture} />
         <ClientRoute path="/chatbot/" component={Chat} />
+        <ClientRoute path="/productDetails/:value" exact component={ProductDetails} />
+        <ClientRoute path="/Contact/" exact component={Contact} />
+        <ClientRoute path="/Basket/" component={Basket} />
 
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
         <PrivateRoute path="/profile" exact component={Profile} />
-        <PrivateRoute
-          path="/updatereview/:value"
-          exact
-          component={UpdateReviewForm}
-        />
-        <PrivateRoute
-          path="/updateuser/:value"
-          exact
-          component={Formuser}
-        />
-        <ClientRoute
-          path="/productDetails/:value"
-          exact
-          component={ProductDetails}
-        />
-        <ClientRoute
-          path="/Contact/"
-          exact
-          component={Contact}
-        />
+        <PrivateRoute path="/updatereview/:value" exact component={UpdateReviewForm}/>
+        <PrivateRoute path="/updateuser/:value" exact component={Formuser} />
+        <PrivateRoute path="/Checkout/" component={Checkout} />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />
         <AdminRoute path="/admin/products" component={ProductList} />

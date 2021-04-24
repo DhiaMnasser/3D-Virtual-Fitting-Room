@@ -19,7 +19,7 @@ export const getOrders = () => async dispatch => {
 
 export const getOrdersByUser = () => async dispatch => {
   try {
-    let { data } = await api.fetchOrderByUser(isAuthenticated().result._id);
+    let { data } = await api.fetchOrderByUser(isAuthenticated()?.result?._id);
     console.log(`data getOrders /actions ${data}`);
 
     dispatch(getAllOrders(data));
@@ -28,9 +28,9 @@ export const getOrdersByUser = () => async dispatch => {
   }
 };
 
-export const createOrder = order => async dispatch => {
+export const createOrder = Client => async dispatch => {
   try {
-    const data = api.createOrder(order);
+    const data = api.createOrder(Client);
     
     dispatch(addOrder(data));
   } catch (error) {
@@ -39,7 +39,10 @@ export const createOrder = order => async dispatch => {
 };
 
 export const updateOrder = (id, order) => async dispatch => {
+  console.log('updateOrder called');
   try {
+    console.log('updating order');
+    
     const { data } = await api.updateOrder(id, order);
 
     dispatch(editOrder(data));
@@ -126,7 +129,7 @@ export const getCurrentBasket = (orders) => {
   const connectedUser = isAuthenticated().result;
   // console.log("getCurrentBasket Orders" + JSON.stringify(orders));
 
-  const indexOrder = orders?.findIndex((order)=> !order.isValid && order.clientId === connectedUser._id);
+  const indexOrder = orders?.findIndex((order)=> !order.isValid && order.clientId === connectedUser?._id);
   
   if(indexOrder!==-1){ 
     return orders[indexOrder] ;

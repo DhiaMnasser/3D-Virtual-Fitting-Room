@@ -35,9 +35,12 @@ const getOrdersByUser = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  console.log(`create prod in server ${req}`);
-
+  console.log(`create order in server `);
+  // console.log(JSON.stringify(req));
+  
   const { clientId } = req.body;
+  console.log(`clientId `);
+  console.log(clientId);
   const newOrder = await new Order({ clientId });
   try {
     await newOrder.save();

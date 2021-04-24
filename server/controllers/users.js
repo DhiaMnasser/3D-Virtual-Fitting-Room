@@ -11,7 +11,7 @@ const refresh = async  (req, res) => {
   const refreshToken = req.body.token
   const oldUser = await UserModal.findOne({ email });
 
-    if (!oldUser) return res.status(404).json({ message: "User doesn't exist" });
+    if (!oldUser) return res.status(404).send({ message: "User doesn't exist" });
   if (refreshToken == null) return res.sendStatus(401)
   if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
   jwt.verify(refreshToken, secret2, (err, email , id) => {
@@ -27,11 +27,11 @@ const signin = async (req, res) => {
   try {
     const oldUser = await UserModal.findOne({ email });
 
-    if (!oldUser) return res.status(404).json({ message: "User doesn't exist" });
+    if (!oldUser) return res.status(404).send({ message: "User doesn't exist" });
 
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
 
-    if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isPasswordCorrect) return res.status(400).send({ message: "Invalid credentials" });
 
     //const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "15s" });
     const token = generateAccessToken({ email: oldUser.email, id: oldUser._id });
@@ -40,7 +40,7 @@ const signin = async (req, res) => {
 
     res.status(200).json({ result: oldUser, token,refreshToken });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).send({ message: "Something went wrong" });
   }
 };
 function generateAccessToken(email ,id) {
@@ -53,7 +53,7 @@ function generateAccessToken(email ,id) {
   try {
     const oldUser = await UserModal.findOne({ email });
 
-    if (oldUser) return res.status(400).json({ message: "User already exists" });
+    if (oldUser) return res.status(400).send({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -64,7 +64,7 @@ function generateAccessToken(email ,id) {
 
     res.status(201).json({ result, token });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).send({ message: "Something went wrong" });
     
     console.log(error);
   }

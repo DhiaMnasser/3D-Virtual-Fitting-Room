@@ -49,20 +49,11 @@ function ProductDetails(props) {
 
   useEffect(() => {
     console.log("useEffect called setThreeDModel");
-    // const threeDModel =  api.fetchFileDataByName(product.threeDModel)
-    // const threeDModel =  api.fetchFileByName(product.threeDModel)
-    // api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(response.data)});
     api.fetchImageByName(product.threeDModel).then((response) => {setThreeDModel(JSON.stringify(response.data))});
-    // setThreeDModel(data);
     console.log('product');
     console.log(product);
     console.log(threeDModel);
-    // localStorage.setItem("threeDModel", threeDModel);
-    
 
-    // setProduct(prod);
-    // setProduct(axios.get(`http://localhost:5000/products/${productId}`).result)
-    // console.log('product'+JSON.stringify( axios.get(`http://localhost:5000/products/${productId}`)));
   }, [prod]);
 
 
@@ -77,13 +68,11 @@ function ProductDetails(props) {
   const addToBasket = () => {
     try {
       setCurrentOrder(addItemToBasket(orders, product));
-      // console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
 
-      //  dispatch(updateOrder(currentOrder._id, currentOrder ));
     } catch (error) {
       console.log(error.message);
     }
-    //  dispatch(editOrder(state.orders[indexOrder]));
+
   };
     const ratingChanged = (newRating) => {
       console.log(newRating);
@@ -106,7 +95,7 @@ function ProductDetails(props) {
                                   <img src={product.image} alt="" />
                               </a>
                           </div>
-                          <Avatar man={threeDModel}/>
+                          <Avatar clothModel={threeDModel}/>
                           <div class="product__details__slider__content">
                               <div class="product__details__pic__slider owl-carousel">
                                   <img  class="product__big__img" src={product.image} alt="Waa"/>

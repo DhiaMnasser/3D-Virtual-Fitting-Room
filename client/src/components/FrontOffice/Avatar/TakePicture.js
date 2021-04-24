@@ -25,22 +25,26 @@ class TakePicture extends React.Component {
     let speed = 3;
     let video;
     let button;
+    let tryAgainButton;
+    let canvas;
     let snapShot;
     let poseNet;
+    let bodyPix;
+    let segmentation;
     let pose;
     let skeleton;
     let img;
-    let slv;
-    let snap;
-    let slv2;
-    let hzem;
-    let ul;
-    let ur;
-    let ll;
-    let lr;
+    let takingSnap = true;
+    let timer = 5;
+    let isVideoLoaded = false;
+    let options = {
+      outputStride: 32, // 8, 16, or 32, default is 16
+      segmentationThreshold: 0.1 // 0 - 1, defaults to 0.5
+    };
+
     let sizes;
     function modelLoaded() {
-      console.log("poseNet ready");
+      console.log("modelLoaded");
     }
 
     function gotPoses(poses) {
@@ -51,102 +55,152 @@ class TakePicture extends React.Component {
       }
     }
 
-
     //###########################PRELOAD##########################\\
     p.preload = () => {
       img = p.loadImage(shirt);
-
     };
 
     //###########################SETUP##########################\\
     p.setup = () => {
+      ml5.p5Utils.setP5Instance(p);
       sizes = { height: 800, width: 1200 };
-      p.pixelDensity(1)
-      let canvas = p
-        .createCanvas(1200, 800, p.WEBGL)
-        // .position(400,-400);
-        .position(sizes.width / 4, -sizes.width / 2);
+      p.pixelDensity(1);
+      canvas = p.createCanvas(1200, 800, p.WEBGL);
+      // .position(sizes.width / 4, -sizes.height / 2);
       canvas.style("display", "block");
 
       //  canvas.style('position', 'absolute');
       //  canvas.style('margin-top', '150px');
 
       canvas.style("z-index", "-1");
-      canvas.style("width", sizes.width*1.25 + "px");
-      canvas.style("height", sizes.height*1.5 + "px");
+      // canvas.style("width", sizes.width * 1.25 + "px");
+      // canvas.style("height", sizes.height * 1.5 + "px");
 
       canvas.style("position", "relative");
       canvas.style("margin", "0 auto");
 
-      console.log(canvas);
+      // console.log(canvas);
       video = p.createCapture(p.VIDEO);
-      button = p.createButton('snap');
-      button.mousePressed(takeSnap);
+
+      // video.size(1200,800);
+      snapShot = video;
+      // button = p.createButton('snap');
+      // button.mousePressed(takeSnap);
+      tryAgainButton = p.createButton("try again");
+      tryAgainButton.mousePressed(resetSnapping);
       // video.hide();
       // poseNet = ml5.poseNet(video, modelLoaded);
       // poseNet.on("pose", gotPoses);
+      bodyPix = ml5.bodyPix(snapShot, modelLoaded);
     };
 
     // ################################################
-const takeSnap = () =>{
-  snapShot = video.get();
-  p.image(snapShot, 0, 0);
-  // video.delete();
+    const takeSnap = () => {
+      console.log("snap taken");
 
-}
+      snapShot = video.get();
+      // p.image(snapShot, 0, 0);
+
+      videoReady();
+      // video.delete();
+      // console.log(snapShot);
+    };
+
+    const resetSnapping = () => {
+      takingSnap = true;
+      timer = 5;
+      snapShot = video;
+    };
+
+    // ######################################
+
+    const videoLoaded = () => {
+      isVideoLoaded = true;
+    };
+    const videoReady = () => {
+      console.log("videoReady");
+
+      bodyPix.segment(gotResults, options);
+    };
+
+    const gotResults = (error, result) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      segmentation = result;
+
+
+
+      p.background('white');
+      console.log(segmentation.backgroundMask.canvas.toDataURL());
+
+      p.image(segmentation.backgroundMask, -canvas.width/2, -canvas.height/2,canvas.width,canvas.height);
+      console.log(segmentation);
+
+    };
+
     //###########################DRAW##########################\\
     p.draw = () => {
       // p.translate(video.width,0);
-      p.scale(-1,1);
-      p.image(video, 0, 0);
-      // p.image(shirt,0,0);
+      p.scale(-1, 1);
+      // p.background(20);
+      // p.image(
+      //   snapShot,
+      //   -canvas.width / 2,
+      //   -canvas.height / 2,
+      //   canvas.width,
+      //   canvas.height
+      // );
 
-      p.texture(img);
-      p.textureMode(p.NORMAL);
-      p.beginShape();
-      p.vertex(0, 0, 0, 0);
-      p.vertex(600, 0, 1, 0);
-      p.vertex(600, 400, 1, 1);
-      p.vertex(0, 400, 0, 1);
-      p.endShape();
+      // console.log(canvas.height);
 
-      if (pose) {
-        let footR = pose.rightAnkle;
-        let eyeL = pose.leftEye;
-        let d = p.dist(footR.x, footR.y, eyeL.x, eyeL.y);
-        // console.log("distsnce d : " + d);
+      // -------  snap  -----------------
+      // p.background(snapShot, [100]);
 
-        //man overlay img
-        p.texture(img);
-        p.textureMode(p.NORMAL);
-        p.beginShape();
-        p.vertex(0, 0, 0, 0);
-        p.vertex(600, 0, 1, 0);
-        p.vertex(600, 400, 1, 1);
-        p.vertex(0, 400, 0, 1);
-        p.endShape();
 
-        for (let i = 0; i < pose.keypoints.length; i++) {
-          let x = pose.keypoints[i].position.x;
-          let y = pose.keypoints[i].position.y;
-          p.fill(0, 255, 0);
-          p.ellipse(x, y, 16, 16);
+      if (takingSnap) {
+        p.image(
+          snapShot,
+          -canvas.width / 2,
+          -canvas.height / 2,
+          canvas.width,
+          canvas.height
+        );
+
+      p.image(img, -canvas.width/2, -canvas.height/2,canvas.width,canvas.height);
+
+
+
+        // p.background(220);
+        p.textAlign("center", "center");
+        p.textSize(100);
+        p.text(timer, p.width / 2, p.height / 2);
+        if (p.frameCount % 60 == 0 && timer > 0) {
+          // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+          timer--;
         }
-
-        for (let i = 0; i < skeleton.length; i++) {
-          let a = skeleton[i][0];
-          let b = skeleton[i][1];
-          p.strokeWeight(2);
-          p.stroke(255);
-          p.line(a.position.x, a.position.y, b.position.x, b.position.y);
+        if (timer == 0) {
+          p.text("GAME OVER", p.width / 2, p.height * 0.7);
+          takeSnap();
+          takingSnap = false;
+          // p.noLoop();
         }
+        console.log(timer);
       }
-      p.Loop();
+
+      // -----------  bodyPix -----------------
+      // p.image(video, 0, 0);
+
+      // if (segmentation) {
+      //   p.image(segmentation.backgroundMask, 0, 0);
+      // }
     };
   };
 
   componentDidMount() {
     this.myP5 = new p5(this.Sketch, this.myRef.current);
+    // this.bodypix = ml5.bodyPix(options);
   }
 
   render() {
