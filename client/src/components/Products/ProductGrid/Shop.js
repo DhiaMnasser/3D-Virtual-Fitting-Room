@@ -9,6 +9,7 @@ import Comparateur from '../../Comparateur/Comparateur';
 import Stripe from '../../Stripe/Stripe';
 import ImgComp from '../../Comparateur/ImgComp';
 import Comp from '../../Comparateur/Comp';
+import Recommandation from '../../Recommandation/Recommandation';
 
 
 
@@ -88,7 +89,7 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-<ImgComp></ImgComp>
+<Recommandation></Recommandation>
     <section className="shop spad">
         <div className="container">
             <div className="row">

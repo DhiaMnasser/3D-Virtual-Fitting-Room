@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "color.js": "^1.2.0",
     "dotenv": "^8.2.0",
     "formik": "^2.2.6",
     "google-login": "^1.0.3",
