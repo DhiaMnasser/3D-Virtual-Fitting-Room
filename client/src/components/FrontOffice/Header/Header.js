@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from 'jwt-decode';
-
+import logo from "./img/logo1.png";
 // import logo from "./logo.png";
 function Header() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -48,7 +48,7 @@ function Header() {
             <div className="col-xl-3 col-lg-2">
               <div className="header__logo">
                 <a href="./index.html">
-                  {/* <img src={logo} alt="" /> */}
+                  <img src={logo} alt="" />
                 </a>
               </div>
             </div>

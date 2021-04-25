@@ -11,7 +11,7 @@ import p2 from "./img/payment-2.png";
 import p3 from "./img/payment-3.png";
 import p4 from "./img/payment-4.png";
 import p5 from "./img/payment-5.png";
-import logo from "./img/logo.png";
+import logo from "./img/logo1.png";
 function Footer() {
   return (
     <footer className="footer">
