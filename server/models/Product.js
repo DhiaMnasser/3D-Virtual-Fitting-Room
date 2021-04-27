@@ -22,7 +22,7 @@ var Product = new Schema({
     required: true,
     min: 0
   },
-  gendre: {
+  gender: {
     type: String,
     required: true
   },

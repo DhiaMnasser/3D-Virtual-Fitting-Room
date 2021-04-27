@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import * as api from "../../../api/index";
 import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
-import { deleteProduct } from "../../../redux/slices/products";
+import { deleteProduct, updateProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 import {
   addItemToCart,
@@ -39,6 +39,7 @@ async function addToCart(id, quantity) {
     console.log(err)
   }
 }
+
 
 function ProductDetails(props) {
   const productId = window.location.pathname.split("/productDetails/")[1];
@@ -82,7 +83,7 @@ function ProductDetails(props) {
     // setProduct(axios.get(`http://localhost:5000/products/${productId}`).result)
     // console.log('product'+JSON.stringify( axios.get(`http://localhost:5000/products/${productId}`)));
   }, [prod]);
-
+ 
 
   
   useEffect(() => {
@@ -105,7 +106,11 @@ function ProductDetails(props) {
   };
     const ratingChanged = (newRating) => {
       console.log(newRating);
-      product.rating=newRating;
+      // setProduct(product.rating=product.rating+newRating/product.nbrating+1);
+      product.rating = newRating;
+      setProduct(product);
+      updateProduct(product);
+      console.log(product);
     };
   return (
         <>
@@ -132,12 +137,13 @@ function ProductDetails(props) {
                               </div>
                           </div>
                       </div>
-                      <Likes></Likes>
                   </div>
                   <div class="col-lg-6">
                       <div class="product__details__text">
                           <h3>{product.productName} <span>Brand: ITPaladins</span></h3>
+                          
                           <div className="rating">
+                          <Likes></Likes><br></br>
                           {product.rating}
                           <ReactStars
                            count={5}
@@ -145,7 +151,7 @@ function ProductDetails(props) {
                            value={product.rating}
                            size={24}
                            activeColor="#ffd700"
-                           />,
+                           />
               {product?.promo !==0 ? (
                 <div class="product__details__price">
                 $ {product?.price * product?.promo} <span>$ {product?.price}- {product?.price * product?.promo} </span>
@@ -173,31 +179,15 @@ function ProductDetails(props) {
                   }}
                   class="cart-btn"
                 >
-                  <button class="icon_bag_alt"></button> Add to cart
+                  <button></button> Add to cart
                 </a>
-                <ul>
-                  <li>
-                    <a href="#">
-                      <span class="icon_heart_alt"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon_adjust-horiz"></span>
-                    </a>
-                  </li>
-                </ul>
               </div>
               <div class="product__details__widget">
                 <ul>
                   <li>
                     <span>Availability:</span>
                     <div class="stock__checkbox">
-                      <label for="stockin">
                         In Stock
-                        <input type="checkbox" id="stockin" />
-                        <span class="checkmark"></span>
-                      </label>
                     </div>
                   </li>
                   <li>

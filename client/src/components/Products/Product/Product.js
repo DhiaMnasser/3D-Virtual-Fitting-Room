@@ -88,19 +88,19 @@ function Product(props) {
 
             </Link>
           </h6>
-                      <div className="rating">
+                      {/* <div className="rating">
                         <ReactStars
                            count={5}
                            value={product.rating}
                            size={24}
                            activeColor="#ffd700"
                            />,
-                        </div>
+                        </div> */}
           {props.product.promo===0 && <div className="product__price">${props.product.price}</div>}
 
 {props.product.promo===0 || <div className="product__price">{props.product.price-(props.product.price*props.product.promo)/100}<span>{props.product.price}</span></div>}
- <div className="product__price">{props.product.color} </div>
-<div className="product__price"> {props.product.size}</div>
+ {/* <div className="product__price">{props.product.color} </div> */}
+{/* <div className="product__price"> {props.product.size}</div> */}
         </div>
         
       </div>

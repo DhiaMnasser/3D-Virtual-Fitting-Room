@@ -19,8 +19,6 @@ const Form = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const classes = useStyles();
-
- 
   const formik = useFormik({
     initialValues: {
      message: "",
@@ -31,8 +29,6 @@ const Form = () => {
      selectValue :"",
      product :"Order",
      Réf :""
-
-
     },
     validationSchema: Validation,
     onSubmit: async values => {
@@ -102,6 +98,7 @@ const Form = () => {
                           )}
                           </div>  ) }
                              </div>
+                             <label><h4> Your message and Code: </h4></label>
                              <div>
                             <textarea 
                             name="message"
@@ -125,7 +122,7 @@ const Form = () => {
                             <FormError>{formik.errors.Réf}</FormError>
                             )}
                              </div>
-                            <button type="submit" class="site-btn" >Send Message</button>
+                            <button type="submit" class="site-btn" >Send Claim</button>
                         </form>
                         </div>
                     </div>

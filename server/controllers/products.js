@@ -41,12 +41,12 @@ const createProduct = async(req, res) => {
 
  const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { productName, description, categoryId, price, gendre, size, stockQuantity , image, arModel, threeDModel,color,promo,rating,nbratig,likes,dlikes} = req.body;
+    const { productName, description, categoryId, price, gender, size, stockQuantity , image, arModel, threeDModel,color,promo,rating,nbratig,likes,dlikes} = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No product with id: ${id}`);
 
 
-    const updatedProduct ={ productName, description, categoryId, price, gendre, size, stockQuantity , image, arModel, threeDModel,color,promo,rating,nbratig,likes,dlikes };
+    const updatedProduct ={ productName, description, categoryId, price, gender, size, stockQuantity , image, arModel, threeDModel,color,promo,rating,nbratig,likes,dlikes };
 
     await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
 

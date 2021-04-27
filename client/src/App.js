@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
@@ -44,6 +44,8 @@ import Formuser from "./components/Profile/updateProfile";
 import AR from "./components/FrontOffice/AR/AR";
 import Chat from "./components/FrontOffice/Chatbot/Chat";
 import Comparateur from "./components/Comparateur/Comparateur";
+import NotFoundPage from "./components/FrontOffice/Help/NotFoundPage";
+import Help from "./components/FrontOffice/Help/Help";
 // import Chat from "./components/FrontOffice/Chatbot/Chat";
 
 function App() {
@@ -80,9 +82,10 @@ function App() {
     <Router>
       <Switch>
         <Route path="/auth" exact component={Auth} />
-
+        <Route path="/404" component={NotFoundPage} />
         <ClientRoute path="/" exact component={HomeFront} />
         <ClientRoute path="/Home" component={HomeFront} />
+        <ClientRoute path="/Help" component={Help} />
         <ClientRoute path="/Shop" component={Shop} />
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
@@ -90,7 +93,6 @@ function App() {
         <ClientRoute path="/AR/" component={AR} />
         <ClientRoute path="/TakePicture/" component={TakePicture} />
         <ClientRoute path="/chatbot/" component={Chat} />
-
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
@@ -126,7 +128,8 @@ function App() {
         <AdminRoute path="/admin/listuser" exact component={Users} />
         <AdminRoute path="/admin/comparateur" exact component={Comparateur} />
 
-        <ClientRoute path="*" component={HomeFront} />
+        {/* <ClientRoute path="*" component={HomeFront} /> */}
+        <Redirect to="/404" />
       </Switch>
     </Router>
   );

@@ -1,7 +1,20 @@
-import * as React from "react";
 import { render } from "react-dom";
 import c from "classnames";
-// import "./styles.css";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import * as api from "../../../api/index";
+import { deleteProduct, updateProduct } from "../../../redux/slices/products";
+import { useDispatch } from "react-redux";
+import {
+  addItemToCart,
+  getCurrentBasket,
+  updateOrder,
+  addItemToBasket
+} from "../../../redux/slices/orders";
+import "./likes.css";
+
+
+
 
 class Likes extends React.Component {
   state = {
@@ -50,7 +63,7 @@ class Likes extends React.Component {
           className={c({ ["active"]: this.state.likeActive })}
         >
           {this.state.like}
-        </button>
+        </button>: Like / Dislike :
         <button
           className={c({ ["active"]: this.state.dislikeActive })}
           onClick={() => this.handleDislike()}

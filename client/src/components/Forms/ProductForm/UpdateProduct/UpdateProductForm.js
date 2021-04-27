@@ -14,6 +14,7 @@ const Form = ({product}) => {
       productName: product.productName,
       description: product.description,
       categoryId: product.categoryId,
+      gender: product.gender,
       price: product.price,
       size: product.size,
       stockQuantity: product.stockQuantity,
@@ -82,18 +83,18 @@ const Form = ({product}) => {
                 )}
               </div>
               <div>
-              <span className="text">gendre: </span>
+              <span className="text">gender: </span>
 
                 <input
                   class="my-2"
-                  name="gendre"
+                  name="gender"
                   type="text"
-                  placeholder="gendre"
-                  value={formik.values.gendre}
+                  placeholder="gender"
+                  value={formik.values.gender}
                   onChange={formik.handleChange}
                 />
-                {formik.errors.gendre && formik.touched.gendre && (
-                  <FormError>{formik.errors.gendre}</FormError>
+                {formik.errors.gender && formik.touched.gender && (
+                  <FormError>{formik.errors.gender}</FormError>
                 )}
               </div>
               <div>

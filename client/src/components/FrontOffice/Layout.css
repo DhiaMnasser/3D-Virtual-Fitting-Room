@@ -91,6 +91,7 @@ input:focus,
 select:focus,
 button:focus,
 textarea:focus {
+	border: 1px solid #e1e1e1 !important;
 	outline: none;
 	border: 1px !important;
 }
@@ -342,7 +343,7 @@ ol {
 	position: relative;
 }
 
-.header__menu ul li.active a:after {
+/* .header__menu ul li.active a:after {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
 	transform: scale(1);
@@ -352,7 +353,7 @@ ol {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
 	transform: scale(1);
-}
+} */
 
 .header__menu ul li:hover .dropdown {
 	top: 27px;
@@ -3112,7 +3113,7 @@ ol {
 	padding-top: 12px;
 	font-size: 14px;
 	color: #444444;
-	border: 1px solid #e1e1e1;
+	border: 1px solid #e1e1e1 !important;
 	border-radius: 10px;
 	margin-bottom: 14px;
 	resize: none;

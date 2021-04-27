@@ -14,7 +14,6 @@ import {
     updateOrder
   } from "../../../redux/slices/orders";
 import { Link } from 'react-router-dom';
-import Help from './Help';
 
 function Home(props) {
     const dispatch = useDispatch();

@@ -62,7 +62,7 @@ export default ({ children }) => {
         </div>
     </div>
       <Header />
-      <div class="breadcrumb-option">
+      {/* <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -72,7 +72,7 @@ export default ({ children }) => {
                 </div>
             </div>
         </div>
-    </div>
+    </div> */}
       {children}
       {/* <Chat/> */}
       <Footer />

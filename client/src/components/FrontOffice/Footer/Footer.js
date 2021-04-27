@@ -25,8 +25,7 @@ function Footer() {
                 </a>
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt cilisis.
+                3D Virtual Fitting Room by IT-Paladins <br></br>Esprit 4TWIN4 
               </p>
               <div className="footer__payment">
                 <a href="#">

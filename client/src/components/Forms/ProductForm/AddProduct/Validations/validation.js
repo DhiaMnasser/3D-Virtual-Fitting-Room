@@ -5,7 +5,7 @@ export const Validation = yup.object().shape({
     .required("required"),
   description: yup.string()
     .required("required"),
-  gendre: yup.string()
+  gender: yup.string()
     .required("required"),    
   categoryId: yup.string()
     .required("required"),

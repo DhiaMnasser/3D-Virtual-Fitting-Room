@@ -4,14 +4,12 @@ import { useSelector } from "react-redux";
 import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Products = () => {
-  const products = useSelector(state => state.products.products);
-
+  const products = useSelector((state) => state.products.products)
   // console.log(products);
 
   return (
     <>
       <h1>Product list</h1>
-
       <div className="container justify-content-md-center">
         <div className="row">
           <div className="col-lg-12">
@@ -26,22 +24,14 @@ const Products = () => {
                   </tr>
                 </thead>
                 <tbody>
-
                 {products.map((product)=>(
-          
-
-        
                   <tr>
                     <td className="cart__product__item">
-                      <img src={product.image} alt="" />
+                      <img src={product._id} alt="" />
                       <div className="cart__product__item__title">
                         <h6>{product.productName}</h6>
                         <div className="rating">
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
-                          <i className="fa fa-star"></i>
+                          {product.rating}
                         </div>
                       </div>
                     </td>
