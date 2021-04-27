@@ -104,6 +104,7 @@ function ProductDetails(props) {
   };
     const ratingChanged = (newRating) => {
       console.log(newRating);
+      product.rating=newRating;
     };
   return (
         <>
@@ -135,6 +136,7 @@ function ProductDetails(props) {
                       <div class="product__details__text">
                           <h3>{product.productName} <span>Brand: ITPaladins</span></h3>
                           <div className="rating">
+                          {product.rating}
                           <ReactStars
                            count={5}
                            onChange={ratingChanged}

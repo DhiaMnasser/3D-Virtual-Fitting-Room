@@ -19,11 +19,11 @@ import Chat from "../Chatbot/Chat";
  
 
 function Home(props) {
-  NotificationManager.success('To 3DVFR', 'Welcome'); 
+    NotificationManager.success('To 3DVFR', 'Welcome'); 
   return (
         <>
         
-      <NotificationContainer/>
+      <NotificationContainer />
       <Chat/>
       {/* <Weather></Weather>
       <Notification></Notification>

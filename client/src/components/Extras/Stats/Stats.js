@@ -14,9 +14,9 @@ function Stats() {
   
   return(
     <div>
-      <h2 style={{ marginTop: 60 }}>Minimal example using react-fps-stats</h2>
-      <FPSStats />
+      <h2 style={{ marginTop: 60 }}>Key Words</h2>
       <Trends></Trends>
+      <FPSStats />
       {/* <WidgetGoogleTrends word="Bitcoin" /> */}
    </div>  
   );

@@ -46,9 +46,6 @@ const Form = () => {
               <div className="mb-4"></div>
 
               <button className="btn btn-primary btn-icon-split btn-sm" type="submit" >
-                <span className="icon text-white-50">
-                  <i className="fas fa-check"></i>
-                </span>
                 Submit
                 </button>
             </div>

@@ -5,7 +5,7 @@ import "./Stats.css";
 export default function Trends() {
   return (
     <>
-      <h1> Google Trends</h1>
+      <h3> Google Trends</h3>
       <div id="widget">
         <GoogleTrends
           type="TIMESERIES"

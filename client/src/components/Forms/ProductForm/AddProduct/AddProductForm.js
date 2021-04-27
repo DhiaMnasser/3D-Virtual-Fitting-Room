@@ -39,6 +39,7 @@ const Form = () => {
       categoryId: "",
       price: "1",
       size: "M",
+      gendre: "",
       stockQuantity: "1",
       image: [],
       arModel: "",
@@ -46,7 +47,10 @@ const Form = () => {
       rating: "5",
       promo: "0",
       color: "#aabbcc",
-      ref:""
+      ref:"",
+      likes:"0",
+      nbrating:"1",
+      dlikes:"0",
     },
     validationSchema: Validation,
     onSubmit: async values => {
@@ -111,7 +115,6 @@ const Form = () => {
             <form onSubmit={formik.handleSubmit}>
               <div>
               <span className="text">Name: </span>
-
                 <input
                   class="my-2"
                   name="productName"
@@ -154,6 +157,22 @@ const Form = () => {
                   <FormError>{formik.errors.description}</FormError>
                 )}
               </div>
+              <div>
+              <span className="text">gendre: </span>
+
+                <input
+                  class="my-2"
+                  name="gendre"
+                  type="text"
+                  placeholder="gendre"
+                  value={formik.values.gendre}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.gendre && formik.touched.gendre && (
+                  <FormError>{formik.errors.gendre}</FormError>
+                )}
+              </div>
+            
               <div>
                 <label>category</label>
                 <CustomSelect
@@ -287,6 +306,51 @@ const Form = () => {
                 />
                 {formik.errors.rating && formik.touched.rating && (
                   <FormError>{formik.errors.rating}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">nbrating: </span>
+
+                <input
+                  class="my-2"
+                  name="nbrating"
+                  type="number"
+                  placeholder="nbrating"
+                  value={formik.values.nbrating}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.nbrating && formik.touched.nbrating && (
+                  <FormError>{formik.errors.nbrating}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">dlikes: </span>
+
+                <input
+                  class="my-2"
+                  name="dlikes"
+                  type="number"
+                  placeholder="dlikes"
+                  value={formik.values.dlikes}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.dlikes && formik.touched.dlikes && (
+                  <FormError>{formik.errors.dlikes}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">likes: </span>
+
+                <input
+                  class="my-2"
+                  name="likes"
+                  type="number"
+                  placeholder="likes"
+                  value={formik.values.likes}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.likes && formik.touched.likes && (
+                  <FormError>{formik.errors.likes}</FormError>
                 )}
               </div>
               <div>

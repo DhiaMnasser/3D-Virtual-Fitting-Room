@@ -20,6 +20,10 @@ const Form = ({product}) => {
       image: product.image,
       arModel: product.arModel,
       theeDModel: product.theeDModel,
+      rating: product.rating,
+      likes: product.likes,
+      dlikes: product.dlikes,
+      nbrating: product.nbrating
     },
     validationSchema: Validation,
     onSubmit: async values => {
@@ -75,6 +79,21 @@ const Form = ({product}) => {
                 />
                 {formik.errors.categoryId && formik.touched.categoryId && (
                   <FormError>{formik.errors.categoryId}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">gendre: </span>
+
+                <input
+                  class="my-2"
+                  name="gendre"
+                  type="text"
+                  placeholder="gendre"
+                  value={formik.values.gendre}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.gendre && formik.touched.gendre && (
+                  <FormError>{formik.errors.gendre}</FormError>
                 )}
               </div>
               <div>
@@ -146,6 +165,66 @@ const Form = ({product}) => {
                 />
                 {formik.errors.arModel && formik.touched.arModel && (
                   <FormError>{formik.errors.arModel}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">rating: </span>
+
+                <input
+                  class="my-2"
+                  name="rating"
+                  type="number"
+                  placeholder="rating"
+                  value={formik.values.rating}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.rating && formik.touched.rating && (
+                  <FormError>{formik.errors.rating}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">nbrating: </span>
+
+                <input
+                  class="my-2"
+                  name="nbrating"
+                  type="number"
+                  placeholder="nbrating"
+                  value={formik.values.nbrating}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.nbrating && formik.touched.nbrating && (
+                  <FormError>{formik.errors.nbrating}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">dlikes: </span>
+
+                <input
+                  class="my-2"
+                  name="dlikes"
+                  type="number"
+                  placeholder="dlikes"
+                  value={formik.values.dlikes}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.dlikes && formik.touched.dlikes && (
+                  <FormError>{formik.errors.dlikes}</FormError>
+                )}
+              </div>
+              <div>
+              <span className="text">likes: </span>
+
+                <input
+                  class="my-2"
+                  name="likes"
+                  type="number"
+                  placeholder="likes"
+                  value={formik.values.likes}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.likes && formik.touched.likes && (
+                  <FormError>{formik.errors.likes}</FormError>
                 )}
               </div>
               <div>

@@ -220,6 +220,7 @@ function Home(props) {
                                         <input type="checkbox" id="paypal"/>
                                     </label>
                                 </div>
+                                <Stripe name="yoyo" price={currentOrder?.totalPrice}></Stripe>
                                 <button type="submit" class="site-btn">Place oder</button>
                             </div>
                         </div>

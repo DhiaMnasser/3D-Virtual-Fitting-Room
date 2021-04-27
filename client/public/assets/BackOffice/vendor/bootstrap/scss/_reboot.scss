@@ -305,6 +305,7 @@ label {
 button {
   // stylelint-disable-next-line property-disallowed-list
   border-radius: 0;
+  border: 1px gray !important;
 }
 
 // Work around a Firefox/IE bug where the transparent `button` background
@@ -321,6 +322,7 @@ button,
 select,
 optgroup,
 textarea {
+  border: 1px gray !important;
   margin: 0; // Remove the margin in Firefox and Safari
   font-family: inherit;
   @include font-size(inherit);
@@ -329,12 +331,14 @@ textarea {
 
 button,
 input {
-  overflow: visible; // Show the overflow in Edge
+  overflow: visible;
+  border: 1px gray !important;  // Show the overflow in Edge
 }
 
 button,
 select {
-  text-transform: none; // Remove the inheritance of text transform in Firefox
+  text-transform: none;
+  border: 1px gray !important; // Remove the inheritance of text transform in Firefox
 }
 
 // Set the cursor for non-`<button>` buttons

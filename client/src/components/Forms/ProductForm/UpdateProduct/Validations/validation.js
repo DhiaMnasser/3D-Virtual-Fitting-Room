@@ -19,4 +19,10 @@ export const Validation = yup.object().shape({
     .required("required"),
   arModel: yup.string(),
   theeDModel: yup.string(),
+  rating:yup.number(),
+  nbrating:yup.number(),
+  likes:yup.number(),
+  dlikes:yup.number(),
+  promo:yup.number(),
+  color:yup.string()
 });
