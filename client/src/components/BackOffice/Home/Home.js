@@ -21,7 +21,7 @@ export class Home extends Component {
         return ( 
              
             <>
-                  <NotificationContainer />
+            <NotificationContainer />
             <h2><strong>Admin Dashboard</strong></h2>
             <Stats></Stats>
             <Analytics></Analytics>

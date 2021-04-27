@@ -19,6 +19,7 @@ import AddReviewForm from "../../Forms/ReviewForm/AddReview/AddReviewForm";
 import { deleteReview } from "../../../redux/slices/reviews";
 import axios from "axios";
 import Avatar from "../../FrontOffice/Avatar/Avatar";
+import Likes from "../../Extras/Likes/Likes";
 
 async function addToCart(id, quantity) {
   try {
@@ -131,6 +132,7 @@ function ProductDetails(props) {
                               </div>
                           </div>
                       </div>
+                      <Likes></Likes>
                   </div>
                   <div class="col-lg-6">
                       <div class="product__details__text">
@@ -140,6 +142,7 @@ function ProductDetails(props) {
                           <ReactStars
                            count={5}
                            onChange={ratingChanged}
+                           value={product.rating}
                            size={24}
                            activeColor="#ffd700"
                            />,
@@ -155,9 +158,7 @@ function ProductDetails(props) {
 
               )}
               <p>
-                Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret
-                fugit, sed quia consequuntur magni lores eos qui ratione
-                voluptatem sequi nesciunt.
+                {product.description}
               </p>
               <div class="product__details__button">
                 <div class="quantity">

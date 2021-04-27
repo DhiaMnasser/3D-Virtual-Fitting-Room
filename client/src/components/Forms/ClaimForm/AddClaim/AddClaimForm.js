@@ -53,6 +53,10 @@ const Form = () => {
   }
 
   return (
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="contact__content">
     <div class="contact__form">
                         <h2>SEND CLAIM</h2>
                         <div>
@@ -124,6 +128,10 @@ const Form = () => {
                             <button type="submit" class="site-btn" >Send Message</button>
                         </form>
                         </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
                     </div>
                 
   );
