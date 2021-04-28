@@ -205,11 +205,21 @@ fs.readFile('ha.json', 'utf8', function readFileCallback(err, data){
 })})
 // mongoDB setup
 // https://www.mongodb.com/cloud/atlas
-const CONNECTION_URL = 'mongodb+srv://admin:admin123@cluster0.pdxx0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = process.env.MONGODB_URL || 'mongodb+srv://admin:admin123@cluster0.pdxx0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 // console.log('process.env.PORT');
 // process.env.PORT=9000
 // console.log(process.env);
+
+if(process.env.NODE_ENV ==="production"){
+
+    app.use(express.static("client/build"));
+
+    app.get("*", (req,res)=>{
+        res.sendFile(path.resolve(__dirname, "../client", "build", index.html));
+    });
+}
+
 const PORT = process.env.PORT || 5000;
 const conn = mongoose.createConnection(CONNECTION_URL, {
   useNewUrlParser: true,
