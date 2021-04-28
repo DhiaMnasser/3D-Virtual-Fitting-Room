@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import Icon from './icon';
 import { signin, signup } from '../../actions/auth';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' ,gender: ''};
 const Auth = () => {
   const history = useHistory();
   const [form, setForm] = useState(initialState);
@@ -61,6 +61,7 @@ const Auth = () => {
               <>
                 <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
                 <Input name="lastName" label="Last Name" handleChange={handleChange} half />
+                <Input name="gender" label="Gender" handleChange={handleChange} />
               </>
               )}
               <Input name="email" label="Email Address" handleChange={handleChange} type="email" />

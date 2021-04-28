@@ -5,11 +5,11 @@ import { Validation } from '../Forms/CategoryForm/AddCategory/Validations/valida
 import {updateCategory,editCategory} from '../../redux/slices/categories'
 import {deleteCategory,selectCategory,deselectCategory} from '../../redux/slices/categories'
 import { useFormik } from 'formik'
+import './style.css';
 function Category(props) {
     const dispatch= useDispatch()
 const [update, setUpdate] = useState(false)
-const [categName, setCategName] = useState(props.category.categoryName)
-
+const [categName, setCategName] = useState(props.category.categoryName);
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +37,7 @@ setUpdate(!update)
 }
     return (<>
 
-        {update===true || <div><div >
+        {update===true || <div><div className="kl" >
             <div onClick={()=>{  handle()}}>{categName}</div>
                 <button className="btn btn-danger" onClick={()=>{  dispatch(deleteCategory(props.category._id))}}>delete</button>
                 </div>

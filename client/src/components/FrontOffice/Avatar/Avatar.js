@@ -3,23 +3,30 @@ import Three from "./Three";
 // import female from "./models/standard-female-figure.gltf";
 import female from "./models/standard-female-figure.gltf";
 import male from "./models/male.gltf";
-import man from "./models/man.obj";
+ //import man from "./models/man.obj";
 import robe from "./models/robe.gltf";
 import shirt from "./models/shirt.gltf";
-import pants from "./models/pants.gltf";
+// import pants from "./models/pants.gltf";
 import vest from "./models/vest.gltf";
-export default function Avatar() {
+export default function Avatar(props) {
   const [model, setModel] = useState(true);
   const [update, setUpdate] = useState(true);
 
   const [roba, setRoba] = useState(false);
   const [vesta, setVesta] = useState(false);
   const [shirta, setShirta] = useState(false);
-  const [pantsa, setPantsa] = useState(false);
+  const [pantsa, setPantsa] = useState(true);
   const combination = [undefined, robe];
   const combination1 = [undefined, shirt];
-  const combination2 = [undefined, pants];
+  const combination2 = [undefined, props.man];
+  // const combination2 = [undefined, pants];
   const combination3 = [undefined, vest];
+
+  console.log("props.man:");
+  console.log(props.man);
+  // console.log("pant:");
+
+  
   return (
     <>
       <div className="container">
@@ -27,7 +34,7 @@ export default function Avatar() {
           <div>
             {model && (
               <Three
-                man={man}
+                man={props.man}
                 model={male}
                 pants={combination2[Number(pantsa)]}
                 shirt={combination1[Number(shirta)]}
@@ -41,7 +48,7 @@ export default function Avatar() {
           <div>
             {model && (
               <Three
-              man={man}
+              man={props.man}
 
                 model={male}
                 pants={combination2[Number(pantsa)]}
@@ -53,7 +60,7 @@ export default function Avatar() {
           </div>
         )}
 
-        <div className="control">
+        {/* <div className="control">
           <button
             onClick={() => {
               setModel(!model);
@@ -87,7 +94,7 @@ export default function Avatar() {
           >
             {" "}
             shirt
-          </button>
+          </button> */}
           <button
             onClick={() => {
               setUpdate(!update);
@@ -95,9 +102,9 @@ export default function Avatar() {
             }}
           >
             {" "}
-            pants
+            try on Avatar
           </button>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

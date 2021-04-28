@@ -17,30 +17,30 @@ export class Three extends Component {
     // document.body.appendChild( renderer.domElement );
     // use ref as a mount point of the Three.js scene instead of the document.body
 
-    // Scene
-    // const objLoader = new OBJLoader();
-    // objLoader.load(this.props.man, root => {
-    //   root.position.y = -1;
-    //   console.log(root);
+    //Scene
+    const objLoader = new OBJLoader();
+     objLoader.load(this.props.man, root => {
+       root.position.y = -1;
+      console.log(root);
       
-    //   root.scale.set(10,10,10);
-    //   const material = new THREE.MeshStandardMaterial({
-    //     color: 0xffdbac,
-    //     emissive: 0x0,
-    //     roughness: 1,
-    //     metalness: 0.2
-    //   });
+      root.scale.set(10,10,10);
+     const material = new THREE.MeshStandardMaterial({
+       color: 0xffdbac,
+       emissive: 0x0,
+        roughness: 1,
+         metalness: 0.2
+     });
 
-    // //   root.children.forEach(c => {
-    // //     c.children.forEach(child => {
-    // //       child.material = material;
-    // //     });
-    // //   });
+       root.children.forEach(c => {
+       c.children.forEach(child => {
+          child.material = material;
+      });
+     });
 
-    //   scene.add(root);
-    // });
+      scene.add(root);
+     });
 
-    const gltfLoader = new GLTFLoader();
+   const gltfLoader = new GLTFLoader();
     gltfLoader.load(this.props.model, gltf => {
       gltf.scene.position.y = -10;
       const material = new THREE.MeshStandardMaterial({
@@ -90,12 +90,14 @@ export class Three extends Component {
       });
     }
     if (this.props.pants !== undefined) {
-      gltfLoader.load(this.props.pants, gltf => {
+      gltfLoader.parse(this.props.pants,'', gltf => {
         gltf.scene.position.y = -10;
 
-        console.log(gltf);
+        // console.log("pants in three.js");
+        // console.log(gltf);
         scene.add(gltf.scene);
       });
+      // scene.add(this.props.pants);
     }
     /**
      * Floor
@@ -202,6 +204,7 @@ export class Three extends Component {
 
     tick();
   }
+
   render() {
     return <canvas className="webgl"></canvas>;
   }

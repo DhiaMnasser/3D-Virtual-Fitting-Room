@@ -1,18 +1,24 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faStar } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect, Component } from "react";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import AddMessageForm from '../../Forms/MessageForm/AddMessage/AddMessageForm';
 import './Contact.css'
-function Contact() {
+import { useFormik } from "formik";
+export class Contact extends Component {
+
+
 
   
+    render() {  
     return ( 
     <>
     {/* <div id="preloder">
         <div class="loader"></div>
     </div>   */}
     
-
     
     <section class="contact spad">
         <div class="container">
@@ -37,22 +43,17 @@ function Contact() {
                             </ul>
                         </div>
                         <div class="contact__form">
-                            <h5>SEND MESSAGE</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Name" />
-                                <input type="text" placeholder="Email"/>
-                                <input type="text" placeholder="Website"/>
-                                <textarea placeholder="Message"></textarea>
-                                <button type="submit" class="site-btn">Send Message</button>
-                            </form>
+                            <AddMessageForm/>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__map">
+                    
                         <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
-                        height="780"  allowfullscreen="" >
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.629933167297!2d10.187515215519902!3d36.89920037992813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2sesprit%20ecole%20d&#39;
+                        ing%C3%A9nieurs!5e0!3m2!1sfr!2stn!4v1617394838389!5m2!1sfr!2stn"
+                        height="780"  allowFullScreen="" >
                     </iframe>
                 </div>
             </div>
@@ -126,6 +127,7 @@ function Contact() {
 
 </>
     );
+}
 };
 
 export default Contact;

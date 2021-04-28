@@ -40,6 +40,13 @@ import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
+import AR from "./components/FrontOffice/AR/AR";
+import Chat from "./components/FrontOffice/Chatbot/Chat";
+import loaderr from "./components/FrontOffice/Avatar/loadingobj";
+import  Sketch from "./components/FrontOffice/Avatar/size";
+import ChildComponen from "./components/FrontOffice/Avatar/RecommendationSize";
+// import Chat from "./components/FrontOffice/Chatbot/Chat";
+
 function App() {
   const login = useSelector(state => state.login);
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
@@ -72,19 +79,27 @@ function App() {
 
   return (
     <Router>
+      
       <Switch>
         <Route path="/auth" exact component={Auth} />
-
+        <Route exact path="/termin" render={() => {window.location.href="pose.html"}} />
+        
         <ClientRoute path="/" exact component={HomeFront} />
         <ClientRoute path="/Home" component={HomeFront} />
         <ClientRoute path="/Shop" component={Shop} />
         <ClientRoute path="/Basket/" component={Basket} />
         <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
+        <ClientRoute path="/AR/" component={AR} />
+        <ClientRoute path="/chatbot/" component={Chat} />
+       
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
         <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/monavatar" exact component={loaderr} />
+        <PrivateRoute path="/terminos" exact component={Sketch}  />
+        <PrivateRoute path="/recom" exact component={ChildComponen}  />
         <PrivateRoute
           path="/updatereview/:value"
           exact

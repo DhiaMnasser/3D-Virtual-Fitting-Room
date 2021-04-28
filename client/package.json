@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
@@ -11,6 +11,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@reduxjs/toolkit": "^1.5.0",
+    "@tensorflow-models/posenet": "^2.2.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -19,7 +20,9 @@
     "dotenv": "^8.2.0",
     "formik": "^2.2.6",
     "google-login": "^1.0.3",
+    "image-size": "^1.0.0",
     "jwt-decode": "^3.1.2",
+    "ml5": "^0.6.1",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
@@ -27,18 +30,24 @@
     "react-dom": "^17.0.1",
     "react-file-base64": "^1.0.3",
     "react-google-login": "^5.2.2",
+    "react-helmet": "^6.1.0",
+    "react-p5": "^1.3.18",
+    "react-posenet": "^0.1.7",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-script": "^2.0.5",
     "react-scripts": "^4.0.3",
     "react-select": "^4.3.0",
+    "react-stripe-checkout": "^2.6.3",
     "react-three-fiber": "^5.3.22",
+    "react-toastify": "^7.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
     "styled-components": "^5.2.1",
     "three": "^0.127.0",
     "three-gltf-loader": "^1.111.0",
+    "three-obj-mtl-loader": "^1.0.3",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
@@ -65,5 +74,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "html-loader": "^2.1.2",
+    "react-app-rewired": "^2.1.8"
   }
 }
