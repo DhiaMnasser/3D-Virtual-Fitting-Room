@@ -1,22 +1,34 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // import Product from "../Product/Product";
 import { useSelector, useDispatch } from "react-redux";
 import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { updateOrder } from "../../../../redux/slices/orders";
+
+import { Link } from 'react-router-dom';
+
 const Orders = () => {
   // const [currOrder, setCurrOrder] = useState({});
-  const orders = useSelector(state => state.orders.orders);
+  const orders = useSelector(state =>
+     
+      state.orders.orders.filter(order => !order.isValid)
+    
+     );
   const dispatch = useDispatch();
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("profile")).result
+  );
+  console.log("orders");
+  console.log(orders);
 
-  const validateOrder = (order) => {
+  const validateOrder = order => {
     const currOrder = JSON.parse(JSON.stringify(order));
 
     try {
       //   product.stockQuantity++;
-      console.log('currOrder'+JSON.stringify(currOrder));
+      console.log("currOrder" + JSON.stringify(currOrder));
       // const indexOrder = orders.findIndex(o => o._id === order._id);
-      
+
       currOrder.isShipped = true;
       // currOrder.totalPrice = currOrder.totalPrice + product.price;
       // setCurrOrder(orderList);
@@ -27,6 +39,17 @@ const Orders = () => {
       console.log(error);
     }
   };
+  const rejectOrder = order => {
+    const currOrder = JSON.parse(JSON.stringify(order));
+
+    try {
+      //   product.stockQuantity++;
+      console.log("currOrder" + JSON.stringify(currOrder));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <h1>Orders list</h1>
@@ -38,31 +61,55 @@ const Orders = () => {
               <table>
                 <thead>
                   <tr>
-                    <th>client</th>
-                    {/* <th>Date Shipped</th> */}
+                    <th>Ref</th>
+                    <th>Client</th>
                     {/* <th>isValid</th> */}
                     <th>State</th>
                     <th>totalPrice</th>
                     <th></th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {orders?.map(order => (
                     <tr>
-                      <td className="cart__price">{order.clientId} </td>
+                      <td>
+                      
+                      <Link
+              to={{
+                pathname: "/order/" + order._id,
+                order: order
+              }}
+
+            >
+            {order.ref}
+
+            </Link>
+                      </td>
+                      <td className="cart__price">{order.clientName} </td>
                       {/* <td className="cart__price">{order.dateShipped} </td> */}
                       <td className="cart__price">
                         {order.isShipped ? "shipped" : "waiting"}{" "}
                       </td>
                       <td className="cart__price">{order.totalPrice} DT</td>
-                      <td className="cart__close">
-                        <span
-                          className="icon_close"
-                          onClick={() => {
-                            validateOrder(order);
-                          }}
-                        ></span>
-                      </td>
+                      {user.role === 1 && (
+                        <>
+                        <td className="cart__close">
+                          <button type="submit" class="site-btn" onClick={() => {
+                                validateOrder(order);
+                              }}>Validate
+                            
+                              </button>
+                          </td>
+                        <td className="cart__close">
+                          <button type="submit" class="site-btn" onClick={() => {
+                                rejectOrder(order);
+                              }}>Reject
+                              </button>
+                          </td>
+                          </>
+                        
+                      )}
                     </tr>
                   ))}
                 </tbody>

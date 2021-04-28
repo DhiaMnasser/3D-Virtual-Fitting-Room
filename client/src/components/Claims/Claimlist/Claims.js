@@ -79,6 +79,7 @@ const Claims = () => {
         </Table>
       </TableContainer>
     </>
+    
   );
 };
 

@@ -17,32 +17,23 @@ export class Three extends Component {
     // document.body.appendChild( renderer.domElement );
     // use ref as a mount point of the Three.js scene instead of the document.body
 
-    //Scene
+    // using .obj file
+    // Scene
     const objLoader = new OBJLoader();
-     objLoader.load(this.props.man, root => {
-       root.position.y = -1;
+    objLoader.load(this.props.man, root => {
+      root.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+          console.log('model child ');
+          
+            //  child.material.ambient.setH(0xFF0000);
+             child.material.color.set(0xecbcb4);
+            }
+        } );
+      root.position.y = -1;
+      root.position.z = -0.5;
       console.log(root);
       
       root.scale.set(10,10,10);
-     const material = new THREE.MeshStandardMaterial({
-       color: 0xffdbac,
-       emissive: 0x0,
-        roughness: 1,
-         metalness: 0.2
-     });
-
-       root.children.forEach(c => {
-       c.children.forEach(child => {
-          child.material = material;
-      });
-     });
-
-      scene.add(root);
-     });
-
-   const gltfLoader = new GLTFLoader();
-    gltfLoader.load(this.props.model, gltf => {
-      gltf.scene.position.y = -10;
       const material = new THREE.MeshStandardMaterial({
         color: 0xffdbac,
         emissive: 0x0,
@@ -50,50 +41,43 @@ export class Three extends Component {
         metalness: 0.2
       });
 
-      gltf.scene.children.forEach(c => {
-        c.children.forEach(child => {
-          child.material = material;
-        });
-      });
-      // gltf.scene.children[1].children[1].material = material;
-      console.log(gltf);
-      scene.add(gltf.scene);
+    //   root.children.forEach(c => {
+    //     c.children.forEach(child => {
+    //       child.material = material;
+    //     });
+    //   });
+
+      scene.add(root);
     });
-    if (this.props.robe !== undefined) {
-      gltfLoader.load(this.props.robe, gltf => {
+
+    const gltfLoader = new GLTFLoader();
+    // gltfLoader.load(this.props.model, gltf => {
+    //   // console.log('gltf');
+    //   // console.log(gltf);
+      
+    //   gltf.scene.position.y = -10;
+    //   const material = new THREE.MeshStandardMaterial({
+    //     color: 0xffdbac,
+    //     emissive: 0x0,
+    //     roughness: 1,
+    //     metalness: 0.2
+    //   });
+
+    //   gltf.scene.children.forEach(c => {
+    //     c.children.forEach(child => {
+    //       child.material = material;
+    //     });
+    //   });
+    //   // gltf.scene.children[1].children[1].material = material;
+    //   // console.log(gltf.scene);
+    //   scene.add(gltf.scene);
+    // });
+
+    if (this.props.productModel !== undefined) {
+      gltfLoader.parse(this.props.productModel,'', gltf => {
         gltf.scene.position.y = -10;
 
-        console.log(gltf);
-        scene.add(gltf.scene);
-      });
-    }
-    if (this.props.vest !== undefined) {
-      gltfLoader.load(this.props.vest, gltf => {
-        gltf.scene.position.y = -10;
-
-        console.log(gltf);
-        scene.add(gltf.scene);
-      });
-    }
-    if (this.props.shirt !== undefined) {
-      gltfLoader.load(this.props.shirt, gltf => {
-        gltf.scene.position.y = -10;
-        const material = new THREE.MeshStandardMaterial({
-          color: 0xe0ac69,
-          roughness: 0,
-          metalness: 0
-        });
-
-        gltf.scene.children[1].children[0].material = material;
-        console.log(gltf);
-        scene.add(gltf.scene);
-      });
-    }
-    if (this.props.pants !== undefined) {
-      gltfLoader.parse(this.props.pants,'', gltf => {
-        gltf.scene.position.y = -10;
-
-        // console.log("pants in three.js");
+        console.log("productModel");
         // console.log(gltf);
         scene.add(gltf.scene);
       });
@@ -204,7 +188,6 @@ export class Three extends Component {
 
     tick();
   }
-
   render() {
     return <canvas className="webgl"></canvas>;
   }

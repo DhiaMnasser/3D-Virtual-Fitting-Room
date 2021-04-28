@@ -74,14 +74,14 @@ else if (shape === "rectangle" )
  else {
    if ( shape === "inverted triangle")
 
-    styles = [{category:'horizontal stripes '}, {category :'slim-fit shirts'},{category :'Slim cotton polo shirt'}, {category :'Regular V-neck T-shirts'},
+    styles = [{category:'horizontal stripes'}, {category :'slim-fit shirts'},{category :'Slim cotton polo shirt'}, {category :'Regular V-neck T-shirts'},
     {category :'Skinny jeans'},{category :'Trousers with larger seat drop'}]
 
     else if ( shape ==="rectangle")
     styles =[{category :'Horizontal stripes'}, {category :'Structured tailoring'},{category :'Layered looks'}, {category :'Prints, color pops, and detailing'}]
    
    else if ( shape ==="oval")
-   styles =[{category :'Pleats'}, {category :'Neckties'}, {category :'Jeans with wide leg patterns'} , {category :'darker tone tshirt'}]
+   styles =[{category :'trim-fit shirt'}, {category :'henley t shirt'}, {category :'Jeans with wide leg patterns'} , {category :'darker tone tshirt'}]
 
    else if ( shape === "triangle")
 

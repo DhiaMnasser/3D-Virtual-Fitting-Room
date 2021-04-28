@@ -7,8 +7,7 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   clientName: {
-    type: String,
-    required: true
+    type: String
   },
   ref: {
     type: Date,
@@ -23,7 +22,7 @@ const orderSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: true
+    // required: true
   },
   isValid: {
     type: Boolean,

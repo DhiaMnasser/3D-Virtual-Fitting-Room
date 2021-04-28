@@ -2,7 +2,7 @@ import React ,{Component } from 'react';
 import ml5 from "ml5";
 import * as p5 from "p5";
 import profil from "./ashley.jpg";
-import sizeOf from"image-size";
+
 import { dimensions } from './dimensions.js';
 import ChildComponent from './RecommendationSize';
 import { RgbColorPicker } from 'react-colorful';

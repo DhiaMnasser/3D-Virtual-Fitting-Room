@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addItemToCart, getCurrentBasket } from "../../../redux/slices/orders";
 import ShopSideBar from "./ShopSideBar/ShopSideBar";
 import ProductGrid from "../../Products/ProductGrid/Products";
+import Weather from "../../Extras/Geo/Weather";
 
 function Shop(props) {
   return (

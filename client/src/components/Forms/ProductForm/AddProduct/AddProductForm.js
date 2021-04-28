@@ -10,7 +10,6 @@ import axios from "axios";
 import { uploadFile } from "../../../../api/index";
 import CustomSelect from "./CustomSelect";
 import { HexColorPicker } from "react-colorful";
-import { array } from "yup";
 
 const Form = () => {
   const [uploadedArModelUrl, setUploadedArModelUrl] = useState("");
@@ -40,17 +39,44 @@ const Form = () => {
       price: "1",
       size: "M",
       stockQuantity: "1",
-      image: [],
+      image: "",
       arModel: "",
       threeDModel: "",
       rating: "5",
       promo: "0",
       color: "#aabbcc",
-      ref:""
+      ref:"",
+      body:"",
+      lh:"",
+      rh:"",
+      lll:"",
+      lrl:""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
+       if(values.categoryId==="T-shirts"){
+      var armodel=[values.body,values.lh,values.rh]
+       }
+ if(values.categoryId==="Jeans"){
+      var armodel=[values.body,values.lh,values.rh,values.lll,values.lrl]
+       }
+      values.arModel=armodel
+      values={
+        productName:values.productName,
+        description:values.description ,
+        categoryId:values.categoryId ,
+      price: values.price,
+      size: values.size,
+      stockQuantity: values.stockQuantity,
+      image:values.image,
+      arModel:values.arModel,
+      threeDModel:values.threeDModel,
+      rating: values.rating,
+      promo: values.promo,
+      color: values.color,
+      ref:values.ref
+      }
       console.log("vals:" + JSON.stringify(values, null, 4));
       dispatch(createProduct(values));
     }
@@ -58,7 +84,17 @@ const Form = () => {
   useEffect(() => {
     formik.setFieldValue("color", color);
   }, [color]);
+const [model, setModel] = useState("")
+useEffect(() => {
+  if(formik.values.categoryId==="T-shirts"){
+  setModel("shirt")
+  }
+  if(formik.values.categoryId==="Jeans"){
+setModel("jean")
+  }
 
+  }
+  , [formik.values.categoryId]);
   useEffect(() => {
     // console.log("uploadedArModel" + JSON.stringify(uploadedArModel, null, 4));
     if (!uploadedArModel.name) {
@@ -75,6 +111,7 @@ const Form = () => {
     if (!uploadedThreeDModel.name) {
       return alert("3D file is missing");
     }
+
     addFileToBd(uploadedThreeDModel, "threeDModel");
   }, [uploadedThreeDModel]);
 
@@ -110,8 +147,6 @@ const Form = () => {
           <div class="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
-              <span className="text">Name: </span>
-
                 <input
                   class="my-2"
                   name="productName"
@@ -125,8 +160,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">ref: </span>
-
                 <input
                   class="my-2"
                   name="ref"
@@ -140,8 +173,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">description: </span>
-
                 <input
                   class="my-2"
                   name="description"
@@ -168,8 +199,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">price: </span>
-
                 <input
                   class="my-2"
                   name="price"
@@ -194,8 +223,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">quantity: </span>
-
                 <input
                   class="my-2"
                   name="stockQuantity"
@@ -217,10 +244,7 @@ const Form = () => {
                   name="image"
                   multiple={false}
                   onDone={({ base64 }) => {
-                    formik.values.image.push(base64);
-                    formik.setFieldValue("image",formik.values.image);
-                    console.log(formik.values.image);
-                    
+                    formik.setFieldValue("image", base64);
                   }}
                 />
 
@@ -228,28 +252,114 @@ const Form = () => {
                   <FormError>{formik.errors.image}</FormError>
                 )}
               </div>
-              
+              { model === "shirt" &&<div>
               <div>
-                <span class="text">AR Model: </span>
+                <span class="text">body: </span>
 
-                <input
+                    <FileBase
                   type="file"
-                  id="arModel"
-                  name="arModel"
-                  className="Upload__Input"
-                  onChange={(event: any) => {
-                    alert("File is uploading please wait");
-                    setUploadedArModel(event.target.files[0]);
-                    // setUploadedArModel({added: 'yes'});
-
-                    setUploadedArModelUrl(
-                      URL.createObjectURL(event.target.files[0])
-                    );
-
-                    // uploadArModel();
+                  id="body"
+                  name="body"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("body", base64);
                   }}
                 />
               </div>
+                <div>
+                <span class="text">right hand: </span>
+
+                    <FileBase
+                  type="file"
+                  id="rh"
+                  name="rh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("rh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left hand: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lh"
+                  name="lh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lh", base64);
+                  }}
+                />
+              </div>
+              </div>}
+              { model === "jean" &&<div>
+              <div>
+                <span class="text">hips: </span>
+
+                    <FileBase
+                  type="file"
+                  id="body"
+                  name="body"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("body", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">right upper leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="rh"
+                  name="rh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("rh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left upper leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lh"
+                  name="lh"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lh", base64);
+                  }}
+                />
+              </div>
+                <div>
+                <span class="text">left lower leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lll"
+                  name="lll"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lll", base64);
+                  }}
+                />
+              </div>
+                   <div>
+                <span class="text">right lower leg: </span>
+
+                    <FileBase
+                  type="file"
+                  id="lrl"
+                  name="lrl"
+                  multiple={false}
+                  onDone={({ base64 }) => {
+                    formik.setFieldValue("lrl", base64);
+                  }}
+                />
+              </div>
+              </div>}
               <div>
                 <span class="text">3D Model: </span>
 
@@ -258,7 +368,7 @@ const Form = () => {
                   id="threeDModel"
                   name="threeDModel"
                   className="Upload__Input"
-                  onChange={(event: any) => {
+                  onChange={(event) => {
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});
@@ -275,8 +385,6 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">rating: </span>
-
                 <input
                   class="my-2"
                   name="rating"
@@ -290,14 +398,12 @@ const Form = () => {
                 )}
               </div>
               <div>
-              <span className="text">promo in %: </span>
-
                 <input
                   class="my-2"
                   name="promo"
                   type="number"
                   placeholder="promo"
-                  value={formik.values.promo/100}
+                  value={formik.values.promo}
                   onChange={formik.handleChange}
                 />
                 {formik.errors.promo && formik.touched.promo && (

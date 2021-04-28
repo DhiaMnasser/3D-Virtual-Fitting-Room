@@ -19,7 +19,7 @@ export class Leftside extends Component {
                     <li className="nav-item active">  
                         <a className="nav-link" href="index.html">  
                             <i className="fas fa-fw fa-tachometer-alt"></i>  
-                            <span>Dashboard</span></a>  
+                            <span>Home</span></a>  
                     </li>  
                     <li className="nav-item active">  
                         <a className="nav-link"  href='/admin/listclaim'>  

@@ -1,22 +1,25 @@
 const express = require('express');
 
-const { getProducts, getProductById, createProduct, updateProduct, deleteProduct } = require('../controllers/products.js');
+const { getProducts, getProductById, createProduct, updateProduct, deleteProduct, getBestProducts, getRecombeeRecommendation , itemAddedToBasket } = require('../controllers/products.js');
 const Product =require('../models/Product.js');
 var router = express.Router();
 
 /* GET products listing. */
 router.get("/", getProducts);
+router.get("/best", getBestProducts);
 router.get("/:id", getProductById);
 router.post("/", createProduct);
 router.patch("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
+router.post("/getRecombeeRecommendation", getRecombeeRecommendation);
+router.post("/itemAddedToBasket", itemAddedToBasket);
 
 router.get("/page/:id?", function (req, res) {
     //Pagination For number Of receords on page
     if (req.params.id) {
         //Case For Counting Number OF Users
         Product.find({})
-        .count()
+        .countDocuments()
         .then(data => {
             res.status(200).send({
                 "cnt" : Math.ceil(data/9)

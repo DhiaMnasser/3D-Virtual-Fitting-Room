@@ -12,7 +12,6 @@ import lowerL from "./models/lowerLeftLeg.png";
 
 import "./AR.css";
 
-
 class AR extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +35,7 @@ class AR extends React.Component {
     let ur;
     let ll;
     let lr;
+     let sizes
     function modelLoaded() {
       console.log("poseNet ready");
     }
@@ -51,35 +51,45 @@ class AR extends React.Component {
     function modelLoaded() {
       console.log("poseNet ready");
     }
+
     //###########################PRELOAD##########################\\
     p.preload = () => {
-      img = p.loadImage(shirt);
-      slv = p.loadImage(sleeve);
-      slv2 = p.loadImage(sleeve2);
-      hzem = p.loadImage(jean);
-      ul = p.loadImage(upperL);
-      ur = p.loadImage(upperR);
-      ll = p.loadImage(lowerL);
-      lr = p.loadImage(lowerR);
+     img = p.loadImage(this.props.body);
+      slv = p.loadImage(this.props.lh);
+      slv2 = p.loadImage(this.props.rh);
+      hzem = p.loadImage(this.props.hip);
+      ul = p.loadImage(this.props.ull);
+      ur = p.loadImage(this.props.url);
+      ll = p.loadImage(this.props.lll);
+      lr = p.loadImage(this.props.lrl);
     };
+
     //###########################SETUP##########################\\
     p.setup = () => {
-      p.createCanvas(1200, 800, p.WEBGL).position(-100, -100);
+      sizes={height:2980,width:1504}
+         p.pixelDensity(1)
+    let canvas = p.createCanvas(1200,800, p.WEBGL).position(-sizes.height/2, -sizes.width/2);
+  canvas.style('display', 'block');
+  
+   canvas.style('position', 'absolute');
+   canvas.style('margin-top', '150px');
+   
+   canvas.style('z-index', '-1');
+canvas.style('width', sizes.height+'px');
+canvas.style('height', sizes.width+'px');
       console.log(p.VIDEO);
       video = p.createCapture(p.VIDEO);
-
       video.hide();
       poseNet = ml5.poseNet(video, modelLoaded);
       poseNet.on("pose", gotPoses);
     };
+
     //###########################DRAW##########################\\
     p.draw = () => {
       p.image(video, 0, 0);
 
       if (pose) {
-        console.log(pose)
         let eyeR = pose.rightEye;
-      
         let eyeL = pose.leftEye;
         let d = p.dist(eyeR.x, eyeR.y, eyeL.x, eyeL.y);
         /*     p.fill(255, 0, 0);
@@ -118,35 +128,113 @@ class AR extends React.Component {
 
         //yed
         // left slv
-        let width=p.dist(pose.rightHip.x - 1.25 * d, pose.rightHip.y - 1.25 * d,pose.leftHip.x + 1.25 * d, pose.leftHip.y - 1.25 * d)/d *6
-      let height=((p.dist(pose.rightShoulder.y - 1.25 * d, pose.rightShoulder.y - 1.25 * d,pose.rightHip.x - d, pose.rightHip.y) )+
-      (p.dist(pose.rightHip.x,pose.rightHip.y,pose.rightAnkle.x,pose.rightAnkle.y))+p.dist(pose.rightShoulder.x,pose.rightShoulder.y,pose.rightEye.x,pose.rightEye.y))/d*6.5
-      console.log(height)
-      console.log(width)
+        let width =
+          (p.dist(
+            pose.rightHip.x - 1.25 * d,
+            pose.rightHip.y - 1.25 * d,
+            pose.leftHip.x + 1.25 * d,
+            pose.leftHip.y - 1.25 * d
+          ) /
+            d) *
+          6;
+        let height =
+          ((p.dist(
+            pose.rightShoulder.y - 1.25 * d,
+            pose.rightShoulder.y - 1.25 * d,
+            pose.rightHip.x - d,
+            pose.rightHip.y
+          ) +
+            p.dist(
+              pose.rightHip.x,
+              pose.rightHip.y,
+              pose.rightAnkle.x,
+              pose.rightAnkle.y
+            ) +
+            p.dist(
+              pose.rightShoulder.x,
+              pose.rightShoulder.y,
+              pose.rightEye.x,
+              pose.rightEye.y
+            )) /
+            d) *
+          6.5;
+        console.log(height);
+        console.log(width);
         p.texture(slv);
         p.textureMode(p.NORMAL);
         p.beginShape();
-        p.vertex(pose.leftShoulder.x + d / 1.75,pose.leftShoulder.y - d /1.5 ,0,0);
-        p.vertex(pose.leftShoulder.x - d / 1.75,pose.leftShoulder.y + d /1.5 ,1,0);
-        p.vertex(pose.leftElbow.x - d / 1.75, pose.leftElbow.y + d / 1.75, 1, 1);
-        p.vertex(pose.leftElbow.x + d / 1.75, pose.leftElbow.y - d / 1.75, 0, 1);
+        p.vertex(
+          pose.leftShoulder.x + d / 1.75,
+          pose.leftShoulder.y - d / 1.5,
+          0,
+          0
+        );
+        p.vertex(
+          pose.leftShoulder.x - d / 1.75,
+          pose.leftShoulder.y + d / 1.5,
+          1,
+          0
+        );
+        p.vertex(
+          pose.leftElbow.x - d / 1.75,
+          pose.leftElbow.y + d / 1.75,
+          1,
+          1
+        );
+        p.vertex(
+          pose.leftElbow.x + d / 1.75,
+          pose.leftElbow.y - d / 1.75,
+          0,
+          1
+        );
         p.endShape();
+
         // right slv
         p.texture(slv2);
         p.textureMode(p.NORMAL);
         p.beginShape();
-        p.vertex(pose.rightShoulder.x - d / 1.75,pose.rightShoulder.y - d / 1.5,0,0);
-        p.vertex(pose.rightShoulder.x + d / 1.75,pose.rightShoulder.y + d / 1.5,1,0);
-        p.vertex(pose.rightElbow.x + d / 1.75, pose.rightElbow.y + d / 1.75, 1, 1);
-        p.vertex(pose.rightElbow.x - d / 1.75, pose.rightElbow.y - d / 1.75, 0, 1);
+        p.vertex(
+          pose.rightShoulder.x - d / 1.75,
+          pose.rightShoulder.y - d / 1.5,
+          0,
+          0
+        );
+        p.vertex(
+          pose.rightShoulder.x + d / 1.75,
+          pose.rightShoulder.y + d / 1.5,
+          1,
+          0
+        );
+        p.vertex(
+          pose.rightElbow.x + d / 1.75,
+          pose.rightElbow.y + d / 1.75,
+          1,
+          1
+        );
+        p.vertex(
+          pose.rightElbow.x - d / 1.75,
+          pose.rightElbow.y - d / 1.75,
+          0,
+          1
+        );
         p.endShape();
 
         //se9 lootania limin
         p.texture(lr);
         p.textureMode(p.NORMAL);
         p.beginShape();
-        p.vertex(pose.rightKnee.x - 1.25 * d/1.5,pose.rightKnee.y - 1.25 * d/2,0,0);
-        p.vertex(pose.rightKnee.x + 1.25 * d/1.5,pose.rightKnee.y - 1.25 * d/2,1,0);
+        p.vertex(
+          pose.rightKnee.x - (1.25 * d) / 1.5,
+          pose.rightKnee.y - (1.25 * d) / 2,
+          0,
+          0
+        );
+        p.vertex(
+          pose.rightKnee.x + (1.25 * d) / 1.5,
+          pose.rightKnee.y - (1.25 * d) / 2,
+          1,
+          0
+        );
         p.vertex(pose.rightAnkle.x + d, pose.rightAnkle.y + d, 1, 1);
         p.vertex(pose.rightAnkle.x - d, pose.rightAnkle.y + d, 0, 1);
         p.endShape();
@@ -155,11 +243,22 @@ class AR extends React.Component {
         p.texture(ll);
         p.textureMode(p.NORMAL);
         p.beginShape();
-        p.vertex(pose.leftKnee.x - 1.25 * d, pose.leftKnee.y - 1.25 * d/2, 0, 0);
-        p.vertex(pose.leftKnee.x + 1.25 * d, pose.leftKnee.y - 1.25 * d/2, 1, 0);
+        p.vertex(
+          pose.leftKnee.x - 1.25 * d,
+          pose.leftKnee.y - (1.25 * d) / 2,
+          0,
+          0
+        );
+        p.vertex(
+          pose.leftKnee.x + 1.25 * d,
+          pose.leftKnee.y - (1.25 * d) / 2,
+          1,
+          0
+        );
         p.vertex(pose.leftAnkle.x + d, pose.leftAnkle.y + d, 1, 1);
         p.vertex(pose.leftAnkle.x - d, pose.leftAnkle.y + d, 0, 1);
         p.endShape();
+
         //se9 foo9ania limin
         p.texture(ur);
         p.textureMode(p.NORMAL);
@@ -169,6 +268,7 @@ class AR extends React.Component {
         p.vertex(pose.rightKnee.x + d, pose.rightKnee.y + d, 1, 1);
         p.vertex(pose.rightKnee.x - d, pose.rightKnee.y + d, 0, 1);
         p.endShape();
+
         //se9 foo9ania lisar
         p.texture(ul);
         p.textureMode(p.NORMAL);
@@ -178,6 +278,7 @@ class AR extends React.Component {
         p.vertex(pose.leftKnee.x + d, pose.leftKnee.y + d, 1, 1);
         p.vertex(pose.leftKnee.x - d, pose.leftKnee.y + d, 0, 1);
         p.endShape();
+
         //7zem
         p.texture(hzem);
         p.textureMode(p.NORMAL);
@@ -187,19 +288,25 @@ class AR extends React.Component {
         p.vertex(pose.leftHip.x + d, pose.leftHip.y + d, 1, 1);
         p.vertex(pose.rightHip.x - d, pose.rightHip.y + d, 0, 1);
         p.endShape();
+
         //kerch img
         p.texture(img);
         p.textureMode(p.NORMAL);
         p.beginShape();
         p.vertex(
-          pose.rightShoulder.x - 1.25 * d/1.5,
+          pose.rightShoulder.x - (1.25 * d) / 1.5,
           pose.rightShoulder.y - 1.25 * d,
           0,
           0
         );
-        p.vertex(pose.leftShoulder.x + 1.25 * d/1.5,pose.leftShoulder.y - 1.25 * d, 1,0);
-        p.vertex(pose.leftHip.x + d, pose.leftHip.y + d /1.25, 1, 1);
-        p.vertex(pose.rightHip.x - d, pose.rightHip.y + d/1.25, 0, 1);
+        p.vertex(
+          pose.leftShoulder.x + (1.25 * d) / 1.5,
+          pose.leftShoulder.y - 1.25 * d,
+          1,
+          0
+        );
+        p.vertex(pose.leftHip.x + d, pose.leftHip.y + d / 1.25, 1, 1);
+        p.vertex(pose.rightHip.x - d, pose.rightHip.y + d / 1.25, 0, 1);
         p.endShape();
 
         // for (let i = 0; i < pose.keypoints.length; i++) {
@@ -225,8 +332,12 @@ class AR extends React.Component {
   }
 
   render() {
-    return <div class="vid"><div ref={this.myRef}></div></div>;
-    
+    return (
+      <div class="vid">
+        <div ref={this.myRef}></div>
+      </div>
+    );
   }
 }
+
 export default AR;
