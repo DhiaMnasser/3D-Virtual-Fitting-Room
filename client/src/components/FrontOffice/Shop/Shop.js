@@ -15,7 +15,6 @@ function Shop(props) {
     <section class="shop spad">
       <div class="container">
         <div class="row">
-          <button class="btn" onClick={Weather}>Weather</button>
           <ShopSideBar />
           <ProductGrid />
         </div>

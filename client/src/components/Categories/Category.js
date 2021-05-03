@@ -36,15 +36,17 @@ const handle=()=>{
 setUpdate(!update)
 }
     return (<>
-
-        {update===true || <div><div className="kl" >
-            <div onClick={()=>{  handle()}}>{categName}</div>
-                <button className="btn btn-danger" onClick={()=>{  dispatch(deleteCategory(props.category._id))}}>delete</button>
-                </div>
-        </div>}
+<table class="table table-striped">
+    <tr>
+      <th scope="row"></th>
+      <th><div>{update===true || <div><div className="kl" >
+            <div onClick={()=>{  handle()}}>{categName}</div></div></div>}
+            </div></th>
+      <th><button className="btn btn-danger" onClick={()=>{ dispatch(deleteCategory(props.category._id))}}>delete</button></th>
+    </tr>
+</table>
           {update===false || <div>
                <form onSubmit={formik.handleSubmit }>
-              
                 <input
                   name="categoryName"
                   type="text"
@@ -52,11 +54,9 @@ setUpdate(!update)
                   value={formik.values.categoryName}
                   onChange={formik.handleChange}
                 />
-
-              <button  type="submit" >
+              <button className="btn btn-sucess"  type="submit" >
                 Submit
                 </button>
-
             </form>
         </div>}
 

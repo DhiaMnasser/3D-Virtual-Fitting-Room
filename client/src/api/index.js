@@ -1,6 +1,11 @@
 import axios from 'axios'
 
 const url = 'http://localhost:5000';
+// const url = process.env.REACT_APP_NODE_APP_URL;
+// console.log('process.env.REACT_APP_NODE_APP_URL');
+console.log(process.env);
+// console.log(process.env.PUBLIC_URL);
+
 
 const urll = 'http://localhost:5008';
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
@@ -19,6 +24,10 @@ export const updateProduct = (id, updatedProduct) => axios.patch(`${url}/product
 export const deleteProduct = (id) => axios.delete(`${url}/products/${id}`);
 export const smartFetchProduct = (pagination)=> axios.post(`${url}/products/page`, pagination);
 export const getNbPages=()=> axios.get(`${url}/products/page/1`);
+export const fetchTopProducts = ()=> axios.get(`${url}/products/best`);
+export const getRecommendation = (data)=> axios.post(`${url}/products/getRecombeeRecommendation`, data);
+export const itemAddedToBasket = (data)=> axios.post(`${url}/products/itemAddedToBasket`, data);
+
 //avatars
 export const fetchAvatars = ()=> axios.get(`${url}/avatars`);
 export const createAvatar = (newAvatar)=> axios.post(`${url}/avatars`, newAvatar);
@@ -33,7 +42,7 @@ export const traiterClaim = (id) => axios.patch(`${url}/claims/${id}/traiterClai
 //orders
 export const fetchOrders = ()=> axios.get(`${url}/orders`);
 export const fetchOrderByUser = (userId)=> axios.get(`${url}/orders/user/${userId}`);
-export const createOrder = (newOrder)=> axios.post(`${url}/orders`, newOrder);
+export const createOrder = (client)=> axios.post(`${url}/orders`,client);
 export const updateOrder = (id, updatedOrder) => axios.patch(`${url}/orders/${id}`, updatedOrder);
 export const deleteOrder = (id) => axios.delete(`${url}/orders/${id}`);
 //reviews
@@ -82,3 +91,4 @@ export const uploadFileavatar=(event)=>{
       })
 }
 export const customavatr= ()=> axios.get(`${urll}/createavatar`);
+

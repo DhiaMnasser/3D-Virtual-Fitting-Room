@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
@@ -17,7 +17,8 @@ import ProductList from "./components/Products/ProductList/Products";
 import MyClaims from "./components/Claims/Claimlist/Myclaims";
 
 import Reviews from "./components/Reviews/Reviewlist/Reviews";
-import OrderListAdmin from "./components/FrontOffice/Orders/OrderList/Orders";
+import Orders from "./components/FrontOffice/Orders/OrderList/Orders";
+import OrderDetails from "./components/FrontOffice/Orders/Order/Order";
 import AddReviewForm from "./components/Forms/ReviewForm/AddReview/AddReviewForm";
 import AddClaimForm from "./components/Forms/ClaimForm/AddClaim/AddClaimForm";
 import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateReviewForm";
@@ -25,7 +26,7 @@ import UpdateReviewForm from "./components/Forms/ReviewForm/UpdateReview/UpdateR
 import AdminRoute from "./Routes/AdminRoute";
 import ClientRoute from "./Routes/ClientRoute";
 import PrivateRoute from "./Routes/PrivateRoute";
-import { getNbPage, get9Products } from "./redux/slices/products";
+import { getNbPage, get9Products, getTopProducts } from "./redux/slices/products";
 import { getProducts } from "./redux/slices/products";
 import { getCategories } from "./redux/slices/categories";
 import { getClaims } from "./redux/slices/claims";
@@ -41,9 +42,17 @@ import TakePicture from "./components/FrontOffice/Avatar/TakePicture";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
-import AR from "./components/FrontOffice/AR/AR";
+import AR from "./components/FrontOffice/AR/ARHolder";
 import Chat from "./components/FrontOffice/Chatbot/Chat";
 import Comparateur from "./components/Comparateur/Comparateur";
+import NotFoundPage from "./components/FrontOffice/Help/NotFoundPage";
+import Help from "./components/FrontOffice/Help/Help";
+import ARHolder from "./components/FrontOffice/AR/ARHolder";
+import ImgComp from "./components/Comparateur/ImgComp";
+import Recommandation from "./components/Recommandation/Recommandation"
+import loaderr from "./components/FrontOffice/Avatar/loadingobj";
+import  Sketch from "./components/FrontOffice/Avatar/size";
+import ChildComponen from "./components/FrontOffice/Avatar/RecommendationSize";
 // import Chat from "./components/FrontOffice/Chatbot/Chat";
 
 function App() {
@@ -56,8 +65,10 @@ function App() {
     dispatch(getClaims());
     dispatch(getAvatars());
     dispatch(getReviews());
-    dispatch(getUsers());
+    dispatch(getTopProducts());
     dispatch(getNbPage());
+    dispatch(get9Products());
+    
   }, [dispatch]);
 
   useEffect(() => {
@@ -80,53 +91,45 @@ function App() {
     <Router>
       <Switch>
         <Route path="/auth" exact component={Auth} />
-
+        <Route path="/404" component={NotFoundPage} />
         <ClientRoute path="/" exact component={HomeFront} />
         <ClientRoute path="/Home" component={HomeFront} />
+        <ClientRoute path="/Help" component={Help} />
         <ClientRoute path="/Shop" component={Shop} />
-        <ClientRoute path="/Basket/" component={Basket} />
-        <ClientRoute path="/Checkout/" component={Checkout} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
-        <ClientRoute path="/AR/" component={AR} />
+        <ClientRoute path="/AR/" component={ARHolder} />
+        <ClientRoute path="/skin/" component={Recommandation} />
         <ClientRoute path="/TakePicture/" component={TakePicture} />
         <ClientRoute path="/chatbot/" component={Chat} />
-
+        <ClientRoute path="/productDetails/:value" exact component={ProductDetails} />
+        <ClientRoute path="/Contact/" exact component={Contact} />
+        <ClientRoute path="/Basket/" component={Basket} />
+         <ClientRoute path="/comImg/" component={ImgComp} />
         <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
         <PrivateRoute path="/addreview" exact component={AddReviewForm} />
         <PrivateRoute path="/Myclaims" exact component={MyClaims} />
         <PrivateRoute path="/profile" exact component={Profile} />
-        <PrivateRoute
-          path="/updatereview/:value"
-          exact
-          component={UpdateReviewForm}
-        />
-        <PrivateRoute
-          path="/updateuser/:value"
-          exact
-          component={Formuser}
-        />
-        <ClientRoute
-          path="/productDetails/:value"
-          exact
-          component={ProductDetails}
-        />
-        <ClientRoute
-          path="/Contact/"
-          exact
-          component={Contact}
-        />
+        <PrivateRoute path="/updatereview/:value" exact component={UpdateReviewForm}/>
+        <PrivateRoute path="/updateuser/:value" exact component={Formuser} />
+        <PrivateRoute path="/Checkout/" component={Checkout} />
+        <PrivateRoute path="/myOrders/" component={Orders} />
+        <PrivateRoute path="/order/:value" exact component={OrderDetails} />
+        <PrivateRoute path="/monavatar" exact component={loaderr} />
+        <PrivateRoute path="/terminos" exact component={Sketch}  />
+        <PrivateRoute path="/recom" exact component={ChildComponen}  />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />
         <AdminRoute path="/admin/products" component={ProductList} />
         <AdminRoute path="/admin/categories" component={Categories} />
-        <AdminRoute path="/admin/orders" component={OrderListAdmin} />
+        <AdminRoute path="/admin/orders" component={Orders} />
         <AdminRoute path="/admin/addProduct" component={AddProduct} />
         <AdminRoute path="/admin/listclaim" exact component={Claims} />
         <AdminRoute path="/admin/listreview" exact component={Reviews} />
         <AdminRoute path="/admin/listuser" exact component={Users} />
         <AdminRoute path="/admin/comparateur" exact component={Comparateur} />
-
-        <ClientRoute path="*" component={HomeFront} />
+         <AdminRoute path="/admin/compImg" exact component={ImgComp} />
+        {/* <ClientRoute path="*" component={HomeFront} /> */}
+        <Redirect to="/404" />
       </Switch>
     </Router>
   );

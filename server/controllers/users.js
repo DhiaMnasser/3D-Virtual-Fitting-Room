@@ -48,7 +48,7 @@ function generateAccessToken(email ,id) {
 }
 
  const signup = async (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName , gender } = req.body;
 
   try {
     const oldUser = await UserModal.findOne({ email });
@@ -57,7 +57,7 @@ function generateAccessToken(email ,id) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+    const result = await UserModal.create({ email,gender, password: hashedPassword, name: `${firstName} ${lastName}` , gender});
     // const result = await OrderModel.create({ clientId: });
 
     const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );

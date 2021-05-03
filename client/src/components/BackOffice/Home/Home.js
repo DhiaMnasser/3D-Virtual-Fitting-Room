@@ -9,13 +9,22 @@ import ProductList from '../../Products/ProductList/Products';
 // import CategoryList from '../../Categories/CategoryList/Categories';
 import AddProductForm from '../../Forms/ProductForm/AddProduct/AddProductForm';
 import AddCategoryForm from '../../Forms/CategoryForm/AddCategory/AddCategoryForm';
+import Analytics from '../../Extras/Analytics/Analytics';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Stats from '../../Extras/Stats/Stats';
 
 export class Home extends Component {  
  
     render() {  
-        return (  
+        NotificationManager.success('Admin', 'Welcome'); 
+
+        return ( 
+             
             <>
-            <h2>this is Admin Dashboard</h2>
+            <NotificationContainer />
+            <h2><strong>Admin Dashboard</strong></h2>
+            <Stats></Stats>
+            <Analytics></Analytics>
             {/* <ProductGrid/> */}
             <div className="row justify-content-md-center">
             <AddProductForm/>

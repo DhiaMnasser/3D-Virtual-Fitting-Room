@@ -29,15 +29,15 @@ export class Contact extends Component {
                             <h5>Contact info</h5>
                             <ul>
                                 <li>
-                                    <h6><i class="fa fa-map-marker" ></i> Address</h6>
+                                    <h6>Address</h6>
                                     <p>Esprit, El Ghazela</p>
                                 </li>
                                 <li>
-                                    <h6><i class="fa fa-phone"></i> Phone</h6>
+                                    <h6>Phone</h6>
                                     <p><span>+216 23-456-768</span></p>
                                 </li>
                                 <li>
-                                    <h6><i class="fa fa-headphones"></i> Support</h6>
+                                    <h6>Support</h6>
                                     <p>contact@3dvfr.com</p>
                                 </li>
                             </ul>
@@ -49,7 +49,6 @@ export class Contact extends Component {
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__map">
-                    
                         <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.629933167297!2d10.187515215519902!3d36.89920037992813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2sesprit%20ecole%20d&#39;
                         ing%C3%A9nieurs!5e0!3m2!1sfr!2stn!4v1617394838389!5m2!1sfr!2stn"

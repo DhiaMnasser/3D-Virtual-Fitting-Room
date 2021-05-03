@@ -2,31 +2,21 @@ import React, { Suspense, useReducer, useState } from "react";
 import Three from "./Three";
 // import female from "./models/standard-female-figure.gltf";
 import female from "./models/standard-female-figure.gltf";
+// import male from "./models/man.obj";
 import male from "./models/male.gltf";
-// import man from "./models/man.obj";
-import robe from "./models/robe.gltf";
-import shirt from "./models/shirt.gltf";
+import man from "./models/manopen.obj";
+
 // import pants from "./models/pants.gltf";
-import vest from "./models/vest.gltf";
+
 export default function Avatar(props) {
   const [model, setModel] = useState(true);
   const [update, setUpdate] = useState(true);
 
-  const [roba, setRoba] = useState(false);
-  const [vesta, setVesta] = useState(false);
-  const [shirta, setShirta] = useState(false);
-  const [pantsa, setPantsa] = useState(true);
-  const combination = [undefined, robe];
-  const combination1 = [undefined, shirt];
-  const combination2 = [undefined, props.man];
-  // const combination2 = [undefined, pants];
-  const combination3 = [undefined, vest];
+  const [clothModel, setPantsa] = useState(true);
+  const combination2 = [undefined, props.clothModel];
 
-  console.log("props.man:");
-  console.log(props.man);
-  // console.log("pant:");
+  console.log("props.clothModel:");
 
-  
   return (
     <>
       <div className="container">
@@ -34,77 +24,46 @@ export default function Avatar(props) {
           <div>
             {model && (
               <Three
-                man={props.man}
+                man={man}
                 model={male}
-                pants={combination2[Number(pantsa)]}
-                shirt={combination1[Number(shirta)]}
-                vest={combination3[Number(vesta)]}
+                productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || <Three model={female} robe={combination[Number(roba)]} />}
+            {model || (
+              <Three
+                model={female}
+                productModel={combination2[Number(clothModel)]}
+              />
+            )}
           </div>
         )}
         {update && (
           <div>
             {model && (
               <Three
-              man={props.man}
-
+                man={man}
                 model={male}
-                pants={combination2[Number(pantsa)]}
-                shirt={combination1[Number(shirta)]}
-                vest={combination3[Number(vesta)]}
+                productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || <Three model={female} robe={combination[Number(roba)]} />}
+            {model || (
+              <Three
+                model={female}
+                productModel={combination2[Number(clothModel)]}
+              />
+            )}
           </div>
         )}
 
-        {/* <div className="control">
-          <button
-            onClick={() => {
-              setModel(!model);
-            }}
-          >
-            male/female
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setRoba(!roba);
-            }}
-          >
-            {" "}
-            robe
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setVesta(!vesta);
-            }}
-          >
-            {" "}
-            vest
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setShirta(!shirta);
-            }}
-          >
-            {" "}
-            shirt
-          </button> */}
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setPantsa(!pantsa);
-            }}
-          >
-            {" "}
-            try on Avatar
-          </button>
-        {/* </div> */}
+        <button
+          onClick={() => {
+            setUpdate(!update);
+            setPantsa(!clothModel);
+          }}
+        >
+          {" "}
+          try on Avatar
+        </button>
       </div>
     </>
   );

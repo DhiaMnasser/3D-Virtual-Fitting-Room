@@ -3,7 +3,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-
+import ReactStars from "react-rating-stars-component";
 import "./product.css";
 import { deleteProduct, getProductById } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
@@ -46,9 +46,10 @@ function Product(props) {
   return (
     <div className={props.class}>
       <div className="product__item">
+      {props.product?.image && (
         <div
           className="product__item__pic set-bg"
-          style={{ backgroundImage: `url(${props.product.image[0]})` }}
+          style={{ backgroundImage: `url(${props.product?.image[0]})` }}
           data-setbg={props.product.image[0]}
         >
           <div className="label new">New</div>
@@ -71,9 +72,10 @@ function Product(props) {
             </li>
           </ul>
         </div>
+      )}
         <div className="product__item__text">
           <h6 onClick={()=>{
-            localStorage.removeItem("selectedProduct");
+            // localStorage.removeItem("selectedProduct");
             localStorage.setItem("selectedProduct",JSON.stringify(props.product));
           }}
         >
@@ -88,43 +90,19 @@ function Product(props) {
 
             </Link>
           </h6>
-          <div className="rating">
-            {props.stars >= 1 && (
-              <FontAwesomeIcon
-                style={{ color: `#e3c01c`, fontSize: `10px` }}
-                icon={faStar}
-              />
-            )}
-            {props.stars >= 2 && (
-              <FontAwesomeIcon
-                style={{ color: `#e3c01c`, fontSize: `10px` }}
-                icon={faStar}
-              />
-            )}
-            {props.stars >= 3 && (
-              <FontAwesomeIcon
-                style={{ color: `#e3c01c`, fontSize: `10px` }}
-                icon={faStar}
-              />
-            )}
-            {props.stars >= 4 && (
-              <FontAwesomeIcon
-                style={{ color: `#e3c01c`, fontSize: `10px` }}
-                icon={faStar}
-              />
-            )}
-            {props.stars >= 5 && (
-              <FontAwesomeIcon
-                style={{ color: `#e3c01c`, fontSize: `10px` }}
-                icon={faStar}
-              />
-            )}
-          </div>
+                      {/* <div className="rating">
+                        <ReactStars
+                           count={5}
+                           value={product.rating}
+                           size={24}
+                           activeColor="#ffd700"
+                           />,
+                        </div> */}
           {props.product.promo===0 && <div className="product__price">${props.product.price}</div>}
 
 {props.product.promo===0 || <div className="product__price">{props.product.price-(props.product.price*props.product.promo)/100}<span>{props.product.price}</span></div>}
- <div className="product__price">{props.product.color} </div>
-<div className="product__price"> {props.product.size}</div>
+ {/* <div className="product__price">{props.product.color} </div> */}
+{/* <div className="product__price"> {props.product.size}</div> */}
         </div>
         
       </div>

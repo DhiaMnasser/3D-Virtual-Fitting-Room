@@ -5,7 +5,10 @@
 .product__item {
 	margin-bottom: 35px;
 }
-
+.shop {
+	padding-top: 70px;
+	padding-bottom: 80px;
+}
 .product__item:hover .product__hover li {
 	opacity: 1;
 	top: 0;

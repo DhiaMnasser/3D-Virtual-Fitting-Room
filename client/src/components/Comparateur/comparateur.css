@@ -57,7 +57,7 @@ ul, li {
 input {
   display: block;
 	outline: none;
-	border: none !important;
+	border: 1px gray !important;
 }
 
 textarea {

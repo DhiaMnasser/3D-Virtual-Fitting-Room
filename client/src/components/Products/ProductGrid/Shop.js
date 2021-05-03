@@ -8,11 +8,7 @@ import { Checkbox } from '@material-ui/core';
 import Comparateur from '../../Comparateur/Comparateur';
 import Stripe from '../../Stripe/Stripe';
 import Weather from '../../Extras/Geo/Weather';
-
-
-
-
-
+import { Link } from 'react-router-dom';
 
 function Shop(props) {
   
@@ -87,7 +83,6 @@ stormik.setFieldValue('tailles',array)
     return (
         
         <div>
-<Stripe name="yoyo" price={10}></Stripe>
     <section className="shop spad">
         <div className="container">
             <div className="row">
@@ -114,7 +109,7 @@ stormik.setFieldValue('tailles',array)
                                 </div>
                             </div>
                         </div>
-                        <div className="sidebar__filter">
+                        {/* <div className="sidebar__filter">
                             <div className="section-title">
                                 <h4>Shop by price</h4>
                             </div>
@@ -130,7 +125,7 @@ stormik.setFieldValue('tailles',array)
                                 </div>
                             </div>
                             <a href="#">Filter</a>
-                        </div>
+                        </div> */}
                         <div className="sidebar__sizes">
                             <div className="section-title">
                                 <h4>Shop by size</h4>
@@ -145,7 +140,7 @@ stormik.setFieldValue('tailles',array)
                               checked={stormik.values.tailles.includes(size)} value={size} on="true"></Checkbox>{size}</>})}
                             </div>
                         </div>
-                        <button class="btn" onClick={Weather}>Weather</button>
+                        <Link to="/Help">Help</Link>
                     </div>
                 </div>
 
@@ -162,7 +157,7 @@ stormik.setFieldValue('tailles',array)
                 onChange={formik.handleChange}
               />
 
-            <button  type="submit" >
+            <button  class="btn" type="submit"  >
               search
               </button>
 
@@ -177,7 +172,7 @@ stormik.setFieldValue('tailles',array)
                         <div className="col-lg-12 text-center">
                             <div className="pagination__option">
                                { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<a className={page===localStorage.getItem('page')?'selected':'pagination__option'}  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
-                               key={page}>{page}</a>})}
+                               key={page}>{page}</a>})}<br></br>
                              current page: {localStorage.getItem('page')}
                             </div>
                         </div>

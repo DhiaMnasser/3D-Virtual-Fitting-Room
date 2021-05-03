@@ -35,6 +35,7 @@ class AR extends React.Component {
     let ur;
     let ll;
     let lr;
+     let sizes
     function modelLoaded() {
       console.log("poseNet ready");
     }
@@ -53,22 +54,31 @@ class AR extends React.Component {
 
     //###########################PRELOAD##########################\\
     p.preload = () => {
-      img = p.loadImage(shirt);
-      slv = p.loadImage(sleeve);
-      slv2 = p.loadImage(sleeve2);
-      hzem = p.loadImage(jean);
-      ul = p.loadImage(upperL);
-      ur = p.loadImage(upperR);
-      ll = p.loadImage(lowerL);
-      lr = p.loadImage(lowerR);
+     img = p.loadImage(this.props.body);
+      slv = p.loadImage(this.props.lh);
+      slv2 = p.loadImage(this.props.rh);
+      hzem = p.loadImage(this.props.hip);
+      ul = p.loadImage(this.props.ull);
+      ur = p.loadImage(this.props.url);
+      ll = p.loadImage(this.props.lll);
+      lr = p.loadImage(this.props.lrl);
     };
 
     //###########################SETUP##########################\\
     p.setup = () => {
-      p.createCanvas(1200, 800, p.WEBGL).position(-100, -100);
+      sizes={height:2980,width:1504}
+         p.pixelDensity(1)
+    let canvas = p.createCanvas(1200,800, p.WEBGL).position(-sizes.height/2, -sizes.width/2);
+  canvas.style('display', 'block');
+  
+   canvas.style('position', 'absolute');
+   canvas.style('margin-top', '150px');
+   
+   canvas.style('z-index', '-1');
+canvas.style('width', sizes.height+'px');
+canvas.style('height', sizes.width+'px');
       console.log(p.VIDEO);
       video = p.createCapture(p.VIDEO);
-
       video.hide();
       poseNet = ml5.poseNet(video, modelLoaded);
       poseNet.on("pose", gotPoses);

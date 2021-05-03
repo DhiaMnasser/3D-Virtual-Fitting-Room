@@ -11,7 +11,7 @@ import p2 from "./img/payment-2.png";
 import p3 from "./img/payment-3.png";
 import p4 from "./img/payment-4.png";
 import p5 from "./img/payment-5.png";
-import logo from "./img/logo.png";
+import logo from "./img/logo1.png";
 function Footer() {
   return (
     <footer className="footer">
@@ -25,8 +25,7 @@ function Footer() {
                 </a>
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt cilisis.
+                3D Virtual Fitting Room by IT-Paladins <br></br>Esprit 4TWIN4 
               </p>
               <div className="footer__payment">
                 <a href="#">

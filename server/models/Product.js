@@ -22,6 +22,10 @@ var Product = new Schema({
     required: true,
     min: 0
   },
+  gender: {
+    type: String,
+    required: true
+  },
   size: {
     type: String,
     required: true
@@ -33,21 +37,33 @@ var Product = new Schema({
   },
   image: [String],
   arModel: {
-    type: String
+    type: [String]
   },
   threeDModel: {
     type: String
-  },
-  rating:{
-    type:Number
   },
   color:{
     type:String
   },
   promo:{
     type:Number
-  }
-
+  },
+  rating:{
+    type:Number,
+    min: 0
+  },
+  nbrating:{
+    type:Number,
+    min: 0
+  },
+  likes:{
+    type:Number,
+    min: 0
+  },
+  dlikes:{
+    type:Number,
+    min: 0
+  },
 
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // import './Basket.css';
 // import {Container} from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,93 +10,165 @@ import {
   removeItemFromBasket,
   updateOrder
 } from "../../../redux/slices/orders";
+import * as api from '../../../api/index';
+
 import { useSelector, useDispatch } from "react-redux";
 import Product from "../../Products/Product/Product";
 import { isAuthenticated } from "../../../redux/slices/auth";
-import { Link } from 'react-router-dom';
+// import { Link } from "react-router-dom";
+
+
+import { Link, useHistory, useLocation } from "react-router-dom";
+
+// import { Link } from 'react-router-dom';
+import Stripe from "../../Stripe/Stripe";
 
 
 // import logo from './logo.png'
 function Basket() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
 
   const [connectedUser, setConnectedUser] = useState(isAuthenticated()?.result);
 
   let orders = useSelector(state => state.orders.orders);
   let [currentOrder, setCurrentOrder] = useState(getCurrentBasket(orders));
+  let [productsFromBD, setProductsFromBD] = useState([]);
   let products = currentOrder?.products;
+  let isChanged = false;
+  const refCurrentOrder = useRef();
+  const refIsChanged = useRef();
 
-  //   useEffect(() => {
-
-  //     currentOrder= getCurrentBasket(orders);
-  //     products = currentOrder?.products;
-
-  //   },[dispatch]);
-
-  // console.log(`orders Basket: ${orders}`);
-
-  // let currentOrder= getCurrentBasket(orders);
-  // console.log(`currentOrder Basket: ${currentOrder}`);
-
-  // let products = currentOrder?.products;
-  // console.log(`products Basket: ${products}`);
 
   useEffect(() => {
-
-
-    // updateOrder(currentOrder._id , currentOrder);
-
-      setCurrentOrder(getCurrentBasket(orders));
-    return ()=>{
-    console.log('useEffect called');
-    console.log(`currentOrder in useEffect ${JSON.stringify(currentOrder)}`);
-    dispatch(updateOrder(currentOrder?._id, currentOrder));
-
+    console.log("Basket mounted");
+    console.log(orders);
+    console.log("currentOrder");
+    console.log(currentOrder);
+    if (currentOrder) {
+      console.log("currentOrder in if");
+      console.log(currentOrder);
+      // getProductsFromBD();
     }
 
-  },[currentOrder] );
+    return () => {
+      // console.log(`currentOrder in useEffect ${JSON.stringify(currentOrder)}`);
+      if (refIsChanged.current) {
+        dispatch(
+          updateOrder(refCurrentOrder.current?._id, refCurrentOrder.current)
+        );
+      }
+    };
+  }, []);
 
+  useEffect(() => {
+    console.log("useEffect orders");
+    setCurrentOrder(getCurrentBasket(orders));
+    getProductsFromBD();
+  }, [orders]);
 
+  useEffect(() => {
+    console.log("currentOrder changed");
+    console.log(currentOrder);
+  }, [currentOrder]);
 
-  const incQuantity = (prod) => {
-    console.log('incQuantity called');
+  useEffect(() => {
+    console.log("changed isChanged");
+    console.log(isChanged);
+  }, [isChanged]);
 
+  const updateCurrentOrder = currOrder => {
+    setCurrentOrder(currentOrder => {
+      currentOrder = currOrder;
+      refCurrentOrder.current = currentOrder;
+      refIsChanged.current = true;
+      return currentOrder;
+    });
+
+    // setCurrentOrder(currOrder);
+  };
+
+  const getProductsFromBD = () => {
+    let productsarray = JSON.parse(JSON.stringify(productsFromBD));
+    console.log("getProductsFromBD called");
+    console.log('products');
+    console.log(products);
+    products?.map(prod => {
+      api.fetchProductById(prod._id).
+      then((response)=>{
+        let index = productsarray?.findIndex((p)=>p._id===response._id);
+         if(index===-1){
+           productsarray.push(response.data);
+           console.log("prodArr useEffect in map");
+           console.log(productsarray);
+           // console.log("productsarray.findIndex(response)");
+           // console.log(productsarray.findIndex(response));
+           setProductsFromBD(productsarray);
+          }
+        
+      })
+    });
+    // console.log("productsarray useEffect out of map");
+    // console.log(productsarray);
+  };
+
+  useEffect(()=>{
+    console.log("productsFromBD useEffect");
+    console.log(productsFromBD);
+
+  },[productsFromBD])
+
+  const redirectToCheckout = () =>{
+    console.log('redirectToCheckout called');
+    let redirect = true;
+    products?.forEach((p,index)=>{
+
+     if (productsFromBD[index].stockQuantity < p.stockQuantity){
+       alert(`only ${productsFromBD[index].stockQuantity} pieces are available for ${productsFromBD[index].productName}`)
+       redirect = false;
+     }
+
+    })
+
+    if(redirect){
+      history.push("/checkout");
+    }
+
+  }
+
+  const incQuantity = prod => {
+    console.log("incQuantity called");
     const product = JSON.parse(JSON.stringify(prod));
     const currOrder = JSON.parse(JSON.stringify(currentOrder));
     try {
-    //   product.stockQuantity++;
-      console.log(product.stockQuantity);
       const indexProduct = currOrder.products.findIndex(
         p => p._id === product._id
       );
       currOrder.products[indexProduct].stockQuantity++;
       currOrder.totalPrice = currOrder.totalPrice + product.price;
-      setCurrentOrder(currOrder);
-    console.log(`currentOrder in incQuantity ${JSON.stringify(currentOrder)}`);
-
-    // dispatch(updateOrder(currOrder._id, currOrder));
-
+      console.log(currOrder.products[indexProduct].stockQuantity);
+      updateCurrentOrder(currOrder);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const decQuantity = (prod) => {
+  const decQuantity = prod => {
+    console.log("decQuantity called");
     const product = JSON.parse(JSON.stringify(prod));
     const currOrder = JSON.parse(JSON.stringify(currentOrder));
 
-    console.log('decQuantity called');
-
     try {
-    //   product.stockQuantity--;
+      //   product.stockQuantity--;
       const indexProduct = currOrder.products.findIndex(
         p => p._id === product._id
       );
-      if (product > 1) {
+      if (product.stockQuantity > 1) {
         currOrder.products[indexProduct].stockQuantity--;
         currOrder.totalPrice = currOrder.totalPrice - product.price;
-        setCurrentOrder(currOrder);
-        console.log(product.stockQuantity);
+        console.log(currOrder.products[indexProduct].stockQuantity);
+        updateCurrentOrder(currOrder);
       } else {
         alert("quantity cant go below 1");
       }
@@ -105,22 +177,21 @@ function Basket() {
     }
   };
 
-  const removeItem = (prod) => {
+  const removeItem = prod => {
     const product = JSON.parse(JSON.stringify(prod));
     const currOrder = JSON.parse(JSON.stringify(currentOrder));
 
-    console.log('removeItem called');
+    console.log("removeItem called");
 
     try {
-        const indexProduct = currOrder.products.findIndex(
-            prod => prod._id === product._id
-          );
-          currOrder.totalPrice -= currOrder.products[indexProduct].price * currOrder.products[indexProduct].stockQuantity;
-          currOrder.products.splice(indexProduct,1)
-        setCurrentOrder(currOrder);
-
-    // dispatch(updateOrder(currOrder._id, currOrder));
-
+      const indexProduct = currOrder.products.findIndex(
+        prod => prod._id === product._id
+      );
+      currOrder.totalPrice -=
+        currOrder.products[indexProduct].price *
+        currOrder.products[indexProduct].stockQuantity;
+      currOrder.products.splice(indexProduct, 1);
+      updateCurrentOrder(currOrder);
     } catch (error) {
       console.log(error);
     }
@@ -174,7 +245,7 @@ function Basket() {
                             </div>
                           </div>
                         </td>
-                        <td class="cart__price">{product.price}</td>
+                        <td class="cart__price">{product.price} DT</td>
                         <td class="cart__quantity">
                           <div class="pro-qty">
                             <span
@@ -197,12 +268,15 @@ function Basket() {
                           </div>
                         </td>
                         <td class="cart__total">
-                          {product.price * product.stockQuantity}
+                          {product.price * product.stockQuantity} DT
                         </td>
                         <td class="cart__close">
-                          <span class="icon_close" onClick={() => {
-                                removeItem(product);
-                              }}></span>
+                          <span
+                            class="icon_close"
+                            onClick={() => {
+                              removeItem(product);
+                            }}
+                          ></span>
                         </td>
                       </tr>
                     ))}
@@ -219,7 +293,7 @@ function Basket() {
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="cart__btn update__btn">
-
+              <Link to="/myOrders">My Orders</Link>
               </div>
             </div>
           </div>
@@ -240,12 +314,14 @@ function Basket() {
                 <h6>Basket total</h6>
                 <ul>
                   <li>
-                    Total <span>{currentOrder?.totalPrice } DT</span>
+                    Total <span>{currentOrder?.totalPrice} DT</span>
                   </li>
                 </ul>
-                <Link to="/checkout" class="primary-btn">
+                <span class="primary-btn" onClick={()=>{redirectToCheckout()}}>
                   Proceed to checkout
-                </Link>
+                </span>
+                <Link></Link>
+                <Stripe name="yoyo" price={currentOrder?.totalPrice}></Stripe>
               </div>
             </div>
           </div>

@@ -1,6 +1,4 @@
 import React from 'react'
-
-
 import './product.css'
 import { deleteReview,likeReview} from '../../../redux/slices/reviews'
 import { useDispatch } from 'react-redux'
