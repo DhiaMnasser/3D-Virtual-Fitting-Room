@@ -81,6 +81,9 @@ function Header() {
                        <li>
                     <Link to="/comImg">comparateur par image</Link>
                   </li>
+                       <li>
+                    <Link to="/TakePicture">takePic</Link>
+                  </li>
                 </ul>
               </nav>
             </div>

@@ -38,6 +38,7 @@ import Categories from "./components/Categories/Categories";
 import ProductDetails from "./components/Products/ProductDetails/ProductDetails";
 import Contact from "./components/FrontOffice/Contact/Contact";
 import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
+import createAvatar from "./components/FrontOffice/Avatar/createAvatar";
 import TakePicture from "./components/FrontOffice/Avatar/TakePicture";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
@@ -97,6 +98,7 @@ function App() {
         <ClientRoute path="/Help" component={Help} />
         <ClientRoute path="/Shop" component={Shop} />
         <ClientRoute path="/avatar/" component={customizedAvatar} />
+        <ClientRoute path="/createAvatar/" component={createAvatar} />
         <ClientRoute path="/AR/" component={ARHolder} />
         <ClientRoute path="/skin/" component={Recommandation} />
         <ClientRoute path="/TakePicture/" component={TakePicture} />
@@ -105,18 +107,18 @@ function App() {
         <ClientRoute path="/Contact/" exact component={Contact} />
         <ClientRoute path="/Basket/" component={Basket} />
          <ClientRoute path="/comImg/" component={ImgComp} />
-        <PrivateRoute path="/addclaim" exact component={AddClaimForm} />
-        <PrivateRoute path="/addreview" exact component={AddReviewForm} />
-        <PrivateRoute path="/Myclaims" exact component={MyClaims} />
-        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/addclaim"  component={AddClaimForm} />
+        <PrivateRoute path="/addreview"  component={AddReviewForm} />
+        <PrivateRoute path="/Myclaims"  component={MyClaims} />
+        <PrivateRoute path="/profile"  component={Profile} />
         <PrivateRoute path="/updatereview/:value" exact component={UpdateReviewForm}/>
         <PrivateRoute path="/updateuser/:value" exact component={Formuser} />
         <PrivateRoute path="/Checkout/" component={Checkout} />
         <PrivateRoute path="/myOrders/" component={Orders} />
         <PrivateRoute path="/order/:value" exact component={OrderDetails} />
-        <PrivateRoute path="/monavatar" exact component={loaderr} />
-        <PrivateRoute path="/terminos" exact component={Sketch}  />
-        <PrivateRoute path="/recom" exact component={ChildComponen}  />
+        <PrivateRoute path="/monavatar"  component={loaderr} />
+        <PrivateRoute path="/terminos"  component={Sketch}  />
+        <PrivateRoute path="/recom"  component={ChildComponen}  />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />
         <AdminRoute path="/admin/products" component={ProductList} />

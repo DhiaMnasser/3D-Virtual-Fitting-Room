@@ -32,6 +32,7 @@ const storage = multer.diskStorage({
 })
 let upload = multer({ storage: storage })
 fs.unlinkSync('../client/src/components/FrontOffice/Avatar/test.jpg')
+
 app.post('/uploadFileAPI', upload.single('file'), (req, res, next) => {
   const file = req.file;
   console.log(file.originalname);

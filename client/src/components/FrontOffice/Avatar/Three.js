@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 // import duck from "../models/standard-female-figure.gltf";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { userInfo } from "os";
 export class Three extends Component {
   componentDidMount() {
     var scene = new THREE.Scene();
@@ -12,15 +13,22 @@ export class Three extends Component {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas
     });
-
+    
+    let currentUser = JSON.parse(localStorage.getItem('profile'));
     renderer.setSize(350, 350);
     // document.body.appendChild( renderer.domElement );
     // use ref as a mount point of the Three.js scene instead of the document.body
 
     // using .obj file
     // Scene
+
+    const gltfLoader = new GLTFLoader();
     const objLoader = new OBJLoader();
-    objLoader.load(this.props.man, root => {
+
+
+    if(currentUser?.avatar){
+
+    objLoader.load(currentUser.avatar, root => {
       root.traverse( function ( child ) {
         if ( child instanceof THREE.Mesh ) {
           console.log('model child ');
@@ -41,37 +49,35 @@ export class Three extends Component {
         metalness: 0.2
       });
 
-    //   root.children.forEach(c => {
-    //     c.children.forEach(child => {
-    //       child.material = material;
-    //     });
-    //   });
-
       scene.add(root);
     });
 
-    const gltfLoader = new GLTFLoader();
-    // gltfLoader.load(this.props.model, gltf => {
-    //   // console.log('gltf');
-    //   // console.log(gltf);
-      
-    //   gltf.scene.position.y = -10;
-    //   const material = new THREE.MeshStandardMaterial({
-    //     color: 0xffdbac,
-    //     emissive: 0x0,
-    //     roughness: 1,
-    //     metalness: 0.2
-    //   });
 
-    //   gltf.scene.children.forEach(c => {
-    //     c.children.forEach(child => {
-    //       child.material = material;
-    //     });
-    //   });
-    //   // gltf.scene.children[1].children[1].material = material;
-    //   // console.log(gltf.scene);
-    //   scene.add(gltf.scene);
-    // });
+  }else{
+
+
+    gltfLoader.load(this.props.model, gltf => {
+      // console.log('gltf');
+      // console.log(gltf);
+      
+      gltf.scene.position.y = -10;
+      const material = new THREE.MeshStandardMaterial({
+        color: 0xffdbac,
+        emissive: 0x0,
+        roughness: 1,
+        metalness: 0.2
+      });
+
+      gltf.scene.children.forEach(c => {
+        c.children.forEach(child => {
+          child.material = material;
+        });
+      });
+      // gltf.scene.children[1].children[1].material = material;
+      // console.log(gltf.scene);
+      scene.add(gltf.scene);
+    });
+  }
 
     if (this.props.productModel !== undefined) {
       gltfLoader.parse(this.props.productModel,'', gltf => {
