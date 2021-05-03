@@ -60,22 +60,26 @@ function Header() {
                   <li>
                     <Link to="/Shop">Shop</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/addclaim">Claims</Link>
                   </li>
                   <li>
                     <Link to="/Myclaims"> My Claims</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact">Contact</Link>
-                  </li>
-                  <li>
-                    <Link to="/avatar">Your Avatar</Link>
-                  </li>
+                  </li> */}
+
                     <li>
-                    <Link to="/AR">AR</Link>
+                    <Link to="/AR">Fitting Room</Link>
                   </li>
                   <li>
+                    <Link to="/myAvatar">My Avatar</Link>
+                  </li>
+                  {/* <li>
+                    <Link to="/contact">Contact</Link>
+                  </li> */}
+                  <li>
+                    <Link to="/contact">Customer Service</Link>
+                  </li>
+                  {/* <li>
                     <Link to="/skin">skin type Recommandation</Link>
                   </li>
                        <li>
@@ -83,7 +87,7 @@ function Header() {
                   </li>
                        <li>
                     <Link to="/TakePicture">takePic</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>
             </div>

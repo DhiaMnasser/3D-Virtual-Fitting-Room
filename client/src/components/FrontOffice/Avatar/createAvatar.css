@@ -1,5 +1,5 @@
 .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center !important;
     margin-top: 10%;
     color: #010508e5;
@@ -10,7 +10,7 @@
     border-radius: 10px ;
     margin: 2vh auto;
     background-color: #b6f2ff;
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +27,7 @@
     border-radius: 10px ;
     margin: 2vh auto;
     background-color: #f18016d8;
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,3 +78,8 @@
     width: 'auto',
     height: '100%'
   }; */
+
+  .row{
+    justify-content: center;
+ 
+  }

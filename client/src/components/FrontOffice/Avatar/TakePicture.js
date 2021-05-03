@@ -11,7 +11,6 @@ import {
 
 function TakePicture() {
   let [globalTimer, setTimer] = useState(1);
-  let myP5;
 
   const Sketch = p5 => {
     let video;

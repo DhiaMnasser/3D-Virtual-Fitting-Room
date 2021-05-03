@@ -40,6 +40,8 @@ import Contact from "./components/FrontOffice/Contact/Contact";
 import customizedAvatar from "./components/FrontOffice/Avatar/customizedAvatar";
 import createAvatar from "./components/FrontOffice/Avatar/createAvatar";
 import TakePicture from "./components/FrontOffice/Avatar/TakePicture";
+import myAvatar from "./components/FrontOffice/Avatar/myAvatar";
+import showMyAvatar from "./components/FrontOffice/Avatar/showMyAvatar";
 import Users from "./components/Users/Userlist/Users";
 import Profile from "./components/Profile/Profile";
 import Formuser from "./components/Profile/updateProfile";
@@ -106,7 +108,8 @@ function App() {
         <ClientRoute path="/productDetails/:value" exact component={ProductDetails} />
         <ClientRoute path="/Contact/" exact component={Contact} />
         <ClientRoute path="/Basket/" component={Basket} />
-         <ClientRoute path="/comImg/" component={ImgComp} />
+        <ClientRoute path="/comImg/" component={ImgComp} />
+
         <PrivateRoute path="/addclaim"  component={AddClaimForm} />
         <PrivateRoute path="/addreview"  component={AddReviewForm} />
         <PrivateRoute path="/Myclaims"  component={MyClaims} />
@@ -119,6 +122,8 @@ function App() {
         <PrivateRoute path="/monavatar"  component={loaderr} />
         <PrivateRoute path="/terminos"  component={Sketch}  />
         <PrivateRoute path="/recom"  component={ChildComponen}  />
+        <PrivateRoute path="/myAvatar"  component={myAvatar}  />
+        <PrivateRoute path="/showMyAvatar"  component={showMyAvatar}  />
 
         <AdminRoute exact path="/admin/" component={HomeBack} />
         <AdminRoute path="/admin/products" component={ProductList} />

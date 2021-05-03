@@ -1,9 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import * as api from "../../../api/index";
-
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Link, useHistory } from 'react-router-dom';
+import { Link , useHistory} from 'react-router-dom';
+
 import "./createAvatar.css";
 
 
@@ -45,9 +44,6 @@ const [fileBase64, setFileBase64] =useState();
 const [inputFile, setInputFile] =useState([]);
 const history = useHistory();
 
-const currentUser = JSON.parse(localStorage.getItem('profile'));
-
-
 
 const thumbs = inputFile.map(file => (
     <div style={thumb} key={file.name}>
@@ -80,22 +76,18 @@ const thumbs = inputFile.map(file => (
     
   }, []);
 
+console.log('fileBase64');
+console.log(fileBase64);
+console.log('inputFile');
+console.log(inputFile);
+
+
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     maxFiles:1,
     accept: 'image/*',
     onDrop
   });
-const createAvatar = () =>{
-  api.uploadFileavatar(fileBase64).then(result=>{
-    currentUser.avatar = result;
-    return api.updateUser(currentUser._id, currentUser);
-  })
-  .then(updatedUser =>{
-    localStorage.setItem('profile', updatedUser);
-    history.push('/showMyAvatar');
-  });
-}
-
 
 
   useEffect(() => () => {
@@ -105,12 +97,24 @@ const createAvatar = () =>{
 
   return (
     <Container>
-      <Row >
-        <h1 >Create My Avatar</h1>
-      </Row>
       <Row>
+      <Col>
+            <Link to="/showMyAvatar">
+            <div className="take-picture-content">
+            <p className="title">Show My Avatar</p>
+            </div>
+            </Link>
+        </Col>
+        <Col>
+            <Link to="/createAvatar">
+            <div className="take-picture-content">
+            <p className="title">Create An Avatar</p>
+            </div>
+            </Link>
+        </Col>
         <Col>
           <div {...getRootProps()} className="dropzone-content">
+          <p className="title">Get My Measurements</p>
             <input {...getInputProps()}  />
             {isDragActive ? (
               <p className="title">Drop your image here ...</p>
@@ -122,22 +126,17 @@ const createAvatar = () =>{
 
           </div>
         </Col>
-        <Col>
-            <Link to="/TakePicture">
-            <div className="take-picture-content">
-            <p className="title">Take A Picture</p>
-            </div>
-            </Link>
-        </Col>
+       
       </Row>
       {inputFile.length!==0 && (
       <Row className="continue-col">
-
-          {/* <Link to="/avatar"> */}
-            {/* <div className="take-picture-content"> */}
-            <button className="site-btn " onClick={()=>{createAvatar()}}>Continue</button>
-            {/* </div> */}
-            {/* </Link> */}
+        <button className="site-btn " onClick={()=>{
+          history.push({
+            pathname: '/terminos',
+            image:fileBase64 ,
+          });
+        }}>Continue</button>
+        
       </Row>
       )}
     </Container>

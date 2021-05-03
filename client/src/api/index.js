@@ -82,13 +82,8 @@ export const deleteFileById = (id) => axios.post(`/files/file/del/${id}`);
 
 export const fetchImageByName = (fileName)=> axios.get(`/files/image/${fileName}`);
 export const deleteImageById = (id) => axios.get(`/files/delete/${id}`);
-export const uploadFileavatar=(event)=>{
-  const data = new FormData() ;
-  data.append('file', event.target.files[0]);
-  axios.post(`${urll}/uploadFileAPI`, data)
-      .then(res => { // then print response status
-        console.log(res.statusText)
-      })
+export const uploadFileavatar=(data)=>{
+  axios.post(`${urll}/uploadFileAPI`, data);
 }
 export const customavatr= ()=> axios.get(`${urll}/createavatar`);
 
