@@ -16,6 +16,10 @@ class AR extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
+       this.state = {
+      height: 0,
+      width:0
+    };
   }
 
   Sketch = p => {
@@ -158,8 +162,8 @@ canvas.style('height', sizes.width+'px');
             )) /
             d) *
           6.5;
-        console.log(height);
-        console.log(width);
+          this.setState({ height: height,width:width })
+       
         p.texture(slv);
         p.textureMode(p.NORMAL);
         p.beginShape();
@@ -332,10 +336,14 @@ canvas.style('height', sizes.width+'px');
   }
 
   render() {
-    return (
+    return (<>
       <div class="vid">
         <div ref={this.myRef}></div>
       </div>
+      <div><h1 class="walid">{Math.ceil(this.state.height/5)*5}</h1>
+<h1 class="walid">{Math.trunc(this.state.width)}</h1>
+</div>
+      </>
     );
   }
 }

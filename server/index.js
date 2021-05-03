@@ -146,43 +146,6 @@ app.post("/checkout",async(req,res)=>{
 })
 app.use('/users', userRoutes);
 app.use('/mails',mailRoutes)
-var max = 1;
-var i = 0;
-
-var timer = setInterval( function(){
-   if(i === max){
-      // stop the timer from looping.
-      clearInterval(timer);
-   }else{
-       i++
-    
- axios.all([
-   axios.post('https://three-vfr-p.herokuapp.com/exist', {link:["https://www.exist.com.tn/215-pulls-polos?page="],page:10}),
-   axios.post('https://three-vfr-p.herokuapp.com/ha',{link:[...pulls,...pantalons,...chemises]}),
-   axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/208-pantalons?page='],page:4}),
-   axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/206-chemises?page='],page:4}),
-    axios.post('https://three-vfr-p.herokuapp.com/exist',{link:['https://www.exist.com.tn/219-gilets?page='],page:3}),
-]).then(res => {
-  //this will be executed only when all requests are complete
-  
-  var data1=res[0]
-  var data2=res[1]
-  var data3=res[2]
-  var data4=res[3]
-  var data5=res[4]
-  console.log(data1)
-  console.log(data2)
-  var exist= [...data1.data,...data3.data,...data4.data]
-  var ha = [...data2.data]
-  var json1 = JSON.stringify(exist);
-var json2 = JSON.stringify(ha);
-fs.writeFile('exist.json', json1, 'utf8',(err)=>{console.log(err)});
-fs.writeFile('ha.json', json2, 'utf8',(err)=>{console.log(err)});
-}).catch(err=>console.log(err));
-  
-
-   }   
-},1000);
 app.get("/exist",async(req,res)=>{
 fs.readFile('exist.json', 'utf8', function readFileCallback(err, data){
     if (err){

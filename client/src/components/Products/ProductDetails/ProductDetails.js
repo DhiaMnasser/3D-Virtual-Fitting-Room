@@ -25,7 +25,9 @@ import axios from "axios";
 import Avatar from "../../FrontOffice/Avatar/Avatar";
 import Product from "../Product/Product";
 import Likes from "../../Extras/Likes/Likes";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -148,7 +150,13 @@ function ProductDetails(props) {
         return true;
       }
     };
-  
+  const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4
+    };
     function recommendProducts() {
       console.log('productKNNRecommended');
       console.log(productKNNRecommended);
@@ -158,7 +166,23 @@ function ProductDetails(props) {
         return false;
       }
     }
-  
+   const [exist, setExist] = useState([])
+    useEffect(() => {
+     function fetchExist(){ 
+     axios.get('http://localhost:5000/exist')
+        .then(response => setExist(response.data));
+   console.log(exist)}
+fetchExist()
+    }, [])
+    console.log(exist)
+       const [ha, setHa] = useState([])
+    useEffect(() => {
+     function fetchHa(){ 
+     axios.get('http://localhost:5000/ha')
+        .then(response => setHa(response.data));
+   console.log(ha)}
+fetchHa()
+    }, [])
     // ******************************************
 
 
@@ -331,7 +355,7 @@ return (
               <h5>Top Rated</h5>
             </div>
           </div>
-
+   
           {topRatedProducts && (
             <>
               <div className="row row-horizon col-lg-12 col-md-12 col-sm-12 text-center">
@@ -405,6 +429,41 @@ return (
         </div>
       </div>
 </section>
+    <h1>comparateur:</h1>
+         <div className="espace"></div>
+         <Slider {...settings}>
+{product.categoryId==="Shirts" && exist.filter(ex=>ex.title.includes("CHEMISE")).map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+     })}
+    
+{product.categoryId==="Shirts" && ha.filter(h=>h.category.includes("Chemise")).map((ex)=>{
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+    })}
+    </Slider>
+     <div className="espace"></div>
+   <Slider {...settings}>
+ {product.categoryId==="Jeans" && exist.filter(ex=>ex.title.includes("JEAN","PANTALON")).map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+     })}
+ 
+     <div className="espace"></div>
+     
+{product.categoryId==="Jeans" && ha.filter(h=>h.category.includes("Jeans","Pantalon")).map((ex)=>{
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+    })}
+    </Slider>
+     <div className="espace"></div>
+      <Slider {...settings}>
+{product.categoryId==="T-shirt" && exist.filter(ex=>ex.category==="PULLS & POLOS").map((ex)=>{
+     return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+     })}
+     
+     <div className="espace"></div>
+   
+{product.categoryId==="T-shirt" && ha.filter(h=>h.category.includes("Sweat","pull")).map((ex)=>{
+    return <><img key={ex.title} src={ex.image} className="image"></img> <div className="price">{ex.prix}</div></>
+    })}
+    </Slider>
 </>
 );
 }

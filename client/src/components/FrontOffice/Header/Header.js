@@ -73,7 +73,7 @@ function Header() {
                     <Link to="/avatar">Your Avatar</Link>
                   </li>
                     <li>
-                    <Link to="/AR">AR</Link>
+                    <Link to="/AR">Augmented Reality</Link>
                   </li>
                   <li>
                     <Link to="/skin">skin type Recommandation</Link>

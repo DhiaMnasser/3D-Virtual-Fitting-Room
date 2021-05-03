@@ -168,3 +168,21 @@
 	text-decoration: line-through;
 	margin-left: 4px;
 }
+.espace{
+    padding: 10px;
+}
+.image{
+ height: 200px;
+ width: 200px;
+}
+.price{
+
+}
+.container{
+width:200px;
+}
+.yep{
+  display: flex;
+  width: 100%;
+   flex-flow: row wrap;
+}
