@@ -1,4 +1,4 @@
-import * as p5 from "p5";
+import P5Wrapper from "react-p5-wrapper";
 import React, { useEffect, useState, useRef } from "react";
 import ml5 from "ml5";
 import manOK from "./models/poseOK.png";
@@ -9,10 +9,8 @@ import {
   removeBackgroundFromImageBase64
 } from "remove.bg";
 
-function TakePicture(props) {
-  let myRef = React.createRef();
+function TakePicture() {
   let [globalTimer, setTimer] = useState(1);
-  let timerRef = useRef();
   let myP5;
 
   const Sketch = p5 => {
@@ -175,7 +173,7 @@ function TakePicture(props) {
           let distance = height / dEyes;
 
           // console.log("height "+height);
-          console.log("dEyes "+dEyes);
+          // console.log("dEyes "+dEyes);
           // console.log("distance "+distance);
           // console.log("dFeets "+dFeets);
           // console.log("dHands "+dHands);
@@ -286,13 +284,13 @@ function TakePicture(props) {
   };
 
   useEffect(() => {
-    myP5 = new p5(Sketch, myRef.current);
+    return
   }, []);
 
   return (
     <>
       <div style={{ position: "relative" }}>
-        <div ref={myRef}></div>
+      <P5Wrapper sketch={Sketch} />
       </div>
     </>
   );

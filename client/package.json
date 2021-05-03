@@ -40,6 +40,7 @@
     "react-notifications": "^1.7.2",
     "react-open-weather": "^1.1.5",
     "react-p5": "^1.3.18",
+    "react-p5-wrapper": "^2.4.0",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
