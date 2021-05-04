@@ -1,6 +1,6 @@
 import * as p5 from "p5";
 import React from "react";
-import ml5 from "ml5";
+// import ml5 from "ml5";
 import man from "./models/humanFigure.jpg";
 // import sleeve from "./models/sleeve1.png";
 // import sleeve2 from "./models/sleeve2.png";
@@ -88,7 +88,7 @@ class PoseNetSingleImage extends React.Component {
     }
     
     // assign poseNet
-    poseNet = ml5.poseNet(modelReady, options);
+    // poseNet = ml5.poseNet(modelReady, options);
     // This sets up an event that listens to 'pose' events
     poseNet.on('pose', gotPoses);
 }

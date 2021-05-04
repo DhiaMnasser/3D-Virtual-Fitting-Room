@@ -7,11 +7,10 @@ import { useDispatch } from "react-redux";
 import AddMessageForm from '../../Forms/MessageForm/AddMessage/AddMessageForm';
 import './Contact.css'
 import { useFormik } from "formik";
+import AddMail from "../../Forms/MailForm/Mail";
+import MailForm from "../../Forms/MailForm/Mail";
 export class Contact extends Component {
 
-
-
-  
     render() {  
     return ( 
     <>
@@ -45,6 +44,9 @@ export class Contact extends Component {
                         <div class="contact__form">
                             <AddMessageForm/>
                         </div>
+                        <div class="contact__form">
+                            <MailForm/>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -60,7 +62,7 @@ export class Contact extends Component {
     </div>
 </section>
 
-<div class="instagram">
+{/* <div class="instagram">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
@@ -113,7 +115,7 @@ export class Contact extends Component {
             </div>
         </div>
     </div>
-</div>
+</div> */}
 
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">

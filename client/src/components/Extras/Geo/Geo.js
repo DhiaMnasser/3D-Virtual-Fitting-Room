@@ -4,10 +4,11 @@ import 'react-notifications/lib/notifications.css';
 
 
 function Geo() {
-  
+  let pos;
   navigator.geolocation.getCurrentPosition(function(position) {
     console.log("Latitude is :", position.coords.latitude);
     console.log("Longitude is :", position.coords.longitude);
+    pos = position;
     navigator.geolocation.getCurrentPosition(
       function(position) {
         console.log(position);
@@ -19,7 +20,6 @@ function Geo() {
   });
     return (
       <>
-      
       </>
     );
 }

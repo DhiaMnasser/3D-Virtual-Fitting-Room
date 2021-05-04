@@ -1,6 +1,6 @@
 import * as p5 from "p5";
 import React from "react";
-import ml5 from "ml5";
+// import ml5 from "ml5";
 import shirt from "./models/man.png";
 import man from "./models/humanFigure.jpg";
 // import sleeve from "./models/sleeve1.png";
@@ -79,7 +79,7 @@ class TakePicture extends React.Component {
       console.log(p.VIDEO);
       video = p.createCapture(p.VIDEO);
       video.hide();
-      poseNet = ml5.poseNet(video, modelLoaded);
+      // poseNet = ml5.poseNet(video, modelLoaded);
       poseNet.on("pose", gotPoses);
     };
 

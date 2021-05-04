@@ -14,8 +14,6 @@ import {
 import "./likes.css";
 
 
-
-
 class Likes extends React.Component {
   state = {
     like: 0,
@@ -63,13 +61,13 @@ class Likes extends React.Component {
           className={c({ ["active"]: this.state.likeActive })}
         >
           {this.state.like}
-        </button>: Like / Dislike :
+        </button> : Like <br></br> 
         <button
           className={c({ ["active"]: this.state.dislikeActive })}
           onClick={() => this.handleDislike()}
         >
           {this.state.dislike}
-        </button>
+        </button> : Dislike 
       </>
     );
   }

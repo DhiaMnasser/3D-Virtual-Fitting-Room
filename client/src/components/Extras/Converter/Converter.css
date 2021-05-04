@@ -1,0 +1,37 @@
+.Converter {
+    width: 100%;
+    padding: 0 15%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .Form {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .Form input,
+  select {
+    padding: 5px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(119, 119, 119, 0.5);
+  }
+  .Form button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgb(11, 170, 59);
+    color: white;
+    border: none;
+  }
+  .Converter h3 {
+    background-color: #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 30px;
+  }
+  .Converter h2 span {
+    color: rgb(11, 170, 59);
+  }

@@ -1,6 +1,6 @@
 import * as p5 from "p5";
 import React from "react";
-import ml5 from "ml5";
+// import ml5 from "ml5";
 import shirt from "./models/shirt1.png";
 import sleeve from "./models/sleeve1.png";
 import sleeve2 from "./models/sleeve2.png";
@@ -70,7 +70,7 @@ class AR extends React.Component {
       video = p.createCapture(p.VIDEO);
 
       video.hide();
-      poseNet = ml5.poseNet(video, modelLoaded);
+      // poseNet = ml5.poseNet(video, modelLoaded);
       poseNet.on("pose", gotPoses);
     };
 

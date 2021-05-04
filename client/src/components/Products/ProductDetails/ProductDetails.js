@@ -9,6 +9,7 @@ import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
 import { deleteProduct, updateProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
+// import { Provider } from '@lyket/react';
 import {
   addItemToCart,
   getCurrentBasket,
@@ -20,6 +21,16 @@ import { deleteReview } from "../../../redux/slices/reviews";
 import axios from "axios";
 import Avatar from "../../FrontOffice/Avatar/Avatar";
 import Likes from "../../Extras/Likes/Likes";
+// import { UpdownButton } from '@lyket/react';
+import ReactDOM from 'react-dom';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+// ReactDOM.render(
+//   <Provider apiKey="4287b62f49d1f24fe741d7a5bb7737">
+//   </Provider>,
+//   document.getElementById('root')
+// );
+
 
 async function addToCart(id, quantity) {
   try {
@@ -111,9 +122,15 @@ function ProductDetails(props) {
       setProduct(product);
       updateProduct(product);
       console.log(product);
+      NotificationManager.success('Thx !', newRating); 
     };
   return (
         <>
+        {/* <UpdownButton
+        id="how-i-joined-the-raiders-of-the-lost-ark"
+        namespace="post"
+      /> */}
+      <NotificationContainer></NotificationContainer>
       <section class="product-details spad">
           <div class="container">
               <div class="row">
@@ -144,7 +161,6 @@ function ProductDetails(props) {
                           
                           <div className="rating">
                           <Likes></Likes><br></br>
-                          {product.rating}
                           <ReactStars
                            count={5}
                            onChange={ratingChanged}

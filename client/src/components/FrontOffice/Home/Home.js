@@ -23,7 +23,7 @@ function Home(props) {
   return (
         <>
         
-      <NotificationContainer />
+      <NotificationContainer/>
       <Chat/>
       {/* <Weather></Weather>
       <Notification></Notification>

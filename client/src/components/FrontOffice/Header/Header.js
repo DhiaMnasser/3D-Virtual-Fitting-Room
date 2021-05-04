@@ -61,7 +61,6 @@ function Header() {
                   </li>
                   <li>
                 <Link to='/Shop'>Shop</Link>
-
                   </li>
                   <li>
                 <Link to='/addclaim'>Claims</Link>
