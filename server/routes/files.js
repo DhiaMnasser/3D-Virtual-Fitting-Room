@@ -6,7 +6,7 @@ const Image = require('../models/image');
 const CONNECTION_URL =
   "mongodb+srv://admin:admin123@cluster0.pdxx0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-module.exports = (upload) => {
+module.exports =    (upload) => {
     const url = CONNECTION_URL;
     const connect = mongoose.createConnection(url, { useNewUrlParser: true, useUnifiedTopology: true });
     let gfs;
