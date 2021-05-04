@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import ml5 from "ml5";
 import manOK from "./models/poseOK.png";
 import manError from "./models/poseError.png";
+import * as api from "../../../api/index";
+
 import {
   RemoveBgResult,
   RemoveBgError,
@@ -10,6 +12,7 @@ import {
 } from "remove.bg";
 
 function TakePicture() {
+
   let [globalTimer, setTimer] = useState(1);
 
   const Sketch = p5 => {
@@ -71,6 +74,13 @@ function TakePicture() {
       snapShot.filter(p5.BLUR, 3);
 
       p5.image(snapShot, -canvas.width, 0, canvas.width, canvas.height);
+      // console.log(snapShot);
+      var file = dataURLtoFile(snapShot.canvas.toDataURL(), 'test.png');
+      console.log(file);
+      api.uploadFileavatar(file).then(result=>{
+        console.log(result);
+        
+      });
 
       // removeBackground();
     };
@@ -113,6 +123,16 @@ function TakePicture() {
       p5.pop();
     };
 
+
+    function dataURLtoFile(dataurl, filename) {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+          while(n--){
+              u8arr[n] = bstr.charCodeAt(n);
+          }
+          return new File([u8arr], filename, {type:mime});
+      };
+
     const removeBackground = () => {
       const base64img = snapShot.canvas.toDataURL();
 
@@ -127,13 +147,31 @@ function TakePicture() {
             result.base64img.canvas.toDataURL(),
             img => {
               p5.image(img, -canvas.width, 0, canvas.width, canvas.height);
+              var file = dataURLtoFile(snapShot.canvas.toDataURL(), 'test.png');
+              createAvatar(file);
             }
           );
+
         })
         .catch(errors => {
           console.log(JSON.stringify(errors));
         });
     };
+
+    const createAvatar = (file) =>{
+
+      // console.log(inputFile[0]);
+      api.uploadFileavatar(file).then(result=>{
+        console.log(result);
+        
+        // currentUser.avatar = result;
+        // return api.updateUser(currentUser._id, currentUser);
+      });
+      // .then(updatedUser =>{
+      //   localStorage.setItem('profile', updatedUser);
+      //   history.push('/showMyAvatar');
+      // });
+    }
 
     //###########################DRAW##########################\\
     p5.draw = () => {

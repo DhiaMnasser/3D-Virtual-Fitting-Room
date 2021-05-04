@@ -86,14 +86,18 @@ const thumbs = inputFile.map(file => (
     onDrop
   });
 const createAvatar = () =>{
-  api.uploadFileavatar(fileBase64).then(result=>{
-    currentUser.avatar = result;
-    return api.updateUser(currentUser._id, currentUser);
-  })
-  .then(updatedUser =>{
-    localStorage.setItem('profile', updatedUser);
-    history.push('/showMyAvatar');
+
+  console.log(inputFile[0]);
+  api.uploadFileavatar(inputFile[0]).then(result=>{
+    console.log(result);
+    
+    // currentUser.avatar = result;
+    // return api.updateUser(currentUser._id, currentUser);
   });
+  // .then(updatedUser =>{
+  //   localStorage.setItem('profile', updatedUser);
+  //   history.push('/showMyAvatar');
+  // });
 }
 
 

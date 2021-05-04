@@ -8,6 +8,10 @@ const style = {
   display: 'flex',
 justifyContent : 'center',
 margin : '2vh auto'
+};
+const style2 = {
+  display: 'flex',
+  flexDirection: 'column',
 }
 
 export default function Avatar(props) {
@@ -18,19 +22,18 @@ export default function Avatar(props) {
   const [avatar, setAvatar] = useState(currentUser?.avatar);
   const history = useHistory();
 
-  // if(currentUser?.gender==="M"){
-  //   setModel(male);
-  // }else{
-  //   setModel(female);
-  // }
+  if(currentUser?.gender==="M"){
+    setModel(male);
+  }else{
+    setModel(female);
+  }
   return (
     <>
-                
+             <div style={style2}>   
       <div className="container" style={style}>
 
           
               <ShowMyAvatarThreeJS
-                // man={man}
                 model={model}
               />
                  
@@ -38,6 +41,7 @@ export default function Avatar(props) {
           {!avatar && (
             <button className="site-btn" onClick={()=>{history.push('/avatar')}}>Create My Custom Avatar</button>
             )}
+            </div>
     </>
   );
 }

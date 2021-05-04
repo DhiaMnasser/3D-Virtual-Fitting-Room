@@ -20,7 +20,7 @@
   }
 
   .dropzone-content:hover{
-    background-image: url("./ashley.jpg") cover no-repeat;
+    background: linear-gradient(-45deg,rgba(33, 149, 226, 0.589), rgba(41, 194, 148, 0.486), rgba(14, 165, 235, 0.3)), url("example.png") center no-repeat;
   }
 
   .take-picture-content {
@@ -33,6 +33,10 @@
     align-items: center;
     justify-content: center;
   }  
+  .take-picture-content:hover{
+    background: linear-gradient(45deg, rgba(197, 121, 49, 0.801), rgb(255, 128, 25),rgba(189, 121, 58, 0.616));
+
+  }
 
   .continue-col{
     align-items: center;
