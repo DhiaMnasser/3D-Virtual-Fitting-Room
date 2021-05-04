@@ -18,7 +18,8 @@ class AR extends React.Component {
     this.myRef = React.createRef();
        this.state = {
       height: 0,
-      width:0
+      width:0,
+      shoulder:0
     };
   }
 
@@ -140,7 +141,7 @@ canvas.style('height', sizes.width+'px');
             pose.leftHip.y - 1.25 * d
           ) /
             d) *
-          6;
+          5.5;
         let height =
           ((p.dist(
             pose.rightShoulder.y - 1.25 * d,
@@ -161,8 +162,9 @@ canvas.style('height', sizes.width+'px');
               pose.rightEye.y
             )) /
             d) *
-          6.5;
-          this.setState({ height: height,width:width })
+          5.5;
+          let shlder= p.dist(pose.rightShoulder.x,pose.rightShoulder.y,pose.leftShoulder.x,pose.leftShoulder.y)/d*5.5
+          this.setState({ height: height,width:width,shoulder:shlder })
        
         p.texture(slv);
         p.textureMode(p.NORMAL);
@@ -342,6 +344,12 @@ canvas.style('height', sizes.width+'px');
       </div>
       <div><h1 class="walid">{Math.ceil(this.state.height/5)*5}</h1>
 <h1 class="walid">{Math.trunc(this.state.width)}</h1>
+{(Math.trunc(this.state.shoulder)<=11 && Math.trunc(this.state.shoulder)>=6 ) &&<h1 class="walid">XS</h1>}
+{(Math.trunc(this.state.shoulder)<=18 && Math.trunc(this.state.shoulder)>=12 ) &&<h1 class="walid">S</h1>}
+{(Math.trunc(this.state.shoulder)<=25 && Math.trunc(this.state.shoulder)>=19 ) &&<h1 class="walid">M</h1>}
+{(Math.trunc(this.state.shoulder)<=33 && Math.trunc(this.state.shoulder)>=26 ) &&<h1 class="walid">L</h1>}
+{(Math.trunc(this.state.shoulder)<=40 && Math.trunc(this.state.shoulder)>=34 ) &&<h1 class="walid">XL</h1>}
+{(Math.trunc(this.state.shoulder)<=47 && Math.trunc(this.state.shoulder)>=41 ) &&<h1 class="walid">XXL</h1>}
 </div>
       </>
     );
