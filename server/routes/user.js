@@ -2,13 +2,15 @@ const express= require("express");
 
 const User = require('../models/user')
 
-const { signin, signup, refresh,getusers ,updateUser }= require("../controllers/users.js");
+const { signin, signup, refresh,getusers ,updateUser,setsize,setAvatar  }= require("../controllers/users.js");
 var router = express.Router();
 router.post("/signin", signin);
 router.post("/signup", signup);
 router.post("/token",refresh)
 router.get("/", getusers);
 router.patch("/:id", updateUser);
+router.patch("/:id/:s/:j/:b", setsize);
+router.patch("/setavatar/:id", setAvatar);
 /*router.get('/', async(req,res)=>{
 try{
 const users = await User.find()

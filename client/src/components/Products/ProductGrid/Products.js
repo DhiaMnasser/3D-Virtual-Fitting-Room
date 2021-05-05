@@ -6,7 +6,7 @@ import { getProducts, createProduct, updateProduct, deleteProduct } from '../../
 
 const Products = () => {
   
-  const products = useSelector((state) => state.products.products)
+const products = useSelector((state) => state.products.products)
 console.log(JSON.stringify(useSelector((state) => state), null, 4));
 
   return (

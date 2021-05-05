@@ -6,10 +6,10 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class Map extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 36.9061097,
+      lng: 10.191628099999999
     },
-    zoom: 11
+    zoom: 4
   };
  
   render() {
@@ -27,8 +27,8 @@ class Map extends Component {
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
         <AnyReactComponent
-        lat={59.955413}
-        lng={30.337844}
+        lat={36.9061097}
+        lng={10.191628099999999}
         text="Position"
         />
         </GoogleMapReact>

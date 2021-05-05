@@ -62,18 +62,17 @@ export default ({ children }) => {
         </div>
     </div>
       <Header />
-      <div class="breadcrumb-option">
+      {/* <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><FontAwesomeIcon icon={faHome}/> Home</a>
-                        <span>Shopping cart</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> */}
       {children}
       {/* <Chat/> */}
       <Footer />

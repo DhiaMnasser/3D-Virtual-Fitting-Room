@@ -19,6 +19,10 @@ const ChildComponent = (props) => {
     width : "100%",
     
   };
+  const mystyle = {
+    textAlign: "center",
+    marginLeft: '100px',
+  };
   const sizes = ["XXS","XS","XS-S","S","M","M-L","L","XL"]
   const products = useSelector((state) => state.products.products)
       const pages = useSelector((state)=>state.products.nbpg)
@@ -51,7 +55,7 @@ const ChildComponent = (props) => {
   });
   console.log("p",products);
   const stylee ={
-    marginLeft: '120px',
+    marginLeft: '100px',
   }
 
 let styles =[];
@@ -74,14 +78,14 @@ else if (shape === "rectangle" )
  else {
    if ( shape === "inverted triangle")
 
-    styles = [{category:'horizontal stripes '}, {category :'slim-fit shirts'},{category :'Slim cotton polo shirt'}, {category :'Regular V-neck T-shirts'},
+    styles = [{category:'horizontal stripes'}, {category :'slim-fit shirts'},{category :'Slim cotton polo shirt'}, {category :'Regular V-neck T-shirts'},
     {category :'Skinny jeans'},{category :'Trousers with larger seat drop'}]
 
     else if ( shape ==="rectangle")
     styles =[{category :'Horizontal stripes'}, {category :'Structured tailoring'},{category :'Layered looks'}, {category :'Prints, color pops, and detailing'}]
    
    else if ( shape ==="oval")
-   styles =[{category :'Pleats'}, {category :'Neckties'}, {category :'Jeans with wide leg patterns'} , {category :'darker tone tshirt'}]
+   styles =[{category :'trim-fit shirt'}, {category :'henley t shirt'}, {category :'Jeans with wide leg patterns'} , {category :'darker tone tshirt'}]
 
    else if ( shape === "triangle")
 
@@ -108,19 +112,24 @@ console.log(styles[1].category)
   }*/
   
     return(
+      <div syle={mystyle}>
+     
+      
 <div class="row">
 
+
      <div class="col" style={stylee} >
-     <h1 > How To Dress For your Body Type :</h1>
-   
-         <h6>Finding outfits that flatter your figure is about to become a lot easier.</h6>
+  
+     <h1> How To Dress For your Body Shape : </h1>
+         
         <br></br>
         <div class="list-group" style = {divStyle}>
   <button type="button" class="list-group-item list-group-item-action active">
-  Recommendations for {shape} are :
+    <strong>
+  Recommendations for {shape} are : </strong>
   </button>
     <li class="list-group-item">{styles.map(style => (
-  <p>{style.category} <button class="btn btn-light" onClick=""> consulter </button> </p>   ))}  </li>
+  <p> <b> {style.category}  </b></p>   ))}  </li>
 
 </div> </div>
 
@@ -171,6 +180,7 @@ console.log(styles[1].category)
 
 
 
+</div>
 </div>
 </div>
     );

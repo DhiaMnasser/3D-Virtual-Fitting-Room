@@ -11,7 +11,7 @@ import { Button } from "@material-ui/core";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import shirt from "./models/pull.obj";
 import pants from "./models/pantss.obj";
-import male from "./models/male.gltf";
+import male from "./models/male1.obj";
 import { green } from "@material-ui/core/colors";
 import materl from "./models/shir.mtl"
 class loaderr extends Component {

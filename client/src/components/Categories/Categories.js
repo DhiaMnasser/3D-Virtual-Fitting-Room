@@ -8,13 +8,21 @@ function Categories() {
 
     return (
         <div>
-            <AddCategoryForm/>
-            {categories.map((category,index)=>{
+  <table class="table table-striped">
+  <thead>
+      <th>Add Categorie</th>
+      <th>Categories List</th>
+  </thead>
+  <tbody>
+  <td><AddCategoryForm/> </td>
+      <th>
+  {categories.map((category,index)=>{
                 return<Category key={index}  category={category}></Category>
-                
-
             })}
-        </div>
+            </th>
+    </tbody>
+    </table>            
+    </div>
     )
 }
 

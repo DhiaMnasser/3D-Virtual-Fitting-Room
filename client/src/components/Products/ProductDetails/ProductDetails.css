@@ -1,3 +1,5 @@
+
+  
 .product {
 	padding-top: 60px;
 	padding-bottom: 50px;
@@ -5,7 +7,10 @@
 .product__item {
 	margin-bottom: 35px;
 }
-
+.shop {
+	padding-top: 70px;
+	padding-bottom: 80px;
+}
 .product__item:hover .product__hover li {
 	opacity: 1;
 	top: 0;
@@ -165,3 +170,22 @@
 	text-decoration: line-through;
 	margin-left: 4px;
 }
+.espace{
+    padding: 10px;
+}
+.image{
+ height: 200px;
+ width: 200px;
+}
+.price{
+
+}
+.container{
+width:200px;
+}
+.yep{
+  display: flex;
+  width: 100%;
+   flex-flow: row wrap;
+}
+

@@ -1,0 +1,15 @@
+.image{
+ height: 200px;
+ width: 200px;
+}
+.price{
+
+}
+.espace{
+    padding: 10px;
+}
+.yep{
+  display: flex;
+  width: 100%;
+   flex-flow: row wrap;
+}

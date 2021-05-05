@@ -1,35 +1,58 @@
-import React ,{Component } from 'react';
+import React, { Component } from "react";
 import ml5 from "ml5";
 import * as p5 from "p5";
-import profil from "./ashley.jpg";
-import sizeOf from"image-size";
-import { dimensions } from './dimensions.js';
-import ChildComponent from './RecommendationSize';
-import { RgbColorPicker } from 'react-colorful';
-import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-let img; let poseNet; let poses= [];    let skeleton;
+// import profil from "./ashley.jpg";
+import * as api from '../../../api/index';
+import { dimensions } from "./dimensions.js";
+import ChildComponent from "./RecommendationSize";
+import { RgbColorPicker } from "react-colorful";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+let img;
+let poseNet;
+let poses = [];
+let skeleton;
 let pose;
-const divStyle = {
-    width : "50%"
-  };
-  
-class Sketch extends Component {
+let profil;
+let top ;
+let jeans ;
+let shape ;
+let image ;
 
+const diStyle = {
+  marginLeft: '30%',
+};
+
+
+const divStyle = {
+    width : "100%"
+  };
+  const style = {
+    textAlign: "center"
+  };
+ 
+  
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const id = user?.result?._id;
+  console.log("id ", id);
+
+class Sketch extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
- 
-  } 
+    profil = this.props.location.image;
+   // localStorage.setItem('image', profil);
+   //  image = localStorage.getItem('image');
+  }
   Sketch = p => {
-    const user = JSON.parse(localStorage.getItem('profile'));
+  
     console.log(user);
-   // const x = localStorage.getItem('x');
-    //const y = localStorage.getItem('y');
-    const x = dimensions(profil).width;
-    const y = dimensions(profil).height;
-   // localStorage.setItem('x', x);
-  //  localStorage.setItem('y', y);
+    //const x = dimensions(image).width;
+    //const y = dimensions(image).height;
+
+    const x = localStorage.getItem('x');
+   const y = localStorage.getItem('y');
+   
   console.log( "My name", user?.result?.name);
   console.log("ena" ,user?.result?.gender);
     function gotPoses(poses) {
@@ -71,7 +94,7 @@ class Sketch extends Component {
         console.log("forme" ,forme);
         let forme2 =  shouldersize/ width ;
         console.log('forme2',forme2)
-        let shape =""
+     
     if ( forme2 > 0.97 && forme2 < 1.10)
     shape ="inverted triangle"
 
@@ -94,9 +117,9 @@ console.log(shape );
 localStorage.setItem('myshape', shape);
 document.getElementById("shape").innerHTML=shape;
 let random = Math.round(width);
-let jeans ;
-let top ;
-console.log(random);
+
+ 
+console.log("random " ,random);
 if (user?.result?.gender !== "F")
 {
         if (random  === 35)
@@ -148,8 +171,22 @@ else {
         jeans  =29 ;
         else if (random === 40)
         jeans  =30 ;
-        else if (random === 41)
+        else if (random === 41 )
         jeans  =31 ;
+        else if (random === 42 )
+        jeans  =32 ;
+        else if (random === 43 )
+        jeans = 33 
+        else if (random === 44 )
+        jeans = 34 
+        else if (random === 45 )
+        jeans = 35 
+        else if (random === 46 )
+        jeans = 36
+        else if (random === 47 )
+        jeans = 37
+        else if (random  > 47 )
+        jeans = 38
          console.log(jeans);
          document.getElementById("jeans").innerHTML=jeans;
 }
@@ -183,7 +220,7 @@ else {
         else if ( top ==="M")
         R="L";
         else if (top === "L")
-        R= "Xl"
+        R= "XL"
         else if ( top ==="XL")
         R ="XXL"
         document.getElementById("R").innerHTML=R;
@@ -299,6 +336,8 @@ document.getElementById("Rp").innerHTML=Rp;
 document.getElementById("P").innerHTML=top;
 
 
+
+
         }
 
     }
@@ -398,12 +437,12 @@ componentDidMount() {
   render() {
 
     return <div class="vid">
-      <h1> What Is My Body Type ? </h1>
+      <h1 style={style}> What Is  Your Body Shape ? </h1>
       
-      <div class="row"> <div class ="col"> <img src={profil} alt="" width="500px"></img>  </div> 
+      <div class="row" style={diStyle}> 
      <div class ="col"> 
         <table class="table" style = {divStyle}>
-  <thead class="thead-dark">
+  <thead class="table-warning">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Body measurements</th>
@@ -452,8 +491,8 @@ componentDidMount() {
 
   <br></br>
 </table>
-<table class="table table-striped" style={divStyle}>
-  <thead class ="thead-dark">
+<table class="table" style={divStyle}>
+  <thead class="table-success">
     <tr>
       <th scope="col"> POLO SIZES</th>
       <th scope="col">CLASSIC FIT</th>
@@ -470,7 +509,7 @@ componentDidMount() {
       <td><span id="S"> </span></td>
     </tr>
     </tbody>
-    <thead>
+    <thead  class="table-warning">
     <tr>
       <th scope="col"> SWEATER SIZES</th>
       <th scope="col">CLASSIC FIT</th>
@@ -487,15 +526,23 @@ componentDidMount() {
     </tr>
     </tbody>
     </table>
-   
+    
     <Link to='/recom'>
     <Button variant="contained" color="secondary">
          Show Recommendations
     </Button>
 </Link>
+
+<Button  color="primary" variant="contained"   onClick={() => api.setsize(id , top ,jeans,shape )}>
+save
+</Button>
+
     </div>
+    <div class ="col"> <img src={profil} alt="" width="200px"></img>  </div> 
 </div>
+
 </div>
+
   }
   
   }

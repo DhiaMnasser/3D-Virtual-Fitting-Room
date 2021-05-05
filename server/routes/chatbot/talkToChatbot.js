@@ -2,6 +2,7 @@ const dialogflow = require("dialogflow");
 
 const dialogflowConfig = require("./config");
 const projectId = dialogflowConfig.projectId;
+
 const configuration = {
   credentials: {
     private_key: dialogflowConfig.privateKey,
@@ -41,4 +42,30 @@ async function talkToChatbot(message) {
   return response;
 }
 
-module.exports = talkToChatbot;
+async function eventToChatbot(event) {
+  console.log("event " + event);
+  const botRequest = {
+    session: sessionPath,
+    queryInput: {
+      event: {
+        name: event,
+        languageCode
+      }
+    }
+  };
+
+  const response = await sessionClient
+    .detectIntent(botRequest)
+    .then((responses) => {
+      console.log(JSON.stringify(responses));
+      const requiredResponse = responses[0].queryResult;
+      return requiredResponse;
+    })
+    .catch((error) => {
+      console.log("ERROR: " + error);
+    });
+
+  return response;
+}
+
+module.exports = {talkToChatbot, eventToChatbot};

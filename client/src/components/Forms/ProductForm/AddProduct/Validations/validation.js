@@ -5,6 +5,8 @@ export const Validation = yup.object().shape({
     .required("required"),
   description: yup.string()
     .required("required"),
+  gender: yup.string()
+    .required("required"),    
   categoryId: yup.string()
     .required("required"),
   price: yup.number()
@@ -19,6 +21,9 @@ export const Validation = yup.object().shape({
   arModel: yup.string(),
   threeDModel: yup.string(),
   rating:yup.number(),
+  nbrating:yup.number(),
+  likes:yup.number(),
+  dlikes:yup.number(),
   promo:yup.number(),
   color:yup.string()
 

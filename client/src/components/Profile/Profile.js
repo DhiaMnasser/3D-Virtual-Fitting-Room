@@ -58,10 +58,7 @@ function Profile(props) {
                 className="btn btn-primary btn-icon-split btn-sm"
                 type="submit"
               >
-                <span className="icon text-white-50">
-                  <i className="fas fa-check"></i>
-                </span>
-                sumbit
+                Submit
               </button>
 </Form>
 </Col>

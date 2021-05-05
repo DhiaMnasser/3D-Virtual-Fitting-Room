@@ -94,4 +94,38 @@ const updateUser = async (req, res) => {
 
   res.status(200).json(updatedUser);
 }
-module.exports= {signin,signup,refresh,getusers ,updateUser}
+const setsize = async (req, res) => {
+  const { id , s ,j,b} = req.params;
+  
+
+
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`);
+  
+  const user = await User.findById(id);
+
+  /*const index = review.likes.findIndex((id) => id ===String(req.userId));
+  
+  if (index === -1) {
+    review.likes.push(req.userId);
+  } else {
+    review.likes = review.likes.filter((id) => id !== String(req.userId));
+  }
+  const updatedReview = await Review.findByIdAndUpdate(id, review, { new: true });*/
+  const updatedUser = await User.findByIdAndUpdate(id, { size: user.size = s , jeansize: user.jeansize = j, bodyshape : user.bodyshape = b },{ new: true });
+  res.status(200).json(updatedUser);
+}
+const setAvatar = async (req, res) => {
+  const { id } = req.params;
+  
+const { email, password, name , gender, avatar , size,bodyshape,jeansize } = req.body ;
+
+
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`);
+  
+  const user = await User.findById(id);
+  const updatedUser  = {    _id: id,email, password,  name , gender, avatar , size,bodyshape,jeansize }
+
+  await User.findByIdAndUpdate(id,{ $set: { avatar:  avatar }});
+  res.status(200).json(updatedUser);
+}
+module.exports= {signin,signup,refresh,getusers ,updateUser , setsize,setAvatar}

@@ -98,7 +98,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
                 aria-expanded="false"
               >
                 <i className="fas fa-bell fa-fw"></i>
-                <span className="badge badge-danger badge-counter">3+</span>
+                <span className="badge badge-danger badge-counter"></span>
               </a>
 
               <div
@@ -163,7 +163,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
               >
                 <i className="fas fa-envelope fa-fw"></i>
 
-                <span className="badge badge-danger badge-counter">7</span>
+                <span className="badge badge-danger badge-counter"></span>
               </a>
 
               <div

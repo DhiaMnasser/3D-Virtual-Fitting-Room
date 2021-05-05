@@ -10,10 +10,11 @@ const fs = require('fs')
 app.use(cors());
 app.use(morgan("dev"));
 
+
 app.get("/createavatar", function (req, res, next) {
   //shell.exec('python -m apps.simple_test')
-  //shell.exec('python -m apps.render_turntable -f ../client/src/components/FrontOffice/Avatar/models -ww 512 -hh 512')
-
+  //shell.exec('python -m apps.render_turntable -f ./results/pifuhd_final/recon -ww 512 -hh 512')
+res.sendFile()
 });
 
 const port = process.env.PORT || 5008;
@@ -23,7 +24,7 @@ app.listen(port, () => {
 });
 
 const storage = multer.diskStorage({
-  destination: '../client/src/components/FrontOffice/Avatar',
+  destination: './sample_images',
         filename: function ( req, file, cb ) {
             //req.body is empty...
             //How could I get the new_file_name property sent from client here?
@@ -31,17 +32,26 @@ const storage = multer.diskStorage({
         }
 })
 let upload = multer({ storage: storage })
-fs.unlinkSync('../client/src/components/FrontOffice/Avatar/test.jpg')
+fs.unlinkSync('./sample_images/test.jpg')
+
 app.post('/uploadFileAPI', upload.single('file'), (req, res, next) => {
   const file = req.file;
   console.log(file.originalname);
   if (!file) {
-    const error = new Error('No File')
-    error.httpStatusCode = 400
-    return next(error)
+    const error = new Error('No File');
+    error.httpStatusCode = 400;
+    return next(error);
   }
+
+  shell.exec('python -m apps.simple_test');
+  shell.exec('python -m apps.render_turntable -f ./ -ww 512 -hh 512');
+  
+ /* missing code to get file from directori and send it back to react
+
+     code here 
+
+*/
+
     res.send(file);
-   // shell.exec('python -m apps.simple_test')
-    //shell.exec('python -m apps.render_turntable -f ../client/src/components/FrontOffice/Avatar/models -ww 512 -hh 512')
   
 })

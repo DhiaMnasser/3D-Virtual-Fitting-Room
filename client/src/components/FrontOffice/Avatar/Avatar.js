@@ -1,110 +1,82 @@
+import { json } from "body-parser";
+import { current } from "immer";
 import React, { Suspense, useReducer, useState } from "react";
-import Three from "./Three";
+import AvatarThreeJS from "./AvatarThreeJS";
 // import female from "./models/standard-female-figure.gltf";
-import female from "./models/standard-female-figure.gltf";
-import male from "./models/male.gltf";
- //import man from "./models/man.obj";
-import robe from "./models/robe.gltf";
-import shirt from "./models/shirt.gltf";
+import female from "./models/female1.obj";
+// import male from "./models/man.obj";
+import male from "./models/male1.obj";
+import man from "./models/manopen.obj";
+import chris from "./models/chris.obj";
 // import pants from "./models/pants.gltf";
-import vest from "./models/vest.gltf";
+
 export default function Avatar(props) {
   const [model, setModel] = useState(true);
   const [update, setUpdate] = useState(true);
 
-  const [roba, setRoba] = useState(false);
-  const [vesta, setVesta] = useState(false);
-  const [shirta, setShirta] = useState(false);
-  const [pantsa, setPantsa] = useState(true);
-  const combination = [undefined, robe];
-  const combination1 = [undefined, shirt];
-  const combination2 = [undefined, props.man];
-  // const combination2 = [undefined, pants];
-  const combination3 = [undefined, vest];
+  const [clothModel, setPantsa] = useState(true);
+  const combination2 = [undefined, props.clothModel];
 
-  console.log("props.man:");
-  console.log(props.man);
-  // console.log("pant:");
-
+  console.log("props.clothModel:");
   
+  const currentUser =JSON.parse(localStorage.getItem('profile')).result ;
+  let theAvatar = male;
+  
+  /*if(currentUser?.avatar){
+
+    theAvatar = currentUser.avatar; 
+  }*/
+  if ( currentUser?.name === "clientclient client") 
+  {theAvatar = chris;
+
+}
   return (
     <>
       <div className="container">
         {update || (
           <div>
             {model && (
-              <Three
-                man={props.man}
-                model={male}
-                pants={combination2[Number(pantsa)]}
-                shirt={combination1[Number(shirta)]}
-                vest={combination3[Number(vesta)]}
+              <AvatarThreeJS
+                man={man}
+                model={theAvatar}
+                productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || <Three model={female} robe={combination[Number(roba)]} />}
+            {model || (
+              <AvatarThreeJS
+                model={female}
+                productModel={combination2[Number(clothModel)]}
+              />
+            )}
           </div>
         )}
         {update && (
           <div>
             {model && (
-              <Three
-              man={props.man}
-
+              <AvatarThreeJS
+                man={man}
                 model={male}
-                pants={combination2[Number(pantsa)]}
-                shirt={combination1[Number(shirta)]}
-                vest={combination3[Number(vesta)]}
+                productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || <Three model={female} robe={combination[Number(roba)]} />}
+            {model || (
+              <AvatarThreeJS
+                model={female}
+                productModel={combination2[Number(clothModel)]}
+              />
+            )}
           </div>
         )}
 
-        {/* <div className="control">
-          <button
-            onClick={() => {
-              setModel(!model);
-            }}
-          >
-            male/female
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setRoba(!roba);
-            }}
-          >
-            {" "}
-            robe
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setVesta(!vesta);
-            }}
-          >
-            {" "}
-            vest
-          </button>
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setShirta(!shirta);
-            }}
-          >
-            {" "}
-            shirt
-          </button> */}
-          <button
-            onClick={() => {
-              setUpdate(!update);
-              setPantsa(!pantsa);
-            }}
-          >
-            {" "}
-            try on Avatar
-          </button>
-        {/* </div> */}
+        <button
+          onClick={() => {
+            setUpdate(!update);
+            setPantsa(!clothModel);
+          }}
+        >
+          {" "}
+          try on Avatar
+        </button>
       </div>
     </>
   );

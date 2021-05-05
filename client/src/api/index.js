@@ -1,9 +1,14 @@
 import axios from 'axios'
 
 const url = 'http://localhost:5000';
+// const url = process.env.REACT_APP_NODE_APP_URL;
+// console.log('process.env.REACT_APP_NODE_APP_URL');
+console.log(process.env);
+// console.log(process.env.PUBLIC_URL);
+
 
 const urll = 'http://localhost:5008';
-const API = axios.create({ baseURL: 'http://localhost:5000/' });
+const API = axios.create();
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
@@ -12,73 +17,82 @@ API.interceptors.request.use((req) => {
   return req;
 });
 // products
-export const fetchProducts = ()=> axios.get(`${url}/products`);
-export const fetchProductById = (id)=> axios.get(`${url}/products/${id}`);
-export const createProduct = (newProduct)=> axios.post(`${url}/products`, newProduct);
-export const updateProduct = (id, updatedProduct) => axios.patch(`${url}/products/${id}`, updatedProduct);
-export const deleteProduct = (id) => axios.delete(`${url}/products/${id}`);
-export const smartFetchProduct = (pagination)=> axios.post(`${url}/products/page`, pagination);
-export const getNbPages=()=> axios.get(`${url}/products/page/1`);
+export const fetchProducts = ()=> axios.get(`/products`);
+export const fetchProductById = (id)=> axios.get(`/products/${id}`);
+export const createProduct = (newProduct)=> axios.post(`/products`, newProduct);
+export const updateProduct = (id, updatedProduct) => axios.patch(`/products/${id}`, updatedProduct);
+export const deleteProduct = (id) => axios.delete(`/products/${id}`);
+export const smartFetchProduct = (pagination)=> axios.post(`/products/page`, pagination);
+export const getNbPages=()=> axios.get(`/products/page/1`);
+export const fetchTopProducts = ()=> axios.get(`/products/best`);
+export const getRecommendation = (data)=> axios.post(`/products/getRecombeeRecommendation`, data);
+export const itemAddedToBasket = (data)=> axios.post(`/products/itemAddedToBasket`, data);
+
 //avatars
-export const fetchAvatars = ()=> axios.get(`${url}/avatars`);
-export const createAvatar = (newAvatar)=> axios.post(`${url}/avatars`, newAvatar);
-export const updateAvatar = (id, updatedAvatar) => axios.patch(`${url}/avatars/${id}`, updatedAvatar);
-export const deleteAvatar = (id) => axios.delete(`${url}/avatars/${id}`);
+export const fetchAvatars = ()=> axios.get(`/avatars`);
+export const createAvatar = (newAvatar)=> axios.post(`/avatars`, newAvatar);
+export const updateAvatar = (id, updatedAvatar) => axios.patch(`/avatars/${id}`, updatedAvatar);
+export const deleteAvatar = (id) => axios.delete(`/avatars/${id}`);
 //claims
-export const fetchClaims = ()=> axios.get(`${url}/claims`);
-export const createClaim = (newClaim)=> axios.post(`${url}/claims`, newClaim);
-export const updateClaim = (id, updatedClaim) => axios.patch(`${url}/claims/${id}`, updatedClaim);
-export const deleteClaim = (id) => axios.delete(`${url}/claims/${id}`);
-export const traiterClaim = (id) => axios.patch(`${url}/claims/${id}/traiterClaim`);
+export const fetchClaims = ()=> axios.get(`/claims`);
+export const createClaim = (newClaim)=> axios.post(`/claims`, newClaim);
+export const updateClaim = (id, updatedClaim) => axios.patch(`/claims/${id}`, updatedClaim);
+export const deleteClaim = (id) => axios.delete(`/claims/${id}`);
+export const traiterClaim = (id) => axios.patch(`/claims/${id}/traiterClaim`);
 //orders
-export const fetchOrders = ()=> axios.get(`${url}/orders`);
-export const fetchOrderByUser = (userId)=> axios.get(`${url}/orders/user/${userId}`);
-export const createOrder = (newOrder)=> axios.post(`${url}/orders`, newOrder);
-export const updateOrder = (id, updatedOrder) => axios.patch(`${url}/orders/${id}`, updatedOrder);
-export const deleteOrder = (id) => axios.delete(`${url}/orders/${id}`);
+export const fetchOrders = ()=> axios.get(`/orders`);
+export const fetchOrderByUser = (userId)=> axios.get(`/orders/user/${userId}`);
+export const createOrder = (client)=> axios.post(`/orders`,client);
+export const updateOrder = (id, updatedOrder) => axios.patch(`/orders/${id}`, updatedOrder);
+export const deleteOrder = (id) => axios.delete(`/orders/${id}`);
 //reviews
-export const fetchReviews = ()=> axios.get(`${url}/reviews`);
-export const createReview = (newReview)=> axios.post(`${url}/reviews`, newReview);
-export const updateReview = (id, updatedReview) => axios.patch(`${url}/reviews/${id}`, updatedReview);
-export const deleteReview = (id) => axios.delete(`${url}/reviews/${id}`);
+export const fetchReviews = ()=> axios.get(`/reviews`);
+export const createReview = (newReview)=> axios.post(`/reviews`, newReview);
+export const updateReview = (id, updatedReview) => axios.patch(`/reviews/${id}`, updatedReview);
+export const deleteReview = (id) => axios.delete(`/reviews/${id}`);
 export const likeReview = (id) => API.patch(`/reviews/${id}/likeReview`);
 // Categories
 
-export const fetchCategories = ()=> axios.get(`${url}/categories`);
-export const createCategory = (newCategory)=> axios.post(`${url}/categories`, newCategory);
-export const updateCategory = (id, updatedCategory) => axios.patch(`${url}/categories/${id}`, updatedCategory);
-export const deleteCategory = (id) => axios.delete(`${url}/categories/${id}`);
+export const fetchCategories = ()=> axios.get(`/categories`);
+export const createCategory = (newCategory)=> axios.post(`/categories`, newCategory);
+export const updateCategory = (id, updatedCategory) => axios.patch(`/categories/${id}`, updatedCategory);
+export const deleteCategory = (id) => axios.delete(`/categories/${id}`);
 // Messages
-export const fetchMessages = ()=> axios.get(`${url}/messages`);
-export const createMessage = (newMessage)=> axios.post(`${url}/messages`, newMessage);
-export const updateMessage = (id, updatedMessage) => axios.patch(`${url}/messages/${id}`, updatedMessage);
-export const deleteMessage = (id) => axios.delete(`${url}/messages/${id}`);
+export const fetchMessages = ()=> axios.get(`/messages`);
+export const createMessage = (newMessage)=> axios.post(`/messages`, newMessage);
+export const updateMessage = (id, updatedMessage) => axios.patch(`/messages/${id}`, updatedMessage);
+export const deleteMessage = (id) => axios.delete(`/messages/${id}`);
 
 // users
 
 export const signIn = (formData) => API.post('/users/signin', formData);
 export const signUp = (formData) => API.post('/users/signup', formData);
 
-export const fetchUsers = ()=> axios.get(`${url}/users`);
-export const createUser = (newUser)=> axios.post(`${url}/user`, newUser);
-export const updateUser = (id, updatedUser) => axios.patch(`${url}/users/${id}`, updatedUser);
-export const deleteUser = (id) => axios.delete(`${url}/user/${id}`);
+export const fetchUsers = ()=> axios.get(`/users`);
+export const createUser = (newUser)=> axios.post(`/user`, newUser);
+export const updateUser = (id, updatedUser) => axios.patch(`/users/${id}`, updatedUser);
+export const deleteUser = (id) => axios.delete(`/user/${id}`);
+export const setsize = (id, s,j,b) => axios.patch(`${url}/users/${id}/${s}/${j}/${b}`);
+export const setAvatar = (id, updatedUser) => axios.patch(`${url}/users/setavatar/${id}` , updatedUser);
+// files
 
 // files
-export const fetchFiles = ()=> axios.get(`${url}/files/files`);
-export const fetchFileByName = (fileName)=> axios.get(`${url}/files/file/${fileName}`);
-export const fetchFileDataByName = (fileName)=> axios.get(`${url}/files/fileData/${fileName}`);
-export const uploadFile = (file)=> axios.post(`${url}/files`, file);
-export const deleteFileById = (id) => axios.post(`${url}/files/file/del/${id}`);
+export const fetchFiles = ()=> axios.get(`/files/files`);
+export const fetchFileByName = (fileName)=> axios.get(`/files/file/${fileName}`);
+export const fetchFileDataByName = (fileName)=> axios.get(`/files/fileData/${fileName}`);
+export const uploadFile = (file)=> axios.post(`/files`, file);
+export const deleteFileById = (id) => axios.post(`/files/file/del/${id}`);
 
-export const fetchImageByName = (fileName)=> axios.get(`${url}/files/image/${fileName}`);
-export const deleteImageById = (id) => axios.get(`${url}/files/delete/${id}`);
-export const uploadFileavatar=(event)=>{
+export const fetchImageByName = (fileName)=> axios.get(`/files/image/${fileName}`);
+export const deleteImageById = (id) => axios.get(`/files/delete/${id}`);
+export const uploadFileavatar= (image)=>{
+  console.log(image);
   const data = new FormData() ;
-  data.append('file', event.target.files[0]);
-  axios.post(`${urll}/uploadFileAPI`, data)
-      .then(res => { // then print response status
-        console.log(res.statusText)
-      })
+  data.append('file', image);
+  console.log(data);
+  
+  return axios.post(`${urll}/uploadFileAPI`, data);
 }
-export const customavatr= ()=> axios.get(`${urll}/createavatar`);
+export const customavatr=(data)=>{
+ axios.get(`${urll}/createavatar`, data);}
+
