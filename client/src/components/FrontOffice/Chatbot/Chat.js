@@ -5,6 +5,8 @@ import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import Messages from "./Messages";
 import {  Avatar, Icon } from '@material-ui/core';
+import Picker from 'emoji-picker-react';
+
 
 
 const Chat = props => {
@@ -14,6 +16,10 @@ const Chat = props => {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [isListening, setIsListening] = useState(false);
   const microphoneRef = useRef(null);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+  const onEmojiClick = (event, emojiObject) => {
+    setChosenEmoji(emojiObject);
+  };
 
   useEffect(() => {
     handleEventQuery("welcomeTo3DVFR");
@@ -215,7 +221,14 @@ const handleEventQuery = event => {
                 />
               </g>
             </svg>
-            
+            {/* <div>
+            {chosenEmoji ? (
+            <span>You chose: </span>
+             ) : (
+            <span>No emoji Chosen</span>
+             )}
+            <Picker onEmojiClick={onEmojiClick} />
+            </div> */}
           </div>
         </div>
       </div>

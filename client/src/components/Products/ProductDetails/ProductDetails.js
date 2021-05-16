@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 import * as api from "../../../api/index";
 import ReactStars from "react-rating-stars-component";
 import "./ProductDetails.css";
+import c from "classnames";
 import { deleteProduct, updateProduct } from "../../../redux/slices/products";
 import { useDispatch } from "react-redux";
 // import { Provider } from '@lyket/react';
@@ -78,7 +79,8 @@ function ProductDetails(props) {
   const reviews = useSelector(state => state.reviews.reviews);
   const [currentOrder, setCurrentOrder] = useState();
   const [threeDModel, setThreeDModel] = useState();
-
+  const [likeActive,setLikeActive] = useState(false);
+  const [dislikeActive,setDislikeActive] = useState(false);
   useEffect(() => {
     console.log("useEffect called setThreeDModel");
     // const threeDModel =  api.fetchFileDataByName(product.threeDModel)
@@ -104,20 +106,55 @@ function ProductDetails(props) {
     }
   }, [currentOrder]);
 
+  const setDislike = () =>{
+    setDislike({
+      dislikeActive: !dislikeActive,
+      dislike: dislikeActive
+        ? (product.like = product.like-1)
+        : product.dislike = product.dislike+1
+      });
+  }
+  const setLike = () => {
+    setLike({
+      likeActive: !likeActive,
+      like: likeActive 
+      ? (product.like = product.like+1)
+      : product.dislike = product.dislike-1
+    });
+  }
+
+  const handleLike = () => {
+    if (dislikeActive) {
+      setLike();
+      setDislike();
+    }
+    setLike();
+    setProduct(product);
+    updateProduct(product);
+    console.log(product);
+  }
+
+  const handleDislike = () => {
+    if (likeActive) {
+      setDislike();
+      setLike();
+    }
+    setDislike();
+    setProduct(product);
+    updateProduct(product);
+    console.log(product);
+  }
+
+
   const addToBasket = () => {
     try {
       setCurrentOrder(addItemToBasket(orders, product));
-      // console.log(`currentOrder in product ${JSON.stringify(currentOrder)}`);
-
-      //  dispatch(updateOrder(currentOrder._id, currentOrder ));
     } catch (error) {
       console.log(error.message);
     }
-    //  dispatch(editOrder(state.orders[indexOrder]));
   };
     const ratingChanged = (newRating) => {
       console.log(newRating);
-      // setProduct(product.rating=product.rating+newRating/product.nbrating+1);
       product.rating = newRating;
       setProduct(product);
       updateProduct(product);
@@ -157,10 +194,21 @@ function ProductDetails(props) {
                   </div>
                   <div class="col-lg-6">
                       <div class="product__details__text">
-                          <h3>{product.productName} <span>Brand: ITPaladins</span></h3>
-                          
+                          <h3>{product.productName} <span>Brand: ITPaladins</span></h3>       
                           <div className="rating">
-                          <Likes></Likes><br></br>
+                          <button
+                          onClick={() => handleLike()}
+                          className={c({ ["active"]: likeActive })}
+                          >
+                         {product.like}
+                         </button> : Like <br></br> 
+                         <button
+                         className={c({ ["active"]: dislikeActive })}
+                         onClick={() => handleDislike()}
+                          >
+                         {product.dislike}
+                         </button> : Dislike 
+                          <br></br>
                           <ReactStars
                            count={5}
                            onChange={ratingChanged}

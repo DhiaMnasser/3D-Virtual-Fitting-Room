@@ -8,7 +8,8 @@ import OneAd from "../../Extras/Ads/OneAd"
 import Quotes from "../../Extras/Quotes/Quotes"
 import Converter from "../../Extras/Converter/Converter"
 import CurrencyConverter from 'react-currency-conv';
-import Messages from "../Contact/ListContact"
+// import Messages from "../Contact/ListContact"
+// import AChatbot from "../Chatbot/AChatbot/AChatbot"
 
 function Help() {
     return (
@@ -24,8 +25,9 @@ function Help() {
         <Weather></Weather>
         <h1>Map and Position</h1>
         <Map></Map>
-        <Messages></Messages>
+        {/* <Messages></Messages> */}
         </span>
+        {/* <AChatbot></AChatbot> */}
         </>
     )
 }
