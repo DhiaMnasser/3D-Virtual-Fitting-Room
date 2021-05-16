@@ -26,6 +26,7 @@ const Formrev = (props) => {
       // e.preventDefault();
 
       dispatch(createReview (values));
+      alert("your review is registered");
       console.log("vals" + JSON.stringify(values, null, 4));
     }
   });

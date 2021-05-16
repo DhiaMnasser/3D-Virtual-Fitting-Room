@@ -2,7 +2,7 @@ import React, {useEffect,  useState } from 'react'
 import { useSelector } from 'react-redux';
 import { usersSlice } from '../../../redux/slices/auth';
 import { useDispatch } from "react-redux";
-import {filterProducts,get9Products} from "../../../redux/slices/products"
+import {filterProducts,get9Productss} from "../../../redux/slices/products"
 import Product from "../../Products/Product/Product";
 import { useFormik } from 'formik';
 
@@ -38,7 +38,7 @@ const ChildComponent = (props) => {
 
       useEffect(() => {
        
-    dispatch(get9Products(page));
+    dispatch(get9Productss(page));
   
   }, [dispatch]);
 
@@ -141,7 +141,7 @@ console.log(styles[1].category)
         })}
                         <div className="col-lg-12 text-center">
                             <div className="pagination__option">
-                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<a className={page===localStorage.getItem('page')?'selected':'pagination__option'}  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Products({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
+                               { Array.from({length: pages}, (_, i) => i + 1).map((page)=>{return<a className={page===localStorage.getItem('page')?'selected':'pagination__option'}  onClick={()=>{localStorage.setItem('page', page); dispatch(get9Productss({page: localStorage.getItem('page'),filter:localStorage.getItem('filter')}))}}
                                key={page}>{page}</a>})}
                              current page: {localStorage.getItem('page')}
                             </div>

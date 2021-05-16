@@ -43,6 +43,7 @@ export default function MyDropzone() {
   const history = useHistory();
 
   const currentUser = JSON.parse(localStorage.getItem("profile")).result;
+  const profile = JSON.parse(localStorage.getItem("profile"));
 
   const thumbs = inputFile.map(file => (
     <div style={thumb} key={file.name}>
@@ -138,28 +139,28 @@ export default function MyDropzone() {
       // write the ArrayBuffer to a blob, and you're done
       return new Blob([ab], {type: mimeString});
   };
-  function srcToFile(src, fileName, mimeType){
-    return (fetch(src)
-        .then(function(res){return res.arrayBuffer();})
-        .then(function(buf){return new File([buf], fileName, {type:mimeType});})
-    );
-}
+
+//   function srcToFile(src, fileName, mimeType){
+//     return (fetch(src)
+//         .then(function(res){return res.arrayBuffer();})
+//         .then(function(buf){return new File([buf], fileName, {type:mimeType});})
+//     );
+// }
   
   const createAvatar = () => {
     api.uploadFileavatar(inputFile[0])
-      .then(res => {
+      /*.then(res => {
         // const Avatar= res.data;
-        console.log(res.data)
-        var file =srcToFile(res.data,"7359e60e3f2e5b09c633a89ea37f72d0.obj" , "application/octet-stream");
-  console.log(file);
-        /*let formData = new FormData();
+        console.log(JSON.stringify(res.data));
+
+        let formData = new FormData();
         let fileUrl;
-        // formData.append("caption", this.state.caption);
+        formData.append("caption", this.state.caption);
         formData.append("file", file);
 
-        return api.uploadFile(formData);*/
+        return api.uploadFile(formData);
       })
-      /*.then(response => {
+      .then(response => {
         let fileUrl;
 
         response.data.success
@@ -168,28 +169,32 @@ export default function MyDropzone() {
 
         return fileUrl;
 
-      }).then(result =>{
-        // const a = JSON.stringify(res.data);
+      })*/
+      .then(result =>{
+        // const a = JSON.stringify(result.data);
         // console.log(a);
+        console.log(JSON.stringify(result));
 
         if(result){
           
           console.log("currentUser",currentUser);
-          currentUser.avatar = JSON.stringify(result);
+          currentUser.avatar = result.data;
           console.log("currentUser",currentUser);
           //api.setAvatar(currentUser._id , currentUser);
-          // return api.setAvatar(id, currentUser);
+          return api.setAvatar(currentUser._id, currentUser);
         }else {
           throw 'Error2' ;
         }
 
       })
-      // .then(result => {
-      //   //  localStorage.setItem('profile', updatedUser);
-      //   console.log(result);
-      //   currentUser.avatar = result.data.avatar;
-      //   localStorage.setItem("profile", JSON.stringify(currentUser));
-      // })*/
+      .then(result => {
+        //  localStorage.setItem('profile', updatedUser);
+        console.log(result);
+        currentUser.avatar = result.data.avatar;
+        profile.result = currentUser
+        localStorage.setItem("profile", JSON.stringify(profile));
+      })
+
       .catch(error =>{
         console.log("error",error);
         

@@ -35,6 +35,7 @@ const divStyle = {
   const user = JSON.parse(localStorage.getItem('profile'));
   const id = user?.result?._id;
   console.log("id ", id);
+  console.log("gender", user?.result?.gender);
 
 class Sketch extends Component {
   constructor(props) {
@@ -117,6 +118,7 @@ console.log(shape );
 localStorage.setItem('myshape', shape);
 document.getElementById("shape").innerHTML=shape;
 let random = Math.round(width);
+console.log("gender", user?.result?.gender);
 
  
 console.log("random " ,random);

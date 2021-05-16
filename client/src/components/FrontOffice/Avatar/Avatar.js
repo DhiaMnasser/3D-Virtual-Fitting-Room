@@ -11,40 +11,41 @@ import chris from "./models/chris.obj";
 // import pants from "./models/pants.gltf";
 
 export default function Avatar(props) {
-  const [model, setModel] = useState(true);
+  const currentUser = JSON.parse(localStorage.getItem("profile"));
+  let theAvatar;
+  const [model, setModel] = useState(male);
   const [update, setUpdate] = useState(true);
-
   const [clothModel, setPantsa] = useState(true);
   const combination2 = [undefined, props.clothModel];
 
-  console.log("props.clothModel:");
-  
-  const currentUser =JSON.parse(localStorage.getItem('profile')).result ;
-  let theAvatar = male;
-  
-  /*if(currentUser?.avatar){
+  console.log("props.clothModel:", props.clothModel);
 
-    theAvatar = currentUser.avatar; 
-  }*/
-  if ( currentUser?.name === "clientclient client") 
-  {theAvatar = chris;
+  if (currentUser?.result.avatar) {
+    theAvatar = currentUser?.result.avatar;
+  } else {
+    if (currentUser?.result.gender === "M") 
+    {
+      theAvatar = male;
+    } else {
+      theAvatar = female;
+    }
+  }
 
-}
   return (
     <>
       <div className="container">
         {update || (
           <div>
-            {model && (
+            {clothModel && (
               <AvatarThreeJS
-                man={man}
+                // man={man}
                 model={theAvatar}
                 productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || (
+            {clothModel || (
               <AvatarThreeJS
-                model={female}
+                model={theAvatar}
                 productModel={combination2[Number(clothModel)]}
               />
             )}
@@ -52,16 +53,16 @@ export default function Avatar(props) {
         )}
         {update && (
           <div>
-            {model && (
+            {clothModel && (
               <AvatarThreeJS
-                man={man}
-                model={male}
+                // man={man}
+                model={theAvatar}
                 productModel={combination2[Number(clothModel)]}
               />
             )}
-            {model || (
+            {clothModel || (
               <AvatarThreeJS
-                model={female}
+                model={theAvatar}
                 productModel={combination2[Number(clothModel)]}
               />
             )}

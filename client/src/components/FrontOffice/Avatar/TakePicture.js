@@ -14,6 +14,8 @@ import {
 function TakePicture() {
 
   let [globalTimer, setTimer] = useState(1);
+  const currentUser = JSON.parse(localStorage.getItem("profile")).result;
+  const profile = JSON.parse(localStorage.getItem("profile"));
 
   const Sketch = p5 => {
     let video;
@@ -158,20 +160,38 @@ function TakePicture() {
         });
     };
 
-    const createAvatar = (file) =>{
+    const createAvatar = (file) => {
+      api.uploadFileavatar(file)
 
-      // console.log(inputFile[0]);
-      api.uploadFileavatar(file).then(result=>{
-        console.log(result);
-        
-        // currentUser.avatar = result;
-        // return api.updateUser(currentUser._id, currentUser);
-      });
-      // .then(updatedUser =>{
-      //   localStorage.setItem('profile', updatedUser);
-      //   history.push('/showMyAvatar');
-      // });
-    }
+        .then(result =>{
+
+          console.log(JSON.stringify(result));
+  
+          if(result){
+            
+            console.log("currentUser",currentUser);
+            currentUser.avatar = result.data;
+            console.log("currentUser",currentUser);
+            //api.setAvatar(currentUser._id , currentUser);
+            return api.setAvatar(currentUser._id, currentUser);
+          }else {
+            throw 'Error2' ;
+          }
+  
+        })
+        .then(result => {
+          //  localStorage.setItem('profile', updatedUser);
+          console.log(result);
+          currentUser.avatar = result.data.avatar;
+          profile.result = currentUser
+          localStorage.setItem("profile", JSON.stringify(profile));
+        })
+  
+        .catch(error =>{
+          console.log("error",error);
+          
+        });
+    };
 
     //###########################DRAW##########################\\
     p5.draw = () => {

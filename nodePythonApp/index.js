@@ -4,18 +4,38 @@ const cors = require("cors");
 const morgan = require("morgan");
 const multer = require('multer')
 const shell = require('shelljs')
-const fs = require('fs')
-
-
+const path = require('path');
 app.use(cors());
 app.use(morgan("dev"));
 
+app.get("/createavatar", function(req, res, next){
+     
+  var options = {
+      root: path.join(__dirname)
+  };
+    
+  var fileName = 'result_test_512.obj';
+  res.sendFile(fileName, options, function (err) {
+      if (err) {
+          next(err);
+      } else {
+          console.log('Sent:', fileName);
+          next();
+      }
+      console.log("File Sent")
+      
+      res.status(200).send();
+      return ;
+  });
+});
 
-app.get("/createavatar", function (req, res, next) {
+/*app.get("/createavatar", function (req, res, next) {
   //shell.exec('python -m apps.simple_test')
   //shell.exec('python -m apps.render_turntable -f ./results/pifuhd_final/recon -ww 512 -hh 512')
-res.sendFile()
-});
+  console.log("File Sent")
+    res.send();
+    return ;
+});*/
 
 const port = process.env.PORT || 5008;
 
@@ -32,26 +52,31 @@ const storage = multer.diskStorage({
         }
 })
 let upload = multer({ storage: storage })
-fs.unlinkSync('./sample_images/test.jpg')
-
 app.post('/uploadFileAPI', upload.single('file'), (req, res, next) => {
   const file = req.file;
   console.log(file.originalname);
   if (!file) {
-    const error = new Error('No File');
-    error.httpStatusCode = 400;
-    return next(error);
+    const error = new Error('No File')
+    error.httpStatusCode = 400
+    return next(error)
   }
-
-  shell.exec('python -m apps.simple_test');
-  shell.exec('python -m apps.render_turntable -f ./ -ww 512 -hh 512');
+     // shell.exec('python -m apps.simple_test')
+   // shell.exec('python -m apps.render_turntable -f ./ -ww 512 -hh 512')
+  var options = {
+    root: path.join(__dirname)
+};
   
- /* missing code to get file from directori and send it back to react
+var fileName = 'result_test_512.obj';
+res.sendFile(fileName, options, function (err) {
+    if (err) {
+        next(err);
+    } else {
+        console.log('Sent:', fileName);
+        next();
+    }
+    console.log("File Sent")
+    res.send();
+    return ;
+});
 
-     code here 
-
-*/
-
-    res.send(file);
-  
 })

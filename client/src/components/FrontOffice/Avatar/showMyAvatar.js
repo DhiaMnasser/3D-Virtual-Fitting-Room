@@ -20,21 +20,31 @@ export default function Avatar(props) {
   const [avatar, setAvatar] = useState(currentUser?.avatar);
   const history = useHistory();
  
+  // console.log( "chris" ,chris)
+  // console.log( "avatar" ,currentUser?.result.avatar)
 
   
   /*if(currentUser?.avatar){
 
     theAvatar = currentUser.avatar; 
   }*/
-  if ( currentUser?.result.name === "clientclient client") 
-  {
-    theAvatar = chris;
+  if (currentUser?.result.avatar) {
+    theAvatar = currentUser?.result.avatar;
+    console.log('theAvatar');
     
-
-}
-else {
-   theAvatar = male;}
-   console.log( "this" ,currentUser)
+  } else {
+  if (currentUser?.result.gender === "M") 
+  {
+    theAvatar = male;
+  } else {
+    theAvatar = female;
+  }
+  //  theAvatar = currentUser?.result.avatar;
+  }
+  //  console.log( "this" ,currentUser)
+  //  console.log( "avatar" ,currentUser?.result.avatar)
+  //  console.log( "male" ,male)
+  //  console.log( "chris" ,chris)
   // if(currentUser?.gender==="M"){
   //   setModel(male);
   // }else{

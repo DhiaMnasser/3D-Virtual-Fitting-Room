@@ -6,7 +6,6 @@ import "./style.css";
 import Messages from "./Messages";
 import {  Avatar, Icon } from '@material-ui/core';
 
-
 const Chat = props => {
   const [message, setMessage] = useState('')
   const [responses, setResponses] = useState([]);

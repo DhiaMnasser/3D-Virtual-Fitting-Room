@@ -37,8 +37,8 @@ var client = new recombee.ApiClient('it-paladins-dev', 'Rd3LLBOVVE7xG0YimO8eX8Me
 const createProduct = async(req, res) => {
     console.log(`create prod in server ${req}`);
     
-    const { productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color } = req.body;
-    const newProduct = await new Product({productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color});
+    const { productName, description, categoryId, gender,price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color } = req.body;
+    const newProduct = await new Product({productName, description, categoryId, gender, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color});
     addItemToRecombee(newProduct);
     
     try {
@@ -53,12 +53,12 @@ const createProduct = async(req, res) => {
 
  const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { _id, productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color} = req.body;
+    const { _id, productName, description, categoryId, gender, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color} = req.body;
     
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No product with id: ${id}`);
 
 
-    const updatedProduct ={ "id":_id, productName, description, categoryId, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color };
+    const updatedProduct ={ "id":_id, productName, description, categoryId,gender, price, size, stockQuantity , image, arModel, threeDModel,rating,promo,color };
 
     await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
 
@@ -95,7 +95,7 @@ const addItemToRecombee = async (product) =>{
     let productToSend = {}
     // product = JSON.parse(product);
     for (const [key, value] of Object.entries(product)) {
-        if(["image","arModel"].includes(key)){
+        if(["image"].includes(key)){
             const uri = value[0].split(';base64,').pop()
             let imgBuffer = Buffer.from(uri, 'base64');
     

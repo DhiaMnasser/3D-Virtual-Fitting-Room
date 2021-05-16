@@ -33,7 +33,16 @@ export const get9Products = page => async dispatch => {
     console.log(error.response);
   }
 };
+export const get9Productss = page => async dispatch => {
+  try {
+    const { data } = await api.smarttFetchProduct(page);
 
+    // dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch(getAllProducts(data.products));
+  } catch (error) {
+    console.log(error.response);
+  }
+};
 export const getNbPage = () => async dispatch => {
   try {
     const { data } = await api.getNbPages();

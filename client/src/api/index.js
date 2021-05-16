@@ -23,6 +23,7 @@ export const createProduct = (newProduct)=> axios.post(`/products`, newProduct);
 export const updateProduct = (id, updatedProduct) => axios.patch(`/products/${id}`, updatedProduct);
 export const deleteProduct = (id) => axios.delete(`/products/${id}`);
 export const smartFetchProduct = (pagination)=> axios.post(`/products/page`, pagination);
+export const smarttFetchProduct = (pagination)=> axios.post(`/products/pagee`, pagination);
 export const getNbPages=()=> axios.get(`/products/page/1`);
 export const fetchTopProducts = ()=> axios.get(`/products/best`);
 export const getRecommendation = (data)=> axios.post(`/products/getRecombeeRecommendation`, data);

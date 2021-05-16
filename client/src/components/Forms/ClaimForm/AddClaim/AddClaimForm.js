@@ -35,7 +35,9 @@ const Form = () => {
       // e.preventDefault();
 
       dispatch(createClaim (values));
+      alert("your claim is registered");
       console.log("vals" + JSON.stringify(values, null, 4));
+ 
     }
   });
   if (!user?.result?.name) {

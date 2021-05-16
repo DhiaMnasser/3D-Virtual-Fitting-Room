@@ -16,8 +16,7 @@ const Form = () => {
   const [uploadedArModel, setUploadedArModel] = useState({});
   const [uploadedThreeDModelUrl, setUploadedThreeDModelUrl] = useState("");
   const [uploadedThreeDModel, setUploadedThreeDModel] = useState({});
-
-
+  const [nbrOfImages, setNbrOfImages] = useState(1);
 
   const Chan = event => {
     formik.setFieldValue("color", color);
@@ -39,62 +38,71 @@ const Form = () => {
       price: "1",
       size: "M",
       stockQuantity: "1",
-      image: "",
+      gender: "m",
+      image: [],
       arModel: "",
       threeDModel: "",
       rating: "5",
       promo: "0",
       color: "#aabbcc",
-      ref:"",
-      body:"",
-      lh:"",
-      rh:"",
-      lll:"",
-      lrl:""
+      ref: "",
+      body: "",
+      lh: "",
+      rh: "",
+      lll: "",
+      lrl: ""
     },
     validationSchema: Validation,
     onSubmit: async values => {
       // e.preventDefault();
-       if(values.categoryId==="T-shirts"){
-      var armodel=[values.body,values.lh,values.rh]
-       }
- if(values.categoryId==="Jeans"){
-      var armodel=[values.body,values.lh,values.rh,values.lll,values.lrl]
-       }
-      values.arModel=armodel
-      values={
-        productName:values.productName,
-        description:values.description ,
-        categoryId:values.categoryId ,
-      price: values.price,
-      size: values.size,
-      stockQuantity: values.stockQuantity,
-      image:values.image,
-      arModel:values.arModel,
-      threeDModel:values.threeDModel,
-      rating: values.rating,
-      promo: values.promo,
-      color: values.color,
-      ref:values.ref
+      if (values.categoryId === "T-shirts") {
+        var armodel = [values.body, values.lh, values.rh];
       }
+      if (values.categoryId === "Jeans") {
+        var armodel = [
+          values.body,
+          values.lh,
+          values.rh,
+          values.lll,
+          values.lrl
+        ];
+      }
+      values.arModel = armodel;
+      values = {
+        productName: values.productName,
+        description: values.description,
+        categoryId: values.categoryId,
+        price: values.price,
+        size: values.size,
+        gender: values.gender,
+        stockQuantity: values.stockQuantity,
+        image: values.image,
+        arModel: values.arModel,
+        threeDModel: values.threeDModel,
+        rating: values.rating,
+        promo: values.promo,
+        color: values.color,
+        ref: values.ref
+      };
       console.log("vals:" + JSON.stringify(values, null, 4));
-      dispatch(createProduct(values));
+      dispatch(createProduct(values)).then(()=>{
+        alert("product Added")
+      });
+      
     }
   });
   useEffect(() => {
     formik.setFieldValue("color", color);
   }, [color]);
-const [model, setModel] = useState("")
-useEffect(() => {
-  if(formik.values.categoryId==="T-shirts"){
-  setModel("shirt")
-  }
-  if(formik.values.categoryId==="Jeans"){
-setModel("jean")
-  }
-
-  }
-  , [formik.values.categoryId]);
+  const [model, setModel] = useState("");
+  useEffect(() => {
+    if (formik.values.categoryId === "T-shirts") {
+      setModel("shirt");
+    }
+    if (formik.values.categoryId === "Jeans") {
+      setModel("jean");
+    }
+  }, [formik.values.categoryId]);
   useEffect(() => {
     // console.log("uploadedArModel" + JSON.stringify(uploadedArModel, null, 4));
     if (!uploadedArModel.name) {
@@ -102,8 +110,6 @@ setModel("jean")
     }
 
     addFileToBd(uploadedArModel, "arModel");
-
-
   }, [uploadedArModel]);
 
   useEffect(() => {
@@ -128,10 +134,7 @@ setModel("jean")
                 JSON.stringify(response.data.message, null, 4)
             )
           : alert("File already exists");
-          formik.setFieldValue(
-            selectedField,
-            response.data.message.filename
-          );
+        formik.setFieldValue(selectedField, response.data.message.filename);
         // this.fetchRecent();
       })
       .catch(err => alert("Error useEffect: " + err));
@@ -147,6 +150,8 @@ setModel("jean")
           <div class="card-body ">
             <form onSubmit={formik.handleSubmit}>
               <div>
+                <span className="text">Product Name: </span>
+
                 <input
                   class="my-2"
                   name="productName"
@@ -160,6 +165,8 @@ setModel("jean")
                 )}
               </div>
               <div>
+                <span className="text">Product ref: </span>
+
                 <input
                   class="my-2"
                   name="ref"
@@ -173,6 +180,8 @@ setModel("jean")
                 )}
               </div>
               <div>
+                <span className="text">Description: </span>
+
                 <input
                   class="my-2"
                   name="description"
@@ -198,7 +207,25 @@ setModel("jean")
                   <FormError>{formik.errors.categoryId}</FormError>
                 )}
               </div>
+              
               <div>
+                <span className="text">Gender: </span>
+
+                <input
+                  class="my-2"
+                  name="gender"
+                  type="text"
+                  placeholder="gender"
+                  value={formik.values.gender}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.gender && formik.touched.gender && (
+                  <FormError>{formik.errors.gender  }</FormError>
+                )}
+              </div>
+              <div>
+                <span className="text">Price: </span>
+
                 <input
                   class="my-2"
                   name="price"
@@ -223,6 +250,8 @@ setModel("jean")
                 )}
               </div>
               <div>
+                <span className="text">Stock Quantity: </span>
+
                 <input
                   class="my-2"
                   name="stockQuantity"
@@ -244,122 +273,204 @@ setModel("jean")
                   name="image"
                   multiple={false}
                   onDone={({ base64 }) => {
-                    formik.setFieldValue("image", base64);
+                    formik.values.image.push(base64);
+console.log('Image',  formik.values.image);
+
+                    formik.setFieldValue("image", formik.values.image);
                   }}
                 />
+                <button 
+                type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setNbrOfImages(nbrOfImages + 1)}
+                >
+                  +
+                </button>
 
                 {formik.errors.image && formik.touched.image && (
                   <FormError>{formik.errors.image}</FormError>
                 )}
               </div>
-              { model === "shirt" &&<div>
+              {nbrOfImages>=2 && (
               <div>
-                <span class="text">body: </span>
-
-                    <FileBase
+                <span className="text">Image2: </span>
+                <FileBase
                   type="file"
-                  id="body"
-                  name="body"
+                  id="image"
+                  name="image"
                   multiple={false}
                   onDone={({ base64 }) => {
-                    formik.setFieldValue("body", base64);
+                    formik.values.image.push(base64)
+                    formik.setFieldValue("image", formik.values.image);
                   }}
                 />
-              </div>
-                <div>
-                <span class="text">right hand: </span>
+                  <button type="button" className="btn btn-secondary" onClick={()=>setNbrOfImages(nbrOfImages+1)}>+</button>
 
-                    <FileBase
-                  type="file"
-                  id="rh"
-                  name="rh"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("rh", base64);
-                  }}
-                />
-              </div>
-                <div>
-                <span class="text">left hand: </span>
 
-                    <FileBase
-                  type="file"
-                  id="lh"
-                  name="lh"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("lh", base64);
-                  }}
-                />
+                {formik.errors.image && formik.touched.image && (
+                  <FormError>{formik.errors.image}</FormError>
+                )}
               </div>
-              </div>}
-              { model === "jean" &&<div>
+              )}
+
+              {nbrOfImages>=3 && (
               <div>
-                <span class="text">hips: </span>
-
-                    <FileBase
+                <span className="text">Image3: </span>
+                <FileBase
                   type="file"
-                  id="body"
-                  name="body"
+                  id="image"
+                  name="image"
                   multiple={false}
                   onDone={({ base64 }) => {
-                    formik.setFieldValue("body", base64);
+                    formik.values.image.push(base64);
+                    
+                    formik.setFieldValue("image", formik.values.image);
                   }}
                 />
+                
+                {formik.errors.image && formik.touched.image && (
+                  <FormError>{formik.errors.image}</FormError>
+                )}
               </div>
+              )}
+ 
+              {model === "shirt" && (
                 <div>
-                <span class="text">right upper leg: </span>
+                  <div>
+                    <span class="text">body: </span>
 
                     <FileBase
-                  type="file"
-                  id="rh"
-                  name="rh"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("rh", base64);
-                  }}
-                />
-              </div>
+                      type="file"
+                      id="body"
+                      name="body"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("body", base64);
+                      }}
+                    />
+                                    {formik.errors.body && formik.touched.body && (
+                  <FormError>{formik.errors.body}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">right hand: </span>
+
+                    <FileBase
+                      type="file"
+                      id="rh"
+                      name="rh"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("rh", base64);
+                      }}
+                    />
+                                    {formik.errors.rh && formik.touched.rh && (
+                  <FormError>{formik.errors.rh}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">left hand: </span>
+
+                    <FileBase
+                      type="file"
+                      id="lh"
+                      name="lh"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("lh", base64);
+                      }}
+                    />
+                                    {formik.errors.lh && formik.touched.lh && (
+                  <FormError>{formik.errors.lh}</FormError>
+                )}
+                  </div>
+                </div>
+              )}
+              {model === "jean" && (
                 <div>
-                <span class="text">left upper leg: </span>
+                  <div>
+                    <span class="text">hips: </span>
 
                     <FileBase
-                  type="file"
-                  id="lh"
-                  name="lh"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("lh", base64);
-                  }}
-                />
-              </div>
-                <div>
-                <span class="text">left lower leg: </span>
+                      type="file"
+                      id="body"
+                      name="body"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("body", base64);
+                      }}
+                    />
+                                    {formik.errors.body && formik.touched.body && (
+                  <FormError>{formik.errors.body}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">right upper leg: </span>
 
                     <FileBase
-                  type="file"
-                  id="lll"
-                  name="lll"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("lll", base64);
-                  }}
-                />
-              </div>
-                   <div>
-                <span class="text">right lower leg: </span>
+                      type="file"
+                      id="rh"
+                      name="rh"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("rh", base64);
+                      }}
+                    />
+                                    {formik.errors.rh && formik.touched.rh && (
+                  <FormError>{formik.errors.rh}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">left upper leg: </span>
 
                     <FileBase
-                  type="file"
-                  id="lrl"
-                  name="lrl"
-                  multiple={false}
-                  onDone={({ base64 }) => {
-                    formik.setFieldValue("lrl", base64);
-                  }}
-                />
-              </div>
-              </div>}
+                      type="file"
+                      id="lh"
+                      name="lh"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("lh", base64);
+                      }}
+                    />
+                                    {formik.errors.lh && formik.touched.lh && (
+                  <FormError>{formik.errors.lh}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">left lower leg: </span>
+
+                    <FileBase
+                      type="file"
+                      id="lll"
+                      name="lll"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("lll", base64);
+                      }}
+                    />
+                                    {formik.errors.lll && formik.touched.lll && (
+                  <FormError>{formik.errors.lll}</FormError>
+                )}
+                  </div>
+                  <div>
+                    <span class="text">right lower leg: </span>
+
+                    <FileBase
+                      type="file"
+                      id="lrl"
+                      name="lrl"
+                      multiple={false}
+                      onDone={({ base64 }) => {
+                        formik.setFieldValue("lrl", base64);
+                      }}
+                    />
+                                    {formik.errors.lrl && formik.touched.lrl && (
+                  <FormError>{formik.errors.lrl}</FormError>
+                )}
+                  </div>
+                </div>
+              )}
+               
               <div>
                 <span class="text">3D Model: </span>
 
@@ -368,7 +479,7 @@ setModel("jean")
                   id="threeDModel"
                   name="threeDModel"
                   className="Upload__Input"
-                  onChange={(event) => {
+                  onChange={event => {
                     alert("File is uploading please wait");
                     setUploadedThreeDModel(event.target.files[0]);
                     // setUploadedThreeDModel({added: 'yes'});

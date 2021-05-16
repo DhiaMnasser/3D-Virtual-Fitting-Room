@@ -26,10 +26,22 @@ export class showMyAvatarThreeJS extends Component {
     const objLoader = new OBJLoader();
 
 var myavatar = this.props.model;
-    /*if(currentUser?.avatar){
-      myavatar = currentUser.avatar ;
-    }*/
+
+
+    if(currentUser?.result.avatar){
+      myavatar =  objLoader.parse(currentUser.result.avatar); 
+      myavatar.position.y = 0;
+      myavatar.position.z = -0.5;
+      // console.log(myavatar);
+      
+      myavatar.scale.set(10,10,10);
+      console.log('myavatar ', myavatar);
+      scene.add(myavatar);
+    }else {
+
     objLoader.load(myavatar, root => {
+    console.log('root ', root);
+
       root.traverse( function ( child ) {
 
         if ( child instanceof THREE.Mesh ) {
@@ -52,11 +64,14 @@ var myavatar = this.props.model;
       });
 
       scene.add(root);
+    }, ()=>{}, error =>{
+      console.log('error',error);
+      
     });
 
 
   
-
+}
 
     /**
      * Floor

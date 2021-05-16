@@ -84,23 +84,23 @@ useState(()=>{
                             <h6>{product.productName}</h6>
                             <div class="rating">
                               <FontAwesomeIcon
-                                style={{ color: `#e3c01c`, fontSize: `10px` }}
+                                style={{ color: "#e3c01c", fontSize: "10px" }}
                                 icon={faStar}
                               />
                               <FontAwesomeIcon
-                                style={{ color: `#e3c01c`, fontSize: `10px` }}
+                                style={{ color: "#e3c01c", fontSize: "10px" }}
                                 icon={faStar}
                               />
                               <FontAwesomeIcon
-                                style={{ color: `#e3c01c`, fontSize: `10px` }}
+                                style={{ color: "#e3c01c", fontSize:" 10px" }}
                                 icon={faStar}
                               />
                               <FontAwesomeIcon
-                                style={{ color: `#e3c01c`, fontSize: `10px` }}
+                                style={{ color: "#e3c01c", fontSize: "10px" }}
                                 icon={faStar}
                               />
                               <FontAwesomeIcon
-                                style={{ color: `#e3c01c`, fontSize: `10px` }}
+                                style={{ color: "#e3c01c", fontSize: "10px" }}
                                 icon={faStar}
                               />
                             </div>
@@ -133,7 +133,12 @@ useState(()=>{
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="cart__btn update__btn">
-              <Link to="/addclaim">Add Claim</Link>
+              <Link 
+              to={{
+                pathname: "/addclaim" ,
+                order: order
+              }}
+              >Add Claim</Link>
               </div>
             </div>
 

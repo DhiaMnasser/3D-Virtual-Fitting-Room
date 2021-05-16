@@ -22,6 +22,7 @@ const Formup = (props) => {
     onSubmit: async values => {
       // e.preventDefault();
       dispatch(updateReview(review._id, values));
+      alert("your review is registered");
       console.log("vals" + JSON.stringify(values, null, 4));
     }
   });
