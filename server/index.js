@@ -17,7 +17,7 @@ const scrapingRoutes = require("./routes/scraping.js");
 const GridFsStorage = require("multer-gridfs-storage");
 const multer = require("multer");
 const crypto = require("crypto");
-const path = require("path");
+var path = require('path');
 const stripe = require("stripe")(
   "sk_test_51IcLvHCPAWlRLabTKXrUtBtjKUfrCpayBeReUcudDNg23OMhZhMQg70MqbXOvATDviRQPpo7HKhigVqSNqk45BNM00WrYq0y9m"
 );
