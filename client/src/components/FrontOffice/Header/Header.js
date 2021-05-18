@@ -181,6 +181,7 @@ function Header() {
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={handleClose}> <Link to ="/profile" >  <strong> Profile</strong></Link></MenuItem>
                     <MenuItem onClick={handleClose}> <Link to ="/Myclaims"> <strong> My Claims</strong> </Link></MenuItem>
+                    <MenuItem onClick={handleClose}> <Link to ="/admin"> <strong> Admin Dashboard</strong> </Link></MenuItem>
                     <MenuItem onClick={handleClose}> <span onClick={logout} >Logout</span></MenuItem>
                   </MenuList>
                 </ClickAwayListener>

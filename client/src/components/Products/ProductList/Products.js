@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Product from "../Product/Product";
 import { useSelector } from "react-redux";
 import { fa, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AddProductForm from '../../Forms/ProductForm/AddProduct/AddProductForm';
+import { Button } from "@material-ui/core";
+
 const Products = () => {
   const products = useSelector((state) => state.products.products)
+  const [addProduct, setaddProduct] = useState(false);
   // console.log(products);
 
   return (
     <>
+    <button className=" primary-btn"  onClick={()=>setaddProduct(!addProduct)}>Add Product</button>
+    {addProduct &&( 
+
+      <AddProductForm/>
+    )}
+
       <h1>Product list</h1>
       <div className="container justify-content-md-center">
         <div className="row">

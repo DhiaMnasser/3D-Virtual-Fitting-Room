@@ -27,12 +27,12 @@ export class Home extends Component {
             <Analytics></Analytics>
             {/* <ProductGrid/> */}
             <div className="row justify-content-md-center">
-            <AddProductForm/>
+            {/* <AddProductForm/> */}
             </div>
             {/* <ProductList/> */}
             {/* <CategoryList/> */}
             <div className="row justify-content-md-center">
-            <AddCategoryForm/>
+            {/* <AddCategoryForm/> */}
             </div>
 
             </> 

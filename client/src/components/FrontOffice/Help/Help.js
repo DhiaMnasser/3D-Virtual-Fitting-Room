@@ -2,6 +2,8 @@ import Geo from "../../Extras/Geo/Geo"
 import Map from "../../Extras/Geo/Map"
 import Weather from "../../Extras/Geo/Weather"
 import GAds from "../../Extras/Ads/GAds"
+import Recommandation from "../../Recommandation/Recommandation"
+
 import React, { useState, useEffect } from 'react'
 // import Ads from "../../Extras/Ads/Ads"
 import OneAd from "../../Extras/Ads/OneAd"
@@ -13,6 +15,7 @@ import CurrencyConverter from 'react-currency-conv';
 function Help() {
     return (
         <>
+        <Recommandation/>
         {/* <GAds></GAds>
         <Ads></Ads> */}
         <Quotes></Quotes>

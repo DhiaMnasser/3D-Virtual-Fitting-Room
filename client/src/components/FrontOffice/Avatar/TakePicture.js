@@ -4,6 +4,8 @@ import ml5 from "ml5";
 import manOK from "./models/poseOK.png";
 import manError from "./models/poseError.png";
 import * as api from "../../../api/index";
+import { useHistory } from 'react-router-dom';
+
 
 import {
   RemoveBgResult,
@@ -12,15 +14,17 @@ import {
 } from "remove.bg";
 
 function TakePicture() {
-
   let [globalTimer, setTimer] = useState(1);
   const currentUser = JSON.parse(localStorage.getItem("profile")).result;
   const profile = JSON.parse(localStorage.getItem("profile"));
+  const history = useHistory();
+
 
   const Sketch = p5 => {
     let video;
     let frame;
     let tryAgainButton;
+    let createAvatarButton;
     let canvas;
     let snapShot;
     let poseNet;
@@ -62,7 +66,11 @@ function TakePicture() {
       video.size(1200, 800);
       tryAgainButton = p5.createButton("try again");
       tryAgainButton.mousePressed(resetSnapping);
+      createAvatarButton = p5.createButton("Create Avatar");
+      createAvatarButton.mousePressed(removeBackground);
       video.hide();
+      tryAgainButton.hide();
+      createAvatarButton.hide();
       poseNet = ml5.poseNet(video, modelLoaded);
       poseNet.on("pose", gotPoses);
     };
@@ -73,17 +81,11 @@ function TakePicture() {
 
       // p5.background(0);
       snapShot = video.get();
-      snapShot.filter(p5.BLUR, 3);
-
       p5.image(snapShot, -canvas.width, 0, canvas.width, canvas.height);
-      // console.log(snapShot);
-      var file = dataURLtoFile(snapShot.canvas.toDataURL(), 'test.png');
-      console.log(file);
-      api.uploadFileavatar(file).then(result=>{
-        console.log(result);
-        
-      });
 
+      tryAgainButton.show();
+      createAvatarButton.show();
+      alert(`click Try Again or Create Avatar`);
       // removeBackground();
     };
 
@@ -94,7 +96,8 @@ function TakePicture() {
       timer = 1;
       setTimer(1);
       console.log("new timer" + globalTimer);
-
+      tryAgainButton.hide();
+      createAvatarButton.hide();
       p5.loop();
     };
 
@@ -125,17 +128,21 @@ function TakePicture() {
       p5.pop();
     };
 
-
     function dataURLtoFile(dataurl, filename) {
-      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-          while(n--){
-              u8arr[n] = bstr.charCodeAt(n);
-          }
-          return new File([u8arr], filename, {type:mime});
-      };
+      var arr = dataurl.split(","),
+        // mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: '.png' });
+    }
 
     const removeBackground = () => {
+      alert(`Creating Your Avatar`);
+
       const base64img = snapShot.canvas.toDataURL();
 
       removeBackgroundFromImageBase64({
@@ -146,50 +153,49 @@ function TakePicture() {
       })
         .then(result => {
           let Clientimage = p5.loadImage(
-            result.base64img.canvas.toDataURL(),
+            'data:image/png;base64,'+result.base64img,
             img => {
+              snapShot.filter(p5.BLUR, 3);
+              p5.image(snapShot, -canvas.width, 0, canvas.width, canvas.height);
               p5.image(img, -canvas.width, 0, canvas.width, canvas.height);
-              var file = dataURLtoFile(snapShot.canvas.toDataURL(), 'test.png');
+              var file = dataURLtoFile(img.canvas.toDataURL(), "test.png");
               createAvatar(file);
             }
           );
-
         })
         .catch(errors => {
-          console.log(JSON.stringify(errors));
+          console.log(errors);
         });
     };
 
-    const createAvatar = (file) => {
-      api.uploadFileavatar(file)
+    const createAvatar = file => {
+      api
+        .uploadFileavatar(file)
 
-        .then(result =>{
-
+        .then(result => {
           console.log(JSON.stringify(result));
-  
-          if(result){
-            
-            console.log("currentUser",currentUser);
+
+          if (result) {
+            console.log("currentUser", currentUser);
             currentUser.avatar = result.data;
-            console.log("currentUser",currentUser);
-            //api.setAvatar(currentUser._id , currentUser);
+            console.log("currentUser", currentUser);
             return api.setAvatar(currentUser._id, currentUser);
-          }else {
-            throw 'Error2' ;
+          } else {
+            throw "Error2";
           }
-  
         })
         .then(result => {
-          //  localStorage.setItem('profile', updatedUser);
           console.log(result);
           currentUser.avatar = result.data.avatar;
-          profile.result = currentUser
+          profile.result = currentUser;
           localStorage.setItem("profile", JSON.stringify(profile));
+          alert(`Your Avatar is Created`);
+
+          history.push('/showMyAvatar');
         })
-  
-        .catch(error =>{
-          console.log("error",error);
-          
+
+        .catch(error => {
+          console.log("error", error);
         });
     };
 
@@ -298,7 +304,7 @@ function TakePicture() {
           }
 
           // distance human - camera
-          if (dEyes>40 || distance > 19) {
+          if (dEyes > 40 || distance > 19) {
             p5.image(frame, -canvas.width, 0, canvas.width, canvas.height);
             p5.image(
               imgManError,
@@ -308,9 +314,7 @@ function TakePicture() {
               canvas.height
             );
             setText("Get Farther");
-          }else
-
-          if ( distance < 16) {
+          } else if (distance < 16) {
             p5.image(frame, -canvas.width, 0, canvas.width, canvas.height);
             p5.image(
               imgManError,
@@ -341,14 +345,18 @@ function TakePicture() {
   };
 
   useEffect(() => {
-    return
+    return;
   }, []);
 
   return (
     <>
       <div style={{ position: "relative" }}>
-      <P5Wrapper sketch={Sketch} />
+        <P5Wrapper sketch={Sketch} />
       </div>
+     {/* { true
+       
+    &&(<button>Create My Avatar</button>)
+    }  */}
     </>
   );
 }

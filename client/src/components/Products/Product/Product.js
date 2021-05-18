@@ -52,8 +52,8 @@ function Product(props) {
           style={{ backgroundImage: `url(${props.product?.image[0]})` }}
           data-setbg={props.product.image[0]}
         >
-          <div className="label new">New</div>
-          <div className="label stockout">out of stock</div>
+          {/* <div className="label new">New</div> */}
+          {props.product?.stockQuantity==0 && ( <div className="label stockout">out of stock</div>)}
           <ul className="product__hover">
             <li>
               <a href={props.product.image} className="image-popup">

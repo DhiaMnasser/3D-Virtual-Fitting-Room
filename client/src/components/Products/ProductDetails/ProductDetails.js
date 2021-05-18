@@ -198,13 +198,13 @@ function ProductDetails(props) {
               <div class="product__details__pic">
                 <div class="product__details__pic__left product__thumb nice-scroll">
                   <a class="pt active" href="#product-1">
-                    <img src={product.image} alt="" />
+                    <img src={product.image} alt={product.description} />
                   </a>
                   <a class="pt" href="#product-2">
-                    <img src={product.image} alt="" />
+                    <img src={product.image} alt={product.description} />
                   </a>
                   <a class="pt" href="#product-3">
-                    <img src={product.image} alt="" />
+                    <img src={product.image} alt={product.description} />
                   </a>
                 </div>
                 <Avatar clothModel={threeDModel}  />

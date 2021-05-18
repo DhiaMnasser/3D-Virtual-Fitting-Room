@@ -218,7 +218,7 @@ function Basket() {
                     {products?.map(product => (
                       <tr>
                         <td class="cart__product__item">
-                          <img src={product.image} alt="" />
+                          <img src={product.image} alt={product.description} />
                           <div class="cart__product__item__title">
                             <h6>{product.productName}</h6>
                             <div class="rating">
