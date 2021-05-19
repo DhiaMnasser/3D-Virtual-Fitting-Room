@@ -207,7 +207,7 @@ function ProductDetails(props) {
                     <img src={product.image} alt={product.description} />
                   </a>
                 </div>
-                <Avatar clothModel={threeDModel}  />
+                <Avatar clothModel={threeDModel} />
                 <div class="product__details__slider__content">
                   <div class="product__details__pic__slider owl-carousel">
                     <img
@@ -325,13 +325,16 @@ function ProductDetails(props) {
               </div>
             </div>
             <div class="col-lg-12">
+            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    <h3>Product Description</h3>
+                    <p>{product.description}</p>
+                  </div>
               <div class="product__details__tab">
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item">
                     <a
                       class="nav-link"
                       data-toggle="tab"
-                      href="#tabs-2"
                       role="tab"
                     >
                       Review
@@ -400,6 +403,7 @@ function ProductDetails(props) {
                       pellentesque eu, pretium quis, sem.
                     </p>
                   </div>
+                 
                 </div>
               </div>
             </div>

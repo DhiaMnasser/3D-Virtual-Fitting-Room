@@ -38,22 +38,22 @@ function Home(props) {
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <img class="categories__item categories__large__item set-bg"
-                    src="img/categories/category-1.jpg" alt="" /> 
+                    src="img/categories/category-1.jpg" alt="Virtual clothing" /> 
             </div>
             <div class="col-lg-6">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <img class="categories__item set-bg" src="img/categories/category-2.jpg" alt="" /> 
+                        <img class="categories__item set-bg" src="img/categories/category-2.jpg" alt="3D Avatar" /> 
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <img class="categories__item set-bg" src="img/categories/category-3.jpg" alt="" />
+                        <img class="categories__item set-bg" src="img/categories/category-3.jpg" alt="Augmented Reality" />
                     </div>   
                     
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <img class="categories__item set-bg" src="img/categories/category-4.jpg" alt="" />
+                        <img class="categories__item set-bg" src="img/categories/category-4.jpg" alt="3D online application" />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <img class="categories__item set-bg" src="img/categories/category-5.jpg" alt="" />
+                        <img class="categories__item set-bg" src="img/categories/category-5.jpg" alt=" Virtual Fitting room" />
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ function Home(props) {
         <div class="row property__gallery">
             <div class="col-lg-3 col-md-4 col-sm-6 mix women">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-1.jpg" />          
+                    <img class="product__item__pic set-bg" src="img/product/product-1.jpg" alt=" Virtual Fitting room"/>          
                     <div class="product__item__text">
                         <h6><a href="#">Buttons tweed blazer</a></h6>
                         <div class="product__price">$ 59.0</div>
@@ -92,7 +92,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix men">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-2.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-2.jpg"  alt=" Virtual Fitting room"/>
                     <div class="product__item__text">
                         <h6><a href="#">Flowy striped skirt</a></h6>
                         <div class="product__price">$ 49.0</div>
@@ -101,7 +101,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-3.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-3.jpg" alt=" Virtual Fitting room" />
                     <div class="product__item__text">
                         <h6><a href="#">Cotton T-Shirt</a></h6>
                         <div class="product__price">$ 59.0</div>
@@ -110,7 +110,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-4.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-4.jpg" alt=" Virtual Fitting room" />
                     <div class="product__item__text">
                         <h6><a href="#">Slim striped pocket shirt</a></h6>
                         <div class="product__price">$ 59.0</div>
@@ -119,7 +119,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix kid">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-5.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-5.jpg" alt=" Virtual Fitting room" />
                     <div class="product__item__text">
                         <h6><a href="#">Fit micro corduroy shirt</a></h6>
                         <div class="product__price">$ 59.0</div>
@@ -128,7 +128,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
                 <div class="product__item sale">
-                    <img class="product__item__pic set-bg" src="img/product/product-6.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-6.jpg" alt=" Augmented Reality" />
                     <div class="product__item__text">
                         <h6><a href="#">Tropical Kimono</a></h6>
                         <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
@@ -137,7 +137,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
                 <div class="product__item">
-                    <img class="product__item__pic set-bg" src="img/product/product-7.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-7.jpg" alt=" Virtual Fitting room"/>
                     <div class="product__item__text">
                         <h6><a href="#">Contrasting sunglasses</a></h6>
                         <div class="product__price">$ 59.0</div>
@@ -146,7 +146,7 @@ function Home(props) {
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
                 <div class="product__item sale">
-                    <img class="product__item__pic set-bg" src="img/product/product-8.jpg" />
+                    <img class="product__item__pic set-bg" src="img/product/product-8.jpg" alt=" Virtual Fitting room"/>
                     <div class="product__item__text">
                         <h6><a href="#">Water resistant backpack</a></h6>
                         <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
@@ -158,7 +158,7 @@ function Home(props) {
 </section>
 
 <div class="banner set-bg">
-    <img  src="img/banner/banner-1.jpg"/>
+    <img  src="img/banner/banner-1.jpg" alt=" Virtual Fitting room"/>
 </div>
 
 <section class="trend spad">
@@ -171,7 +171,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/ht-1.jpg" alt="" />
+                            <img src="img/trend/ht-1.jpg" alt=" Augmented Reality" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Chain bucket bag</h6>
@@ -181,7 +181,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/ht-2.jpg" alt="" />
+                            <img src="img/trend/ht-2.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Pendant earrings</h6>
@@ -191,7 +191,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/ht-3.jpg" alt="" />
+                            <img src="img/trend/ht-3.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Cotton T-Shirt</h6>
@@ -207,7 +207,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/bs-1.jpg" alt="" />
+                            <img src="img/trend/bs-1.jpg" alt=" Augmented Reality" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Cotton T-Shirt</h6>
@@ -216,7 +216,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/bs-2.jpg" alt="" />
+                            <img src="img/trend/bs-2.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Zip-pockets pebbled tote</h6>
@@ -225,7 +225,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/bs-3.jpg" alt="" />
+                            <img src="img/trend/bs-3.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Round leather bag</h6>
@@ -241,7 +241,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/f-1.jpg" alt="" />
+                            <img src="img/trend/f-1.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Bow wrap skirt</h6>
@@ -250,7 +250,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/f-2.jpg" alt="" />
+                            <img src="img/trend/f-2.jpg" alt=" Augmented Reality" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Metallic earrings</h6>
@@ -259,7 +259,7 @@ function Home(props) {
                     </div>
                     <div class="trend__item">
                         <div class="trend__item__pic">
-                            <img src="img/trend/f-3.jpg" alt="" />
+                            <img src="img/trend/f-3.jpg" alt=" Virtual Fitting room" />
                         </div>
                         <div class="trend__item__text">
                             <h6>Flap cross-body bag</h6>
@@ -277,7 +277,7 @@ function Home(props) {
         <div class="row">
             <div class="col-lg-6 p-0">
                 <div class="discount__pic">
-                    <img src="img/discount.jpg" alt=""/>
+                    <img src="img/discount.jpg" alt=" Augmented Reality 3D Avatar"/>
                 </div>
             </div>
             <div class="col-lg-6 p-0">
@@ -348,28 +348,28 @@ function Home(props) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <img class="instagram__item set-bg" src="img/instagram/insta-1.jpg" />
+                <img class="instagram__item set-bg" src="img/instagram/insta-1.jpg" alt=" Virtual Fitting room" />
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
                     </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <img class="instagram__item set-bg" src="img/instagram/insta-2.jpg" />
+                <img class="instagram__item set-bg" src="img/instagram/insta-2.jpg" alt=" Virtual Fitting room" />
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
                     </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <img class="instagram__item set-bg" src="img/instagram/insta-3.jpg" />
+                <img class="instagram__item set-bg" src="img/instagram/insta-3.jpg" alt=" Augmented Reality 3D Avatar" />
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
                     </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <img class="instagram__item set-bg" src="img/instagram/insta-4.jpg" />
+                <img class="instagram__item set-bg" src="img/instagram/insta-4.jpg" alt=" Augmented Reality" />
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
